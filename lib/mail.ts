@@ -1,9 +1,10 @@
 import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  host: process.env.SMTP_HOST || 'smtp.hostinger.com',
   port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_PORT === '465',
+  secure: false,      // false = STARTTLS upgrade (port 587) — port 465 SSL is blocked on Vercel
+  requireTLS: true,   // force TLS upgrade, reject plaintext
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,

@@ -38,10 +38,13 @@ export async function POST(req: NextRequest) {
     const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
     const resetUrl = `${baseUrl}/auth-re-password?token=${token}`
 
-    // Non-blocking — SMTP failure should not return 500 to the user
-    sendPasswordResetEmail(user.email, resetUrl, user.firstName || undefined).catch((err) =>
+    // Awaited — Vercel serverless terminates non-awaited promises before they complete
+    try {
+      await sendPasswordResetEmail(user.email, resetUrl, user.firstName || undefined)
+    } catch (err) {
       console.error('[FORGOT_PASSWORD] Email send failed:', err)
-    )
+      // Still return success to avoid email enumeration
+    }
 
     return NextResponse.json({ message: 'If that email exists, a reset link has been sent.' })
   } catch (error) {

@@ -66,29 +66,79 @@ export function getWelcomeEmailTemplate(name: string, email: string): string {
 }
 
 export function getPasswordResetEmailTemplate(name: string, resetLink: string): string {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head><meta charset="utf-8"><title>Password Reset</title></head>
-    <body style="font-family: Arial, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px;">
-      <div style="max-width: 600px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 40px;">
-        <h1 style="color: #22c55e; text-align: center;">Password Reset Request</h1>
-        <p>Hello ${name},</p>
-        <p>We received a request to reset your password. Click the button below to set a new password:</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${resetLink}" 
-             style="background: #22c55e; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-            Reset Password
-          </a>
-        </div>
-        <p>This link expires in <strong>1 hour</strong>.</p>
-        <p style="color: #94a3b8; font-size: 12px; text-align: center;">
-          If you didn't request a password reset, please ignore this email.
-        </p>
-      </div>
-    </body>
-    </html>
-  `
+  const firstName = name.includes('@') ? name.split('@')[0] : name.split(' ')[0]
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Your Password — StakeOnix</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 50%,#1a0a2e 100%);border-radius:16px 16px 0 0;padding:40px 48px 32px;text-align:center;">
+          <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:10px 20px;margin-bottom:20px;">
+            <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
+          </div>
+          <div style="width:64px;height:64px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:28px;line-height:64px;">&#128274;</span>
+          </div>
+          <h1 style="color:#ffffff;font-size:26px;font-weight:700;margin:0 0 8px;letter-spacing:-0.5px;">Password Reset Request</h1>
+          <p style="color:#b794f4;font-size:15px;margin:0;">We received a request to reset your password</p>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="background:#111827;padding:40px 48px;">
+          <p style="color:#d1d5db;font-size:16px;margin:0 0 16px;">Hi <strong style="color:#ffffff;">${firstName}</strong>,</p>
+          <p style="color:#9ca3af;font-size:15px;line-height:1.7;margin:0 0 28px;">
+            Someone requested a password reset for your StakeOnix account. If this was you, click the button below to set a new password. This link is valid for <strong style="color:#ffffff;">1 hour</strong>.
+          </p>
+
+          <!-- CTA Button -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:0 0 32px;">
+            <a href="${resetLink}" style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:16px 48px;border-radius:10px;letter-spacing:0.3px;">Reset My Password &rarr;</a>
+          </td></tr></table>
+
+          <!-- Security notice box -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+            <tr><td style="background:#1a1a2e;border:1px solid #2d1b4e;border-left:4px solid #7c3aed;border-radius:8px;padding:16px 20px;">
+              <p style="color:#c4b5fd;font-size:13px;font-weight:600;margin:0 0 6px;">&#9888;&nbsp; Security Notice</p>
+              <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">
+                If you did <strong style="color:#9ca3af;">not</strong> request a password reset, your account may be at risk.
+                Please <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard" style="color:#a855f7;text-decoration:none;">log in</a> and change your password immediately, or contact our support team.
+              </p>
+            </td></tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding:24px 0 0;"></td></tr></table>
+
+          <p style="color:#6b7280;font-size:13px;line-height:1.6;margin:0;">
+            <strong style="color:#9ca3af;">Button not working?</strong> Copy and paste this link into your browser:<br />
+            <a href="${resetLink}" style="color:#a855f7;word-break:break-all;font-size:12px;">${resetLink}</a>
+          </p>
+          <p style="color:#ef4444;font-size:12px;margin:12px 0 0;">&#9201; This reset link expires in <strong>1 hour</strong>. After that you&rsquo;ll need to request a new one.</p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
+          <p style="color:#4b5563;font-size:12px;margin:0 0 8px;">
+            &copy; ${new Date().getFullYear()} StakeOnix &mdash; 130 King St W, Toronto, ON M5X 2A2, Canada
+          </p>
+          <p style="color:#374151;font-size:11px;margin:0;">
+            This email was sent from a no-reply address. For support, visit <a href="${process.env.NEXT_PUBLIC_APP_URL}/contact" style="color:#6b7280;text-decoration:none;">stakeonix.com/contact</a>
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
 }
 
 export function getDepositConfirmedEmailTemplate(name: string, amount: string, currency: string): string {
@@ -228,7 +278,7 @@ export async function sendVerificationEmail(email: string, name: string, token: 
 export async function sendPasswordResetEmail(email: string, resetUrl: string, name?: string): Promise<void> {
   await sendEmail({
     to: email,
-    subject: 'Reset Your Password',
+    subject: 'Reset Your StakeOnix Password',
     html: getPasswordResetEmailTemplate(name || email, resetUrl),
   })
 }

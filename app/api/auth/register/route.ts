@@ -76,12 +76,14 @@ export async function POST(req: NextRequest) {
           username: finalUsername,
           referralCode: myReferralCode,
           referredById,
+          // Auto-verify so users can login immediately; still send welcome email
+          emailVerified: new Date(),
           emailVerificationToken: verificationToken,
           emailVerificationExpires: verificationExpires,
         },
       })
 
-      // Send verification email (non-blocking)
+      // Send welcome/verification email (non-blocking — failure won't break signup)
       sendVerificationEmail(user.email, firstName || user.email, verificationToken).catch((emailError) => {
         console.error('[REGISTER] Email send error:', emailError)
       })

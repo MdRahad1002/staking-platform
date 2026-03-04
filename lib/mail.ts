@@ -122,31 +122,97 @@ export async function sendWelcomeEmail(email: string, name: string): Promise<voi
 }
 
 export function getVerificationEmailTemplate(name: string, verifyUrl: string): string {
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head><meta charset="utf-8"><title>Verify Your Email</title></head>
-    <body style="font-family: Arial, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px;">
-      <div style="max-width: 600px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 40px;">
-        <h1 style="color: #22c55e; text-align: center;">Verify Your Email</h1>
-        <p>Hello ${name},</p>
-        <p>Thanks for signing up! Please verify your email address to activate your account.</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${verifyUrl}"
-             style="background: #22c55e; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
-            Verify Email Address
-          </a>
-        </div>
-        <p>Or copy this link into your browser:</p>
-        <p style="word-break: break-all; color: #94a3b8; font-size: 13px;">${verifyUrl}</p>
-        <p>This link expires in <strong>24 hours</strong>.</p>
-        <p style="color: #94a3b8; font-size: 12px; text-align: center;">
-          If you didn't create this account, you can safely ignore this email.
-        </p>
-      </div>
-    </body>
-    </html>
-  `
+  const firstName = name.split('@')[0].split(' ')[0]
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to StakeOnix</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#0f2027 0%,#203a43 50%,#0f2027 100%);border-radius:16px 16px 0 0;padding:40px 48px 32px;text-align:center;">
+          <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:10px 20px;margin-bottom:20px;">
+            <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
+          </div>
+          <h1 style="color:#ffffff;font-size:28px;font-weight:700;margin:0 0 8px;letter-spacing:-0.5px;">Welcome to StakeOnix</h1>
+          <p style="color:#7dd3c8;font-size:15px;margin:0;">Your journey to smarter crypto staking starts now</p>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="background:#111827;padding:40px 48px;">
+          <p style="color:#d1d5db;font-size:16px;margin:0 0 16px;">Hi <strong style="color:#ffffff;">${firstName}</strong>,</p>
+          <p style="color:#9ca3af;font-size:15px;line-height:1.7;margin:0 0 24px;">
+            Thank you for creating your StakeOnix account. We&rsquo;re excited to have you on board.
+            Please verify your email address to complete your registration and unlock all platform features.
+          </p>
+
+          <!-- CTA Button -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:8px 0 32px;">
+            <a href="${verifyUrl}" style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:16px 48px;border-radius:10px;letter-spacing:0.3px;">Verify My Email Address &rarr;</a>
+          </td></tr></table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding:24px 0;"></td></tr></table>
+
+          <!-- Features -->
+          <p style="color:#6b7280;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin:0 0 16px;">What you get with StakeOnix</p>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="33%" style="padding:0 8px 0 0;vertical-align:top;">
+                <div style="background:#1a2332;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
+                  <div style="font-size:24px;margin-bottom:8px;">&#128200;</div>
+                  <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">Daily Returns</p>
+                  <p style="color:#6b7280;font-size:12px;margin:0;">Earn rewards every 24h</p>
+                </div>
+              </td>
+              <td width="33%" style="padding:0 4px;vertical-align:top;">
+                <div style="background:#1a2332;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
+                  <div style="font-size:24px;margin-bottom:8px;">&#128274;</div>
+                  <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">Bank-Grade Security</p>
+                  <p style="color:#6b7280;font-size:12px;margin:0;">2FA &amp; SSL encryption</p>
+                </div>
+              </td>
+              <td width="33%" style="padding:0 0 0 8px;vertical-align:top;">
+                <div style="background:#1a2332;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
+                  <div style="font-size:24px;margin-bottom:8px;">&#127381;</div>
+                  <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">Referral Rewards</p>
+                  <p style="color:#6b7280;font-size:12px;margin:0;">Earn when friends join</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding:24px 0 0;"></td></tr></table>
+
+          <p style="color:#6b7280;font-size:13px;line-height:1.6;margin:0;">
+            <strong style="color:#9ca3af;">Button not working?</strong> Copy and paste this link into your browser:<br />
+            <a href="${verifyUrl}" style="color:#00d4aa;word-break:break-all;font-size:12px;">${verifyUrl}</a>
+          </p>
+          <p style="color:#ef4444;font-size:12px;margin:12px 0 0;">&#9888; This link expires in <strong>24 hours</strong>.</p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
+          <p style="color:#4b5563;font-size:12px;margin:0 0 8px;">
+            &copy; ${new Date().getFullYear()} StakeOnix &mdash; 130 King St W, Toronto, ON M5X 2A2, Canada
+          </p>
+          <p style="color:#374151;font-size:11px;margin:0;">
+            If you did not create a StakeOnix account, please ignore this email.
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
 }
 
 export async function sendVerificationEmail(email: string, name: string, token: string): Promise<void> {
@@ -154,7 +220,7 @@ export async function sendVerificationEmail(email: string, name: string, token: 
   const verifyUrl = `${appUrl}/verify-email?token=${token}`
   await sendEmail({
     to: email,
-    subject: 'Verify your email address',
+    subject: 'Welcome to StakeOnix — Please Verify Your Email',
     html: getVerificationEmailTemplate(name, verifyUrl),
   })
 }

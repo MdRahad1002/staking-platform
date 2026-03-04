@@ -52,6 +52,9 @@ function SignupForm() {
   const refCode = searchParams.get('ref') || ''
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [successEmail, setSuccessEmail] = useState<string | null>(null)
+  const [resending, setResending] = useState(false)
+  const [resent, setResent] = useState(false)
 
   const {
     register,
@@ -65,7 +68,6 @@ function SignupForm() {
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     try {
-      // Omit confirmPassword — not needed by the API
       const { confirmPassword: _, ...payload } = data
       const res = await fetch('/api/auth/register', {
         method: 'POST',
@@ -80,24 +82,97 @@ function SignupForm() {
         return
       }
 
-      // Auto sign in after registration
-      const signInResult = await signIn('credentials', {
+      // Auto sign in
+      await signIn('credentials', {
         email: data.email,
         password: data.password,
         redirect: false,
       })
 
-      if (signInResult?.error) {
-        toast.success('Account created! Please sign in.')
-        window.location.href = '/login'
-      } else {
-        toast.success('Account created successfully! Welcome to StakePlatform!')
-        window.location.href = '/dashboard'
-      }
+      // Show success screen with email check prompt
+      setSuccessEmail(data.email)
     } catch {
       toast.error('Something went wrong. Please try again.')
     }
     setLoading(false)
+  }
+
+  const handleResend = async () => {
+    if (!successEmail || resending || resent) return
+    setResending(true)
+    try {
+      const res = await fetch('/api/auth/resend-verification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: successEmail }),
+      })
+      if (res.ok) {
+        setResent(true)
+        toast.success('Verification email resent!')
+      } else {
+        toast.error('Could not resend email. Try again.')
+      }
+    } catch {
+      toast.error('Something went wrong. Try again.')
+    }
+    setResending(false)
+  }
+
+  // ── Success screen ──────────────────────────────────────────────────
+  if (successEmail) {
+    return (
+      <div className="w-full space-y-6 text-center">
+        {/* Icon */}
+        <div className="flex justify-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 border border-primary/20">
+            <Mail className="h-9 w-9 text-primary" />
+          </div>
+        </div>
+
+        {/* Heading */}
+        <div className="space-y-2">
+          <h1 className="text-2xl font-bold">Check your inbox</h1>
+          <p className="text-sm text-muted-foreground">
+            We&apos;ve sent a welcome email to
+          </p>
+          <p className="text-sm font-semibold text-foreground break-all">{successEmail}</p>
+        </div>
+
+        {/* Info box */}
+        <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-left space-y-2">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Your account is <span className="text-green-400 font-semibold">active</span> — you can start using StakeOnix right away.
+            The email contains your verification link and a summary of your account.
+          </p>
+        </div>
+
+        {/* Go to dashboard */}
+        <Button
+          variant="gradient"
+          className="w-full h-11"
+          onClick={() => { window.location.href = '/dashboard' }}
+        >
+          Go to Dashboard
+        </Button>
+
+        {/* Resend */}
+        <div className="border-t border-border pt-4">
+          <p className="text-xs text-muted-foreground mb-3">Didn&apos;t receive the email? Check your spam folder or</p>
+          {resent ? (
+            <p className="text-xs font-semibold text-green-400">✓ Email resent successfully!</p>
+          ) : (
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resending}
+              className="text-xs font-semibold text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {resending ? 'Sending…' : 'Resend verification email'}
+            </button>
+          )}
+        </div>
+      </div>
+    )
   }
 
   return (

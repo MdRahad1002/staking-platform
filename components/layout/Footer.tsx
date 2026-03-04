@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Twitter, Github, Mail, Shield, TrendingUp, Globe, Zap } from 'lucide-react'
+import { Twitter, Mail, Shield, TrendingUp, Globe, Zap, Phone, MapPin } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 
 const footerLinks = {
@@ -66,6 +66,20 @@ export function Footer() {
               The most trusted crypto staking platform. Grow your digital assets with
               institutional-grade security and competitive daily returns.
             </p>
+            <div className="space-y-2 mb-5">
+              <a href="mailto:info@stakeonix.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Mail className="h-4 w-4 text-primary flex-shrink-0" />
+                <span>info@stakeonix.com</span>
+              </a>
+              <a href="tel:+16133664391" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
+                <span>+1 (613) 366-4391</span>
+              </a>
+              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>130 King St W, Toronto, ON M5X 2A2, Canada</span>
+              </div>
+            </div>
             <div className="flex gap-2">
               <a
                 href="#"
@@ -75,14 +89,7 @@ export function Footer() {
                 <Twitter className="h-4 w-4" />
               </a>
               <a
-                href="#"
-                aria-label="GitHub"
-                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-              <a
-                href="mailto:support@stakeonix.com"
+                href="mailto:info@stakeonix.com"
                 aria-label="Email"
                 className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all"
               >

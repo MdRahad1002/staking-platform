@@ -82,7 +82,9 @@ export async function POST(req: NextRequest) {
       })
 
       // Send verification email (non-blocking)
-      sendVerificationEmail(user.email, firstName || user.email, verificationToken).catch(console.error)
+      sendVerificationEmail(user.email, firstName || user.email, verificationToken).catch((emailError) => {
+        console.error('[REGISTER] Email send error:', emailError)
+      })
     } catch (createError: any) {
       // P2002 = unique constraint violation (race condition on email)
       if (createError?.code === 'P2002') {
@@ -93,7 +95,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: 'Account created. Please check your email to verify your account.', userId: user.id }, { status: 201 })
   } catch (error) {
-    console.error('[REGISTER]', error)
+    console.error('[REGISTER] Full error:', {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      error,
+    })
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 })
   }
 }

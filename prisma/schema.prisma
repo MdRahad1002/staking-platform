@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mongodb"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // ─────────────────────────────────────────────
@@ -13,7 +12,7 @@ datasource db {
 // ─────────────────────────────────────────────
 
 model User {
-  id                String    @id @default(cuid()) @map("_id")
+  id                String    @id @default(uuid())
   email             String    @unique
   password          String
   username          String?   @unique
@@ -67,7 +66,7 @@ model User {
 }
 
 model Domain {
-  id           String        @id @default(cuid()) @map("_id")
+  id           String        @id @default(uuid())
   domain       String        @unique
   name         String?
   logoUrl      String?
@@ -84,7 +83,7 @@ model Domain {
 }
 
 model StakingPlan {
-  id           String   @id @default(cuid()) @map("_id")
+  id           String   @id @default(uuid())
   name         String
   description  String?
   minAmount    Float
@@ -109,7 +108,7 @@ model StakingPlan {
 }
 
 model Stake {
-  id             String    @id @default(cuid()) @map("_id")
+  id             String    @id @default(uuid())
   userId         String
   planId         String
   amount         Float
@@ -136,7 +135,7 @@ model Stake {
 }
 
 model StakePayment {
-  id      String   @id @default(cuid()) @map("_id")
+  id      String   @id @default(uuid())
   stakeId String
   amount  Float
   date    DateTime @default(now())
@@ -147,7 +146,7 @@ model StakePayment {
 }
 
 model DepositCurrency {
-  id              String   @id @default(cuid()) @map("_id")
+  id              String   @id @default(uuid())
   symbol          String
   name            String
   network         String
@@ -169,7 +168,7 @@ model DepositCurrency {
 }
 
 model WithdrawalCurrency {
-  id              String   @id @default(cuid()) @map("_id")
+  id              String   @id @default(uuid())
   symbol          String
   name            String
   network         String
@@ -194,7 +193,7 @@ model WithdrawalCurrency {
 }
 
 model Deposit {
-  id                    String    @id @default(cuid()) @map("_id")
+  id                    String    @id @default(uuid())
   userId                String
   currencyId            String
   amount                Float
@@ -221,7 +220,7 @@ model Deposit {
 }
 
 model Withdrawal {
-  id            String    @id @default(cuid()) @map("_id")
+  id            String    @id @default(uuid())
   userId        String
   currencyId    String
   amount        Float
@@ -247,7 +246,7 @@ model Withdrawal {
 }
 
 model Transaction {
-  id          String   @id @default(cuid()) @map("_id")
+  id          String   @id @default(uuid())
   userId      String
   type        String
   amount      Float
@@ -265,7 +264,7 @@ model Transaction {
 }
 
 model ReferralEarning {
-  id         String   @id @default(cuid()) @map("_id")
+  id         String   @id @default(uuid())
   userId     String
   fromUserId String
   stakeId    String?
@@ -282,7 +281,7 @@ model ReferralEarning {
 }
 
 model Notification {
-  id        String    @id @default(cuid()) @map("_id")
+  id        String    @id @default(uuid())
   userId    String
   title     String
   message   String
@@ -299,7 +298,7 @@ model Notification {
 }
 
 model Ticket {
-  id        String    @id @default(cuid()) @map("_id")
+  id        String    @id @default(uuid())
   userId    String
   subject   String
   category  String    @default("GENERAL")
@@ -315,7 +314,7 @@ model Ticket {
 }
 
 model TicketMessage {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   ticketId  String
   userId    String
   content   String
@@ -331,7 +330,7 @@ model TicketMessage {
 }
 
 model ChatMessage {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   userId    String
   content   String
   isStaff   Boolean  @default(false)
@@ -346,7 +345,7 @@ model ChatMessage {
 }
 
 model LoginHistory {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   userId    String
   ipAddress String
   userAgent String?
@@ -362,7 +361,7 @@ model LoginHistory {
 }
 
 model ApiKey {
-  id          String    @id @default(cuid()) @map("_id")
+  id          String    @id @default(uuid())
   userId      String
   name        String
   key         String    @unique
@@ -378,7 +377,7 @@ model ApiKey {
 }
 
 model IpBlocklist {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   ip        String   @unique
   reason    String?
   blockedAt DateTime @default(now())
@@ -386,7 +385,7 @@ model IpBlocklist {
 }
 
 model SiteSetting {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   key       String   @unique
   value     String
   type      String   @default("string")
@@ -397,7 +396,7 @@ model SiteSetting {
 }
 
 model SystemLog {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   level     String   @default("info")
   message   String
   context   String?
@@ -410,7 +409,7 @@ model SystemLog {
 }
 
 model QuickReply {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   title     String
   content   String
   domainId  String?
@@ -421,7 +420,7 @@ model QuickReply {
 }
 
 model BulkEmail {
-  id          String    @id @default(cuid()) @map("_id")
+  id          String    @id @default(uuid())
   subject     String
   content     String
   sentCount   Int       @default(0)
@@ -432,7 +431,7 @@ model BulkEmail {
 }
 
 model SavedWallet {
-  id        String   @id @default(cuid()) @map("_id")
+  id        String   @id @default(uuid())
   userId    String
   label     String?
   address   String

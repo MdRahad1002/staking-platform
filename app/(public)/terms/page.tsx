@@ -50,7 +50,11 @@ export default function TermsPage() {
             },
             {
               title: '9. Contact',
-              content: `Questions about the Terms of Service should be sent to: legal@stakeonix.com`,
+              content: `Questions about the Terms of Service should be sent to: info@stakeonix.com
+              
+              StakeOnix
+              130 King St W, Toronto, ON M5X 2A2, Canada
+              Phone: +1 (613) 366-4391`,
             },
           ].map((section) => (
             <div key={section.title}>

@@ -60,7 +60,11 @@ export default function PolicyPage() {
             },
             {
               title: '7. Contact Us',
-              content: `If you have any questions about this Privacy Policy, please contact us at: privacy@stakeonix.com`,
+              content: `If you have any questions about this Privacy Policy, please contact us at: info@stakeonix.com
+              
+              StakeOnix
+              130 King St W, Toronto, ON M5X 2A2, Canada
+              Phone: +1 (613) 366-4391`,
             },
           ].map((section) => (
             <div key={section.title}>

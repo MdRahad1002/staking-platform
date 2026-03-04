@@ -5,29 +5,24 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, MessageSquare, Clock, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
 import { toast } from 'sonner'
 
 const contactInfo = [
   {
     icon: <Mail className="h-5 w-5" />,
     label: 'Email',
-    value: 'support@stakeonix.com',
+    value: 'info@stakeonix.com',
   },
   {
-    icon: <MessageSquare className="h-5 w-5" />,
-    label: 'Live Chat',
-    value: 'Available 24/7 via our platform',
-  },
-  {
-    icon: <Clock className="h-5 w-5" />,
-    label: 'Response Time',
-    value: 'Within 2 hours',
+    icon: <Phone className="h-5 w-5" />,
+    label: 'Phone',
+    value: '+1 (613) 366-4391',
   },
   {
     icon: <MapPin className="h-5 w-5" />,
     label: 'Headquarters',
-    value: 'London, United Kingdom',
+    value: '130 King St W, Toronto, ON M5X 2A2, Canada',
   },
 ]
 

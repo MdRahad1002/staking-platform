@@ -18,13 +18,25 @@ interface EmailOptions {
 }
 
 export async function sendEmail({ to, subject, html, text }: EmailOptions): Promise<void> {
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM || 'StakeOnix <noreply@stakeonix.com>',
-    to,
-    subject,
-    html,
-    text: text || html.replace(/<[^>]+>/g, ''),
-  })
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || 'StakeOnix <noreply@stakeonix.com>',
+      to,
+      subject,
+      html,
+      text: text || html.replace(/<[^>]+>/g, ''),
+    })
+  } catch (error) {
+    console.error('[MAIL] Error sending email:', {
+      to,
+      subject,
+      smtpHost: process.env.SMTP_HOST,
+      smtpPort: process.env.SMTP_PORT,
+      smtpUser: process.env.SMTP_USER,
+      error: error instanceof Error ? error.message : String(error),
+    })
+    throw error
+  }
 }
 
 export function getWelcomeEmailTemplate(name: string, email: string): string {

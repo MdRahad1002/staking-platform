@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Shield, Target, Users, TrendingUp } from 'lucide-react'
+import { Shield, Target, Users, TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'About Us' }
 
@@ -93,6 +93,39 @@ export default function AboutPage() {
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+        {/* Headquarters */}
+        <div className="mt-16 glass-card p-8 max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6 gradient-text">Our Headquarters</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                <Mail className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Email</p>
+                <a href="mailto:info@stakeonix.com" className="text-sm font-medium hover:text-primary transition-colors">info@stakeonix.com</a>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                <Phone className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Phone</p>
+                <a href="tel:+16133664391" className="text-sm font-medium hover:text-primary transition-colors">+1 (613) 366-4391</a>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary flex-shrink-0">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-1">Address</p>
+                <p className="text-sm font-medium">130 King St W, Toronto,<br />ON M5X 2A2, Canada</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

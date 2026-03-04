@@ -1,15 +1,8 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.hostinger.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,      // false = STARTTLS upgrade (port 587) — port 465 SSL is blocked on Vercel
-  requireTLS: true,   // force TLS upgrade, reject plaintext
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-})
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+const FROM_ADDRESS = process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.com>'
 
 interface EmailOptions {
   to: string
@@ -19,24 +12,16 @@ interface EmailOptions {
 }
 
 export async function sendEmail({ to, subject, html, text }: EmailOptions): Promise<void> {
-  try {
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || 'StakeOnix <noreply@stakeonix.com>',
-      to,
-      subject,
-      html,
-      text: text || html.replace(/<[^>]+>/g, ''),
-    })
-  } catch (error) {
-    console.error('[MAIL] Error sending email:', {
-      to,
-      subject,
-      smtpHost: process.env.SMTP_HOST,
-      smtpPort: process.env.SMTP_PORT,
-      smtpUser: process.env.SMTP_USER,
-      error: error instanceof Error ? error.message : String(error),
-    })
-    throw error
+  const { error } = await resend.emails.send({
+    from: FROM_ADDRESS,
+    to,
+    subject,
+    html,
+    text: text || html.replace(/<[^>]+>/g, ''),
+  })
+  if (error) {
+    console.error('[MAIL] Resend error:', { to, subject, error })
+    throw new Error(error.message)
   }
 }
 
@@ -303,7 +288,7 @@ export async function sendContactEmail({
   subject: string
   message: string
 }): Promise<void> {
-  const adminEmail = process.env.SMTP_FROM || process.env.SMTP_USER || ''
+  const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_FROM || 'nikos@stakeonix.com'
   await sendEmail({
     to: adminEmail,
     subject: `Contact Form: ${subject}`,

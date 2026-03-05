@@ -10,16 +10,19 @@ export async function GET(req: Request) {
   const to = searchParams.get('to')
   if (!to) return NextResponse.json({ error: 'Missing ?to= param' }, { status: 400 })
 
+  const rawKey = process.env.RESEND_API_KEY || ''
+  const keyInfo = rawKey ? `set (${rawKey.trim().length} chars, raw len ${rawKey.length})` : 'NOT SET'
+
   try {
     await sendEmail({
       to,
       subject: 'StakeOnix — Email Test',
       html: '<p>✅ Email delivery is working correctly on Vercel via Resend.</p>',
     })
-    return NextResponse.json({ ok: true, message: `Email sent to ${to}` })
+    return NextResponse.json({ ok: true, message: `Email sent to ${to}`, keyInfo })
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err)
     console.error('[TEST_EMAIL] Error:', message)
-    return NextResponse.json({ ok: false, error: message }, { status: 500 })
+    return NextResponse.json({ ok: false, error: message, keyInfo }, { status: 500 })
   }
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
-import { createPayment, toNowPaymentsCode } from '@/lib/nowpayments'
+import { createPayment, getMinAmount, toNowPaymentsCode, NowPaymentsError } from '@/lib/nowpayments'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -28,6 +28,16 @@ export async function POST(req: NextRequest) {
     if (amountUsd < currency.minDeposit) {
       return NextResponse.json(
         { error: `Minimum deposit is $${currency.minDeposit} USD.` },
+        { status: 400 }
+      )
+    }
+
+    // Check NowPayments minimum for this currency (network fees vary)
+    const nowCode = toNowPaymentsCode(currency.symbol, currency.network)
+    const npMinUsd = await getMinAmount(nowCode)
+    if (npMinUsd > 0 && amountUsd < npMinUsd) {
+      return NextResponse.json(
+        { error: `Minimum deposit for ${currency.symbol} is $${Math.ceil(npMinUsd * 100) / 100} USD due to network fees.` },
         { status: 400 }
       )
     }
@@ -78,14 +88,21 @@ export async function POST(req: NextRequest) {
       const ipnUrl = process.env.NEXT_PUBLIC_APP_URL
         ? `${process.env.NEXT_PUBLIC_APP_URL}/api/deposit/webhook`
         : undefined
-      const nowCode = toNowPaymentsCode(currency.symbol, currency.network)
       payment = await createPayment(amountUsd, nowCode, deposit.id, ipnUrl)
     } catch (err) {
       // Clean up the placeholder deposit on failure
       await prisma.deposit.delete({ where: { id: deposit.id } }).catch(() => {})
       console.error('[DEPOSIT_CREATE] NOWPayments error:', err)
+
+      // Surface the real NowPayments error to the user
+      if (err instanceof NowPaymentsError) {
+        const msg = err.code === 'AMOUNT_MINIMAL_ERROR'
+          ? `Amount too low for ${currency.symbol}. Please increase the deposit amount.`
+          : err.message
+        return NextResponse.json({ error: msg }, { status: 400 })
+      }
       return NextResponse.json(
-        { error: 'Failed to create payment. Check NOWPAYMENTS_API_KEY in .env.local.' },
+        { error: 'Failed to create payment. Please try again.' },
         { status: 500 }
       )
     }

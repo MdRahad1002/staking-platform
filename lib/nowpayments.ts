@@ -5,8 +5,20 @@
 import crypto from 'crypto'
 
 const BASE_URL = 'https://api.nowpayments.io/v1'
-const API_KEY = process.env.NOWPAYMENTS_API_KEY || ''
-const IPN_SECRET = process.env.NOWPAYMENTS_IPN_SECRET || ''
+const API_KEY = (process.env.NOWPAYMENTS_API_KEY || '').trim()
+const IPN_SECRET = (process.env.NOWPAYMENTS_IPN_SECRET || '').trim()
+
+// ─── Error type ──────────────────────────────────────────────────────────────
+export class NowPaymentsError extends Error {
+  constructor(
+    public readonly code: string,
+    message: string,
+    public readonly statusCode?: number
+  ) {
+    super(message)
+    this.name = 'NowPaymentsError'
+  }
+}
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -56,8 +68,19 @@ async function nowFetch<T>(
   })
 
   if (!res.ok) {
-    const text = await res.text()
-    throw new Error(`NOWPayments ${path} → ${res.status}: ${text}`)
+    let code = 'NOWPAYMENTS_ERROR'
+    let message = `NOWPayments error ${res.status}`
+    try {
+      const json = await res.json() as { code?: string; message?: string; statusCode?: number }
+      code = json.code ?? code
+      message = json.message ?? message
+      throw new NowPaymentsError(code, message, res.status)
+    } catch (e) {
+      if (e instanceof NowPaymentsError) throw e
+      // fallback if body isn't JSON
+      const text = await res.text().catch(() => '')
+      throw new NowPaymentsError(code, text || message, res.status)
+    }
   }
 
   return res.json() as Promise<T>
@@ -109,13 +132,18 @@ export async function getAvailableCurrencies(): Promise<NowCurrency[]> {
 }
 
 /**
- * Get the minimum payment amount for a given crypto.
+ * Get the minimum payment amount (in USD) for a given crypto → USD pair.
+ * Returns 0 on failure so the caller can still attempt the payment.
  */
 export async function getMinAmount(currency: string): Promise<number> {
-  const res = await nowFetch<{ min_amount: number }>(
-    `/min-amount?currency_from=${currency.toLowerCase()}&currency_to=usd`
-  )
-  return res.min_amount ?? 0
+  try {
+    const res = await nowFetch<{ min_amount: number }>(
+      `/min-amount?currency_from=${currency.toLowerCase()}&currency_to=usd`
+    )
+    return res.min_amount ?? 0
+  } catch {
+    return 0
+  }
 }
 
 /**

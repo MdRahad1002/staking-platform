@@ -56,7 +56,6 @@ export default withAuth(
           pathname.startsWith('/api/crypto-prices') ||
           pathname.startsWith('/api/contact') ||
           pathname.startsWith('/api/test-email') ||
-          pathname.startsWith('/api/debug-nowpay') ||
           pathname.startsWith('/_next') ||
           pathname.startsWith('/favicon') ||
           pathname.startsWith('/uploads') ||

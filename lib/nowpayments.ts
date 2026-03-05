@@ -119,17 +119,41 @@ export async function getMinAmount(currency: string): Promise<number> {
 }
 
 /**
+ * Recursively sort all keys of an object alphabetically.
+ * Required by NOWPayments' IPN signature scheme (nested objects like `fee` must
+ * also be sorted before hashing).
+ */
+function sortObjectDeep(obj: unknown): unknown {
+  if (Array.isArray(obj)) return obj.map(sortObjectDeep)
+  if (obj !== null && typeof obj === 'object') {
+    return Object.keys(obj as Record<string, unknown>)
+      .sort()
+      .reduce<Record<string, unknown>>((acc, key) => {
+        acc[key] = sortObjectDeep((obj as Record<string, unknown>)[key])
+        return acc
+      }, {})
+  }
+  return obj
+}
+
+/**
  * Verify the HMAC-SHA512 signature of an IPN webhook from NOWPayments.
  * Called in the webhook route to ensure the request is genuine.
+ *
+ * Algorithm (from NowPayments docs):
+ *   1. Parse the raw JSON body
+ *   2. Recursively sort all keys alphabetically
+ *   3. Re-serialize with JSON.stringify
+ *   4. HMAC-SHA512 with the IPN secret
+ *   5. Compare hex digest to x-nowpayments-sig header
  */
 export function verifyIpnSignature(rawBody: string, signature: string): boolean {
   if (!IPN_SECRET) return false
   try {
-    // NOWPayments signs the alphabetically sorted JSON
     const parsed = JSON.parse(rawBody)
-    const sortedJson = JSON.stringify(parsed, Object.keys(parsed).sort())
+    const sortedJson = JSON.stringify(sortObjectDeep(parsed))
     const expected = crypto
-      .createHmac('sha512', IPN_SECRET)
+      .createHmac('sha512', IPN_SECRET.trim())
       .update(sortedJson)
       .digest('hex')
     return crypto.timingSafeEqual(

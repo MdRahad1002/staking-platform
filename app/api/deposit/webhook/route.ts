@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.text()
 
-    // Verify NOWPayments IPN signature
+    // Verify NOWPayments IPN signature (HMAC-SHA512 with recursive key sort)
     const sig = req.headers.get('x-nowpayments-sig') || ''
     if (!verifyIpnSignature(body, sig)) {
       console.warn('[DEPOSIT_WEBHOOK] Invalid signature — rejected')
@@ -17,8 +17,9 @@ export async function POST(req: NextRequest) {
     const payload = JSON.parse(body)
     const {
       payment_id,
+      parent_payment_id,  // set on re-deposits — do NOT auto-credit per NowPayments docs
       payment_status,
-      order_id,        // This is our deposit.id
+      order_id,           // our deposit.id
       actually_paid,
       pay_amount,
       pay_currency,
@@ -29,14 +30,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing identifiers.' }, { status: 400 })
     }
 
-    // Look up by order_id (our deposit.id) or paymentId
+    // Re-deposits: parent_payment_id is set when the same address receives extra funds.
+    // Per NowPayments docs: do NOT automatically credit — risk of underpayment.
+    if (parent_payment_id) {
+      console.warn(
+        '[DEPOSIT_WEBHOOK] Re-deposit received — skipping auto-credit.',
+        { payment_id, parent_payment_id, order_id, payment_status, actually_paid }
+      )
+      return NextResponse.json({ success: true })
+    }
+
+    // Look up deposit by order_id (our deposit.id) or by stored paymentId
     const deposit = await prisma.deposit.findFirst({
-      where: order_id ? { id: order_id } : { paymentId: payment_id },
+      where: order_id
+        ? { id: order_id }
+        : { paymentId: String(payment_id) },
       include: { user: true, currency: true },
     })
 
     if (!deposit) {
-      console.warn('[DEPOSIT_WEBHOOK] Deposit not found for order_id:', order_id)
+      console.warn('[DEPOSIT_WEBHOOK] Deposit not found', { order_id, payment_id })
       return NextResponse.json({ error: 'Deposit not found.' }, { status: 404 })
     }
 
@@ -94,13 +107,23 @@ export async function POST(req: NextRequest) {
         deposit.amountUsd ?? price_amount ?? 0,
         (pay_currency ?? '').toUpperCase()
       ).catch(console.error)
+
     } else if (isPaymentFailed(payment_status)) {
       await prisma.deposit.update({
         where: { id: deposit.id },
         data: { status: 'FAILED' },
       })
+    } else if (payment_status === 'partially_paid') {
+      // Update the amount paid so far but don't credit balance yet
+      await prisma.deposit.update({
+        where: { id: deposit.id },
+        data: {
+          status: 'PARTIALLY_PAID',
+          payAmount: actually_paid || pay_amount || deposit.payAmount,
+        },
+      })
     } else {
-      // Just update confirmations / status for intermediate states
+      // Intermediate states (waiting, confirming, sending…) — update payAmount only
       await prisma.deposit.update({
         where: { id: deposit.id },
         data: {
@@ -115,3 +138,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 })
   }
 }
+

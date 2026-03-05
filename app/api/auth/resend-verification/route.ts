@@ -44,11 +44,11 @@ export async function POST(req: NextRequest) {
       data: { emailVerificationToken: token, emailVerificationExpires: expires },
     })
 
-    sendVerificationEmail(
-      user.email,
-      user.firstName || user.email,
-      token
-    ).catch(console.error)
+    try {
+      await sendVerificationEmail(user.email, user.firstName || user.email, token)
+    } catch (emailErr) {
+      console.error('[resend-verification] Email send error:', emailErr)
+    }
 
     return NextResponse.json({ message: 'If that email exists, a verification link has been sent.' })
   } catch (err) {

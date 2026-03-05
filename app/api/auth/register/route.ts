@@ -83,10 +83,13 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      // Send welcome/verification email (non-blocking — failure won't break signup)
-      sendVerificationEmail(user.email, firstName || user.email, verificationToken).catch((emailError) => {
+      // Send welcome/verification email — awaited so Vercel doesn't kill it before it completes
+      try {
+        await sendVerificationEmail(user.email, firstName || user.email, verificationToken)
+      } catch (emailError) {
         console.error('[REGISTER] Email send error:', emailError)
-      })
+        // Don't fail the request — account is created, email is cosmetic
+      }
     } catch (createError: any) {
       // P2002 = unique constraint violation (race condition on email)
       if (createError?.code === 'P2002') {

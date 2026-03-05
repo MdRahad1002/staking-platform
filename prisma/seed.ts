@@ -229,13 +229,14 @@ async function main() {
   }
 
   // ─── Deposit currencies ────────────────────────────────────────────────────
+  // minDeposit is in USD — the deposit page shows "Minimum: $X USD"
   const depositCurrencies = [
-    { symbol: 'BTC', name: 'Bitcoin', network: 'BTC', minDeposit: 0.0001, isActive: true },
-    { symbol: 'ETH', name: 'Ethereum', network: 'ERC20', minDeposit: 0.005, isActive: true },
-    { symbol: 'USDT', name: 'Tether', network: 'TRC20', minDeposit: 10, isActive: true },
-    { symbol: 'USDC', name: 'USD Coin', network: 'ERC20', minDeposit: 10, isActive: true },
-    { symbol: 'LTC', name: 'Litecoin', network: 'LTC', minDeposit: 0.01, isActive: true },
-    { symbol: 'TRX', name: 'TRON', network: 'TRC20', minDeposit: 50, isActive: true },
+    { symbol: 'BTC',  name: 'Bitcoin',   network: 'BTC',   minDeposit: 10, isActive: true },
+    { symbol: 'ETH',  name: 'Ethereum',  network: 'ERC20', minDeposit: 10, isActive: true },
+    { symbol: 'USDT', name: 'Tether',    network: 'TRC20', minDeposit: 10, isActive: true },
+    { symbol: 'USDC', name: 'USD Coin',  network: 'ERC20', minDeposit: 10, isActive: true },
+    { symbol: 'LTC',  name: 'Litecoin',  network: 'LTC',   minDeposit: 10, isActive: true },
+    { symbol: 'TRX',  name: 'TRON',      network: 'TRC20', minDeposit: 10, isActive: true },
   ]
 
   for (const c of depositCurrencies) {

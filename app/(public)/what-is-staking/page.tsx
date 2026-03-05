@@ -17,9 +17,20 @@ import {
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
-  title: 'What is Staking? | StakeOnix',
+  title: 'What is Crypto Staking? Complete Guide 2026 | StakeOnix',
   description:
-    'Learn what crypto staking is, how it works, and how you can earn passive income — explained in simple, everyday language.',
+    'Learn what crypto staking is, how it works, and how to earn passive income with Bitcoin, Ethereum & USDT. A complete beginner-friendly guide to staking in 2026.',
+  keywords: [
+    'what is crypto staking', 'how does staking work', 'crypto staking explained',
+    'staking guide', 'proof of stake explained', 'earn passive income staking',
+    'cryptocurrency staking guide 2026', 'how to stake crypto', 'staking rewards explained',
+  ],
+  alternates: { canonical: 'https://www.stakeonix.com/what-is-staking' },
+  openGraph: {
+    title: 'What is Crypto Staking? — Complete Guide 2026',
+    description: 'The ultimate beginner-friendly guide to crypto staking. Learn how to earn passive income on Bitcoin, Ethereum, USDT and more.',
+    url: 'https://www.stakeonix.com/what-is-staking',
+  },
 }
 
 const steps = [

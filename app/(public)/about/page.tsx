@@ -1,7 +1,23 @@
 import { Metadata } from 'next'
 import { Shield, Target, Users, TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'About Us' }
+const APP_URL = 'https://www.stakeonix.com'
+
+export const metadata: Metadata = {
+  title: 'About StakeOnix — Trusted Crypto Staking Company',
+  description:
+    'Learn about StakeOnix — the team behind the leading crypto staking platform. Our mission is to make earning passive income on cryptocurrency simple, secure, and accessible for everyone.',
+  keywords: [
+    'about StakeOnix', 'crypto staking company', 'trusted staking platform',
+    'staking company team', 'secure crypto platform', 'crypto investment company',
+  ],
+  alternates: { canonical: `${APP_URL}/about` },
+  openGraph: {
+    title: 'About StakeOnix — Trusted Crypto Staking Company',
+    description: 'Meet the team making crypto staking simple, secure, and profitable for thousands of investors worldwide.',
+    url: `${APP_URL}/about`,
+  },
+}
 
 const team = [
   { name: 'Alex Johnson', role: 'CEO & Founder', avatar: '👤' },

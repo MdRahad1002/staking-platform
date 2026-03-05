@@ -2,7 +2,17 @@ import { Metadata } from 'next'
 import { Button } from '@/components/ui/button'
 import { Smartphone, Shield, Zap, Bell, BarChart3, TrendingUp, Download } from 'lucide-react'
 
-export const metadata: Metadata = { title: 'Mobile App' }
+export const metadata: Metadata = {
+  title: 'StakeOnix Mobile App — Stake Crypto on the Go',
+  description:
+    'Download the StakeOnix mobile app to manage your crypto staking portfolio from anywhere. Track your daily earnings, deposits, and withdrawals in real time.',
+  alternates: { canonical: 'https://www.stakeonix.com/app-info' },
+  openGraph: {
+    title: 'StakeOnix Mobile App — Stake Crypto on the Go',
+    description: 'Manage your staking portfolio from anywhere with the StakeOnix mobile app.',
+    url: 'https://www.stakeonix.com/app-info',
+  },
+}
 
 const appFeatures = [
   { icon: <BarChart3 className="h-5 w-5" />, title: 'Live Analytics', desc: 'Track your earnings in real-time' },

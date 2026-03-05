@@ -1,6 +1,103 @@
 ﻿export const dynamic = 'force-dynamic'
 
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+const APP_URL = 'https://www.stakeonix.com'
+
+export const metadata: Metadata = {
+  title: 'StakeOnix — #1 Crypto Staking Platform | Earn Daily Passive Income',
+  description:
+    'Join thousands of investors earning daily passive income on Bitcoin, Ethereum, USDT, Solana & 10+ cryptocurrencies. Secure, transparent, and high-yield crypto staking. Start with as little as $20.',
+  keywords: [
+    'crypto staking platform', 'earn crypto daily', 'bitcoin staking rewards',
+    'ethereum staking APY', 'USDT staking', 'passive crypto income', 'DeFi staking',
+    'best staking platform 2026', 'high yield crypto staking', 'crypto investment platform',
+  ],
+  alternates: { canonical: APP_URL },
+  openGraph: {
+    title: 'StakeOnix — Earn Daily Passive Income on Crypto',
+    description: 'Stake Bitcoin, Ethereum, USDT & more. Earn up to 5% daily rewards. Join 10,000+ investors on the most trusted crypto staking platform.',
+    url: APP_URL,
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
+  },
+}
+
+const homepageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  name: 'StakeOnix',
+  url: APP_URL,
+  description: 'Professional cryptocurrency staking platform offering daily passive income on Bitcoin, Ethereum, USDT, Solana and 10+ cryptocurrencies.',
+  serviceType: 'Cryptocurrency Staking',
+  areaServed: 'Worldwide',
+  currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL',
+  priceRange: '$20+',
+  telephone: '+1-613-366-4391',
+  email: 'info@stakeonix.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '130 King St W',
+    addressLocality: 'Toronto',
+    addressRegion: 'ON',
+    postalCode: 'M5X 2A2',
+    addressCountry: 'CA',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    reviewCount: '2340',
+    bestRating: '5',
+  },
+}
+
+const faqHomepageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is crypto staking?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Crypto staking is the process of locking up cryptocurrency assets to earn rewards. StakeOnix pools staking resources and distributes daily rewards to investors.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much can I earn with StakeOnix?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Earnings depend on your staked amount and chosen plan. StakeOnix offers plans with daily returns ranging from 1% to 5%. Start with as little as $20.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is StakeOnix safe?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'StakeOnix employs SSL encryption, two-factor authentication, withdrawal PIN protection, and cold storage for the majority of user funds.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which cryptocurrencies can I stake on StakeOnix?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'StakeOnix supports Bitcoin (BTC), Ethereum (ETH), USDT, USDC, Litecoin (LTC), Tron (TRX), BNB, and Solana (SOL).',
+      },
+    },
+  ],
+}
+
+function HomePageSchemas() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqHomepageSchema) }} />
+    </>
+  )
+}
 import { Button } from '@/components/ui/button'
 import { PlanCard } from '@/components/shared/PlanCard'
 import CryptoTicker from '@/components/layout/CryptoTicker'
@@ -179,6 +276,7 @@ export default async function HomePage() {
 
   return (
     <div className="relative overflow-hidden">
+      <HomePageSchemas />
 
       {/* Live Crypto Ticker */}
       <CryptoTicker />

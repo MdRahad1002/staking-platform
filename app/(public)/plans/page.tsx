@@ -5,7 +5,24 @@ import { PlansClient } from './PlansClient'
 import { TrendingUp, Users, Shield, Zap } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = { title: 'Staking Plans' }
+const APP_URL = 'https://www.stakeonix.com'
+
+export const metadata: Metadata = {
+  title: 'Crypto Staking Plans — Earn Up to 5% Daily | StakeOnix',
+  description:
+    'Browse StakeOnix staking plans for Bitcoin, Ethereum, USDT and more. Choose from flexible short-term and long-term plans with daily returns up to 5%. Start staking from just $20.',
+  keywords: [
+    'crypto staking plans', 'bitcoin staking plan', 'ethereum staking APY',
+    'high yield staking plans', 'daily crypto returns', 'staking investment plans',
+    'USDT staking plans', 'best staking plans 2026', 'crypto daily rewards plan',
+  ],
+  alternates: { canonical: `${APP_URL}/plans` },
+  openGraph: {
+    title: 'Crypto Staking Plans — Earn Up to 5% Daily | StakeOnix',
+    description: 'Choose the perfect staking plan. Earn daily passive income on Bitcoin, Ethereum, USDT, Solana & more. Plans start from just $20.',
+    url: `${APP_URL}/plans`,
+  },
+}
 
 async function getPlans() {
   try {

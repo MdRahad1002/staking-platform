@@ -5,15 +5,16 @@
 import { PrismaClient } from '@prisma/client'
 const db = new PrismaClient()
 
+// NowPayments minimum is ~$19.18 USD for all currencies — use $20 as safe minimum
 const depositCurrencies = [
-  { symbol: 'BTC',  name: 'Bitcoin',   network: 'BTC',   minDeposit: 10, isActive: true },
-  { symbol: 'ETH',  name: 'Ethereum',  network: 'ERC20', minDeposit: 10, isActive: true },
-  { symbol: 'USDT', name: 'Tether',    network: 'TRC20', minDeposit: 10, isActive: true },
-  { symbol: 'USDC', name: 'USD Coin',  network: 'ERC20', minDeposit: 10, isActive: true },
-  { symbol: 'LTC',  name: 'Litecoin',  network: 'LTC',   minDeposit: 10, isActive: true },
-  { symbol: 'TRX',  name: 'TRON',      network: 'TRC20', minDeposit: 10, isActive: true },
-  { symbol: 'BNB',  name: 'BNB',       network: 'BEP20', minDeposit: 10, isActive: true },
-  { symbol: 'SOL',  name: 'Solana',    network: 'SOL',   minDeposit: 10, isActive: true },
+  { symbol: 'BTC',  name: 'Bitcoin',   network: 'BTC',   minDeposit: 20, isActive: true },
+  { symbol: 'ETH',  name: 'Ethereum',  network: 'ERC20', minDeposit: 20, isActive: true },
+  { symbol: 'USDT', name: 'Tether',    network: 'TRC20', minDeposit: 20, isActive: true },
+  { symbol: 'USDC', name: 'USD Coin',  network: 'ERC20', minDeposit: 20, isActive: true },
+  { symbol: 'LTC',  name: 'Litecoin',  network: 'LTC',   minDeposit: 20, isActive: true },
+  { symbol: 'TRX',  name: 'TRON',      network: 'TRC20', minDeposit: 20, isActive: true },
+  { symbol: 'BNB',  name: 'BNB',       network: 'BEP20', minDeposit: 20, isActive: true },
+  { symbol: 'SOL',  name: 'Solana',    network: 'SOL',   minDeposit: 20, isActive: true },
 ]
 
 const withdrawalCurrencies = [

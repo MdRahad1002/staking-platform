@@ -132,13 +132,14 @@ export async function getAvailableCurrencies(): Promise<NowCurrency[]> {
 }
 
 /**
- * Get the minimum payment amount (in USD) for a given crypto → USD pair.
+ * Get the minimum payment amount in USD for the given pay_currency.
+ * Uses currency_from=usd so the result is in USD directly.
  * Returns 0 on failure so the caller can still attempt the payment.
  */
-export async function getMinAmount(currency: string): Promise<number> {
+export async function getMinAmount(payCurrency: string): Promise<number> {
   try {
     const res = await nowFetch<{ min_amount: number }>(
-      `/min-amount?currency_from=${currency.toLowerCase()}&currency_to=usd`
+      `/min-amount?currency_from=usd&currency_to=${payCurrency.toLowerCase()}`
     )
     return res.min_amount ?? 0
   } catch {

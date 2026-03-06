@@ -41,12 +41,33 @@ const DOC_TYPES = [
   { value: 'DRIVERS_LICENSE', label: "Driver's License" },
 ]
 
-function fileToBase64(file: File): Promise<string> {
+// Compress + resize on a canvas, then return a data URI.
+// Max dimension 1400px, JPEG 0.82 quality → each image ~100–300 KB in base64
+async function compressImageToBase64(file: File, maxPx = 1400, quality = 0.82): Promise<string> {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = reject
-    reader.readAsDataURL(file)
+    const img = new Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      URL.revokeObjectURL(url)
+      let { width, height } = img
+      if (width > maxPx || height > maxPx) {
+        if (width >= height) {
+          height = Math.round((height * maxPx) / width)
+          width = maxPx
+        } else {
+          width = Math.round((width * maxPx) / height)
+          height = maxPx
+        }
+      }
+      const canvas = document.createElement('canvas')
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')!
+      ctx.drawImage(img, 0, 0, width, height)
+      resolve(canvas.toDataURL('image/jpeg', quality))
+    }
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Failed to load image')) }
+    img.src = url
   })
 }
 
@@ -66,16 +87,20 @@ function ImageUploadBox({
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image must be under 5MB')
+    if (file.size > 25 * 1024 * 1024) {
+      toast.error('Image must be under 25MB')
       return
     }
     if (!file.type.startsWith('image/')) {
       toast.error('Only image files are allowed')
       return
     }
-    const b64 = await fileToBase64(file)
-    onChange(b64)
+    try {
+      const b64 = await compressImageToBase64(file)
+      onChange(b64)
+    } catch {
+      toast.error('Failed to process image. Please try another file.')
+    }
   }
 
   return (
@@ -92,7 +117,7 @@ function ImageUploadBox({
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
             <Upload className="h-8 w-8" />
             <span className="text-sm">Click to upload</span>
-            <span className="text-xs">JPG, PNG, WEBP — max 5MB</span>
+            <span className="text-xs">JPG, PNG, WEBP — auto-compressed</span>
           </div>
         )}
         <input type="file" accept="image/*" className="hidden" onChange={handleFile} />

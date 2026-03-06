@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/react'
 import { cn } from '@/lib/utils'
 import {
   LayoutDashboard, Users, MessageSquare, Globe, Bell, Settings,
-  ChevronLeft, ChevronRight, LogOut, Menu, X, Ticket
+  ChevronLeft, ChevronRight, LogOut, Menu, X, Ticket, ShieldCheck
 } from 'lucide-react'
 
 const navItems = [
@@ -17,6 +17,7 @@ const navItems = [
   { label: 'Tickets', href: '/support/tickets', icon: Ticket },
   { label: 'Domains', href: '/support/domains', icon: Globe },
   { label: 'Notifications', href: '/support/notifications', icon: Bell },
+  { label: 'KYC Verification', href: '/support/kyc', icon: ShieldCheck },
   { label: 'Settings', href: '/support/settings', icon: Settings },
 ]
 

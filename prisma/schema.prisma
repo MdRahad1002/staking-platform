@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ─────────────────────────────────────────────
@@ -57,12 +58,38 @@ model User {
   referralEarnings      ReferralEarning[] @relation("ReferralEarningTo")
   referralEarningsFrom  ReferralEarning[] @relation("ReferralEarningFrom")
   savedWallets          SavedWallet[]
+  kyc                   KycSubmission?
   domain            Domain?           @relation(fields: [domainId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([role])
   @@index([domainId])
   @@index([resetPasswordToken])
   @@index([emailVerificationToken])
+}
+
+model KycSubmission {
+  id               String    @id @default(uuid())
+  userId           String    @unique
+  status           String    @default("PENDING")   // PENDING | APPROVED | REJECTED
+  firstName        String
+  lastName         String
+  dateOfBirth      String
+  country          String
+  documentType     String    // PASSPORT | NATIONAL_ID | DRIVERS_LICENSE
+  documentNumber   String
+  frontImage       String    @db.Text  // base64 data URI
+  backImage        String?   @db.Text  // base64 data URI (optional for passport)
+  selfieImage      String    @db.Text  // base64 data URI
+  rejectionReason  String?
+  reviewedById     String?
+  reviewedAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([userId])
 }
 
 model Domain {

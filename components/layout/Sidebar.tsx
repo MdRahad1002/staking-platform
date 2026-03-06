@@ -23,6 +23,7 @@ import {
   KeyRound,
   Wallet,
   X,
+  ShieldCheck,
 } from 'lucide-react'
 
 interface SidebarLink {
@@ -49,6 +50,7 @@ const settingsLinks: SidebarLink[] = [
   { href: '/settings/security', label: 'Security', icon: <TrendingDown className="h-4 w-4" /> },
   { href: '/settings/api-keys', label: 'API Keys', icon: <KeyRound className="h-4 w-4" /> },
   { href: '/settings/withdraw', label: 'Wallets', icon: <Wallet className="h-4 w-4" /> },
+  { href: '/settings/kyc', label: 'KYC Verification', icon: <ShieldCheck className="h-4 w-4" /> },
 ]
 
 interface SidebarProps {

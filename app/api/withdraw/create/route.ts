@@ -21,8 +21,22 @@ export async function POST(req: NextRequest) {
     }
     const { currencyId, amount, walletAddress, pin } = parsed.data
 
-    const user = await prisma.user.findUnique({ where: { id: session.user.id } })
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      include: { kyc: { select: { status: true } } },
+    })
     if (!user) return NextResponse.json({ error: 'User not found.' }, { status: 404 })
+
+    // KYC gate — must be APPROVED before any withdrawal
+    if (!user.kyc || user.kyc.status !== 'APPROVED') {
+      const kycStatus = user.kyc?.status
+      const msg = !user.kyc
+        ? 'Identity verification (KYC) is required before you can withdraw. Please complete your KYC in Settings.'
+        : kycStatus === 'PENDING'
+        ? 'Your KYC is still under review. Withdrawals will be enabled once approved.'
+        : 'Your KYC was rejected. Please resubmit your documents in Settings → KYC.'
+      return NextResponse.json({ error: msg, kycRequired: true }, { status: 403 })
+    }
 
     // Verify PIN
     if (!user.pinEnabled || !user.pin) {

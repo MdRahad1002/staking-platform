@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard, Users, TrendingUp, Wallet, ArrowUpFromLine, ArrowDownToLine,
-  MessageSquare, Globe, Settings, Bell, Mail, FileText, Shield, LogOut,
+  MessageSquare, Globe, Settings, Bell, Mail, FileText, Shield, ShieldCheck, LogOut,
   Menu, X, ChevronRight, History, CreditCard, Ticket
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -20,6 +20,7 @@ const navItems = [
   { href: '/admin/payments', label: 'Payments', icon: CreditCard },
   { href: '/admin/deposits', label: 'Deposits', icon: ArrowDownToLine },
   { href: '/admin/withdrawals', label: 'Withdrawals', icon: ArrowUpFromLine },
+  { href: '/admin/kyc', label: 'KYC Verification', icon: ShieldCheck },
   { href: '/admin/currenci-deposit', label: 'Deposit Currencies', icon: Wallet },
   { href: '/admin/currencies-withdrawal', label: 'Withdrawal Currencies', icon: Wallet },
   { href: '/admin/chat', label: 'Live Chat', icon: MessageSquare },

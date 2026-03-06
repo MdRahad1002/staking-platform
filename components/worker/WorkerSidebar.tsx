@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   LayoutDashboard, Users, TrendingUp, ArrowDownLeft, ArrowUpRight,
-  MessageSquare, Globe, ChevronLeft, ChevronRight, LogOut, Menu, X, Coins, Settings
+  MessageSquare, Globe, ChevronLeft, ChevronRight, LogOut, Menu, X, Coins, Settings, ShieldCheck
 } from 'lucide-react'
 
 const navItems = [
@@ -19,6 +19,7 @@ const navItems = [
   { label: 'Withdraw Currencies', href: '/worker/currencies-withdrawal', icon: Coins },
   { label: 'Deposits', href: '/worker/deposits', icon: ArrowDownLeft },
   { label: 'Withdrawals', href: '/worker/withdrawals', icon: ArrowUpRight },
+  { label: 'KYC Verification', href: '/worker/kyc', icon: ShieldCheck },
   { label: 'Live Chat', href: '/worker/chat', icon: MessageSquare },
   { label: 'Domains', href: '/worker/domains', icon: Globe },
   { label: 'Settings', href: '/worker/settings', icon: Settings },

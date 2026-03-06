@@ -8,7 +8,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formatCurrency, formatDateTime, truncateAddress } from '@/lib/utils'
-import { ArrowUpFromLine, AlertTriangle } from 'lucide-react'
+import { ArrowUpFromLine, AlertTriangle, ShieldAlert } from 'lucide-react'
+import Link from 'next/link'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
@@ -52,6 +53,7 @@ export default function WithdrawPage() {
   const [history, setHistory] = useState<WithdrawalHistory[]>([])
   const [savedWallets, setSavedWallets] = useState<SavedWallet[]>([])
   const [submitting, setSubmitting] = useState(false)
+  const [kycRequired, setKycRequired] = useState(false)
 
   useEffect(() => {
     fetch('/api/withdraw/currencies')
@@ -93,12 +95,16 @@ export default function WithdrawPage() {
       })
       const data = await res.json()
       if (res.ok) {
+        setKycRequired(false)
         toast.success('Withdrawal request submitted!')
         setAmount('')
         setWallet('')
         setPin('')
         router.refresh()
       } else {
+        if (data.kycRequired) {
+          setKycRequired(true)
+        }
         toast.error(data.error || 'Failed to submit withdrawal.')
       }
     } catch {
@@ -113,6 +119,21 @@ export default function WithdrawPage() {
         <h1 className="text-2xl font-bold">Withdraw</h1>
         <p className="text-muted-foreground text-sm mt-1">Withdraw your funds to a crypto wallet.</p>
       </div>
+
+      {kycRequired && (
+        <div className="flex items-start gap-3 rounded-lg border border-destructive/50 bg-destructive/10 p-4">
+          <ShieldAlert className="h-5 w-5 text-destructive mt-0.5 shrink-0" />
+          <div className="space-y-1">
+            <p className="font-semibold text-sm text-destructive">KYC Verification Required</p>
+            <p className="text-sm text-muted-foreground">
+              You must complete identity verification before making withdrawals.
+            </p>
+            <Link href="/settings/kyc" className="text-sm font-medium text-primary underline-offset-4 hover:underline">
+              Complete KYC Verification →
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>

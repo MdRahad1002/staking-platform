@@ -9,7 +9,20 @@ export default async function AdminKycPage() {
 
   const submissions = await prisma.kycSubmission.findMany({
     orderBy: [{ status: 'asc' }, { createdAt: 'desc' }],
-    include: {
+    select: {
+      id: true,
+      status: true,
+      firstName: true,
+      lastName: true,
+      dateOfBirth: true,
+      country: true,
+      documentType: true,
+      documentNumber: true,
+      rejectionReason: true,
+      reviewedAt: true,
+      reviewedById: true,
+      createdAt: true,
+      updatedAt: true,
       user: {
         select: {
           id: true,

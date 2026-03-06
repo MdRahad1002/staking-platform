@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { toast } from 'sonner'
 import { formatDateTime } from '@/lib/utils'
 import {
-  ShieldCheck, Clock, XCircle, CheckCircle2, Eye, Search, Filter,
+  ShieldCheck, Clock, XCircle, CheckCircle2, Eye, Search, Filter, Loader2,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -25,9 +25,9 @@ interface KycRecord {
   country: string
   documentType: string
   documentNumber: string
-  frontImage: string
-  backImage: string | null
-  selfieImage: string
+  frontImage?: string
+  backImage?: string | null
+  selfieImage?: string
   rejectionReason: string | null
   reviewedAt: Date | null
   reviewedById: string | null
@@ -69,6 +69,7 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('ALL')
   const [imgPreview, setImgPreview] = useState<string | null>(null)
+  const [loadingImages, setLoadingImages] = useState(false)
 
   const filtered = useMemo(() => {
     return submissions.filter(s => {
@@ -94,10 +95,23 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
     rejected: submissions.filter(s => s.status === 'REJECTED').length,
   }), [submissions])
 
-  const openReview = (s: KycRecord) => {
+  const openReview = async (s: KycRecord) => {
     setSelected(s)
     setRejReason(s.rejectionReason || '')
     setDialogOpen(true)
+    // Lazy-load images via API (excluded from SSR payload to avoid MB-sized page loads)
+    if (!s.frontImage) {
+      setLoadingImages(true)
+      try {
+        const r = await fetch(`/api/admin/kyc/${s.id}`)
+        if (r.ok) {
+          const d = await r.json()
+          setSelected(prev => prev ? { ...prev, frontImage: d.data.frontImage, backImage: d.data.backImage, selfieImage: d.data.selfieImage } : prev)
+        }
+      } finally {
+        setLoadingImages(false)
+      }
+    }
   }
 
   const doAction = async (action: 'APPROVE' | 'REJECT') => {
@@ -248,24 +262,31 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
               {/* Documents */}
               <div>
                 <p className="font-semibold mb-3">Documents</p>
+                {loadingImages ? (
+                  <div className="flex items-center justify-center h-32 text-muted-foreground gap-2">
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span className="text-sm">Loading documents...</span>
+                  </div>
+                ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
                     { label: 'Front of Document', src: selected.frontImage },
                     ...(selected.backImage ? [{ label: 'Back of Document', src: selected.backImage }] : []),
                     { label: 'Selfie with Document', src: selected.selfieImage },
-                  ].map(doc => (
+                  ].filter(doc => !!doc.src).map(doc => (
                     <div key={doc.label} className="space-y-1">
                       <p className="text-xs text-muted-foreground">{doc.label}</p>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={safeImgSrc(doc.src)}
+                        src={safeImgSrc(doc.src!)}
                         alt={doc.label}
                         className="w-full h-40 object-cover rounded-lg border border-border cursor-zoom-in"
-                        onClick={() => setImgPreview(doc.src)}
+                        onClick={() => setImgPreview(doc.src!)}
                       />
                     </div>
                   ))}
                 </div>
+                )}
               </div>
 
               {/* Action area */}

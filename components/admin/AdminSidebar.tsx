@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard, Users, TrendingUp, Wallet, ArrowUpFromLine, ArrowDownToLine,
   MessageSquare, Globe, Settings, Bell, Mail, FileText, Shield, ShieldCheck, LogOut,
-  Menu, X, ChevronRight, History, CreditCard, Ticket
+  Menu, X, ChevronRight, History, CreditCard, Ticket, UserCheck
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -31,6 +31,7 @@ const navItems = [
   { href: '/admin/logs', label: 'System Logs', icon: FileText },
   { href: '/admin/ip-blocklist', label: 'IP Blocklist', icon: Shield },
   { href: '/admin/run-staking-cron', label: 'Run Staking Cron', icon: TrendingUp },
+  { href: '/admin/referral-nudge', label: 'Referral Nudge Emails', icon: UserCheck },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 

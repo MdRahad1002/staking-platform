@@ -391,6 +391,140 @@ export async function sendDepositConfirmedEmail(email: string, amount: number, c
   })
 }
 
+// ─────────────────────────────────────────────
+//  Referral nudge email — sent to referrers
+//  whose referrals signed up but haven't staked
+// ─────────────────────────────────────────────
+export function getReferralNudgeEmailTemplate(
+  referrerName: string,
+  inactiveCount: number,
+  potentialEarnings: string,
+  commissionRate: number,
+  referralLink: string,
+  unsubscribeUrl: string
+): string {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const year = new Date().getFullYear()
+  const firstName = referrerName.includes('@') ? referrerName.split('@')[0] : referrerName.split(' ')[0]
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You have unclaimed referral earnings waiting</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 50%,#1a0a2e 100%);border-radius:16px 16px 0 0;padding:32px 48px;text-align:center;">
+          <a href="${appUrl}" style="text-decoration:none;">
+            <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:8px 20px;">
+              <span style="color:#ffffff;font-size:20px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
+            </div>
+          </a>
+          <p style="color:#f59e0b;font-size:28px;margin:20px 0 4px;">&#128176;</p>
+          <h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0 0 8px;">You have money waiting</h1>
+          <p style="color:#b794f4;font-size:14px;margin:0;">${inactiveCount} friend${inactiveCount !== 1 ? 's' : ''} signed up with your link but haven't invested yet</p>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="background:#111827;padding:40px 48px;">
+          <p style="color:#d1d5db;font-size:16px;margin:0 0 16px;">Hi <strong style="color:#ffffff;">${firstName}</strong>,</p>
+
+          <p style="color:#9ca3af;font-size:15px;line-height:1.7;margin:0 0 24px;">
+            You referred <strong style="color:#ffffff;">${inactiveCount} ${inactiveCount !== 1 ? 'people' : 'person'}</strong> to StakeOnix who have created an account.
+            The moment any of them activates a staking plan, you earn <strong style="color:#00d4aa;">${commissionRate}% commission</strong> instantly, credited straight to your balance.
+          </p>
+
+          <!-- Earning potential box -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+            <tr><td style="background:linear-gradient(135deg,#0f3d2e,#1a4d3a);border:1px solid #00d4aa33;border-radius:12px;padding:24px;text-align:center;">
+              <p style="color:#6b7280;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">Potential earnings waiting</p>
+              <p style="color:#00d4aa;font-size:40px;font-weight:900;margin:0 0 4px;">${potentialEarnings}</p>
+              <p style="color:#6b7280;font-size:12px;margin:0;">Estimated if each inactive referral stakes $300</p>
+            </td></tr>
+          </table>
+
+          <p style="color:#9ca3af;font-size:14px;line-height:1.7;margin:0 0 24px;">
+            The easiest thing you can do right now is send them a quick reminder with your referral link.
+            People often just forget - a single message can turn into real earnings for you.
+          </p>
+
+          <!-- Share link box -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+            <tr><td style="background:#1a2332;border:1px solid #1f2937;border-radius:10px;padding:16px 20px;">
+              <p style="color:#6b7280;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">Your referral link</p>
+              <p style="color:#7c3aed;font-size:13px;word-break:break-all;margin:0;font-family:monospace;">${referralLink}</p>
+            </td></tr>
+          </table>
+
+          <!-- CTA buttons -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+            <tr>
+              <td align="center" style="padding:0 8px 0 0;">
+                <a href="https://wa.me/?text=${encodeURIComponent(`Hey! I've been earning daily income on my crypto through StakeOnix - no trading needed. You signed up with my link already, just activate a plan to start earning: ${referralLink}`)}"
+                   style="display:inline-block;background:#25D366;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 24px;border-radius:8px;">
+                  Send via WhatsApp
+                </a>
+              </td>
+              <td align="center" style="padding:0 0 0 8px;">
+                <a href="${appUrl}/referrals"
+                   style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 24px;border-radius:8px;">
+                  View My Referrals
+                </a>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding-top:24px;"></td></tr></table>
+
+          <p style="color:#4b5563;font-size:12px;margin:16px 0 0;line-height:1.6;">
+            You are receiving this because you have referrals who haven't yet activated a stake.<br/>
+            <a href="${unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">Unsubscribe from referral reminders</a>
+          </p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
+          <p style="color:#4b5563;font-size:12px;margin:0 0 6px;">
+            &copy; ${year} StakeOnix - 130 King St W, Toronto, ON M5X 2A2, Canada
+          </p>
+          <p style="color:#374151;font-size:11px;margin:0;">
+            <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">Contact Support</a>
+            &nbsp;&middot;&nbsp;
+            <a href="${appUrl}/referrals" style="color:#6b7280;text-decoration:none;">My Referrals</a>
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
+export async function sendReferralNudgeEmail(
+  email: string,
+  referrerName: string,
+  inactiveCount: number,
+  potentialEarnings: string,
+  commissionRate: number,
+  referralLink: string
+): Promise<void> {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const unsubUrl = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=referral`
+  await sendEmail({
+    to: email,
+    subject: `You have ${inactiveCount} referral${inactiveCount !== 1 ? 's' : ''} who haven't invested yet - remind them today`,
+    html: getReferralNudgeEmailTemplate(referrerName, inactiveCount, potentialEarnings, commissionRate, referralLink, unsubUrl),
+  })
+}
+
 export async function sendContactEmail({
   name,
   email,

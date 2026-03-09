@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   alternates: { canonical: APP_URL },
   openGraph: {
     title: 'StakeOnix — Earn Daily Passive Income on Crypto',
-    description: 'Thousands of people earn money every day doing absolutely nothing — their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $20, get paid daily.'
+    description: 'Thousands of people earn money every day doing absolutely nothing — their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $20, get paid daily.',
     url: APP_URL,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
   },

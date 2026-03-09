@@ -1,6 +1,7 @@
 ﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
+import { sendEmail } from '@/lib/mail'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -170,14 +171,51 @@ async function sendBotMessage(userId: string, content: string, meta: BotMeta) {
 }
 
 async function escalateToHuman(userId: string) {
-  await prisma.notification.create({
-    data: {
-      userId,
-      type: 'SYSTEM',
-      title: 'Chat: customer needs a human agent',
-      message: 'The bot could not resolve this issue. Please review the chat and respond.',
-    },
+  // Load the user who needs help
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { firstName: true, lastName: true, email: true },
   })
+  const userName = user ? `${user.firstName} ${user.lastName}`.trim() : 'A user'
+  const chatLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'}/admin/chat`
+
+  // Notify every admin and support staff member in-app
+  const staff = await prisma.user.findMany({
+    where: { role: { in: ['ADMIN', 'SUPPORT'] }, isActive: true },
+    select: { id: true, email: true },
+  })
+
+  if (staff.length > 0) {
+    await prisma.notification.createMany({
+      data: staff.map((s) => ({
+        userId: s.id,
+        type: 'SYSTEM',
+        title: `Support request — ${userName}`,
+        message: `${userName} could not be helped by the bot and needs a human agent. Open the Live Chat panel to respond.`,
+        link: chatLink,
+      })),
+    })
+  }
+
+  // Also try to send an email alert to the admin (best-effort — never blocks the response)
+  const adminEmail = process.env.ADMIN_EMAIL
+  if (adminEmail) {
+    sendEmail({
+      to: adminEmail,
+      subject: `Support request from ${userName}`,
+      html: `
+        <div style="font-family:Arial,sans-serif;background:#0f172a;color:#e2e8f0;padding:32px;">
+          <div style="max-width:520px;margin:0 auto;background:#1e293b;border-radius:12px;padding:32px;">
+            <h2 style="color:#ef4444;margin-top:0;">&#128308; Customer Needs Human Support</h2>
+            <p><strong>${userName}</strong>${user?.email ? ` (${user.email})` : ''} was not resolved by the bot and has been escalated to a live agent.</p>
+            <p>Please open the <strong>Live Chat</strong> panel and reply as soon as possible.</p>
+            <a href="${chatLink}" style="display:inline-block;margin-top:16px;padding:12px 24px;background:#4f46e5;color:#ffffff;border-radius:8px;text-decoration:none;font-weight:bold;">
+              Open Live Chat &rarr;
+            </a>
+          </div>
+        </div>`,
+    }).catch(() => { /* email is best-effort */ })
+  }
 }
 
 export async function POST(req: NextRequest) {

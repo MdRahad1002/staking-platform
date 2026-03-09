@@ -30,6 +30,7 @@ model User {
   referralCode      String    @unique
   referredById      String?
   balance           Float     @default(0)
+  phone             String?
   telegramChatId    String?
   lastLoginAt       DateTime?
   lastLoginIp       String?

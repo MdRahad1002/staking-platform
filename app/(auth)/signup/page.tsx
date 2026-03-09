@@ -10,8 +10,47 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { TrendingUp, Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users, BarChart3, ChevronLeft } from 'lucide-react'
+import { TrendingUp, Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users, BarChart3, ChevronLeft, Phone } from 'lucide-react'
 import { toast } from 'sonner'
+
+const COUNTRY_CODES = [
+  { code: '+1',   flag: '🇺🇸', name: 'US/CA' },
+  { code: '+44',  flag: '🇬🇧', name: 'UK' },
+  { code: '+61',  flag: '🇦🇺', name: 'AU' },
+  { code: '+49',  flag: '🇩🇪', name: 'DE' },
+  { code: '+33',  flag: '🇫🇷', name: 'FR' },
+  { code: '+39',  flag: '🇮🇹', name: 'IT' },
+  { code: '+34',  flag: '🇪🇸', name: 'ES' },
+  { code: '+31',  flag: '🇳🇱', name: 'NL' },
+  { code: '+7',   flag: '🇷🇺', name: 'RU' },
+  { code: '+91',  flag: '🇮🇳', name: 'IN' },
+  { code: '+86',  flag: '🇨🇳', name: 'CN' },
+  { code: '+81',  flag: '🇯🇵', name: 'JP' },
+  { code: '+82',  flag: '🇰🇷', name: 'KR' },
+  { code: '+55',  flag: '🇧🇷', name: 'BR' },
+  { code: '+52',  flag: '🇲🇽', name: 'MX' },
+  { code: '+27',  flag: '🇿🇦', name: 'ZA' },
+  { code: '+234', flag: '🇳🇬', name: 'NG' },
+  { code: '+20',  flag: '🇪🇬', name: 'EG' },
+  { code: '+254', flag: '🇰🇪', name: 'KE' },
+  { code: '+971', flag: '🇦🇪', name: 'AE' },
+  { code: '+966', flag: '🇸🇦', name: 'SA' },
+  { code: '+92',  flag: '🇵🇰', name: 'PK' },
+  { code: '+880', flag: '🇧🇩', name: 'BD' },
+  { code: '+62',  flag: '🇮🇩', name: 'ID' },
+  { code: '+63',  flag: '🇵🇭', name: 'PH' },
+  { code: '+84',  flag: '🇻🇳', name: 'VN' },
+  { code: '+66',  flag: '🇹🇭', name: 'TH' },
+  { code: '+60',  flag: '🇲🇾', name: 'MY' },
+  { code: '+65',  flag: '🇸🇬', name: 'SG' },
+  { code: '+48',  flag: '🇵🇱', name: 'PL' },
+  { code: '+380', flag: '🇺🇦', name: 'UA' },
+  { code: '+90',  flag: '🇹🇷', name: 'TR' },
+  { code: '+98',  flag: '🇮🇷', name: 'IR' },
+  { code: '+212', flag: '🇲🇦', name: 'MA' },
+  { code: '+233', flag: '🇬🇭', name: 'GH' },
+  { code: '+255', flag: '🇹🇿', name: 'TZ' },
+]
 
 const highlights = [
   {
@@ -36,6 +75,7 @@ const schema = z
     firstName: z.string().min(1, 'First name is required'),
     lastName: z.string().min(1, 'Last name is required'),
     email: z.string().email('Invalid email address'),
+    phoneNumber: z.string().min(4, 'Enter a valid phone number').regex(/^[0-9\s\-()]+$/, 'Numbers only'),
     password: z.string().min(8, 'Password must be at least 8 characters'),
     confirmPassword: z.string(),
     referralCode: z.string().optional(),
@@ -52,6 +92,7 @@ function SignupForm() {
   const refCode = searchParams.get('ref') || ''
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [countryCode, setCountryCode] = useState('+1')
   const [successEmail, setSuccessEmail] = useState<string | null>(null)
   const [resending, setResending] = useState(false)
   const [resent, setResent] = useState(false)
@@ -68,7 +109,8 @@ function SignupForm() {
   const onSubmit = async (data: FormData) => {
     setLoading(true)
     try {
-      const { confirmPassword: _, ...payload } = data
+      const { confirmPassword: _, phoneNumber, ...rest } = data
+      const payload = { ...rest, phone: `${countryCode}${phoneNumber}` }
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -215,6 +257,38 @@ function SignupForm() {
             />
           </div>
           {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+        </div>
+
+        {/* Phone Number */}
+        <div className="space-y-1.5">
+          <Label>Phone Number</Label>
+          <div className="flex gap-2">
+            <div className="relative">
+              <select
+                value={countryCode}
+                onChange={(e) => setCountryCode(e.target.value)}
+                className="h-11 rounded-md border border-input bg-secondary/40 pl-3 pr-7 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
+                style={{ minWidth: '7.5rem' }}
+              >
+                {COUNTRY_CODES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.flag} {c.name} ({c.code})
+                  </option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">▼</span>
+            </div>
+            <div className="relative flex-1">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <Input
+                type="tel"
+                placeholder="Phone number"
+                className="pl-9 h-11 bg-secondary/40"
+                {...register('phoneNumber')}
+              />
+            </div>
+          </div>
+          {errors.phoneNumber && <p className="text-xs text-destructive">{errors.phoneNumber.message}</p>}
         </div>
 
         <div className="space-y-1.5">

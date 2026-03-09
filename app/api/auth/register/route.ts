@@ -14,6 +14,7 @@ const schema = z.object({
   // min(1) rejects empty strings — undefined/absent is still fine
   username: z.string().min(1).optional(),
   referralCode: z.string().optional(),
+  phone: z.string().optional(),
 })
 
 export async function POST(req: NextRequest) {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 })
     }
-    const { email, password, firstName, lastName, username, referralCode } = parsed.data
+    const { email, password, firstName, lastName, username, referralCode, phone } = parsed.data
 
     // Check existing
     const existing = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
@@ -73,6 +74,7 @@ export async function POST(req: NextRequest) {
           password: hash,
           firstName: firstName ?? null,
           lastName: lastName ?? null,
+          phone: phone ?? null,
           username: finalUsername,
           referralCode: myReferralCode,
           referredById,

@@ -351,134 +351,135 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right: Hero Visual */}
-            <div className="relative flex items-center justify-center">
-              <div className="relative w-[380px] h-[380px] md:w-[480px] md:h-[480px]">
-                <div className="absolute inset-0 rounded-full border border-cyan-500/15 animate-spin-slow" />
-                <div className="absolute inset-8 rounded-full border border-blue-500/10 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '30s' }} />
-                <div className="absolute inset-16 rounded-full border border-purple-500/10" />
+            {/* Right: APY Snapshot Widget */}
+            <div className="relative flex items-center justify-center lg:justify-end">
+              <div className="relative w-full max-w-[520px]">
+                {/* Glow behind card */}
+                <div className="absolute -inset-4 bg-cyan-500/10 blur-3xl rounded-3xl pointer-events-none" />
 
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl" />
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="animate-float-slow">
-                    <svg width="260" height="260" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <defs>
-                        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#00c4e8" stopOpacity="0.95"/>
-                          <stop offset="100%" stopColor="#4db8ff" stopOpacity="0.8"/>
-                        </linearGradient>
-                        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.85"/>
-                          <stop offset="100%" stopColor="#2563eb" stopOpacity="0.7"/>
-                        </linearGradient>
-                        <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#1d4ed8" stopOpacity="0.75"/>
-                          <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.55"/>
-                        </linearGradient>
-                        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#4338ca" stopOpacity="0.65"/>
-                          <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.45"/>
-                        </linearGradient>
-                        <filter id="fg">
-                          <feGaussianBlur stdDeviation="3" result="cb"/>
-                          <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
-                        </filter>
-                      </defs>
-                      <ellipse cx="140" cy="248" rx="95" ry="12" fill="#000" opacity="0.3"/>
-                      <path d="M35 218 L140 200 L245 218 L140 236 Z" fill="url(#g4)" filter="url(#fg)"/>
-                      <ellipse cx="140" cy="200" rx="105" ry="18" fill="url(#g4)" opacity="0.5"/>
-                      <path d="M58 185 L140 168 L222 185 L140 202 Z" fill="url(#g3)" filter="url(#fg)"/>
-                      <ellipse cx="140" cy="168" rx="82" ry="15" fill="url(#g3)" opacity="0.6"/>
-                      <path d="M80 153 L140 137 L200 153 L140 169 Z" fill="url(#g2)" filter="url(#fg)"/>
-                      <ellipse cx="140" cy="137" rx="60" ry="12" fill="url(#g2)" opacity="0.7"/>
-                      <path d="M103 121 L140 106 L177 121 L140 136 Z" fill="url(#g1)" filter="url(#fg)"/>
-                      <ellipse cx="140" cy="106" rx="37" ry="9" fill="url(#g1)" opacity="0.9"/>
-                      <polygon points="140,62 117,106 163,106" fill="url(#g1)" filter="url(#fg)" opacity="0.95"/>
-                      <ellipse cx="140" cy="62" rx="7" ry="7" fill="#fff" opacity="0.95" filter="url(#fg)"/>
-                      <line x1="35" y1="218" x2="58" y2="185" stroke="#00c4e8" strokeOpacity="0.25" strokeWidth="0.8"/>
-                      <line x1="245" y1="218" x2="222" y2="185" stroke="#00c4e8" strokeOpacity="0.25" strokeWidth="0.8"/>
-                      <line x1="58" y1="185" x2="80" y2="153" stroke="#4db8ff" strokeOpacity="0.2" strokeWidth="0.8"/>
-                      <line x1="222" y1="185" x2="200" y2="153" stroke="#4db8ff" strokeOpacity="0.2" strokeWidth="0.8"/>
-                      <circle cx="35" cy="218" r="2.5" fill="#7c3aed" opacity="0.8"/>
-                      <circle cx="245" cy="218" r="2.5" fill="#7c3aed" opacity="0.8"/>
-                      <circle cx="58" cy="185" r="2" fill="#4f46e5" opacity="0.8"/>
-                      <circle cx="222" cy="185" r="2" fill="#4f46e5" opacity="0.8"/>
-                      <circle cx="80" cy="153" r="2" fill="#2563eb" opacity="0.9"/>
-                      <circle cx="200" cy="153" r="2" fill="#2563eb" opacity="0.9"/>
-                      <circle cx="103" cy="121" r="2" fill="#00c4e8" opacity="0.9"/>
-                      <circle cx="177" cy="121" r="2" fill="#00c4e8" opacity="0.9"/>
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Orbiting coin badges */}
-                {[
-                  { symbol: 'btc', angle: 0, delay: '0s', bg: 'bg-orange-500/80' },
-                  { symbol: 'eth', angle: 90, delay: '-3s', bg: 'bg-blue-500/80' },
-                  { symbol: 'sol', angle: 180, delay: '-6s', bg: 'bg-purple-500/80' },
-                  { symbol: 'usdt', angle: 270, delay: '-9s', bg: 'bg-green-600/80' },
-                ].map((coin) => (
-                  <div
-                    key={coin.symbol}
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ transform: `rotate(${coin.angle}deg)` }}
-                  >
-                    <div className="animate-orbit" style={{ animationDelay: coin.delay }}>
-                      <div
-                        className={`w-11 h-11 rounded-2xl ${coin.bg} flex items-center justify-center shadow-xl border border-white/20 backdrop-blur-sm`}
-                        style={{ transform: `rotate(-${coin.angle}deg)` }}
-                      >
-                        <img
-                          src={`https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/${coin.symbol}.svg`}
-                          alt={coin.symbol.toUpperCase()}
-                          className="w-6 h-6"
-                        />
-                      </div>
+                <div className="relative rounded-2xl border border-white/10 bg-[#0a0f1e]/90 backdrop-blur-xl overflow-hidden shadow-2xl shadow-cyan-500/10">
+                  {/* Card header */}
+                  <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-white/[0.06]">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-400/80 mb-1">APY snapshot</p>
+                      <h3 className="text-lg font-bold text-white leading-tight">Live rates across top assets</h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">Compare &quot;up to&quot; APYs and start earning instantly.</p>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 flex-shrink-0 ml-4">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+                      </span>
+                      <span className="text-xs font-semibold text-cyan-300">Live</span>
                     </div>
                   </div>
-                ))}
 
-                {/* Floating stat cards */}
-                <div className="absolute -top-6 right-0 glass-card px-4 py-3 animate-float shadow-2xl border border-cyan-500/20 z-10">
+                  {/* Coin list + Top-rate panel */}
+                  <div className="flex gap-0 divide-x divide-white/[0.06]">
+                    {/* Left: coin rows */}
+                    <div className="flex-1 py-2">
+                      {[
+                        { symbol: 'eth',  name: 'Ethereum', ticker: 'ETH',      apr: 9.0  },
+                        { symbol: 'ada',  name: 'Cardano',  ticker: 'ADA',      apr: 8.5  },
+                        { symbol: 'sol',  name: 'Solana',   ticker: 'SOL',      apr: 12.0 },
+                        { symbol: 'dot',  name: 'Polkadot', ticker: 'DOT',      apr: 16.5 },
+                        { symbol: 'avax', name: 'Avalanche',ticker: 'AVAX',     apr: 14.0 },
+                        { symbol: 'atom', name: 'Cosmos',   ticker: 'ATOM',     apr: 21.5 },
+                      ].map((coin) => (
+                        <div
+                          key={coin.symbol}
+                          className="flex items-center gap-3 px-5 py-3 hover:bg-white/[0.04] transition-colors group cursor-default"
+                        >
+                          <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 flex-shrink-0 group-hover:border-cyan-500/30 transition-colors">
+                            <img
+                              src={`https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/${coin.symbol}.svg`}
+                              alt={coin.name}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-white leading-tight">{coin.name}</p>
+                            <p className="text-[11px] text-muted-foreground">{coin.ticker}</p>
+                          </div>
+                          <div className="text-right flex-shrink-0">
+                            <p className="text-[10px] text-muted-foreground leading-none mb-0.5">Up to</p>
+                            <p className="text-base font-black text-cyan-400">{coin.apr}%</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Right: Top rate card */}
+                    <div className="w-[158px] flex-shrink-0 p-4 flex flex-col gap-3 bg-white/[0.02]">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Top rate</p>
+                      <div className="flex flex-col items-center gap-2 py-3 px-2 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20">
+                        <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-2">
+                          <img
+                            src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/atom.svg"
+                            alt="ATOM"
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <p className="text-xs font-bold text-white">Cosmos</p>
+                          <p className="text-[10px] text-muted-foreground">ATOM</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-3xl font-black text-cyan-400 leading-none">21.5<span className="text-lg">%</span></p>
+                          <p className="text-[10px] text-muted-foreground mt-1">Up to APY</p>
+                        </div>
+                      </div>
+                      {/* Rate range bar */}
+                      <div>
+                        <div className="flex justify-between text-[10px] text-muted-foreground mb-1.5">
+                          <span>Rate range</span>
+                        </div>
+                        <div className="flex justify-between text-[10px] mb-1">
+                          <span className="text-muted-foreground/60">Low</span>
+                          <span className="text-cyan-400">High</span>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+                          <div className="h-full w-[85%] rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400" />
+                        </div>
+                      </div>
+                      <p className="text-[9px] text-muted-foreground/60 leading-relaxed">
+                        APYs are &ldquo;up to&rdquo; and may vary by network conditions.
+                      </p>
+                      <Link href={session ? '/dashboard' : '/signup'}>
+                        <button className="w-full text-[11px] font-bold py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all">
+                          Start Staking →
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating stat pill */}
+                <div className="absolute -bottom-4 left-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-green-500/20 z-10">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="h-4 w-4 text-green-400" />
+                    <div className="w-7 h-7 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <TrendingUp className="h-3.5 w-3.5 text-green-400" />
                     </div>
                     <div>
-                      <p className="text-[10px] text-muted-foreground">Daily Reward</p>
+                      <p className="text-[9px] text-muted-foreground">Daily Reward</p>
                       <p className="text-sm font-bold text-green-400">+$248.50</p>
                     </div>
                   </div>
                 </div>
-
-                <div className="absolute -bottom-6 left-0 glass-card px-4 py-3 animate-float shadow-2xl border border-purple-500/20 z-10" style={{ animationDelay: '-3s' }}>
+                <div className="absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-yellow-500/20 z-10" style={{ animationDelay: '-2s' }}>
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <Users className="h-4 w-4 text-cyan-400" />
+                    <div className="w-7 h-7 rounded-lg bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
+                      <Award className="h-3.5 w-3.5 text-yellow-400" />
                     </div>
                     <div>
-                      <p className="text-[10px] text-muted-foreground">Active Stakers</p>
-                      <p className="text-sm font-bold gradient-text">480,291</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute top-1/2 -right-20 -translate-y-1/2 glass-card px-4 py-3 animate-float-sm shadow-2xl border border-yellow-500/20 z-10" style={{ animationDelay: '-1.5s' }}>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
-                      <Award className="h-4 w-4 text-yellow-400" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-muted-foreground">Max APR</p>
-                      <p className="text-sm font-bold text-yellow-400">{topApr > 0 ? `${topApr}%` : '365%'}</p>
+                      <p className="text-[9px] text-muted-foreground">Active Stakers</p>
+                      <p className="text-sm font-bold gradient-text">480K+</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
 
           </div>
         </div>

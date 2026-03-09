@@ -36,7 +36,6 @@ export async function sendEmailBatch(emails: BulkEmailPayload[]): Promise<{ sent
       text: e.html.replace(/<[^>]+>/g, ''),
     }))
     try {
-      // @ts-expect-error — Resend types may not expose batch on all SDK versions
       const result = await resend.batch.send(chunk)
       if (result.error) {
         failed += chunk.length

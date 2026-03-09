@@ -6,10 +6,15 @@ const APP_URL = 'https://www.stakeonix.com'
 export const metadata: Metadata = {
   title: 'About StakeOnix — Trusted Crypto Staking Company',
   description:
-    'Learn about StakeOnix — the team behind the leading crypto staking platform. Our mission is to make earning passive income on cryptocurrency simple, secure, and accessible for everyone.',
+    'StakeOnix helps everyday people earn money from their crypto automatically — no trading, no expertise needed. Learn who we are, what we stand for, and why 10,000+ investors trust us to grow their crypto every day.',
   keywords: [
-    'about StakeOnix', 'crypto staking company', 'trusted staking platform',
-    'staking company team', 'secure crypto platform', 'crypto investment company',
+    'about StakeOnix',
+    'who is behind StakeOnix',
+    'is StakeOnix a real company',
+    'trusted crypto earning platform',
+    'legit way to make money with crypto',
+    'earn money crypto company',
+    'reliable crypto investment platform',
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {

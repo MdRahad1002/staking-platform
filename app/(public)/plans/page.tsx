@@ -8,13 +8,24 @@ export const dynamic = 'force-dynamic'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'Crypto Staking Plans — Earn Up to 5% Daily | StakeOnix',
+  title: 'How to Earn Money With Crypto Daily — Choose Your Plan | StakeOnix',
   description:
-    'Browse StakeOnix staking plans for Bitcoin, Ethereum, USDT and more. Choose from flexible short-term and long-term plans with daily returns up to 5%. Start staking from just $20.',
+    'Pick a plan, deposit your crypto, and start getting paid every single day. Bitcoin, Ethereum, USDT plans from just $20. No experience needed — we do all the work, you collect daily earnings.',
   keywords: [
-    'crypto staking plans', 'bitcoin staking plan', 'ethereum staking APY',
-    'high yield staking plans', 'daily crypto returns', 'staking investment plans',
-    'USDT staking plans', 'best staking plans 2026', 'crypto daily rewards plan',
+    'how to earn money with crypto',
+    'best way to invest in crypto 2026',
+    'earn daily returns on bitcoin',
+    'how to make money from ethereum',
+    'crypto investment plans',
+    'daily income from crypto investment',
+    'best crypto to earn money',
+    'how to start making money with crypto',
+    'earn money with USDT',
+    'crypto income plan',
+    'high yield staking plans',
+    'best staking plans 2026',
+    'bitcoin staking plan',
+    'ethereum staking APY',
   ],
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {

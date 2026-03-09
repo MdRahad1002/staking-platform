@@ -17,18 +17,30 @@ import {
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
-  title: 'What is Crypto Staking? Complete Guide 2026 | StakeOnix',
+  title: 'What is Crypto Staking? (Simple Guide — Make Money With Crypto 2026)',
   description:
-    'Learn what crypto staking is, how it works, and how to earn passive income with Bitcoin, Ethereum & USDT. A complete beginner-friendly guide to staking in 2026.',
+    'Crypto staking explained simply: you deposit your crypto, it earns money every day, you withdraw whenever you want. Like putting money in a savings account — but with much higher returns. No experience needed.',
   keywords: [
-    'what is crypto staking', 'how does staking work', 'crypto staking explained',
-    'staking guide', 'proof of stake explained', 'earn passive income staking',
-    'cryptocurrency staking guide 2026', 'how to stake crypto', 'staking rewards explained',
+    'what is crypto staking',
+    'how to earn money with bitcoin',
+    'is crypto staking worth it',
+    'how much can I make staking crypto',
+    'is staking crypto safe',
+    'how to earn from crypto without selling',
+    'staking vs savings account',
+    'can you really make money staking crypto',
+    'crypto staking for beginners',
+    'how does crypto staking work',
+    'earn daily from bitcoin',
+    'make money from ethereum without trading',
+    'beginner guide to making money crypto',
+    'crypto staking explained simply',
+    'earn passive income staking',
   ],
   alternates: { canonical: 'https://www.stakeonix.com/what-is-staking' },
   openGraph: {
-    title: 'What is Crypto Staking? — Complete Guide 2026',
-    description: 'The ultimate beginner-friendly guide to crypto staking. Learn how to earn passive income on Bitcoin, Ethereum, USDT and more.',
+    title: 'What is Crypto Staking? (Plain English Explanation) — StakeOnix',
+    description: 'Staking explained without jargon: deposit your crypto, earn money every day, withdraw whenever you want. Yes, it really is that simple. Here’s how it works.',
     url: 'https://www.stakeonix.com/what-is-staking',
   },
 }

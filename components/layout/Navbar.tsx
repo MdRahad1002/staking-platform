@@ -165,7 +165,8 @@ export function Navbar() {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          className="md:hidden p-2.5 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -174,63 +175,70 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/5 bg-background/95 backdrop-blur-xl px-4 pb-5">
-          <div className="pt-3 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  'flex items-center py-3 px-3 text-sm rounded-xl transition-colors',
-                  pathname === link.href
-                    ? 'text-foreground bg-white/5 font-medium'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
-                )}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex gap-2 pt-4 mt-2 border-t border-white/5">
-            {session ? (
-              <>
-                <Link href="/dashboard" className="flex-1">
-                  <Button
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl"
-                    size="sm"
-                  >
-                    <LayoutDashboard className="h-3.5 w-3.5 mr-1.5" />
-                    Dashboard
-                  </Button>
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => signOut({ callbackUrl: '/' })}
-                  className="text-red-400 hover:text-red-300"
+        <div className="md:hidden animate-slide-down border-t border-white/5 bg-background/95 backdrop-blur-xl">          
+          {/* Tap-outside overlay */}
+          <div className="fixed inset-0 z-[-1]" onClick={() => setMobileOpen(false)} />
+          <div className="px-4 pb-6">
+            <div className="pt-3 space-y-0.5">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'flex items-center py-3.5 px-4 text-sm rounded-xl transition-colors font-medium',
+                    pathname === link.href
+                      ? 'text-foreground bg-white/[0.08] border border-white/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                  )}
+                  onClick={() => setMobileOpen(false)}
                 >
-                  <LogOut className="h-4 w-4" />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" className="flex-1">
-                  <Button variant="outline" className="w-full border-white/10" size="sm">
-                    Sign In
-                  </Button>
+                  {link.label}
+                  {pathname === link.href && (
+                    <span className="ml-auto w-1 h-4 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500" />
+                  )}
                 </Link>
-                <Link href="/signup" className="flex-1">
+              ))}
+            </div>
+            <div className="flex gap-2 pt-5 mt-2 border-t border-white/5">
+              {session ? (
+                <>
+                  <Link href="/dashboard" className="flex-1" onClick={() => setMobileOpen(false)}>
+                    <Button
+                      className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl h-11"
+                      size="sm"
+                    >
+                      <LayoutDashboard className="h-3.5 w-3.5 mr-1.5" />
+                      Dashboard
+                    </Button>
+                  </Link>
                   <Button
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl"
+                    variant="ghost"
                     size="sm"
+                    onClick={() => signOut({ callbackUrl: '/' })}
+                    className="text-red-400 hover:text-red-300 h-11 px-4"
                   >
-                    <Rocket className="h-3.5 w-3.5 mr-1.5" />
-                    Get Started
+                    <LogOut className="h-4 w-4" />
                   </Button>
-                </Link>
-              </>
-            )}
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="flex-1" onClick={() => setMobileOpen(false)}>
+                    <Button variant="outline" className="w-full border-white/10 h-11" size="sm">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href="/signup" className="flex-1" onClick={() => setMobileOpen(false)}>
+                    <Button
+                      className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl h-11"
+                      size="sm"
+                    >
+                      <Rocket className="h-3.5 w-3.5 mr-1.5" />
+                      Get Started
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

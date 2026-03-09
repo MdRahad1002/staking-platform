@@ -282,14 +282,14 @@ export default async function HomePage() {
       <CryptoTicker />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 hero-grid opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-blue-950/30" />
         <div className="glow-blob w-[600px] h-[600px] bg-cyan-500/15 top-[-100px] left-[-100px]" />
         <div className="glow-blob w-[500px] h-[500px] bg-blue-600/10 bottom-0 right-[-50px]" />
         <div className="glow-blob w-[300px] h-[300px] bg-purple-600/10 top-1/2 left-1/2" />
 
-        <div className="container relative mx-auto px-4 py-20 lg:py-0">
+        <div className="container relative mx-auto px-4 py-14 sm:py-20 lg:py-0">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
 
             {/* Left: Text content */}
@@ -302,7 +302,7 @@ export default async function HomePage() {
                 Live &middot; Earn up to {topApr > 0 ? `${topApr}% APR` : '365% APR'} &mdash; Join 480K+ stakers
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
+              <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
                 Fast, Secure &amp;<br />
                 <span className="gradient-text">Effortless Crypto</span><br />
                 <span className="text-white">Staking for All</span>
@@ -315,20 +315,20 @@ export default async function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link href={session ? '/dashboard' : '/signup'}>
+                <Link href={session ? '/dashboard' : '/signup'} className="w-full sm:w-auto">
                   <Button
                     size="xl"
-                    className="gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
+                    className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
                   >
                     <Rocket className="h-5 w-5" />
                     {session ? 'Go to Dashboard' : 'Start Earning Now'}
                   </Button>
                 </Link>
-                <Link href="/plans">
+                <Link href="/plans" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
                     size="xl"
-                    className="gap-2 font-semibold text-base px-8 py-4 border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 rounded-2xl transition-all duration-300"
+                    className="w-full sm:w-auto gap-2 font-semibold text-base px-8 py-4 border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 rounded-2xl transition-all duration-300"
                   >
                     <Eye className="h-5 w-5" />
                     View Plans
@@ -375,7 +375,7 @@ export default async function HomePage() {
                   </div>
 
                   {/* Coin list + Top-rate panel */}
-                  <div className="flex gap-0 divide-x divide-white/[0.06]">
+                  <div className="flex gap-0 divide-x divide-white/[0.06] overflow-hidden">
                     {/* Left: coin rows */}
                     <div className="flex-1 py-2">
                       {[
@@ -410,7 +410,7 @@ export default async function HomePage() {
                     </div>
 
                     {/* Right: Top rate card */}
-                    <div className="w-[158px] flex-shrink-0 p-4 flex flex-col gap-3 bg-white/[0.02]">
+                    <div className="hidden sm:flex w-[158px] flex-shrink-0 p-4 flex-col gap-3 bg-white/[0.02]">
                       <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Top rate</p>
                       <div className="flex flex-col items-center gap-2 py-3 px-2 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20">
                         <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-2">
@@ -455,7 +455,7 @@ export default async function HomePage() {
                 </div>
 
                 {/* Floating stat pill */}
-                <div className="absolute -bottom-4 left-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-green-500/20 z-10">
+                <div className="hidden sm:flex absolute -bottom-4 left-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-green-500/20 z-10 items-center gap-2">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="h-3.5 w-3.5 text-green-400" />
@@ -466,7 +466,7 @@ export default async function HomePage() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-yellow-500/20 z-10" style={{ animationDelay: '-2s' }}>
+                <div className="hidden sm:flex absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-yellow-500/20 z-10 items-center gap-2" style={{ animationDelay: '-2s' }}>
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
                       <Award className="h-3.5 w-3.5 text-yellow-400" />

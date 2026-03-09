@@ -63,6 +63,7 @@ export default withAuth(
           pathname === '/sitemap.xml' ||
           pathname === '/robots.txt' ||
           pathname.startsWith('/why-choose-us') ||
+          pathname.startsWith('/referral-program') ||
           pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp)$/)
         ) {
           return true

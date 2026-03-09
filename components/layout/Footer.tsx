@@ -7,6 +7,7 @@ const footerLinks = {
     { href: '/plans', label: 'Staking Plans' },
     { href: '/what-is-staking', label: 'What is Staking?' },
     { href: '/why-choose-us', label: 'Why Choose Us' },
+    { href: '/referral-program', label: 'Referral Program' },
     { href: '/about', label: 'About Us' },
     { href: '/app-info', label: 'Mobile App' },
     { href: '/faq', label: 'FAQ' },

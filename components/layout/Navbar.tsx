@@ -24,6 +24,7 @@ const navLinks = [
   { href: '/plans', label: 'Staking Plans' },
   { href: '/what-is-staking', label: 'What is Staking?' },
   { href: '/why-choose-us', label: 'Why Us' },
+  { href: '/referral-program', label: 'Referrals' },
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQs' },
   { href: '/contact', label: 'Contact' },

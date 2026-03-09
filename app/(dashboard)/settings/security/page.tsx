@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Shield, Smartphone, Key, Clock } from 'lucide-react'
+import { Shield, Smartphone, Key, Clock, Copy, CheckCircle2 } from 'lucide-react'
 import { formatDateTime } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 
@@ -35,6 +35,7 @@ export default function SecurityPage() {
   const [disableCode, setDisableCode] = useState('')
   const [disabling2FA, setDisabling2FA] = useState(false)
   const [loginHistory, setLoginHistory] = useState<LoginRecord[]>([])
+  const [secretCopied, setSecretCopied] = useState(false)
 
   useEffect(() => {
     fetch('/api/profile/security')
@@ -117,14 +118,26 @@ export default function SecurityPage() {
         setTwoFaEnabled(true)
         setTwoFaQr('')
         setTwoFaSecret('')
+        setTwoFaCode('')
         toast.success('Two-Factor Authentication enabled!')
       } else {
-        toast.error(data.error || 'Invalid code.')
+        setTwoFaCode('')
+        toast.error(data.error || 'Invalid code. Try again.')
       }
     } catch {
       toast.error('Something went wrong.')
     }
     setEnabling2FA(false)
+  }
+
+  const copySecret = async () => {
+    try {
+      await navigator.clipboard.writeText(twoFaSecret)
+      setSecretCopied(true)
+      setTimeout(() => setSecretCopied(false), 2000)
+    } catch {
+      toast.error('Failed to copy.')
+    }
   }
 
   const disable2FA = async () => {
@@ -281,26 +294,81 @@ export default function SecurityPage() {
           )}
 
           {twoFaQr && (
-            <div className="space-y-3 pt-2">
-              <p className="text-sm text-muted-foreground">
-                Scan this QR code with your authenticator app:
-              </p>
-              <SafeImg src={twoFaQr} alt="2FA QR Code" allowDataImage className="w-40 h-40 rounded-lg border border-border" />
-              <p className="text-xs text-muted-foreground">
-                Or enter this secret manually:{' '}
-                <span className="font-mono text-foreground">{twoFaSecret}</span>
-              </p>
-              <div className="flex gap-3">
-                <Input
-                  placeholder="Enter 6-digit code"
-                  maxLength={6}
-                  value={twoFaCode}
-                  onChange={(e) => setTwoFaCode(e.target.value)}
-                  className="max-w-xs"
-                />
-                <Button onClick={confirm2FA} variant="gradient" loading={enabling2FA}>
-                  Verify & Enable
-                </Button>
+            <div className="space-y-5 pt-2 border-t border-border">
+              {/* Step 1 */}
+              <div className="space-y-2">
+                <p className="text-sm font-semibold text-foreground flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary text-xs font-bold">1</span>
+                  Install an authenticator app
+                </p>
+                <p className="text-xs text-muted-foreground ml-7">
+                  Download <strong className="text-foreground">Google Authenticator</strong>, <strong className="text-foreground">Authy</strong>, or <strong className="text-foreground">Microsoft Authenticator</strong>.
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-foreground flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary text-xs font-bold">2</span>
+                  Scan the QR code
+                </p>
+                <div className="ml-7 flex items-start gap-5 flex-wrap">
+                  <SafeImg
+                    src={twoFaQr}
+                    alt="2FA QR Code"
+                    allowDataImage
+                    className="w-36 h-36 rounded-xl border border-border bg-white p-1"
+                  />
+                  <div className="space-y-2 flex-1 min-w-0">
+                    <p className="text-xs text-muted-foreground">Can&apos;t scan? Enter this key manually in your app:</p>
+                    <div className="flex items-center gap-2">
+                      <code className="flex-1 font-mono text-xs bg-secondary/60 border border-border rounded-lg px-3 py-2 break-all text-foreground">
+                        {twoFaSecret}
+                      </code>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-shrink-0 h-8 px-2.5"
+                        onClick={copySecret}
+                      >
+                        {secretCopied ? <CheckCircle2 className="h-3.5 w-3.5 text-green-400" /> : <Copy className="h-3.5 w-3.5" />}
+                      </Button>
+                    </div>
+                    <p className="text-[10px] text-muted-foreground/70">
+                      Time-based (TOTP) · 30-second validity
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-foreground flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary text-xs font-bold">3</span>
+                  Enter the 6-digit verification code
+                </p>
+                <div className="ml-7 flex gap-3">
+                  <Input
+                    placeholder="Enter 6-digit code"
+                    inputMode="numeric"
+                    maxLength={6}
+                    autoComplete="one-time-code"
+                    value={twoFaCode}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 6)
+                      setTwoFaCode(val)
+                    }}
+                    className="max-w-[160px] font-mono tracking-widest text-center"
+                  />
+                  <Button
+                    onClick={confirm2FA}
+                    variant="gradient"
+                    loading={enabling2FA}
+                    disabled={twoFaCode.length < 6}
+                  >
+                    Verify &amp; Enable
+                  </Button>
+                </div>
               </div>
             </div>
           )}

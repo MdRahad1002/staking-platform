@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       secret: user.twoFaSecret,
       encoding: 'base32',
       token: code.replace(/\s/g, ''),
-      window: 1, // allow ±30 s clock drift
+      window: 2, // allow ±60 s clock drift
     })
 
     if (!isValid) {

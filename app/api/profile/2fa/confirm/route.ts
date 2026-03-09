@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
       secret: user.twoFaSecret,
       encoding: 'base32',
       token: code,
-      window: 1,
+      window: 2,
     })
 
     if (!verified) return NextResponse.json({ error: 'Invalid code.' }, { status: 400 })

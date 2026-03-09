@@ -108,9 +108,9 @@ function LoginForm() {
     }
   }
 
-  const onTotpSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!totpCode.trim()) return
+  const onTotpSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (!totpCode.trim() || totpCode.length < 6) return
     setTotpLoading(true)
     try {
       const res  = await fetch('/api/auth/2fa-verify', {
@@ -172,14 +172,21 @@ function LoginForm() {
               id="totp"
               type="text"
               inputMode="numeric"
-              pattern="[0-9 ]*"
-              maxLength={7}
+              pattern="[0-9]*"
+              maxLength={6}
               autoFocus
               autoComplete="one-time-code"
-              placeholder="000 000"
+              placeholder="000000"
               className="h-14 text-center text-2xl font-mono tracking-[0.5em] bg-secondary/40 border-border focus:border-primary/60"
               value={totpCode}
-              onChange={(e) => setTotpCode(e.target.value.replace(/[^0-9]/g, ''))}
+              onChange={(e) => {
+                const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 6)
+                setTotpCode(val)
+                // Auto-submit once 6 digits entered
+                if (val.length === 6) {
+                  setTimeout(() => onTotpSubmit(), 0)
+                }
+              }}
             />
           </div>
 

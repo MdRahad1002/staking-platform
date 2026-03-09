@@ -16,7 +16,7 @@ export async function POST() {
       return NextResponse.json({ error: '2FA is already enabled. Disable it first.' }, { status: 400 })
     }
 
-    const secret = speakeasy.generateSecret({ name: `StakePlatform (${user.email})`, length: 32 })
+    const secret = speakeasy.generateSecret({ name: `StakeOnix (${user.email})`, length: 32 })
 
     // Store temp secret until confirmed
     await prisma.user.update({ where: { id: user.id }, data: { twoFaSecret: secret.base32 } })

@@ -17,7 +17,7 @@ export async function POST() {
     const referrers = await prisma.user.findMany({
       where: {
         isActive: true,
-        referralCode: { not: null },
+        NOT: { referralCode: null },
         referredUsers: {
           some: {
             stakes: { none: {} },

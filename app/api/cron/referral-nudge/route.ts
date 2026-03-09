@@ -29,10 +29,10 @@ export async function POST(req: NextRequest) {
     const referrers = await prisma.user.findMany({
       where: {
         isActive: true,
-        referralCode: { not: null },
+        NOT: { referralCode: null },
         referredUsers: {
           some: {
-            stakes: { none: {} }, // at least one referral with zero stakes
+            stakes: { none: {} },
             isActive: true,
           },
         },

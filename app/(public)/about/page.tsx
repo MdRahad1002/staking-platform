@@ -16,7 +16,53 @@ export const metadata: Metadata = {
     title: 'About StakeOnix — Trusted Crypto Staking Company',
     description: 'Meet the team making crypto staking simple, secure, and profitable for thousands of investors worldwide.',
     url: `${APP_URL}/about`,
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'About StakeOnix' }],
   },
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'StakeOnix',
+  url: APP_URL,
+  description:
+    'StakeOnix is a professional cryptocurrency staking platform enabling investors to earn daily passive income on Bitcoin, Ethereum, USDT, Solana and more. Founded in 2020, serving 15,000+ investors worldwide.',
+  foundingDate: '2020',
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
+  email: 'info@stakeonix.com',
+  telephone: '+1-613-366-4391',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '130 King St W',
+    addressLocality: 'Toronto',
+    addressRegion: 'ON',
+    postalCode: 'M5X 2A2',
+    addressCountry: 'CA',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+1-613-366-4391',
+      contactType: 'customer support',
+      email: 'info@stakeonix.com',
+      availableLanguage: 'English',
+      contactOption: 'TollFree',
+      areaServed: 'Worldwide',
+    },
+  ],
+  sameAs: [
+    'https://twitter.com/StakeOnix',
+    'https://t.me/StakeOnix',
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+    { '@type': 'ListItem', position: 2, name: 'About', item: `${APP_URL}/about` },
+  ],
 }
 
 const team = [
@@ -51,6 +97,9 @@ const values = [
 
 export default function AboutPage() {
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
     <div className="py-16">
       <div className="container mx-auto px-4">
         {/* Header */}
@@ -146,5 +195,6 @@ export default function AboutPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

@@ -45,6 +45,27 @@ export default async function PlansPage() {
     ? Math.min(...plans.map((p) => parseFloat((p.dailyRoi * 365 * 0.6).toFixed(2))))
     : 0
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+      { '@type': 'ListItem', position: 2, name: 'Staking Plans', item: `${APP_URL}/plans` },
+    ],
+  }
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialService',
+    name: 'StakeOnix Crypto Staking Plans',
+    url: `${APP_URL}/plans`,
+    description: `Choose from ${plans.length} cryptocurrency staking plans. Earn between ${minApr}% and ${maxApr}% APR. Daily rewards credited automatically.`,
+    serviceType: 'Cryptocurrency Staking',
+    areaServed: 'Worldwide',
+    priceRange: '$20+',
+    provider: { '@type': 'Organization', name: 'StakeOnix', url: APP_URL },
+  }
+
   const heroStats = [
     { icon: <TrendingUp className="h-5 w-5 text-primary" />, label: 'Est. APR Up To', value: `${maxApr}%` },
     { icon: <Zap className="h-5 w-5 text-yellow-400" />, label: 'Active Plans', value: `${plans.length}` },
@@ -53,6 +74,9 @@ export default async function PlansPage() {
   ]
 
   return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
     <div>
       {/* ── Hero banner ── */}
       <section className="relative overflow-hidden py-16 md:py-20">
@@ -115,5 +139,6 @@ export default async function PlansPage() {
         </div>
       </section>
     </div>
+    </>
   )
 }

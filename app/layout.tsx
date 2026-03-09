@@ -83,14 +83,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: APP_URL,
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
   verification: {
     // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN',
-    // bing: 'YOUR_BING_WEBMASTER_TOKEN',
+    // yandex: 'YOUR_YANDEX_TOKEN',
   },
 }
 

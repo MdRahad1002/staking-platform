@@ -692,74 +692,161 @@ export default async function HomePage() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-transparent to-purple-950/20 pointer-events-none" />
-        <div className="glow-blob w-[700px] h-[400px] bg-blue-600/8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <section className="py-24 relative overflow-hidden border-t border-white/5">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/25 via-background to-blue-950/25 pointer-events-none" />
+        <div className="absolute inset-0 hero-grid opacity-[0.04]" />
+        <div className="glow-blob w-[600px] h-[600px] bg-cyan-600/10 top-0 left-0 -translate-x-1/3 -translate-y-1/3" />
+        <div className="glow-blob w-[500px] h-[500px] bg-blue-600/10 bottom-0 right-0 translate-x-1/4 translate-y-1/4" />
+
         <div className="container relative mx-auto px-4">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Our Advantage</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Why Choose StakeOnix?</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Thousands of investors trust us for safe, reliable and transparent crypto staking.
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
+              <Award className="h-3.5 w-3.5" />
+              Why StakeOnix
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black mb-5 leading-tight">
+              The Smarter Way to{' '}
+              <span className="gradient-text">Grow Your Crypto</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+              While others watch the charts and stress about timing the market, StakeOnix users earn daily - automatically, securely, and without lifting a finger.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          {/* Top two-col pitch block */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-10">
+            {/* Left - Main pitch */}
+            <div className="glass-card p-8 md:p-10 flex flex-col justify-between bg-gradient-to-br from-cyan-500/[0.07] to-blue-600/[0.07] border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300">
+              <div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 text-cyan-400 mb-6">
+                  <ShieldCheck className="h-7 w-7" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Your money works. You rest.</h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Traditional banks pay you 0.01% a year. The stock market demands research, timing, and nerves. StakeOnix gives you a third option - put your crypto to work in a proven staking protocol and collect rewards every single day, whether you are sleeping, working, or on vacation.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    'No trading knowledge needed - zero experience required',
+                    'Rewards credited to your wallet every 24 hours',
+                    'Withdraw anytime - no lock-in traps',
+                    'Start with as little as $20',
+                  ].map((point) => (
+                    <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <CheckCircle2 className="h-4 w-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                <Link href="/signup">
+                  <Button size="lg" className="gap-2 rounded-xl w-full sm:w-auto">
+                    <Rocket className="h-4 w-4" />
+                    Start Earning Today
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right - Proof stats */}
+            <div className="flex flex-col gap-5">
+              {/* Big stat */}
+              <div className="glass-card p-7 bg-gradient-to-br from-green-500/[0.07] to-emerald-600/[0.07] border-green-500/20 hover:border-green-500/35 transition-all duration-300">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Total Paid to Users</p>
+                    <p className="text-5xl font-black text-white">$2.5B+</p>
+                  </div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/15 text-green-400">
+                    <DollarSign className="h-6 w-6" />
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">Distributed across 170+ countries since launch - every dollar fully verifiable on-chain.</p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-5">
+                <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-400 mx-auto mb-3">
+                    <Users className="h-5 w-5" />
+                  </div>
+                  <p className="text-3xl font-black text-white mb-1">87K+</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Active Investors</p>
+                </div>
+                <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-500/15 text-yellow-400 mx-auto mb-3">
+                    <Star className="h-5 w-5" />
+                  </div>
+                  <p className="text-3xl font-black text-white mb-1">4.8/5</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">User Rating</p>
+                </div>
+                <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-400 mx-auto mb-3">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <p className="text-3xl font-black text-white mb-1">99.95%</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Uptime SLA</p>
+                </div>
+                <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400 mx-auto mb-3">
+                    <Globe className="h-5 w-5" />
+                  </div>
+                  <p className="text-3xl font-black text-white mb-1">170+</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Countries</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom 6-point trust grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
-                icon: <Shield className="h-7 w-7" />,
-                color: 'from-cyan-500/20 to-blue-600/20',
-                iconColor: 'text-cyan-400',
-                borderHover: 'hover:border-cyan-500/30',
-                title: 'Secure Staking',
-                desc: 'Military-grade encryption, multi-sig cold wallets and 24/7 monitoring keep your assets safe at all times.',
-                stat: '256-bit SSL',
-                statLabel: 'Encryption',
+                icon: <Lock className="h-5 w-5" />,
+                color: 'bg-cyan-500/15 text-cyan-400',
+                title: 'Bank-Grade Security',
+                desc: '256-bit SSL encryption, multi-signature cold wallets, and round-the-clock threat monitoring. Your assets are protected like a vault.',
               },
               {
-                icon: <Activity className="h-7 w-7" />,
-                color: 'from-green-500/20 to-emerald-600/20',
-                iconColor: 'text-green-400',
-                borderHover: 'hover:border-green-500/30',
-                title: '99.95% Uptime',
-                desc: 'Our globally distributed infrastructure guarantees near-zero downtime so your rewards never stop accumulating.',
-                stat: '99.95%',
-                statLabel: 'Uptime SLA',
+                icon: <Eye className="h-5 w-5" />,
+                color: 'bg-green-500/15 text-green-400',
+                title: '100% Transparent',
+                desc: "Every reward, every transaction, every fee - visible and auditable. We have nothing to hide and everything to prove. What you see is what you get.",
               },
               {
-                icon: <RefreshCw className="h-7 w-7" />,
-                color: 'from-purple-500/20 to-violet-600/20',
-                iconColor: 'text-purple-400',
-                borderHover: 'hover:border-purple-500/30',
+                icon: <Zap className="h-5 w-5" />,
+                color: 'bg-yellow-500/15 text-yellow-400',
+                title: 'Instant Withdrawals',
+                desc: "When it's your money, you should be able to access it. No waiting periods, no complicated unlock windows. Withdraw to your wallet within minutes.",
+              },
+              {
+                icon: <RefreshCw className="h-5 w-5" />,
+                color: 'bg-purple-500/15 text-purple-400',
                 title: 'Auto-Compounding',
-                desc: 'Daily rewards are automatically re-staked to maximise your returns through the power of compound interest.',
-                stat: 'Daily',
-                statLabel: 'Compounding',
+                desc: 'Your daily earnings are automatically reinvested. Compounding daily means your balance snowballs - earning more tomorrow than it did today.',
               },
               {
-                icon: <BarChart3 className="h-7 w-7" />,
-                color: 'from-yellow-500/20 to-orange-500/20',
-                iconColor: 'text-yellow-400',
-                borderHover: 'hover:border-yellow-500/30',
-                title: 'Transparent Fees',
-                desc: 'No hidden charges. Our fee structure is clear and visible upfront - what you see is what you pay.',
-                stat: '0% Hidden',
-                statLabel: 'Fees',
+                icon: <BadgeCheck className="h-5 w-5" />,
+                color: 'bg-blue-500/15 text-blue-400',
+                title: 'Regulated & Compliant',
+                desc: 'Licensed financial operations in Canada with full KYC/AML compliance. We operate with the same standards as traditional financial institutions.',
+              },
+              {
+                icon: <Activity className="h-5 w-5" />,
+                color: 'bg-orange-500/15 text-orange-400',
+                title: 'Live Support, Always',
+                desc: 'Real humans, not bots. Our support team is available 24/7 via live chat and Telegram. Typical response time under 5 minutes.',
               },
             ].map((item) => (
-              <div
-                key={item.title}
-                className={`glass-card p-7 flex flex-col gap-5 transition-all duration-300 group cursor-default ${item.borderHover} hover:bg-white/5`}
-              >
-                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+              <div key={item.title} className="glass-card p-7 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 group cursor-default flex gap-5 items-start">
+                <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${item.color} group-hover:scale-110 transition-transform duration-300`}>
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg mb-2 text-white">{item.title}</h3>
+                  <h3 className="font-bold text-base mb-1.5 text-white">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                </div>
-                <div className="mt-auto pt-4 border-t border-white/[0.06] flex items-center gap-3">
-                  <span className="text-xl font-black gradient-text">{item.stat}</span>
-                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{item.statLabel}</span>
                 </div>
               </div>
             ))}

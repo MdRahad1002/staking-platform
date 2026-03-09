@@ -325,7 +325,7 @@ export default async function HomePage() {
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
                 Choose a plan, deposit crypto, and earn automatic daily rewards. No lockups,
-                no complexity &mdash; just steady{' '}
+                no complexity, just steady{' '}
                 <strong className="text-white font-semibold">passive income</strong> from your digital assets.
               </p>
 

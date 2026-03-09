@@ -120,8 +120,14 @@ const organizationSchema = {
     addressCountry: 'CA',
   },
   sameAs: [
+    'https://x.com/StakeOnix',
     'https://twitter.com/StakeOnix',
     'https://t.me/StakeOnix',
+    'https://t.me/+bJzRzQK0W-Q2ZTU5',
+    'https://wa.me/qr/PER5MG7B7R6EF1',
+    'https://www.instagram.com/stakeonix',
+    'https://www.facebook.com/share/1D3Cw9AjJ3/',
+    'https://www.tiktok.com/@stakeonix',
   ],
 }
 

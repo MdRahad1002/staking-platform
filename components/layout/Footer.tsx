@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Twitter, Mail, Shield, TrendingUp, Globe, Zap, Phone, MapPin } from 'lucide-react'
+import { Twitter, Mail, Shield, TrendingUp, Globe, Zap, Phone, MapPin, Instagram, Facebook, MessageCircle, Send } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 
 const footerLinks = {
@@ -80,19 +80,35 @@ export function Footer() {
                 <span>130 King St W, Toronto, ON M5X 2A2, Canada</span>
               </div>
             </div>
-            <div className="flex gap-2">
-              <a
-                href="#"
-                aria-label="Twitter"
-                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all"
-              >
+            <div className="flex flex-wrap gap-2">
+              <a href="https://x.com/StakeOnix" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
                 <Twitter className="h-4 w-4" />
               </a>
-              <a
-                href="mailto:info@stakeonix.com"
-                aria-label="Email"
-                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all"
-              >
+              <a href="https://t.me/+bJzRzQK0W-Q2ZTU5" target="_blank" rel="noopener noreferrer" aria-label="Telegram"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
+                <Send className="h-4 w-4" />
+              </a>
+              <a href="https://wa.me/qr/PER5MG7B7R6EF1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
+                <MessageCircle className="h-4 w-4" />
+              </a>
+              <a href="https://www.instagram.com/stakeonix?igsh=MTFyaHV5cHh3ZXphaA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="https://www.facebook.com/share/1D3Cw9AjJ3/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a href="https://www.tiktok.com/@stakeonix" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.83 1.56V6.81a4.85 4.85 0 01-1.06-.12z" />
+                </svg>
+              </a>
+              <a href="mailto:info@stakeonix.com" aria-label="Email"
+                className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
                 <Mail className="h-4 w-4" />
               </a>
             </div>

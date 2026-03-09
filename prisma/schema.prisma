@@ -39,6 +39,7 @@ model User {
   resetPasswordExpires  DateTime?
   emailVerificationToken   String?
   emailVerificationExpires DateTime?
+  emailOptOut       Boolean   @default(false)
   domainId          String?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
@@ -451,9 +452,11 @@ model QuickReply {
 model BulkEmail {
   id          String    @id @default(uuid())
   subject     String
-  content     String
+  content     String    @db.Text
+  target      String    @default("all")
   sentCount   Int       @default(0)
-  status      String    @default("pending")
+  failedCount Int       @default(0)
+  status      String    @default("pending")  // pending | sending | sent | failed
   scheduledAt DateTime?
   sentAt      DateTime?
   createdAt   DateTime  @default(now())

@@ -13,6 +13,112 @@ function getResend(): Resend {
 
 const FROM_ADDRESS = () => process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.com>'
 
+// ─────────────────────────────────────────────
+//  Bulk email: batch send (up to 100 per Resend call)
+// ─────────────────────────────────────────────
+export interface BulkEmailPayload {
+  to: string
+  subject: string
+  html: string
+}
+
+export async function sendEmailBatch(emails: BulkEmailPayload[]): Promise<{ sent: number; failed: number }> {
+  const resend = getResend()
+  let sent = 0
+  let failed = 0
+  const CHUNK = 100
+  for (let i = 0; i < emails.length; i += CHUNK) {
+    const chunk = emails.slice(i, i + CHUNK).map((e) => ({
+      from: FROM_ADDRESS(),
+      to: e.to,
+      subject: e.subject,
+      html: e.html,
+      text: e.html.replace(/<[^>]+>/g, ''),
+    }))
+    try {
+      // @ts-expect-error — Resend types may not expose batch on all SDK versions
+      const result = await resend.batch.send(chunk)
+      if (result.error) {
+        failed += chunk.length
+      } else {
+        const successCount = Array.isArray(result.data) ? result.data.length : chunk.length
+        sent += successCount
+        failed += chunk.length - successCount
+      }
+    } catch {
+      failed += chunk.length
+    }
+  }
+  return { sent, failed }
+}
+
+// ─────────────────────────────────────────────
+//  Professional bulk email HTML wrapper
+// ─────────────────────────────────────────────
+export function getBulkEmailTemplate(
+  firstName: string,
+  subject: string,
+  bodyHtml: string,
+  unsubscribeUrl: string
+): string {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const year = new Date().getFullYear()
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${subject}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- Header -->
+        <tr><td style="background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 50%,#1a0a2e 100%);border-radius:16px 16px 0 0;padding:32px 48px;text-align:center;">
+          <a href="${appUrl}" style="text-decoration:none;">
+            <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:8px 20px;">
+              <span style="color:#ffffff;font-size:20px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
+            </div>
+          </a>
+        </td></tr>
+
+        <!-- Body -->
+        <tr><td style="background:#111827;padding:40px 48px;">
+          <p style="color:#d1d5db;font-size:16px;margin:0 0 24px;">Hi <strong style="color:#ffffff;">${firstName}</strong>,</p>
+          <div style="color:#9ca3af;font-size:15px;line-height:1.8;">
+            ${bodyHtml}
+          </div>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding-top:28px;margin-top:32px;"></td></tr></table>
+
+          <p style="color:#4b5563;font-size:12px;margin:16px 0 0;line-height:1.6;">
+            You are receiving this email because you have a StakeOnix account.<br/>
+            <a href="${unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">Unsubscribe from marketing emails</a>
+          </p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
+          <p style="color:#4b5563;font-size:12px;margin:0 0 6px;">
+            &copy; ${year} StakeOnix &mdash; 130 King St W, Toronto, ON M5X 2A2, Canada
+          </p>
+          <p style="color:#374151;font-size:11px;margin:0;">
+            <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">Contact Support</a>
+            &nbsp;&middot;&nbsp;
+            <a href="${appUrl}/dashboard" style="color:#6b7280;text-decoration:none;">My Dashboard</a>
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
 interface EmailOptions {
   to: string
   subject: string

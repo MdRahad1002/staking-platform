@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -218,7 +218,7 @@ export default function WorkerStakingPage() {
                     <td className="px-4 py-3 font-mono text-xs text-green-500">{Number(p.totalRoi).toFixed(2)}%</td>
                     <td className="px-4 py-3 font-mono text-xs">{p.durationDays}d</td>
                     <td className="px-4 py-3 font-mono text-xs">${Number(p.minAmount).toLocaleString()}</td>
-                    <td className="px-4 py-3 font-mono text-xs">{p.maxAmount ? `$${Number(p.maxAmount).toLocaleString()}` : '—'}</td>
+                    <td className="px-4 py-3 font-mono text-xs">{p.maxAmount ? `$${Number(p.maxAmount).toLocaleString()}` : '-'}</td>
                     <td className="px-4 py-3 font-mono text-xs">{p._count.stakes}</td>
                     <td className="px-4 py-3">
                       <Switch
@@ -307,7 +307,7 @@ export default function WorkerStakingPage() {
             </div>
 
             <div className="space-y-1.5">
-              <Label>Max Amount (USD) — leave blank for no limit</Label>
+              <Label>Max Amount (USD) - leave blank for no limit</Label>
               <Input type="number" min="0.01" step="0.01"
                 value={form.maxAmount ?? ''}
                 onChange={(e) => setField('maxAmount', e.target.value ? parseFloat(e.target.value) : null)}
@@ -319,7 +319,7 @@ export default function WorkerStakingPage() {
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Preview</p>
               <p className="text-sm">
                 Total ROI: <span className="font-mono text-green-500">
-                  {isNaN(form.dailyRoi * form.durationDays) ? '—' : `${(form.dailyRoi * form.durationDays).toFixed(2)}%`}
+                  {isNaN(form.dailyRoi * form.durationDays) ? '-' : `${(form.dailyRoi * form.durationDays).toFixed(2)}%`}
                 </span>
               </p>
             </div>

@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+﻿import { prisma } from '@/lib/db'
 import { requireAuth } from '@/lib/auth-helpers'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -84,7 +84,7 @@ export default async function OrdersPage() {
           <div className="space-y-1">
             <div className="flex justify-between text-xs text-muted-foreground">
               <span>Progress</span>
-              <span>{Math.round(progressPct)}% — Ends {formatDate(stake.endDate)}</span>
+              <span>{Math.round(progressPct)}% - Ends {formatDate(stake.endDate)}</span>
             </div>
             <Progress value={progressPct} className="h-1.5" />
           </div>

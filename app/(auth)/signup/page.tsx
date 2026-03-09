@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, Suspense } from 'react'
 import Link from 'next/link'
@@ -27,7 +27,7 @@ const highlights = [
   {
     icon: <Shield className="h-5 w-5 text-blue-400" />,
     title: 'Non-Custodial Option',
-    desc: 'You stay in control — withdraw anytime, no lockups.',
+    desc: 'You stay in control - withdraw anytime, no lockups.',
   },
 ]
 
@@ -141,7 +141,7 @@ function SignupForm() {
         {/* Info box */}
         <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-left space-y-2">
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Your account is <span className="text-green-400 font-semibold">active</span> — you can start using StakeOnix right away.
+            Your account is <span className="text-green-400 font-semibold">active</span> - you can start using StakeOnix right away.
             The email contains your verification link and a summary of your account.
           </p>
         </div>
@@ -305,7 +305,7 @@ function SignupForm() {
 export default function SignupPage() {
   return (
     <div className="min-h-screen flex">
-      {/* Left panel — branding */}
+      {/* Left panel - branding */}
       <div className="hidden lg:flex lg:w-[55%] relative overflow-hidden bg-secondary/30 flex-col justify-between p-12">
         <div className="absolute inset-0 animated-bg opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-transparent" />
@@ -337,7 +337,7 @@ export default function SignupPage() {
               <span className="gradient-text">Reward Awaits</span>
             </h2>
             <p className="text-muted-foreground max-w-sm">
-              Create a free account, deposit crypto, choose a plan — and earn passive income on autopilot.
+              Create a free account, deposit crypto, choose a plan - and earn passive income on autopilot.
             </p>
           </div>
 
@@ -364,7 +364,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Right panel — form */}
+      {/* Right panel - form */}
       <div className="flex flex-1 flex-col lg:w-[45%] bg-background">
         {/* Mobile logo */}
         <div className="flex items-center justify-between p-6 lg:hidden border-b border-border">

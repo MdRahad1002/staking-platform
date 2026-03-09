@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -154,7 +154,7 @@ export default function WithdrawPage() {
                 <SelectContent>
                   {currencies.map((c) => (
                     <SelectItem key={c.id} value={c.id}>
-                      {c.symbol} — {c.name} ({c.network})
+                      {c.symbol} - {c.name} ({c.network})
                     </SelectItem>
                   ))}
                 </SelectContent>

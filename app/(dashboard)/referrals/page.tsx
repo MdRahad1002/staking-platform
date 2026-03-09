@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+﻿import { prisma } from '@/lib/db'
 import { requireAuth } from '@/lib/auth-helpers'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -67,7 +67,7 @@ export default async function ReferralsPage() {
   }, [])
   const runningTotalsDesc = [...runningTotals].reverse()
 
-  // Build base URL — consistent with the rest of the codebase
+  // Build base URL - consistent with the rest of the codebase
   const baseUrl = (process.env.NEXTAUTH_URL || 'http://localhost:3000').replace(/\/$/, '')
   const referralLink = user?.referralCode
     ? `${baseUrl}/signup?ref=${user.referralCode}`
@@ -118,7 +118,7 @@ export default async function ReferralsPage() {
             <div>
               <p className="text-xs text-muted-foreground">Commission Rate</p>
               <p className="text-xl font-bold">
-                {commissionRate !== null ? `${commissionRate}%` : '—'}
+                {commissionRate !== null ? `${commissionRate}%` : '-'}
               </p>
               <p className="text-xs text-muted-foreground">per stake payout</p>
             </div>
@@ -140,7 +140,7 @@ export default async function ReferralsPage() {
         <CardContent className="space-y-3">
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
             <div className="flex-1 rounded-lg bg-secondary/40 border border-border px-4 py-3 font-mono text-sm break-all select-all">
-              {referralLink || <span className="text-muted-foreground italic">Link unavailable — set NEXTAUTH_URL</span>}
+              {referralLink || <span className="text-muted-foreground italic">Link unavailable - set NEXTAUTH_URL</span>}
             </div>
             {referralLink && <CopyButton text={referralLink} />}
           </div>
@@ -195,7 +195,7 @@ export default async function ReferralsPage() {
                         </span>
                       </td>
                       <td className="py-3 font-medium text-green-400">
-                        {earningsByUser[ref.id] ? `+${formatCurrency(earningsByUser[ref.id])}` : <span className="text-muted-foreground">—</span>}
+                        {earningsByUser[ref.id] ? `+${formatCurrency(earningsByUser[ref.id])}` : <span className="text-muted-foreground">-</span>}
                       </td>
                       <td className="py-3">
                         <Badge variant={ref.stakes.length > 0 ? 'success' : ref._count.stakes > 0 ? 'info' : ref.isActive ? 'warning' : 'secondary'}>
@@ -257,7 +257,7 @@ export default async function ReferralsPage() {
                             View <ExternalLink className="h-3 w-3" />
                           </Link>
                         ) : (
-                          <span className="text-muted-foreground">—</span>
+                          <span className="text-muted-foreground">-</span>
                         )}
                       </td>
                       <td className="py-3 text-xs text-muted-foreground/70 whitespace-nowrap">

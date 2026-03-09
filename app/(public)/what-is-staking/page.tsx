@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import Link from 'next/link'
 import {
   Coins,
@@ -17,9 +17,9 @@ import {
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
-  title: 'What is Crypto Staking? (Simple Guide — Make Money With Crypto 2026)',
+  title: 'What is Crypto Staking? (Simple Guide - Make Money With Crypto 2026)',
   description:
-    'Crypto staking explained simply: you deposit your crypto, it earns money every day, you withdraw whenever you want. Like putting money in a savings account — but with much higher returns. No experience needed.',
+    'Crypto staking explained simply: you deposit your crypto, it earns money every day, you withdraw whenever you want. Like putting money in a savings account - but with much higher returns. No experience needed.',
   keywords: [
     'what is crypto staking',
     'how to earn money with bitcoin',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://www.stakeonix.com/what-is-staking' },
   openGraph: {
-    title: 'What is Crypto Staking? (Plain English Explanation) — StakeOnix',
+    title: 'What is Crypto Staking? (Plain English Explanation) - StakeOnix',
     description: 'Staking explained without jargon: deposit your crypto, earn money every day, withdraw whenever you want. Yes, it really is that simple. Here’s how it works.',
     url: 'https://www.stakeonix.com/what-is-staking',
   },
@@ -51,7 +51,7 @@ const steps = [
     step: '1',
     title: 'You deposit crypto',
     description:
-      'You put some of your cryptocurrency into a staking plan — like putting money in a savings account.',
+      'You put some of your cryptocurrency into a staking plan - like putting money in a savings account.',
   },
   {
     icon: <Lock className="h-6 w-6" />,
@@ -65,7 +65,7 @@ const steps = [
     step: '3',
     title: 'You earn daily rewards',
     description:
-      'Every 24 hours a percentage of your deposit is added to your balance as a reward — completely automatically.',
+      'Every 24 hours a percentage of your deposit is added to your balance as a reward - completely automatically.',
   },
   {
     icon: <Unlock className="h-6 w-6" />,
@@ -82,7 +82,7 @@ const analogies = [
     title: 'Like a bank savings account',
     bad: 'A bank pays you 0.5% per year',
     good: 'Staking can pay you multiple percent per month',
-    note: 'But unlike a bank, crypto markets carry risk — only stake what you can afford to hold.',
+    note: 'But unlike a bank, crypto markets carry risk - only stake what you can afford to hold.',
   },
   {
     icon: <RefreshCw className="h-7 w-7" />,
@@ -123,7 +123,7 @@ const faqs = [
   },
   {
     q: 'Is there a minimum amount?',
-    a: 'Yes, each plan has a minimum deposit — typically starting from $10 equivalent. You do not need a lot to get started.',
+    a: 'Yes, each plan has a minimum deposit - typically starting from $10 equivalent. You do not need a lot to get started.',
   },
 ]
 
@@ -150,7 +150,7 @@ export default function WhatIsStakingPage() {
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             No jargon. No technical degree required. Here is everything you need to know about
-            staking — explained as simply as possible.
+            staking - explained as simply as possible.
           </p>
         </div>
 
@@ -160,7 +160,7 @@ export default function WhatIsStakingPage() {
             Staking = <span className="gradient-text">putting your crypto to work</span> so it earns you money while you just wait.
           </p>
           <p className="text-muted-foreground mt-4">
-            Think of it like a savings account — except instead of earning nearly nothing, you earn
+            Think of it like a savings account - except instead of earning nearly nothing, you earn
             meaningful daily rewards.
           </p>
         </div>
@@ -191,7 +191,7 @@ export default function WhatIsStakingPage() {
         <div className="mb-20">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Still confused? Think of it this way…</h2>
           <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto">
-            Staking is not a new concept — you already understand it from everyday life.
+            Staking is not a new concept - you already understand it from everyday life.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {analogies.map((a) => (
@@ -241,7 +241,7 @@ export default function WhatIsStakingPage() {
                 <Coins className="h-5 w-5" />
               </div>
               <div>
-                <p className="font-semibold">Silver Staking Plan — 30 days</p>
+                <p className="font-semibold">Silver Staking Plan - 30 days</p>
                 <p className="text-sm text-muted-foreground">1% daily reward</p>
               </div>
             </div>
@@ -291,7 +291,7 @@ export default function WhatIsStakingPage() {
         <div className="text-center max-w-xl mx-auto">
           <h2 className="text-2xl font-bold mb-3">Ready to start earning?</h2>
           <p className="text-muted-foreground mb-7">
-            Browse our plans and see exactly how much you could earn. No commitment needed — just explore.
+            Browse our plans and see exactly how much you could earn. No commitment needed - just explore.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild size="lg" className="gap-2">

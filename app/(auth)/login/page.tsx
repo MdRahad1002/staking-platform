@@ -217,7 +217,7 @@ function LoginForm() {
       <div className="space-y-1">
         <h1 className="text-2xl font-bold">Sign In</h1>
         <p className="text-sm text-muted-foreground">
-          Welcome back — sign in to your account
+          Welcome back - sign in to your account
         </p>
       </div>
 
@@ -294,7 +294,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex">
-      {/* Left panel — branding */}
+      {/* Left panel - branding */}
       <div className="hidden lg:flex lg:w-[55%] relative overflow-hidden bg-secondary/30 flex-col justify-between p-12">
         <div className="absolute inset-0 animated-bg opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-transparent" />
@@ -354,7 +354,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right panel — form */}
+      {/* Right panel - form */}
       <div className="flex flex-1 flex-col lg:w-[45%] bg-background">
         {/* Mobile logo */}
         <div className="flex items-center justify-between p-6 lg:hidden border-b border-border">

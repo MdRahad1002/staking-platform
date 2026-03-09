@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -52,7 +52,7 @@ const STATUS_LABEL: Record<string, string> = {
   confirmed: 'Confirmed!',
   sending: 'Sending to wallet…',
   finished: 'Completed!',
-  partially_paid: 'Partially paid — waiting for more',
+  partially_paid: 'Partially paid - waiting for more',
   failed: 'Payment failed',
   expired: 'Payment expired',
   refunded: 'Refunded',
@@ -154,7 +154,7 @@ export default function DepositPage() {
       setPayment(data.data)
       setPollStatus('waiting')
       startPoll(data.data.depositId)
-      toast.success('Payment created — send the exact amount to the address below')
+      toast.success('Payment created - send the exact amount to the address below')
     } catch {
       toast.error('Something went wrong.')
     } finally {
@@ -192,7 +192,7 @@ export default function DepositPage() {
                     <SelectTrigger><SelectValue placeholder="Select currency..." /></SelectTrigger>
                     <SelectContent>
                       {currencies.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>{c.symbol} — {c.name} ({c.network})</SelectItem>
+                        <SelectItem key={c.id} value={c.id}>{c.symbol} - {c.name} ({c.network})</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

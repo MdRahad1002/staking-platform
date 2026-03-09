@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
 import { PlansClient } from './PlansClient'
@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'How to Earn Money With Crypto Daily — Choose Your Plan | StakeOnix',
+  title: 'How to Earn Money With Crypto Daily - Choose Your Plan | StakeOnix',
   description:
-    'Pick a plan, deposit your crypto, and start getting paid every single day. Bitcoin, Ethereum, USDT plans from just $20. No experience needed — we do all the work, you collect daily earnings.',
+    'Pick a plan, deposit your crypto, and start getting paid every single day. Bitcoin, Ethereum, USDT plans from just $20. No experience needed - we do all the work, you collect daily earnings.',
   keywords: [
     'how to earn money with crypto',
     'best way to invest in crypto 2026',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {
-    title: 'Crypto Staking Plans — Earn Up to 5% Daily | StakeOnix',
+    title: 'Crypto Staking Plans - Earn Up to 5% Daily | StakeOnix',
     description: 'Choose the perfect staking plan. Earn daily passive income on Bitcoin, Ethereum, USDT, Solana & more. Plans start from just $20.',
     url: `${APP_URL}/plans`,
   },

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -23,7 +23,7 @@ export default function NotifLinkRow({
 
   const handleClick = () => {
     if (!isRead) {
-      // fire-and-forget — navigate immediately, refresh after
+      // fire-and-forget - navigate immediately, refresh after
       fetch(`/api/notifications/${id}/read`, { method: 'PATCH' }).then(() =>
         router.refresh(),
       )

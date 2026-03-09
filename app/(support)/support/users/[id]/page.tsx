@@ -190,11 +190,11 @@ export default function SupportUserDetailPage() {
               <CardContent className="space-y-2 text-sm">
                 {[
                   { label: 'Email',       value: user.email },
-                  { label: 'Username',    value: user.username || '—' },
-                  { label: 'Referral Code', value: user.referralCode || '—' },
+                  { label: 'Username',    value: user.username || '-' },
+                  { label: 'Referral Code', value: user.referralCode || '-' },
                   { label: 'Joined',      value: new Date(user.createdAt).toLocaleString() },
-                  { label: 'Last Login',  value: user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : '—' },
-                  { label: 'Last IP',     value: user.lastLoginIp || '—' },
+                  { label: 'Last Login',  value: user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleString() : '-' },
+                  { label: 'Last IP',     value: user.lastLoginIp || '-' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between gap-4">
                     <span className="text-muted-foreground">{label}</span>
@@ -290,7 +290,7 @@ export default function SupportUserDetailPage() {
                       <td className="px-4 py-2">{d.currency.name}</td>
                       <td className="px-4 py-2"><Badge variant={depositVariant[d.status] ?? 'secondary'} className="text-xs">{d.status}</Badge></td>
                       <td className="px-4 py-2 text-muted-foreground">{new Date(d.createdAt).toLocaleDateString()}</td>
-                      <td className="px-4 py-2 text-muted-foreground text-xs font-mono truncate max-w-[120px]">{d.txHash || '—'}</td>
+                      <td className="px-4 py-2 text-muted-foreground text-xs font-mono truncate max-w-[120px]">{d.txHash || '-'}</td>
                     </tr>
                   ))}
                 </tbody>

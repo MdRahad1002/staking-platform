@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -195,7 +195,7 @@ export default function WorkerWithdrawalsPage() {
                             {w.user.domain.name || w.user.domain.domain}
                           </Badge>
                         ) : (
-                          <span className="text-xs text-muted-foreground">—</span>
+                          <span className="text-xs text-muted-foreground">-</span>
                         )}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap">{formatCurrency(w.amount)}</td>

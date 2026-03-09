@@ -1,9 +1,9 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions — Crypto Staking Help | StakeOnix',
+  title: 'Frequently Asked Questions - Crypto Staking Help | StakeOnix',
   description:
     'Find answers to the most common questions about StakeOnix: how staking works, earning rewards, deposits, withdrawals, security, and the referral program.',
   keywords: [
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/faq` },
   openGraph: {
-    title: 'FAQ — Crypto Staking Questions Answered | StakeOnix',
+    title: 'FAQ - Crypto Staking Questions Answered | StakeOnix',
     description: 'Everything you need to know about staking, earning, deposits, withdrawals, and security on StakeOnix.',
     url: `${APP_URL}/faq`,
   },

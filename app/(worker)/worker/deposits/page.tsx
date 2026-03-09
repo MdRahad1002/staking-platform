@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -187,7 +187,7 @@ export default function WorkerDepositsPage() {
                             {d.user.domain.name || d.user.domain.domain}
                           </Badge>
                         ) : (
-                          <span className="text-xs text-muted-foreground">—</span>
+                          <span className="text-xs text-muted-foreground">-</span>
                         )}
                       </td>
                       <td className="px-4 py-3 font-medium whitespace-nowrap">
@@ -216,7 +216,7 @@ export default function WorkerDepositsPage() {
                         {formatDate(d.createdAt)}
                       </td>
                       <td className="px-4 py-3 font-mono text-xs max-w-[8rem] truncate">
-                        {d.txHash || '—'}
+                        {d.txHash || '-'}
                       </td>
                       <td className="px-4 py-3">
                         {d.status === 'PENDING' && (

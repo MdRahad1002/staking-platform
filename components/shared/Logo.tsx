@@ -1,7 +1,7 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
-/** Hexagonal S icon — matches the StakeOnix brand mark */
+/** Hexagonal S icon - matches the StakeOnix brand mark */
 export function LogoIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -22,7 +22,7 @@ export function LogoIcon({ className }: { className?: string }) {
         points="20,2 35,11 35,29 20,38 5,29 5,11"
         fill="url(#lg1)"
       />
-      {/* S letter — geometric block style */}
+      {/* S letter - geometric block style */}
       {/* Top bar */}
       <rect x="12" y="10" width="13" height="5" rx="1.5" fill="white" />
       {/* Left top arm */}
@@ -37,7 +37,7 @@ export function LogoIcon({ className }: { className?: string }) {
   )
 }
 
-/** Full logo — icon + brand name. Wraps in a Link by default. */
+/** Full logo - icon + brand name. Wraps in a Link by default. */
 export function Logo({
   size = 'md',
   className,

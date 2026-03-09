@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db'
+﻿import { prisma } from '@/lib/db'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency } from '@/lib/utils'
 import {
@@ -21,7 +21,7 @@ function shortLabel(isoDate: string) {
 }
 
 export default async function AdminDashboard() {
-  // Layout already enforces admin — no need to call requireAdmin() again here
+  // Layout already enforces admin - no need to call requireAdmin() again here
 
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
 

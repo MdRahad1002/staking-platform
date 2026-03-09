@@ -4,7 +4,7 @@ import FaqClient from './FaqClient'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'Common Questions — Is This Legit? How Much Can I Earn? | StakeOnix FAQ',
+  title: 'Common Questions - Is This Legit? How Much Can I Earn? | StakeOnix FAQ',
   description:
     'Real answers to real questions: Is StakeOnix legit? How much money can I actually earn? Is my crypto safe? How quickly can I withdraw? Everything you want to know before you start.',
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/faq` },
   openGraph: {
-    title: 'FAQ — Crypto Staking Questions Answered | StakeOnix',
+    title: 'FAQ - Crypto Staking Questions Answered | StakeOnix',
     description: 'Real people asking real questions: Is this legit? How much can I earn? Is my money safe? How do I withdraw? Get straight answers before you start.',
     url: `${APP_URL}/faq`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix FAQ' }],
@@ -103,7 +103,7 @@ const faqSchema = {
       name: 'Can I really make money with crypto staking, or is this a scam?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'StakeOnix is a legitimate crypto staking platform. Staking is a well-established way to earn rewards on cryptocurrency — similar to how a bank pays interest on your savings, but with higher potential returns. We are transparent about our rates and thousands of real users earn daily rewards through our platform.',
+        text: 'StakeOnix is a legitimate crypto staking platform. Staking is a well-established way to earn rewards on cryptocurrency - similar to how a bank pays interest on your savings, but with higher potential returns. We are transparent about our rates and thousands of real users earn daily rewards through our platform.',
       },
     },
     {
@@ -111,7 +111,7 @@ const faqSchema = {
       name: 'How much money can I realistically earn from staking?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'It depends on how much you stake and which plan you choose. For example, if you stake $500 on a plan paying 1.5% daily, you earn $7.50 every single day — that is $225 per month automatically. Earnings scale directly with the amount you stake.',
+        text: 'It depends on how much you stake and which plan you choose. For example, if you stake $500 on a plan paying 1.5% daily, you earn $7.50 every single day - that is $225 per month automatically. Earnings scale directly with the amount you stake.',
       },
     },
     {
@@ -143,7 +143,7 @@ const faqSchema = {
       name: 'How is this different from a regular savings account at a bank?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A traditional bank savings account pays around 0.5–5% per year. Crypto staking on StakeOnix can pay that same amount in daily rewards. The key difference is that you are earning on cryptocurrency instead of regular money, which means higher potential returns — alongside the normal risks of crypto markets.',
+        text: 'A traditional bank savings account pays around 0.5–5% per year. Crypto staking on StakeOnix can pay that same amount in daily rewards. The key difference is that you are earning on cryptocurrency instead of regular money, which means higher potential returns - alongside the normal risks of crypto markets.',
       },
     },
   ],

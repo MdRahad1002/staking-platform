@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect, useState, useTransition, Suspense } from 'react'
@@ -158,7 +158,7 @@ function VerifyEmailContent() {
           </>
         )}
 
-        {/* Fallback — no params (direct visit) */}
+        {/* Fallback - no params (direct visit) */}
         {!success && !error && (
           <>
             <div className="flex justify-center">{ICONS.loading}</div>

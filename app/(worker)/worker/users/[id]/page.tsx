@@ -87,7 +87,7 @@ function statusVariant(u: UserDetail): 'destructive' | 'success' | 'warning' {
 }
 
 function fmtDate(d: string | null) {
-  if (!d) return '—'
+  if (!d) return '-'
   return new Date(d).toLocaleString()
 }
 
@@ -236,15 +236,15 @@ export default function WorkerUserDetailPage() {
             {(
               [
                 ['Email',       user.email],
-                ['Username',    user.username || '—'],
+                ['Username',    user.username || '-'],
                 ['Role',        user.role],
-                ['Domain',      user.domain ? (user.domain.name || user.domain.domain) : '—'],
+                ['Domain',      user.domain ? (user.domain.name || user.domain.domain) : '-'],
                 ['Balance',     `$${Number(user.balance).toFixed(2)}`],
                 ['2FA',         user.twoFaEnabled ? 'Enabled' : 'Disabled'],
                 ['PIN',         user.pinEnabled   ? 'Enabled' : 'Disabled'],
                 ['Referral',    user.referralCode],
                 ['Last login',  fmtDate(user.lastLoginAt)],
-                ['Last IP',     user.lastLoginIp || '—'],
+                ['Last IP',     user.lastLoginIp || '-'],
                 ['Joined',      fmtDate(user.createdAt)],
                 ['Updated',     fmtDate(user.updatedAt)],
               ] as [string, string][]
@@ -291,7 +291,7 @@ export default function WorkerUserDetailPage() {
 
             {/* Balance */}
             <div>
-              <p className="text-xs text-muted-foreground mb-1.5 font-medium uppercase tracking-wide">Balance — currently <span className="text-foreground font-mono">${Number(user.balance).toFixed(2)}</span></p>
+              <p className="text-xs text-muted-foreground mb-1.5 font-medium uppercase tracking-wide">Balance - currently <span className="text-foreground font-mono">${Number(user.balance).toFixed(2)}</span></p>
               <Button size="sm" variant="outline" onClick={() => setBalanceDialog(true)} className="gap-2">
                 <DollarSign className="h-3 w-3" /> Manage Balance
               </Button>
@@ -395,7 +395,7 @@ export default function WorkerUserDetailPage() {
                         <td className="px-4 py-2.5">
                           <Badge variant={t.status === 'COMPLETED' ? 'success' : 'warning'} className="text-xs">{t.status}</Badge>
                         </td>
-                        <td className="px-4 py-2.5 text-xs text-muted-foreground max-w-[200px] truncate">{t.description || '—'}</td>
+                        <td className="px-4 py-2.5 text-xs text-muted-foreground max-w-[200px] truncate">{t.description || '-'}</td>
                         <td className="px-4 py-2.5 text-xs text-muted-foreground whitespace-nowrap">
                           {formatDistanceToNow(new Date(t.createdAt), { addSuffix: true })}
                         </td>
@@ -477,12 +477,12 @@ export default function WorkerUserDetailPage() {
                       <tr key={d.id} className="hover:bg-secondary/20">
                         <td className="px-4 py-2.5 font-mono text-xs">{d.currency.symbol}</td>
                         <td className="px-4 py-2.5 font-mono text-xs">{Number(d.amount).toFixed(6)}</td>
-                        <td className="px-4 py-2.5 font-mono text-xs">{d.amountUsd != null ? `$${Number(d.amountUsd).toFixed(2)}` : '—'}</td>
+                        <td className="px-4 py-2.5 font-mono text-xs">{d.amountUsd != null ? `$${Number(d.amountUsd).toFixed(2)}` : '-'}</td>
                         <td className="px-4 py-2.5">
                           <Badge variant={d.status === 'CONFIRMED' ? 'success' : d.status === 'PENDING' ? 'warning' : 'destructive'} className="text-xs">{d.status}</Badge>
                         </td>
                         <td className="px-4 py-2.5 font-mono text-xs text-muted-foreground max-w-[120px] truncate">
-                          {d.txHash || '—'}
+                          {d.txHash || '-'}
                         </td>
                         <td className="px-4 py-2.5 text-xs text-muted-foreground whitespace-nowrap">
                           {formatDistanceToNow(new Date(d.createdAt), { addSuffix: true })}

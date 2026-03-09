@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -84,7 +84,7 @@ export default function SecurityPage() {
   }
 
   const setup2FA = async () => {
-    if (twoFaQr) return // already showing — don't generate another
+    if (twoFaQr) return // already showing - don't generate another
     setSettingUp2FA(true)
     try {
       const res = await fetch('/api/profile/2fa/setup', { method: 'POST' })

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -112,7 +112,7 @@ export default function AdminWithdrawCurrenciesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Withdrawal Currencies</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Global currencies — copied to new domains automatically</p>
+          <p className="text-sm text-muted-foreground mt-0.5">Global currencies - copied to new domains automatically</p>
         </div>
         <Button variant="gradient" className="gap-2" onClick={openCreate}><Plus className="h-4 w-4" /> Add Currency</Button>
       </div>

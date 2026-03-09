@@ -6,9 +6,9 @@ import Link from 'next/link'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'StakeOnix — #1 Crypto Staking Platform | Earn Daily Passive Income',
+  title: 'StakeOnix - #1 Crypto Staking Platform | Earn Daily Passive Income',
   description:
-    'Looking for a way to earn money online? StakeOnix pays you every single day on your crypto — Bitcoin, Ethereum, USDT & more. No trading needed. Works like a bank savings account but pays way more. Start from just $20.',
+    'Looking for a way to earn money online? StakeOnix pays you every single day on your crypto - Bitcoin, Ethereum, USDT & more. No trading needed. Works like a bank savings account but pays way more. Start from just $20.',
   keywords: [
     'how to make money online',
     'earn money from home 2026',
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: APP_URL },
   openGraph: {
-    title: 'StakeOnix — Earn Daily Passive Income on Crypto',
-    description: 'Thousands of people earn money every day doing absolutely nothing — their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $20, get paid daily.',
+    title: 'StakeOnix - Earn Daily Passive Income on Crypto',
+    description: 'Thousands of people earn money every day doing absolutely nothing - their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $20, get paid daily.',
     url: APP_URL,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
   },
@@ -529,7 +529,7 @@ export default async function HomePage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Real-Time APR</p>
             <h2 className="text-3xl md:text-4xl font-bold mb-3">Live Staking Rates</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Competitive yields updated continuously — stake any of these assets and start earning today.
+              Competitive yields updated continuously - stake any of these assets and start earning today.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
@@ -741,7 +741,7 @@ export default async function HomePage() {
                 iconColor: 'text-yellow-400',
                 borderHover: 'hover:border-yellow-500/30',
                 title: 'Transparent Fees',
-                desc: 'No hidden charges. Our fee structure is clear and visible upfront — what you see is what you pay.',
+                desc: 'No hidden charges. Our fee structure is clear and visible upfront - what you see is what you pay.',
                 stat: '0% Hidden',
                 statLabel: 'Fees',
               },

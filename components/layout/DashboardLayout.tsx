@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
@@ -74,7 +74,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         />
       )}
 
-      {/* Sidebar — desktop: inline flow, mobile: fixed drawer */}
+      {/* Sidebar - desktop: inline flow, mobile: fixed drawer */}
       <div
         className={cn(
           'fixed inset-y-0 left-0 z-40 md:relative md:z-auto md:translate-x-0 transition-transform duration-300 ease-in-out',
@@ -99,7 +99,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             >
               <Menu className="h-5 w-5" />
             </button>
-            {/* Breadcrumb — desktop only */}
+            {/* Breadcrumb - desktop only */}
             <nav className="hidden md:flex items-center gap-1 text-sm text-muted-foreground">
               {breadcrumbs.map((crumb, i) => (
                 <span key={i} className="flex items-center gap-1">
@@ -110,7 +110,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 </span>
               ))}
             </nav>
-            {/* Page title — mobile only */}
+            {/* Page title - mobile only */}
             <span className="md:hidden text-sm font-semibold text-foreground capitalize">
               {breadcrumbs[breadcrumbs.length - 1] || 'Dashboard'}
             </span>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -47,19 +47,19 @@ const TEMPLATES = [
   {
     id: 'promo',
     label: '🎉 Promotion',
-    subject: '🎉 Exclusive Offer — Earn More with StakeOnix',
+    subject: '🎉 Exclusive Offer - Earn More with StakeOnix',
     body: `<p>We have an exciting offer just for you!</p>
 <p>[Describe the promotion or limited-time offer]</p>
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 0;">
   <a href="${APP_URL}/plan" style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#ffffff;font-size:16px;font-weight:700;text-decoration:none;padding:14px 40px;border-radius:10px;">View Plans →</a>
 </td></tr></table>
-<p>Don't miss out — this offer is for a limited time only.</p>
+<p>Don't miss out - this offer is for a limited time only.</p>
 <p>Best regards,<br/><strong>The StakeOnix Team</strong></p>`,
   },
   {
     id: 'maintenance',
     label: '🔧 Maintenance',
-    subject: '🔧 Scheduled Maintenance Notice — StakeOnix',
+    subject: '🔧 Scheduled Maintenance Notice - StakeOnix',
     body: `<p>We will be performing scheduled maintenance on our platform.</p>
 <p><strong>Date &amp; Time:</strong> [Insert date and time]<br/>
 <strong>Duration:</strong> Approximately [X] hours<br/>
@@ -108,7 +108,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; Icon: React.
 }
 
 function fmtDate(d: string | null) {
-  if (!d) return '—'
+  if (!d) return '-'
   return new Intl.DateTimeFormat('en-GB', {
     day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
   }).format(new Date(d))
@@ -216,7 +216,7 @@ export default function AdminBulkEmailPage() {
 <style>body{margin:0;padding:24px;background:#0a0f1e;font-family:sans-serif;color:#e2e8f0;}
 .note{background:#1f2937;border:1px solid #374151;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#9ca3af;}
 </style></head><body>
-<div class="note">📧 <strong style="color:#e2e8f0;">Preview</strong> — greeting shows "Hi Admin". Real sends personalise each recipient's name.</div>
+<div class="note">📧 <strong style="color:#e2e8f0;">Preview</strong> - greeting shows "Hi Admin". Real sends personalise each recipient's name.</div>
 <div style="max-width:600px;margin:0 auto;background:#111827;border-radius:16px;padding:40px 48px;">
 <p style="color:#d1d5db;font-size:16px;margin:0 0 24px;">Hi <strong style="color:#fff;">Admin</strong>,</p>
 <div style="color:#9ca3af;font-size:15px;line-height:1.8;">${body || '<em style="color:#4b5563;">No content yet.</em>'}</div>
@@ -256,7 +256,7 @@ export default function AdminBulkEmailPage() {
             <div className="p-2 bg-purple-500/10 rounded-lg"><Clock className="h-5 w-5 text-purple-400" /></div>
             <div>
               <p className="text-sm text-muted-foreground">Last Campaign</p>
-              <p className="text-sm font-medium">{lastCampaign ? fmtDate(lastCampaign.sentAt ?? lastCampaign.createdAt) : '—'}</p>
+              <p className="text-sm font-medium">{lastCampaign ? fmtDate(lastCampaign.sentAt ?? lastCampaign.createdAt) : '-'}</p>
             </div>
           </div>
         </CardContent></Card>
@@ -456,7 +456,7 @@ export default function AdminBulkEmailPage() {
           <DialogHeader className="px-6 pt-6 pb-2">
             <DialogTitle className="flex items-center gap-2">
               <Eye className="h-4 w-4" />Email Preview
-              {subject && <span className="text-muted-foreground font-normal text-sm">— {subject}</span>}
+              {subject && <span className="text-muted-foreground font-normal text-sm">- {subject}</span>}
             </DialogTitle>
           </DialogHeader>
           <div className="flex-1 overflow-hidden px-6 pb-6">

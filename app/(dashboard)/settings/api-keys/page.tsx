@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -149,7 +149,7 @@ export default function ApiKeysPage() {
           <div className="flex items-start gap-2 text-yellow-400">
             <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
             <p className="text-sm font-medium">
-              Copy your API key now — it will never be shown again.
+              Copy your API key now - it will never be shown again.
             </p>
           </div>
           <div className="flex items-center gap-3 rounded-lg bg-background/60 border border-border px-3 py-2">
@@ -203,7 +203,7 @@ export default function ApiKeysPage() {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              READ — view balances/stakes &nbsp;·&nbsp; STAKING — create/manage stakes &nbsp;·&nbsp; WITHDRAW — submit withdrawals
+              READ - view balances/stakes &nbsp;·&nbsp; STAKING - create/manage stakes &nbsp;·&nbsp; WITHDRAW - submit withdrawals
             </p>
           </div>
 
@@ -297,7 +297,7 @@ export default function ApiKeysPage() {
       <div className="rounded-lg border border-border bg-secondary/20 p-4 text-xs text-muted-foreground space-y-1.5">
         <p className="font-medium text-foreground">Security Notes</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>API keys are shown in full only once — at creation time.</li>
+          <li>API keys are shown in full only once - at creation time.</li>
           <li>Never share API keys or commit them to version control.</li>
           <li>Disable a key immediately if you suspect it has been compromised.</li>
           <li>Keys with WITHDRAW permission can initiate withdrawals from your account.</li>

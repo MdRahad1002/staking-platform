@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -117,7 +117,7 @@ function ImageUploadBox({
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
             <Upload className="h-8 w-8" />
             <span className="text-sm">Click to upload</span>
-            <span className="text-xs">JPG, PNG, WEBP — auto-compressed</span>
+            <span className="text-xs">JPG, PNG, WEBP - auto-compressed</span>
           </div>
         )}
         <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
@@ -157,7 +157,7 @@ function StatusBanner({ kyc }: { kyc: KycStatus }) {
     <div className="flex items-start gap-3 p-4 rounded-lg bg-destructive/10 border border-destructive/30">
       <XCircle className="h-5 w-5 text-destructive mt-0.5 shrink-0" />
       <div>
-        <p className="font-semibold text-destructive">KYC Rejected — Resubmission Required</p>
+        <p className="font-semibold text-destructive">KYC Rejected - Resubmission Required</p>
         {kyc.rejectionReason && (
           <p className="text-sm text-muted-foreground mt-1">
             <span className="font-medium">Reason:</span> {kyc.rejectionReason}

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import {
   ResponsiveContainer,
@@ -32,7 +32,7 @@ export function AdminCharts({ data }: AdminChartsProps) {
       {/* User & Stake Growth */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">7-Day Growth — Users &amp; Stakes</CardTitle>
+          <CardTitle className="text-base">7-Day Growth - Users &amp; Stakes</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={220}>
@@ -75,7 +75,7 @@ export function AdminCharts({ data }: AdminChartsProps) {
       {/* Deposit & Withdrawal Volume */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">7-Day Volume — Deposits &amp; Withdrawals</CardTitle>
+          <CardTitle className="text-base">7-Day Volume - Deposits &amp; Withdrawals</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={220}>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -125,7 +125,7 @@ export default function AdminPaymentsPage() {
                       </td>
                       <td className="px-4 py-3 font-medium">{formatCurrency(t.amount)}</td>
                       <td className="px-4 py-3 text-muted-foreground">{t.currency}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs max-w-xs truncate">{t.description || '—'}</td>
+                      <td className="px-4 py-3 text-muted-foreground text-xs max-w-xs truncate">{t.description || '-'}</td>
                       <td className="px-4 py-3">
                         <Badge variant={t.status === 'COMPLETED' ? 'success' : 'warning'} className="text-xs">{t.status}</Badge>
                       </td>

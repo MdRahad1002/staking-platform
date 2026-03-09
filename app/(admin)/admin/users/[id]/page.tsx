@@ -42,16 +42,16 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           <CardContent className="p-5 grid grid-cols-2 gap-3 text-sm">
             {[
               { l: 'Email', v: user.email },
-              { l: 'Username', v: user.username || '—' },
-              { l: 'Full Name', v: [user.firstName, user.lastName].filter(Boolean).join(' ') || '—' },
+              { l: 'Username', v: user.username || '-' },
+              { l: 'Full Name', v: [user.firstName, user.lastName].filter(Boolean).join(' ') || '-' },
               { l: 'Role', v: user.role },
               { l: 'Balance', v: formatCurrency(user.balance) },
               { l: 'Status', v: user.bannedAt ? 'Banned' : user.isActive ? 'Active' : 'Inactive' },
               { l: 'Joined', v: formatDateTime(user.createdAt) },
-              { l: 'Last Login', v: user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '—' },
-              { l: 'Last IP', v: user.lastLoginIp || '—' },
+              { l: 'Last Login', v: user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-' },
+              { l: 'Last IP', v: user.lastLoginIp || '-' },
               { l: '2FA', v: user.twoFaEnabled ? 'Enabled' : 'Disabled' },
-              { l: 'Referral Code', v: user.referralCode || '—' },
+              { l: 'Referral Code', v: user.referralCode || '-' },
             ].map((row) => (
               <div key={row.l}>
                 <p className="text-muted-foreground text-xs">{row.l}</p>
@@ -195,7 +195,7 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
                       <Badge variant="info" className="text-xs">{t.type}</Badge>
                     </td>
                     <td className="py-2 font-medium">{formatCurrency(t.amount)}</td>
-                    <td className="py-2 text-muted-foreground text-xs max-w-[160px] truncate">{t.description || '—'}</td>
+                    <td className="py-2 text-muted-foreground text-xs max-w-[160px] truncate">{t.description || '-'}</td>
                     <td className="py-2">
                       <Badge variant={t.status === 'COMPLETED' ? 'success' : 'warning'} className="text-xs">{t.status}</Badge>
                     </td>
@@ -227,8 +227,8 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
                 <tbody className="divide-y divide-border">
                   {user.loginHistory.map((l) => (
                     <tr key={l.id}>
-                      <td className="py-2 font-mono text-xs">{l.ipAddress || '—'}</td>
-                      <td className="py-2 text-muted-foreground text-xs max-w-[200px] truncate">{l.userAgent || '—'}</td>
+                      <td className="py-2 font-mono text-xs">{l.ipAddress || '-'}</td>
+                      <td className="py-2 text-muted-foreground text-xs max-w-[200px] truncate">{l.userAgent || '-'}</td>
                       <td className="py-2 text-muted-foreground text-xs">{formatDateTime(l.createdAt)}</td>
                     </tr>
                   ))}

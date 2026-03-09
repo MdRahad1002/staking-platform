@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
@@ -133,7 +133,7 @@ function StakeForm() {
                 <SelectContent>
                   {plans.map((p) => (
                     <SelectItem key={p.id} value={p.id}>
-                      {p.name} — {p.dailyRoi}% daily
+                      {p.name} - {p.dailyRoi}% daily
                     </SelectItem>
                   ))}
                 </SelectContent>

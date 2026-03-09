@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useMemo } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -234,7 +234,7 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>KYC Review — {selected?.firstName} {selected?.lastName}</DialogTitle>
+            <DialogTitle>KYC Review - {selected?.firstName} {selected?.lastName}</DialogTitle>
           </DialogHeader>
 
           {selected && (
@@ -250,7 +250,7 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
               {/* User info */}
               <div className="grid grid-cols-2 gap-2 text-sm bg-muted/20 p-3 rounded-lg border border-border">
                 <div><span className="text-muted-foreground">Email:</span> {selected.user.email}</div>
-                <div><span className="text-muted-foreground">Username:</span> {selected.user.username || '—'}</div>
+                <div><span className="text-muted-foreground">Username:</span> {selected.user.username || '-'}</div>
                 <div><span className="text-muted-foreground">Full Name:</span> {selected.firstName} {selected.lastName}</div>
                 <div><span className="text-muted-foreground">Date of Birth:</span> {selected.dateOfBirth}</div>
                 <div><span className="text-muted-foreground">Country:</span> {selected.country}</div>
@@ -331,7 +331,7 @@ export default function AdminKycClient({ submissions: initial, readOnly = false 
 
               {selected.status !== 'PENDING' && (
                 <p className="text-sm text-muted-foreground border-t border-border pt-3">
-                  This submission was {selected.status.toLowerCase()} on {selected.reviewedAt ? formatDateTime(selected.reviewedAt) : '—'}.
+                  This submission was {selected.status.toLowerCase()} on {selected.reviewedAt ? formatDateTime(selected.reviewedAt) : '-'}.
                 </p>
               )}
             </div>

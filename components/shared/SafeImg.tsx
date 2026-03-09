@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 
 interface SafeImgProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src: string | null | undefined
@@ -27,7 +27,7 @@ export function SafeImg({ src, alt, allowDataImage, ...props }: SafeImgProps) {
   try {
     const parsed = new URL(trimmed)
     if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null
-    // parsed.href is a freshly constructed string from URL — not the original input
+    // parsed.href is a freshly constructed string from URL - not the original input
     safeSrc = parsed.href
   } catch {
     // Allow relative paths (e.g. /images/logo.png)

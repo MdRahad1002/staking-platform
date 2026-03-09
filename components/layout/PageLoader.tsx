@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { LogoIcon } from '@/components/shared/Logo'
@@ -47,7 +47,7 @@ export function PageLoader() {
 
       {/* Spinner + icon */}
       <div className="relative w-24 h-24 flex items-center justify-center">
-        {/* Single thick arc — rotates */}
+        {/* Single thick arc - rotates */}
         <svg
           className="absolute inset-0 w-full h-full animate-spin"
           style={{ animationDuration: '1.1s', animationTimingFunction: 'linear' }}

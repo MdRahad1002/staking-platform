@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
@@ -11,11 +11,11 @@ const APP_URL = 'https://www.stakeonix.com'
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: 'StakeOnix — #1 Crypto Staking Platform | Earn Daily Passive Income',
+    default: 'StakeOnix - #1 Crypto Staking Platform | Earn Daily Passive Income',
     template: '%s | StakeOnix',
   },
   description:
-    'Want to earn money from your crypto without trading? StakeOnix pays you daily rewards on Bitcoin, Ethereum, USDT & more — like a high-yield savings account for crypto. Start earning from just $20. Trusted by 10,000+ investors worldwide.',
+    'Want to earn money from your crypto without trading? StakeOnix pays you daily rewards on Bitcoin, Ethereum, USDT & more - like a high-yield savings account for crypto. Start earning from just $20. Trusted by 10,000+ investors worldwide.',
   keywords: [
     'how to make money with crypto',
     'earn money online 2026',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: APP_URL,
-    title: 'StakeOnix — Earn Daily Income on Your Crypto | Like a Savings Account',
+    title: 'StakeOnix - Earn Daily Income on Your Crypto | Like a Savings Account',
     description:
       'Put your crypto to work and get paid every single day. Bitcoin, Ethereum, USDT & 10+ coins. No trading needed. Start earning from just $20. Join 10,000+ people already making daily income.',
     siteName: 'StakeOnix',
@@ -62,15 +62,15 @@ export const metadata: Metadata = {
         url: `${APP_URL}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: 'StakeOnix — Crypto Staking Platform',
+        alt: 'StakeOnix - Crypto Staking Platform',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'StakeOnix — Make Money With Crypto Daily (No Trading Required)',
+    title: 'StakeOnix - Make Money With Crypto Daily (No Trading Required)',
     description:
-      'Earn daily income on your Bitcoin, Ethereum & USDT automatically. No trading, no experience needed. Start with $20. People are making real money every day — join them on StakeOnix.',
+      'Earn daily income on your Bitcoin, Ethereum & USDT automatically. No trading, no experience needed. Start with $20. People are making real money every day - join them on StakeOnix.',
     images: [`${APP_URL}/opengraph-image`],
     creator: '@StakeOnix',
     site: '@StakeOnix',

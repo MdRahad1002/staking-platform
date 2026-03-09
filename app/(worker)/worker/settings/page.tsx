@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -275,7 +275,7 @@ export default function WorkerSettingsPage() {
                     <p className="font-medium text-sm">How to get your Telegram Chat ID</p>
                     <ol className="list-decimal list-inside space-y-1.5 text-muted-foreground text-xs leading-relaxed">
                       <li>Open Telegram and search for <strong>@userinfobot</strong></li>
-                      <li>Start the bot — it will immediately reply with your numeric chat ID</li>
+                      <li>Start the bot - it will immediately reply with your numeric chat ID</li>
                       <li>Copy the number (e.g. <code className="bg-background px-1 py-0.5 rounded text-xs">123456789</code>) and paste it above</li>
                       <li>Make sure you have started a conversation with the platform&apos;s bot so it can send you messages</li>
                     </ol>

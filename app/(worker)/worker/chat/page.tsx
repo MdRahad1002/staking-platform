@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -177,7 +177,7 @@ export default function WorkerChatPage() {
 
       <div className="grid grid-cols-12 gap-4 h-[calc(100vh-220px)]">
 
-        {/* User list — 3 cols */}
+        {/* User list - 3 cols */}
         <Card className="col-span-3 flex flex-col overflow-hidden">
           <CardHeader className="py-3 px-4 border-b border-border shrink-0">
             <CardTitle className="text-sm font-semibold">
@@ -221,7 +221,7 @@ export default function WorkerChatPage() {
           </CardContent>
         </Card>
 
-        {/* Chat panel — 9 cols (or 6 if profile is open) */}
+        {/* Chat panel - 9 cols (or 6 if profile is open) */}
         <div className={cn('flex flex-col gap-0 overflow-hidden', showProfile ? 'col-span-6' : 'col-span-9')}>
           <Card className="flex flex-col h-full overflow-hidden">
             {selectedUser ? (
@@ -349,7 +349,7 @@ export default function WorkerChatPage() {
           </Card>
         </div>
 
-        {/* Profile panel — 3 cols, only when open */}
+        {/* Profile panel - 3 cols, only when open */}
         {showProfile && selectedUser && (
           <Card className="col-span-3 flex flex-col overflow-hidden">
             <CardHeader className="py-3 px-4 border-b border-border shrink-0">
@@ -383,26 +383,26 @@ export default function WorkerChatPage() {
               <div className="space-y-3 text-sm">
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">Email</p>
-                  <p className="font-mono text-xs break-all">{selectedUser.email || '—'}</p>
+                  <p className="font-mono text-xs break-all">{selectedUser.email || '-'}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">Balance</p>
                   <p className="font-semibold text-primary">
                     {selectedUser.balance !== undefined
                       ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(selectedUser.balance)
-                      : '—'}
+                      : '-'}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">Domain</p>
-                  <p>{selectedUser.domain?.name || selectedUser.domain?.domain || '—'}</p>
+                  <p>{selectedUser.domain?.name || selectedUser.domain?.domain || '-'}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground mb-0.5">Registered</p>
                   <p className="text-xs">
                     {selectedUser.createdAt
                       ? new Date(selectedUser.createdAt).toLocaleDateString()
-                      : '—'}
+                      : '-'}
                   </p>
                 </div>
               </div>

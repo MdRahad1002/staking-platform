@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useMemo, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -169,7 +169,7 @@ export default function AdminDepositsClient({ deposits }: Props) {
                     </td>
                     <td className="px-4 py-3 text-muted-foreground text-xs">{formatDateTime(d.createdAt)}</td>
                     <td className="px-4 py-3 font-mono text-xs max-w-[8rem] truncate">
-                      {d.txHash || '—'}
+                      {d.txHash || '-'}
                     </td>
                     <td className="px-4 py-3">
                       {d.status === 'PENDING' && (

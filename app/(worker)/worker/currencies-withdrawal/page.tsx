@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -215,7 +215,7 @@ export default function WorkerWithdrawCurrenciesPage() {
                     </td>
                     <td className="px-4 py-3 text-xs text-muted-foreground">{c.network}</td>
                     <td className="px-4 py-3 font-mono text-xs">{Number(c.minWithdrawal).toFixed(8)}</td>
-                    <td className="px-4 py-3 font-mono text-xs">{c.maxWithdrawal != null ? Number(c.maxWithdrawal).toFixed(8) : '—'}</td>
+                    <td className="px-4 py-3 font-mono text-xs">{c.maxWithdrawal != null ? Number(c.maxWithdrawal).toFixed(8) : '-'}</td>
                     <td className="px-4 py-3 font-mono text-xs">{Number(c.fee).toFixed(c.feeType === 'percent' ? 2 : 8)}</td>
                     <td className="px-4 py-3">
                       <Badge variant="secondary" className="text-xs capitalize">{c.feeType}</Badge>

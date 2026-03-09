@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { SafeImg } from '@/components/shared/SafeImg'
@@ -132,13 +132,13 @@ export default function AdminDomainsPage() {
                       <span className="font-medium">{d.domain}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground">{d.name || '—'}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{d.name || '-'}</td>
                   <td className="px-4 py-3">
                     {d.logoUrl
                       ? <SafeImg src={d.logoUrl} alt="logo" className="h-7 w-7 rounded object-cover border border-border" />
-                      : <span className="text-muted-foreground">—</span>}
+                      : <span className="text-muted-foreground">-</span>}
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground text-xs">{d.supportEmail || '—'}</td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs">{d.supportEmail || '-'}</td>
                   <td className="px-4 py-3">
                     <Badge variant="secondary" className="text-xs">{d._count?.users ?? 0}</Badge>
                   </td>

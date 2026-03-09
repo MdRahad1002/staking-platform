@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -175,7 +175,7 @@ export default function WithdrawSettingsPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <p className="font-medium text-sm">{w.label ?? 'Unnamed'}</p>
-                      <Badge variant="info" className="text-xs">{w.currency ?? '—'}</Badge>
+                      <Badge variant="info" className="text-xs">{w.currency ?? '-'}</Badge>
                       <Badge variant="warning" className="text-xs">{w.network}</Badge>
                     </div>
                     <p className="text-xs font-mono text-muted-foreground truncate">{w.address}</p>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
@@ -100,7 +100,7 @@ export default function AdminDepositCurrenciesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Deposit Currencies</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">Global currencies — copied to new domains automatically</p>
+          <p className="text-sm text-muted-foreground mt-0.5">Global currencies - copied to new domains automatically</p>
         </div>
         <Button variant="gradient" className="gap-2" onClick={openCreate}><Plus className="h-4 w-4" /> Add Currency</Button>
       </div>
@@ -133,7 +133,7 @@ export default function AdminDepositCurrenciesPage() {
                     <td className="px-4 py-3 text-xs text-muted-foreground">{c.network}</td>
                     <td className="px-4 py-3 font-mono text-xs">{Number(c.minDeposit).toFixed(8)}</td>
                     <td className="px-4 py-3 font-mono text-xs">{c.decimals}</td>
-                    <td className="px-4 py-3 text-xs text-muted-foreground max-w-[140px] truncate">{c.contractAddress || '—'}</td>
+                    <td className="px-4 py-3 text-xs text-muted-foreground max-w-[140px] truncate">{c.contractAddress || '-'}</td>
                     <td className="px-4 py-3">
                       <Badge variant={c.isActive ? 'success' : 'warning'} className="text-xs">{c.isActive ? 'Active' : 'Inactive'}</Badge>
                     </td>

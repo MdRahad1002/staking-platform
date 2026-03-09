@@ -29,8 +29,7 @@ export async function POST(req: NextRequest) {
     const referrers = await prisma.user.findMany({
       where: {
         isActive: true,
-        NOT: { referralCode: null },
-        referredUsers: {
+        referrals: {
           some: {
             stakes: { none: {} },
             isActive: true,
@@ -42,7 +41,7 @@ export async function POST(req: NextRequest) {
         email: true,
         username: true,
         referralCode: true,
-        referredUsers: {
+        referrals: {
           where: {
             stakes: { none: {} },
             isActive: true,
@@ -58,7 +57,7 @@ export async function POST(req: NextRequest) {
 
     for (const referrer of referrers) {
       try {
-        const inactiveCount = referrer.referredUsers.length
+        const inactiveCount = referrer.referrals.length
         if (inactiveCount === 0) continue
 
         const potentialEarnings = (inactiveCount * 300 * commissionRate) / 100

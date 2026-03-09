@@ -116,6 +116,7 @@ function HomePageSchemas() {
 import { Button } from '@/components/ui/button'
 import { PlanCard } from '@/components/shared/PlanCard'
 import CryptoTicker from '@/components/layout/CryptoTicker'
+import ProfitCalculator from '@/components/shared/ProfitCalculator'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
 import {
@@ -654,6 +655,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* PROFIT CALCULATOR */}
+      <ProfitCalculator />
 
       {/* HOW IT WORKS */}
       <section className="py-20 relative border-t border-white/5">

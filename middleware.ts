@@ -60,6 +60,9 @@ export default withAuth(
           pathname.startsWith('/_next') ||
           pathname.startsWith('/favicon') ||
           pathname.startsWith('/uploads') ||
+          pathname === '/sitemap.xml' ||
+          pathname === '/robots.txt' ||
+          pathname.startsWith('/why-choose-us') ||
           pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp)$/)
         ) {
           return true

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
+import { sendFirstDepositNudgeEmail } from '@/lib/mail'
 
 // GET /api/auth/verify-email?token=<hex-token>
 export async function GET(req: NextRequest) {
@@ -36,6 +37,10 @@ export async function GET(req: NextRequest) {
         emailVerificationExpires: null,
       },
     })
+
+    // Fire-and-forget: schedule deposit nudge email ~8 min after verification
+    const displayName = [user.firstName, user.lastName].filter(Boolean).join(' ') || user.email
+    void sendFirstDepositNudgeEmail(user.email, displayName)
 
     return NextResponse.redirect(new URL('/verify-email?success=true', req.url))
   } catch (err) {

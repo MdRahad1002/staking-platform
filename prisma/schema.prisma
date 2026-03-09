@@ -361,6 +361,7 @@ model ChatMessage {
   userId    String
   content   String
   isStaff   Boolean  @default(false)
+  isBot     Boolean  @default(false)
   imageUrl  String?
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { MessageSquare, X, Send, Image, Minimize2 } from 'lucide-react'
+import { MessageSquare, X, Send, Image, Minimize2, Bot } from 'lucide-react'
 import { formatDateTime } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 import { cn } from '@/lib/utils'
@@ -13,6 +13,7 @@ interface Message {
   id: string
   content: string
   isStaff: boolean
+  isBot?: boolean
   imageUrl?: string | null
   isRead: boolean
   createdAt: string
@@ -148,7 +149,7 @@ export function ChatWidget() {
               </div>
               <div>
                 <p className="text-sm font-semibold">Support Chat</p>
-                <p className="text-xs text-green-500">Online</p>
+                <p className="text-xs text-green-500 flex items-center gap-1"><Bot className="h-3 w-3" /> Bot + Support</p>
               </div>
             </div>
             <div className="flex gap-1">
@@ -186,7 +187,14 @@ export function ChatWidget() {
                   >
                     {msg.isStaff && (
                       <Avatar className="h-7 w-7 flex-shrink-0">
-                        <AvatarFallback className="text-xs bg-primary text-white">S</AvatarFallback>
+                        <AvatarFallback
+                          className={cn(
+                            'text-xs text-white',
+                            msg.isBot ? 'bg-violet-500' : 'bg-primary'
+                          )}
+                        >
+                          {msg.isBot ? <Bot className="h-3.5 w-3.5" /> : 'S'}
+                        </AvatarFallback>
                       </Avatar>
                     )}
                     <div
@@ -197,6 +205,11 @@ export function ChatWidget() {
                           : 'bg-primary text-white rounded-tr-sm'
                       )}
                     >
+                      {msg.isBot && (
+                        <p className="text-[10px] font-semibold text-violet-500 mb-1 flex items-center gap-1">
+                          <Bot className="h-3 w-3" /> Bot
+                        </p>
+                      )}
                       {msg.imageUrl && (
                         <SafeImg src={msg.imageUrl} alt="attachment" className="rounded-lg max-w-full mb-2" />
                       )}

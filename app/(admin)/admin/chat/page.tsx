@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { toast } from 'sonner'
-import { Send, MessageSquare, Trash2, UserCircle, X, Zap } from 'lucide-react'
+import { Send, MessageSquare, Trash2, UserCircle, X, Zap, Bot } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
@@ -44,6 +44,7 @@ interface Message {
   id: string
   content: string
   isStaff: boolean
+  isBot?: boolean
   createdAt: string
   imageUrl?: string | null
 }
@@ -247,6 +248,11 @@ export default function AdminChatPage() {
                   {messages.map((m) => (
                     <div key={m.id} className={cn('flex', m.isStaff ? 'justify-end' : 'justify-start')}>
                       <div className={cn('max-w-sm px-3 py-2 rounded-2xl text-sm', m.isStaff ? 'bg-primary text-primary-foreground rounded-br-none' : 'bg-secondary text-secondary-foreground rounded-bl-none')}>
+                        {m.isBot && (
+                          <p className="text-[10px] font-semibold text-white/70 mb-1 flex items-center gap-1">
+                            <Bot className="h-3 w-3" /> Auto-reply
+                          </p>
+                        )}
                         {m.imageUrl && <SafeImg src={m.imageUrl} alt="attachment" className="rounded-lg max-w-full mb-1" />}
                         <p>{m.content}</p>
                         <p className="text-[10px] opacity-60 mt-1">{formatDistanceToNow(new Date(m.createdAt), { addSuffix: true })}</p>

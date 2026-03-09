@@ -505,6 +505,70 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* LIVE RATES */}
+      <section className="py-20 relative border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Real-Time APR</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Live Staking Rates</h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Competitive yields updated continuously — stake any of these assets and start earning today.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { symbol: 'eth',   name: 'Ethereum',    apr: 9.0,  badge: null },
+              { symbol: 'btc',   name: 'Bitcoin',     apr: 7.0,  badge: null },
+              { symbol: 'sol',   name: 'Solana',      apr: 12.0, badge: null },
+              { symbol: 'dot',   name: 'Polkadot',    apr: 16.5, badge: null },
+              { symbol: 'atom',  name: 'Cosmos',      apr: 21.5, badge: 'Top Rate' },
+              { symbol: 'avax',  name: 'Avalanche',   apr: 14.0, badge: null },
+              { symbol: 'matic', name: 'Polygon',     apr: 12.5, badge: null },
+              { symbol: 'ada',   name: 'Cardano',     apr: 8.5,  badge: null },
+              { symbol: 'near',  name: 'NEAR',        apr: 14.0, badge: null },
+              { symbol: 'algo',  name: 'Algorand',    apr: 10.0, badge: null },
+              { symbol: 'xtz',   name: 'Tezos',       apr: 9.5,  badge: null },
+              { symbol: 'trx',   name: 'TRON',        apr: 10.5, badge: null },
+            ].map((coin) => (
+              <div
+                key={coin.symbol}
+                className="glass-card p-5 flex items-center gap-4 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group relative overflow-hidden"
+              >
+                {coin.badge && (
+                  <span className="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-2 py-0.5 rounded-full">
+                    {coin.badge}
+                  </span>
+                )}
+                <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 flex-shrink-0 group-hover:border-cyan-500/30 transition-colors">
+                  <img
+                    src={`https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/${coin.symbol}.svg`}
+                    alt={coin.name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-sm text-white truncate">{coin.name}</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">{coin.symbol.toUpperCase()}</p>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-lg font-black text-cyan-400">{coin.apr}%</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">APR</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link href={session ? '/dashboard' : '/signup'}>
+              <Button className="gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white border-0 rounded-xl font-semibold px-8">
+                <TrendingUp className="h-4 w-4" />
+                Start Earning Now
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* SUPPORTED CRYPTOCURRENCIES */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
@@ -605,6 +669,82 @@ export default async function HomePage() {
                     <ChevronRight className="h-3 w-3 text-cyan-400" />
                   </div>
                 )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-transparent to-purple-950/20 pointer-events-none" />
+        <div className="glow-blob w-[700px] h-[400px] bg-blue-600/8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Our Advantage</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Why Choose StakeOnix?</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Thousands of investors trust us for safe, reliable and transparent crypto staking.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <Shield className="h-7 w-7" />,
+                color: 'from-cyan-500/20 to-blue-600/20',
+                iconColor: 'text-cyan-400',
+                borderHover: 'hover:border-cyan-500/30',
+                title: 'Secure Staking',
+                desc: 'Military-grade encryption, multi-sig cold wallets and 24/7 monitoring keep your assets safe at all times.',
+                stat: '256-bit SSL',
+                statLabel: 'Encryption',
+              },
+              {
+                icon: <Activity className="h-7 w-7" />,
+                color: 'from-green-500/20 to-emerald-600/20',
+                iconColor: 'text-green-400',
+                borderHover: 'hover:border-green-500/30',
+                title: '99.95% Uptime',
+                desc: 'Our globally distributed infrastructure guarantees near-zero downtime so your rewards never stop accumulating.',
+                stat: '99.95%',
+                statLabel: 'Uptime SLA',
+              },
+              {
+                icon: <RefreshCw className="h-7 w-7" />,
+                color: 'from-purple-500/20 to-violet-600/20',
+                iconColor: 'text-purple-400',
+                borderHover: 'hover:border-purple-500/30',
+                title: 'Auto-Compounding',
+                desc: 'Daily rewards are automatically re-staked to maximise your returns through the power of compound interest.',
+                stat: 'Daily',
+                statLabel: 'Compounding',
+              },
+              {
+                icon: <BarChart3 className="h-7 w-7" />,
+                color: 'from-yellow-500/20 to-orange-500/20',
+                iconColor: 'text-yellow-400',
+                borderHover: 'hover:border-yellow-500/30',
+                title: 'Transparent Fees',
+                desc: 'No hidden charges. Our fee structure is clear and visible upfront — what you see is what you pay.',
+                stat: '0% Hidden',
+                statLabel: 'Fees',
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className={`glass-card p-7 flex flex-col gap-5 transition-all duration-300 group cursor-default ${item.borderHover} hover:bg-white/5`}
+              >
+                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} ${item.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                  {item.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg mb-2 text-white">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+                <div className="mt-auto pt-4 border-t border-white/[0.06] flex items-center gap-3">
+                  <span className="text-xl font-black gradient-text">{item.stat}</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{item.statLabel}</span>
+                </div>
               </div>
             ))}
           </div>

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { sendWithdrawal } from '@/lib/westwallet'
+import { sendWithdrawalEmail, sendEmail, getWithdrawalStatusEmailTemplate } from '@/lib/mail'
 
 export async function POST(
   req: NextRequest,
@@ -48,6 +49,16 @@ export async function POST(
           }),
         ])
 
+        const approvedName = [withdrawal.user.firstName, withdrawal.user.lastName].filter(Boolean).join(' ') || withdrawal.user.email
+        void sendWithdrawalEmail({
+          name: approvedName,
+          email: withdrawal.user.email,
+          amount: Number(withdrawal.netAmount),
+          currency: withdrawal.currency.symbol,
+          walletAddress: withdrawal.walletAddress,
+          txHash: tx.txHash,
+        }).catch(console.error)
+
         return NextResponse.json({ message: 'Withdrawal approved and sent.' })
       } catch (err) {
         await prisma.withdrawal.update({
@@ -78,6 +89,12 @@ export async function POST(
           },
         }),
       ])
+      const rejectedName = [withdrawal.user.firstName, withdrawal.user.lastName].filter(Boolean).join(' ') || withdrawal.user.email
+      void sendEmail({
+        to: withdrawal.user.email,
+        subject: `Withdrawal Rejected — Funds Returned to Your Balance`,
+        html: getWithdrawalStatusEmailTemplate(rejectedName, withdrawal.amount.toString(), withdrawal.currency.symbol, 'rejected'),
+      }).catch(console.error)
       return NextResponse.json({ message: 'Withdrawal rejected and refunded.' })
     }
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker, requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
+import { sendKycStatusEmail } from '@/lib/mail'
 
 const actionSchema = z.object({
   action: z.enum(['APPROVE', 'REJECT']),
@@ -57,7 +58,10 @@ export async function PATCH(
       return NextResponse.json({ error: 'Rejection reason is required.' }, { status: 400 })
     }
 
-    const existing = await prisma.kycSubmission.findUnique({ where: { id } })
+    const existing = await prisma.kycSubmission.findUnique({
+      where: { id },
+      include: { user: { select: { email: true, firstName: true, lastName: true } } },
+    })
     if (!existing) return NextResponse.json({ error: 'KYC not found.' }, { status: 404 })
     if (existing.status !== 'PENDING') {
       return NextResponse.json({ error: 'Only PENDING submissions can be reviewed.' }, { status: 400 })
@@ -87,6 +91,15 @@ export async function PATCH(
         link: '/settings/kyc',
       },
     }).catch(() => {})
+
+    // Fire KYC status email
+    const displayName = [existing.user.firstName, existing.user.lastName].filter(Boolean).join(' ') || existing.user.email
+    void sendKycStatusEmail({
+      name: displayName,
+      email: existing.user.email,
+      status: action === 'APPROVE' ? 'approved' : 'rejected',
+      rejectionReason: rejectionReason,
+    }).catch(console.error)
 
     return NextResponse.json({ data: { id: updated.id, status: updated.status } })
   } catch (err) {

@@ -19,12 +19,19 @@ export async function POST() {
 
     for (const stake of stakes) {
       try {
+        const msPerDay = 24 * 60 * 60 * 1000
+        const missedDays = Math.max(1, Math.floor((now.getTime() - stake.nextProcessAt!.getTime()) / msPerDay) + 1)
+
         const dailyProfit = parseFloat(((stake.amount * stake.dailyRoi) / 100).toFixed(2))
+        const totalProfit = parseFloat((dailyProfit * missedDays).toFixed(2))
         const isLastPayment = stake.endDate <= now
-        const newTotalEarned = parseFloat((stake.totalEarned + dailyProfit).toFixed(2))
+        const newTotalEarned = parseFloat((stake.totalEarned + totalProfit).toFixed(2))
 
         await prisma.$transaction(async (tx) => {
-          await tx.stakePayment.create({ data: { stakeId: stake.id, amount: dailyProfit, date: now } })
+          for (let d = 0; d < missedDays; d++) {
+            const payDate = new Date(stake.nextProcessAt!.getTime() + d * msPerDay)
+            await tx.stakePayment.create({ data: { stakeId: stake.id, amount: dailyProfit, date: payDate } })
+          }
 
           if (isLastPayment) {
             await tx.stake.update({
@@ -40,15 +47,17 @@ export async function POST() {
             })
           }
 
-          await tx.user.update({ where: { id: stake.userId }, data: { balance: { increment: dailyProfit } } })
+          await tx.user.update({ where: { id: stake.userId }, data: { balance: { increment: totalProfit } } })
 
           await tx.transaction.create({
             data: {
               userId: stake.userId,
               type: 'STAKING_RETURN',
-              amount: dailyProfit,
+              amount: totalProfit,
               status: 'COMPLETED',
-              description: `Staking return for stake #${stake.id.slice(-8)}`,
+              description: missedDays > 1
+                ? `Staking return for stake #${stake.id.slice(-8)} (${missedDays} days catch-up)`
+                : `Staking return for stake #${stake.id.slice(-8)}`,
               referenceId: stake.id,
             },
           })

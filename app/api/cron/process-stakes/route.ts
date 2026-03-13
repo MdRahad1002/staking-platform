@@ -32,19 +32,23 @@ export async function POST(req: NextRequest) {
 
     for (const stake of stakes) {
       try {
-      const dailyProfit = parseFloat(((stake.amount * stake.dailyRoi) / 100).toFixed(2))
-      const isLastPayment = stake.endDate <= now
-      const newTotalEarned = parseFloat((stake.totalEarned + dailyProfit).toFixed(2))
+        // Calculate how many daily periods have been missed
+        const msPerDay = 24 * 60 * 60 * 1000
+        const missedDays = Math.max(1, Math.floor((now.getTime() - stake.nextProcessAt!.getTime()) / msPerDay) + 1)
+
+        const dailyProfit = parseFloat(((stake.amount * stake.dailyRoi) / 100).toFixed(2))
+        const totalProfit = parseFloat((dailyProfit * missedDays).toFixed(2))
+        const isLastPayment = stake.endDate <= now
+        const newTotalEarned = parseFloat((stake.totalEarned + totalProfit).toFixed(2))
 
       await prisma.$transaction(async (tx) => {
-        // Record the payment
-        await tx.stakePayment.create({
-          data: {
-            stakeId: stake.id,
-            amount: dailyProfit,
-            date: now,
-          },
-        })
+        // Record one payment entry per missed day
+        for (let d = 0; d < missedDays; d++) {
+          const payDate = new Date(stake.nextProcessAt!.getTime() + d * msPerDay)
+          await tx.stakePayment.create({
+            data: { stakeId: stake.id, amount: dailyProfit, date: payDate },
+          })
+        }
 
         // Update stake
         if (isLastPayment) {
@@ -70,10 +74,10 @@ export async function POST(req: NextRequest) {
           })
         }
 
-        // Credit user balance with daily profit
+        // Credit user balance with all missed profits at once
         await tx.user.update({
           where: { id: stake.userId },
-          data: { balance: { increment: dailyProfit } },
+          data: { balance: { increment: totalProfit } },
         })
 
         // Transaction ledger entry
@@ -81,9 +85,11 @@ export async function POST(req: NextRequest) {
           data: {
             userId: stake.userId,
             type: 'STAKING_RETURN',
-            amount: dailyProfit,
+            amount: totalProfit,
             status: 'COMPLETED',
-            description: `Daily ROI from ${stake.plan.name}`,
+            description: missedDays > 1
+              ? `Daily ROI from ${stake.plan.name} (${missedDays} days catch-up)`
+              : `Daily ROI from ${stake.plan.name}`,
             referenceId: stake.id,
           },
         })

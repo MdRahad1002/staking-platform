@@ -11,12 +11,14 @@ import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-// Milestone tier definitions
+// Commission tier thresholds (active invested referrals)
+// Bronze: 0–4 → 5% L1 | Silver: 5–9 → 6% L1 | Gold: 10–24 → 7% L1 | Platinum: 25+ → 8% L1
+// All tiers earn +2% L2 commission on their referrals' referrals
 const TIERS = [
-  { name: 'Bronze', min: 0, target: 1,  color: 'text-amber-600',  bg: 'bg-amber-600/10 border-amber-600/30',  icon: '🥉', perk: 'Unlock your referral badge' },
-  { name: 'Silver', min: 1, target: 5,  color: 'text-slate-300',  bg: 'bg-slate-400/10 border-slate-400/30',  icon: '🥈', perk: 'Top-referrer leaderboard entry' },
-  { name: 'Gold',   min: 5, target: 10, color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/30', icon: '🥇', perk: 'Priority support access' },
-  { name: 'Platinum', min: 10, target: 25, color: 'text-cyan-400', bg: 'bg-cyan-400/10 border-cyan-400/30', icon: '💎', perk: 'VIP ambassador status' },
+  { name: 'Bronze',   min: 0,  target: 5,   commission: '5%', color: 'text-amber-600',  bg: 'bg-amber-600/10 border-amber-600/30',  icon: '🥉', perk: 'Referral badge · 5% L1 + 2% L2 commission' },
+  { name: 'Silver',   min: 5,  target: 10,  commission: '6%', color: 'text-slate-300',  bg: 'bg-slate-400/10 border-slate-400/30',  icon: '🥈', perk: 'Leaderboard entry · 6% L1 + 2% L2 · Priority support' },
+  { name: 'Gold',     min: 10, target: 25,  commission: '7%', color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/30', icon: '🥇', perk: 'VIP support · 7% L1 + 2% L2 · Monthly cash prize eligibility' },
+  { name: 'Platinum', min: 25, target: 999, commission: '8%', color: 'text-cyan-400',   bg: 'bg-cyan-400/10 border-cyan-400/30',   icon: '💎', perk: 'Ambassador badge · 8% L1 + 2% L2 · Exclusive perks + bonuses' },
 ]
 
 function getTier(count: number) {

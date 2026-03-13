@@ -43,24 +43,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.70,
     },
     {
-      url: `${APP_URL}/app-info`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.60,
-    },
-    {
-      url: `${APP_URL}/terms`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.40,
-    },
-    {
-      url: `${APP_URL}/policy`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.40,
-    },
-    {
       url: `${APP_URL}/why-choose-us`,
       lastModified: now,
       changeFrequency: 'monthly',

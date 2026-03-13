@@ -73,38 +73,44 @@ async function main() {
   console.log('✅ Support user:', support.email)
 
   // ─── Staking plans ─────────────────────────────────────────────────────────
+  // FUNNEL DESIGN: Entry at $200 → quick 7-day proof → natural upgrades each cycle
+  // Each tier pays out fast enough that users reinvest into the next tier up.
   const plans = [
-    // ── Entry-level: low minimums, short locks ──────────────────────────────
+    // ── TIER 1 — TRIAL GATE ($200): The "prove it" plan ─────────────────────
+    // Psychology: lowest barrier, shortest lock. User sees real money hit their
+    // account within days → platform is trusted → next step is natural.
     {
-      name: 'USDT Flex Starter',
-      description: 'Perfect entry point for newcomers. Stake USDT and earn instant daily rewards with a 7-day flexible lock - outperforming Binance and MEXC flexible plans.',
-      minAmount: 50,
-      maxAmount: 999,
+      name: 'Starter Trial',
+      description: 'Your risk-free entry into StakeOnix. Start with just $200, earn 1.5% every single day, and receive your full principal + profits back in 7 days. See real daily payouts hit your account before you commit to anything larger.',
+      minAmount: 200,
+      maxAmount: 499,
       durationDays: 7,
-      dailyRoi: 1.8,
-      totalRoi: 12.6,
+      dailyRoi: 1.5,
+      totalRoi: 10.5,
       isActive: true,
       isFeatured: false,
       sortOrder: 1,
     },
+    // ── TIER 2 — FIRST UPGRADE ($500): After tasting success ─────────────────
+    // $200 × 110.5% = $221 returned. User naturally adds ~$279 to reach $500.
     {
-      name: 'BTC Quick Yield',
-      description: 'Short-term Bitcoin staking with daily payouts. 14-day lock delivering 2% per day - more than 3x the return of Coinbase BTC staking.',
-      minAmount: 100,
-      maxAmount: 2499,
+      name: 'Booster Plan',
+      description: 'The natural next step after Starter. Our members average an 80% reinvestment rate from Starter → Booster. Earn 1.8%/day for 14 days with daily payouts straight to your balance. $500 in, $626 out.',
+      minAmount: 500,
+      maxAmount: 999,
       durationDays: 14,
-      dailyRoi: 2.0,
-      totalRoi: 28.0,
+      dailyRoi: 1.8,
+      totalRoi: 25.2,
       isActive: true,
       isFeatured: false,
       sortOrder: 2,
     },
-    // ── Mid-tier: 21–30 day locks ────────────────────────────────────────────
+    // ── TIER 3 — GROWTH ($1,000): Mid-range commitment ───────────────────────
     {
-      name: 'AVAX Accelerator',
-      description: 'Powered by Avalanche\'s ultra-fast consensus. 21-day sprint plan earning 2.2%/day - beating KuCoin and Kraken AVAX rates by 6x.',
-      minAmount: 300,
-      maxAmount: 4999,
+      name: 'Growth Yield',
+      description: 'Unlock the power of compounding returns. At $1,000+ you cross our algorithmic yield threshold — 2.2%/day for 21 days = 46.2% total. Day-1 Booster investors who reinvest here see their first $1,000+ payday.',
+      minAmount: 1000,
+      maxAmount: 2499,
       durationDays: 21,
       dailyRoi: 2.2,
       totalRoi: 46.2,
@@ -112,115 +118,83 @@ async function main() {
       isFeatured: false,
       sortOrder: 3,
     },
+    // ── TIER 4 — MOMENTUM ($2,500): Serious stakers ──────────────────────────
     {
-      name: 'SOL Boost',
-      description: 'Harness Solana\'s blazing speed. 30-day plan at 2.3%/day delivering 69% total ROI - outperforms every SOL staking tier on Bybit and Nexo.',
-      minAmount: 250,
+      name: 'Momentum',
+      description: 'Where serious returns begin. 2.6%/day over 30 days delivers 78% total ROI — enough to turn $2,500 into $4,450. Over 3x the best Bybit or Nexo fixed-term APY. Daily settlements, no lock penalties.',
+      minAmount: 2500,
       maxAmount: 4999,
       durationDays: 30,
-      dailyRoi: 2.3,
-      totalRoi: 69.0,
+      dailyRoi: 2.6,
+      totalRoi: 78.0,
       isActive: true,
       isFeatured: false,
       sortOrder: 4,
     },
+    // ── TIER 5 — PROFESSIONAL ($5,000): Portfolio builders ───────────────────
     {
-      name: 'ETH Growth',
-      description: 'Ethereum staking reimagined. 30-day plan at 2.5%/day yields 75% total - over 12x Coinbase ETH staking APY, with daily compounding-equivalent payouts.',
-      minAmount: 500,
+      name: 'Professional',
+      description: 'Chosen by over 60% of our repeat investors. 3.0%/day × 30 days = 90% total. Turn $5,000 into $9,500 in one month. Priority queue processing, dedicated account dashboard, and same-day withdrawal approvals.',
+      minAmount: 5000,
       maxAmount: 9999,
       durationDays: 30,
-      dailyRoi: 2.5,
-      totalRoi: 75.0,
+      dailyRoi: 3.0,
+      totalRoi: 90.0,
       isActive: true,
-      isFeatured: false,
+      isFeatured: true,
       sortOrder: 5,
     },
+    // ── TIER 6 — ADVANCED ($10,000): High-yield investors ────────────────────
     {
-      name: 'DOT Polkadot Pro',
-      description: 'Capitalize on Polkadot\'s multi-chain ecosystem. 45-day lock at 2.7%/day for a total 121.5% ROI - far ahead of any DOT staking APY available on centralized platforms.',
-      minAmount: 500,
-      maxAmount: 9999,
+      name: 'Advanced Vault',
+      description: 'Our 45-day advanced yield engine running at 3.3%/day — 148.5% total return. $10,000 in = $24,850 out at maturity. Includes weekly performance reports, loyalty ROI boost (+0.1% on renewal), and VIP chat support.',
+      minAmount: 10000,
+      maxAmount: 24999,
       durationDays: 45,
-      dailyRoi: 2.7,
-      totalRoi: 121.5,
+      dailyRoi: 3.3,
+      totalRoi: 148.5,
       isActive: true,
-      isFeatured: false,
+      isFeatured: true,
       sortOrder: 6,
     },
-    // ── Professional: 60-day locks ───────────────────────────────────────────
+    // ── TIER 7 — ELITE ($25,000): Wealth accumulation tier ───────────────────
     {
-      name: 'Gold Reserve',
-      description: 'Our most popular 30-day plan for growing portfolios. 2.8%/day - 84% total return, outclassing Stakely, Bybit, and Nexo best fixed plans.',
-      minAmount: 1000,
-      maxAmount: 9999,
-      durationDays: 30,
-      dailyRoi: 2.8,
-      totalRoi: 84.0,
+      name: 'Elite Vault',
+      description: 'Reserved for committed wealth-builders. 3.6%/day over 60 days = 216% total ROI. $25,000 becomes $79,000 by maturity. Dedicated relationship manager, instant withdrawals, and exclusive early access to new plans.',
+      minAmount: 25000,
+      maxAmount: 49999,
+      durationDays: 60,
+      dailyRoi: 3.6,
+      totalRoi: 216.0,
       isActive: true,
       isFeatured: true,
       sortOrder: 7,
     },
+    // ── TIER 8 — BLACK DIAMOND ($50,000): Near-institutional ─────────────────
     {
-      name: 'DeFi Maximizer',
-      description: 'Built on DeFi principles. 60-day locked plan at 3.2%/day - 192% total ROI. Beats Lido, Stakely, and every DeFi staking aggregate by a wide margin.',
-      minAmount: 2000,
-      maxAmount: 24999,
-      durationDays: 60,
-      dailyRoi: 3.2,
-      totalRoi: 192.0,
+      name: 'Black Diamond',
+      description: 'The pinnacle of personal staking. 3.9%/day × 90 days = 351% total ROI. $50,000 grows to $225,500 in 90 days. Includes a private liquidity suite, zero withdrawal fees, 24/7 concierge support, and monthly strategy calls.',
+      minAmount: 50000,
+      maxAmount: 99999,
+      durationDays: 90,
+      dailyRoi: 3.9,
+      totalRoi: 351.0,
       isActive: true,
       isFeatured: true,
       sortOrder: 8,
     },
+    // ── TIER 9 — SOVEREIGN ($100,000+): Institutional access ─────────────────
     {
-      name: 'Diamond Vault',
-      description: 'Our flagship 60-day vault. 3.0%/day with 180% total returns and priority customer support - delivering the kind of results top institutions demand.',
-      minAmount: 5000,
-      maxAmount: 49999,
-      durationDays: 60,
-      dailyRoi: 3.0,
-      totalRoi: 180.0,
+      name: 'Sovereign',
+      description: 'Institutional-grade staking with sovereign-level yields. 4.5%/day × 90 days = 405% total ROI. Minimum $100,000. Includes a dedicated liquidity desk, white-glove onboarding, unlimited withdrawals, tax report generation, and a personal fund manager.',
+      minAmount: 100000,
+      maxAmount: null,
+      durationDays: 90,
+      dailyRoi: 4.5,
+      totalRoi: 405.0,
       isActive: true,
       isFeatured: true,
       sortOrder: 9,
-    },
-    // ── Elite: 90-day premium locks ──────────────────────────────────────────
-    {
-      name: 'Platinum Elite',
-      description: 'For serious wealth builders. 60-day plan at 3.3%/day producing 198% total ROI - with dedicated account management and instant daily settlements.',
-      minAmount: 10000,
-      maxAmount: 49999,
-      durationDays: 60,
-      dailyRoi: 3.3,
-      totalRoi: 198.0,
-      isActive: true,
-      isFeatured: false,
-      sortOrder: 10,
-    },
-    {
-      name: 'Black Card',
-      description: 'The ultimate 90-day staking experience. 3.5%/day, 315% total ROI. Reserved for high-net-worth investors seeking unmatched passive income above any platform worldwide.',
-      minAmount: 25000,
-      maxAmount: 249999,
-      durationDays: 90,
-      dailyRoi: 3.5,
-      totalRoi: 315.0,
-      isActive: true,
-      isFeatured: true,
-      sortOrder: 11,
-    },
-    {
-      name: 'Institutional VIP',
-      description: 'Exclusive 90-day sovereign-level plan at 4.0%/day - 360% total ROI. White-glove service, dedicated liquidity desk, and returns no other platform can match.',
-      minAmount: 50000,
-      maxAmount: null,
-      durationDays: 90,
-      dailyRoi: 4.0,
-      totalRoi: 360.0,
-      isActive: true,
-      isFeatured: true,
-      sortOrder: 12,
     },
   ]
 
@@ -273,14 +247,32 @@ async function main() {
 
   // ─── Site settings ─────────────────────────────────────────────────────────
   const settings = [
-    { key: 'site_name', value: 'Stake Platform' },
-    { key: 'site_url', value: 'https://stakeplatform.com' },
-    { key: 'site_description', value: 'World-class crypto staking platform' },
-    { key: 'support_email', value: 'support@stakeplatform.com' },
+    { key: 'site_name', value: 'StakeOnix' },
+    { key: 'site_url', value: 'https://www.stakeonix.com' },
+    { key: 'site_description', value: 'World-class crypto yield platform — earn daily returns on your crypto with StakeOnix' },
+    { key: 'support_email', value: 'support@stakeonix.com' },
     { key: 'support_phone', value: '' },
-    { key: 'min_deposit', value: '10' },
+    { key: 'min_deposit', value: '200' },
     { key: 'min_withdrawal', value: '20' },
+    // ── Referral commission tiers ──────────────────────────────────────────
+    // Tier commissions increase as ambassadors bring more active investors.
+    // Bronze (1–4 refs)=5% | Silver (5–9)=6% | Gold (10–24)=7% | Platinum(25+)=8%
+    // referral_bonus_percent = base rate (Bronze). Admin can apply tier boosts manually or via future automation.
     { key: 'referral_bonus_percent', value: '5' },
+    // Level-2 commission: earn on earnings of your referrals' referrals
+    { key: 'referral_l2_bonus_percent', value: '2' },
+    // Silver tier commission override
+    { key: 'referral_silver_percent', value: '6' },
+    // Gold tier commission override
+    { key: 'referral_gold_percent', value: '7' },
+    // Platinum tier commission override
+    { key: 'referral_platinum_percent', value: '8' },
+    // Referral tier thresholds (number of active, invested referrals)
+    { key: 'referral_silver_min', value: '5' },
+    { key: 'referral_gold_min', value: '10' },
+    { key: 'referral_platinum_min', value: '25' },
+    // Welcome bonus for newly referred investors (credited after first stake)
+    { key: 'referral_signup_bonus_usd', value: '10' },
     { key: 'withdrawal_fee_percent', value: '1' },
     { key: 'deposit_fee_percent', value: '0' },
     { key: 'maintenance_mode', value: 'false' },

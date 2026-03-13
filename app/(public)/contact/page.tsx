@@ -16,13 +16,23 @@ const contactInfo = [
   },
   {
     icon: <Phone className="h-5 w-5" />,
-    label: 'Phone',
+    label: 'Canada (Head Office)',
     value: '+1 (613) 366-4391',
   },
   {
+    icon: <Phone className="h-5 w-5" />,
+    label: 'United Kingdom',
+    value: '+44 (0) 56 0384 6173',
+  },
+  {
     icon: <MapPin className="h-5 w-5" />,
-    label: 'Headquarters',
+    label: 'Canada HQ',
     value: '130 King St W, Toronto, ON M5X 2A2, Canada',
+  },
+  {
+    icon: <MapPin className="h-5 w-5" />,
+    label: 'UK Office',
+    value: 'Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom',
   },
 ]
 

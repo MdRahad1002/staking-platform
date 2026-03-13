@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     'Download the StakeOnix mobile app to manage your crypto staking portfolio from anywhere. Track your daily earnings, deposits, and withdrawals in real time.',
   alternates: { canonical: 'https://www.stakeonix.com/app-info' },
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'StakeOnix Mobile App - Stake Crypto on the Go',
     description: 'Manage your staking portfolio from anywhere with the StakeOnix mobile app.',

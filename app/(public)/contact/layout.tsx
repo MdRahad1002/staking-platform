@@ -23,16 +23,26 @@ const localBusinessSchema = {
   '@type': 'FinancialService',
   name: 'StakeOnix',
   url: APP_URL,
-  telephone: '+1-613-366-4391',
+  telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
   email: 'info@stakeonix.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '130 King St W',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    postalCode: 'M5X 2A2',
-    addressCountry: 'CA',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '130 King St W',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      postalCode: 'M5X 2A2',
+      addressCountry: 'CA',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ashley Road',
+      addressLocality: 'Altrincham',
+      addressRegion: 'Cheshire',
+      postalCode: 'WA14 2DT',
+      addressCountry: 'GB',
+    },
+  ],
   openingHours: 'Mo-Su 00:00-23:59',
   contactPoint: [
     {
@@ -41,6 +51,20 @@ const localBusinessSchema = {
       telephone: '+1-613-366-4391',
       email: 'info@stakeonix.com',
       availableLanguage: 'English',
+      areaServed: 'CA',
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      },
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      telephone: '+44-056-0384-6173',
+      availableLanguage: 'English',
+      areaServed: 'GB',
       hoursAvailable: {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],

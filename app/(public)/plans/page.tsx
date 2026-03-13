@@ -8,29 +8,29 @@ export const dynamic = 'force-dynamic'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'How to Earn Money With Crypto Daily - Choose Your Plan | StakeOnix',
+  title: 'Crypto Yield Plans — Start With $200, Earn Daily | StakeOnix',
   description:
-    'Pick a plan, deposit your crypto, and start getting paid every single day. Bitcoin, Ethereum, USDT plans from just $20. No experience needed - we do all the work, you collect daily earnings.',
+    'Join StakeOnix and start earning daily crypto returns from just $200. 9 yield plans from Starter Trial to Sovereign institutional tier. Up to 4.5% daily — see real payouts in your account within 24 hours.',
   keywords: [
-    'how to earn money with crypto',
-    'best way to invest in crypto 2026',
-    'earn daily returns on bitcoin',
-    'how to make money from ethereum',
-    'crypto investment plans',
-    'daily income from crypto investment',
-    'best crypto to earn money',
-    'how to start making money with crypto',
-    'earn money with USDT',
-    'crypto income plan',
-    'high yield staking plans',
-    'best staking plans 2026',
-    'bitcoin staking plan',
-    'ethereum staking APY',
+    'crypto yield plans 2026',
+    'earn daily returns on crypto',
+    'best crypto investment plan',
+    'daily crypto payouts',
+    'high yield staking platform',
+    'bitcoin daily earnings',
+    'ethereum yield plan',
+    'USDT daily interest',
+    'start crypto investing 200 dollars',
+    'passive income crypto',
+    'best staking platform 2026',
+    'stakeonix plans',
+    'crypto income daily',
+    'short term crypto investment',
   ],
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {
-    title: 'Crypto Staking Plans - Earn Up to 5% Daily | StakeOnix',
-    description: 'Choose the perfect staking plan. Earn daily passive income on Bitcoin, Ethereum, USDT, Solana & more. Plans start from just $20.',
+    title: 'StakeOnix Yield Plans — Earn Up to 4.5% Daily | StakeOnix',
+    description: 'Start with just $200. 9 plans designed to grow with you — from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
     url: `${APP_URL}/plans`,
   },
 }
@@ -73,7 +73,7 @@ export default async function PlansPage() {
     description: `Choose from ${plans.length} cryptocurrency staking plans. Earn between ${minApr}% and ${maxApr}% APR. Daily rewards credited automatically.`,
     serviceType: 'Cryptocurrency Staking',
     areaServed: 'Worldwide',
-    priceRange: '$20+',
+    priceRange: '$200+',
     provider: { '@type': 'Organization', name: 'StakeOnix', url: APP_URL },
   }
 
@@ -104,8 +104,7 @@ export default async function PlansPage() {
             Staking <span className="gradient-text">Plans</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-base mb-8">
-            Discover our full range of staking products. All plans include daily rewards,
-            instant activation, and secure fund management.
+            Nine plans designed as a progressive path — start with $200 on our 7-day <strong className="text-white">Starter Trial</strong> to see real daily payouts in your account, then scale up as your confidence grows. Every plan delivers daily settlements.
           </p>
 
           {/* APR range pill */}

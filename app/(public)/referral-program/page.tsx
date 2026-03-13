@@ -25,41 +25,49 @@ const TIERS = [
     name: 'Bronze',
     icon: '🥉',
     min: 0,
-    target: 1,
+    target: 5,
+    commission: '5%',
+    l2: '2%',
     color: 'text-amber-600',
     bg: 'bg-amber-600/10 border-amber-600/30',
     glow: 'hover:border-amber-500/50',
-    perk: 'Unlock your referral badge + 5% commission',
+    perk: '5% L1 commission + 2% L2 commission on your referrals\' referrals',
   },
   {
     name: 'Silver',
     icon: '🥈',
-    min: 1,
-    target: 5,
+    min: 5,
+    target: 10,
+    commission: '6%',
+    l2: '2%',
     color: 'text-slate-300',
     bg: 'bg-slate-400/10 border-slate-400/30',
     glow: 'hover:border-slate-300/50',
-    perk: 'Top-referrer leaderboard entry',
+    perk: '6% L1 + 2% L2 commission · Leaderboard entry · Priority support',
   },
   {
     name: 'Gold',
     icon: '🥇',
-    min: 5,
-    target: 10,
+    min: 10,
+    target: 25,
+    commission: '7%',
+    l2: '2%',
     color: 'text-yellow-400',
     bg: 'bg-yellow-400/10 border-yellow-400/30',
     glow: 'hover:border-yellow-400/50',
-    perk: 'Priority support access',
+    perk: '7% L1 + 2% L2 commission · VIP support · Monthly cash prize eligibility',
   },
   {
     name: 'Platinum',
     icon: '💎',
-    min: 10,
-    target: 25,
+    min: 25,
+    target: 999,
+    commission: '8%',
+    l2: '2%',
     color: 'text-cyan-400',
     bg: 'bg-cyan-400/10 border-cyan-400/30',
     glow: 'hover:border-cyan-400/50',
-    perk: 'VIP ambassador status + bonus perks',
+    perk: '8% L1 + 2% L2 commission · Ambassador badge · Exclusive perks + cash bonuses',
   },
 ]
 
@@ -89,19 +97,27 @@ const steps = [
     num: '04',
     icon: <DollarSign className="h-6 w-6" />,
     color: 'bg-green-500/15 text-green-400',
-    title: 'You earn 5% commission',
-    desc: 'Every time your referral earns staking rewards, you automatically receive 5% of their earnings - for as long as they stake.',
+    title: 'Earn up to 8% — two levels deep',
+    desc: 'Earn 5–8% on every dollar your direct referrals earn (L1), PLUS 2% on what their referrals earn (L2). Your commission tier rises automatically as your network grows.',
   },
 ]
 
 function EarningsCalc() {
   const [friends, setFriends] = useState(5)
-  const [avgStake, setAvgStake] = useState(500)
-  const RATE = 0.05
-  const AVG_DAILY = 0.012 // ~1.2% avg daily yield
-  const dailyPerFriend = avgStake * AVG_DAILY * RATE
-  const monthlyEarnings = dailyPerFriend * friends * 30
-  const yearlyEarnings = dailyPerFriend * friends * 365
+  const [avgStake, setAvgStake] = useState(1000)
+  // Tier commission is determined by number of direct referrals
+  const l1Rate = friends < 5 ? 0.05 : friends < 10 ? 0.06 : friends < 25 ? 0.07 : 0.08
+  const l2Rate = 0.02
+  // L2 network estimate: assume each L1 referral brings 1 more person on average
+  const l2Friends = Math.round(friends * 0.6)
+  const AVG_DAILY = 0.022 // ~2.2% avg daily yield across StakeOnix plans
+  const dailyL1 = avgStake * AVG_DAILY * l1Rate
+  const dailyL2 = avgStake * AVG_DAILY * l2Rate
+  const monthlyL1 = dailyL1 * friends * 30
+  const monthlyL2 = dailyL2 * l2Friends * 30
+  const monthlyTotal = monthlyL1 + monthlyL2
+  const yearlyTotal = monthlyTotal * 12
+  const tierLabel = friends < 5 ? 'Bronze (5%)' : friends < 10 ? 'Silver (6%)' : friends < 25 ? 'Gold (7%)' : 'Platinum (8%)'
 
   return (
     <div className="glass-card p-8">
@@ -112,8 +128,8 @@ function EarningsCalc() {
       <div className="space-y-6 mb-8">
         <div>
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-muted-foreground">Friends referred</span>
-            <span className="font-bold text-white">{friends} friends</span>
+            <span className="text-muted-foreground">Direct referrals (L1)</span>
+            <span className="font-bold text-white">{friends} friends · <span className="text-cyan-400">{tierLabel}</span></span>
           </div>
           <input
             type="range" min={1} max={50} value={friends}
@@ -121,7 +137,7 @@ function EarningsCalc() {
             className="w-full accent-cyan-400"
           />
           <div className="flex justify-between text-xs text-muted-foreground/50 mt-1">
-            <span>1</span><span>50</span>
+            <span>1</span><span>50+</span>
           </div>
         </div>
         <div>
@@ -130,35 +146,39 @@ function EarningsCalc() {
             <span className="font-bold text-white">${avgStake.toLocaleString()}</span>
           </div>
           <input
-            type="range" min={20} max={5000} step={20} value={avgStake}
+            type="range" min={200} max={10000} step={100} value={avgStake}
             onChange={(e) => setAvgStake(Number(e.target.value))}
             className="w-full accent-cyan-400"
           />
           <div className="flex justify-between text-xs text-muted-foreground/50 mt-1">
-            <span>$20</span><span>$5,000</span>
+            <span>$200</span><span>$10,000</span>
           </div>
         </div>
         <div className="flex gap-2 flex-wrap">
-          {[{f:3,s:100},{f:5,s:300},{f:10,s:500}].map(p => (
+          {[{f:3,s:500},{f:5,s:1000},{f:10,s:2500},{f:25,s:5000}].map(p => (
             <button key={`${p.f}-${p.s}`}
               onClick={() => { setFriends(p.f); setAvgStake(p.s) }}
               className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 text-muted-foreground hover:text-cyan-400 transition-all">
-              {p.f} friends @ ${p.s}
+              {p.f} refs @ ${p.s.toLocaleString()}
             </button>
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center">
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Monthly</p>
-          <p className="text-2xl font-black gradient-text">${monthlyEarnings.toFixed(2)}</p>
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 text-center">
+          <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">L1 Monthly</p>
+          <p className="text-xl font-black gradient-text">${monthlyL1.toFixed(2)}</p>
         </div>
-        <div className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 rounded-xl p-4 text-center">
-          <p className="text-xs text-cyan-400 uppercase tracking-wider mb-1">Yearly</p>
-          <p className="text-2xl font-black text-white">${yearlyEarnings.toFixed(2)}</p>
+        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 text-center">
+          <p className="text-xs text-purple-400 uppercase tracking-wider mb-1">L2 Monthly</p>
+          <p className="text-xl font-black text-white">${monthlyL2.toFixed(2)}</p>
         </div>
       </div>
-      <p className="text-xs text-muted-foreground/50 mt-4 text-center">Based on average platform yields. Actual earnings may vary.</p>
+      <div className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 rounded-xl p-4 text-center">
+        <p className="text-xs text-cyan-400 uppercase tracking-wider mb-1">Total Yearly (L1 + L2)</p>
+        <p className="text-3xl font-black text-white">${yearlyTotal.toFixed(2)}</p>
+      </div>
+      <p className="text-xs text-muted-foreground/50 mt-4 text-center">Based on average StakeOnix plan yields. Actual earnings may vary. L2 estimate assumes ~60% of your referrals also refer others.</p>
     </div>
   )
 }
@@ -182,10 +202,13 @@ export default function ReferralProgramPage() {
             <span className="gradient-text">Earn Forever.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
-            Earn <span className="text-white font-bold">5% commission</span> on everything your referrals earn - automatically, every single day, for as long as they stake.
+            Earn <span className="text-white font-bold">5–8% L1 commission</span> on every dollar your referrals earn, plus a <span className="text-white font-bold">2% L2 commission</span> on your referrals&apos; referrals — paid automatically every single day.
           </p>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-10">
-            No cap. No expiry. The more friends you bring, the more you earn together.
+          <p className="text-muted-foreground max-w-xl mx-auto mb-3">
+            No cap. No expiry. Your commission tier <strong className="text-white">upgrades automatically</strong> as your network grows — from 5% at Bronze to 8% at Platinum.
+          </p>
+          <p className="text-sm text-green-400/80 max-w-md mx-auto mb-10 font-medium">
+            🎁 Your referrals receive a <strong>$10 welcome bonus</strong> after activating their first plan — making it easier to share.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/signup">
@@ -208,10 +231,10 @@ export default function ReferralProgramPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { icon: <DollarSign className="h-5 w-5" />, color: 'text-green-400 bg-green-500/15', value: '5%', label: 'Commission Rate' },
-              { icon: <Zap className="h-5 w-5" />, color: 'text-yellow-400 bg-yellow-500/15', value: 'Daily', label: 'Payout Frequency' },
-              { icon: <Users className="h-5 w-5" />, color: 'text-purple-400 bg-purple-500/15', value: 'Unlimited', label: 'Referrals Allowed' },
-              { icon: <Star className="h-5 w-5" />, color: 'text-cyan-400 bg-cyan-500/15', value: '4 Tiers', label: 'Milestone Rewards' },
+              { icon: <DollarSign className="h-5 w-5" />, color: 'text-green-400 bg-green-500/15', value: 'Up to 8%', label: 'L1 Commission' },
+              { icon: <TrendingUp className="h-5 w-5" />, color: 'text-purple-400 bg-purple-500/15', value: '2%', label: 'L2 Commission' },
+              { icon: <Zap className="h-5 w-5" />, color: 'text-yellow-400 bg-yellow-500/15', value: 'Daily', label: 'Auto Payout' },
+              { icon: <Star className="h-5 w-5" />, color: 'text-cyan-400 bg-cyan-500/15', value: '$10', label: 'Welcome Bonus' },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-3">
                 <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${s.color}`}>
@@ -266,18 +289,20 @@ export default function ReferralProgramPage() {
           <div className="grid lg:grid-cols-2 gap-10 items-start">
             {/* Tiers */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3">Milestone Rewards</p>
-              <h2 className="text-3xl font-black mb-3">Climb the Ranks</h2>
-              <p className="text-muted-foreground mb-8">The more friends you refer, the higher your tier and the more perks you unlock.</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3">Commission Tiers</p>
+              <h2 className="text-3xl font-black mb-3">The More You Refer, The More You Earn</h2>
+              <p className="text-muted-foreground mb-8">Your commission rate upgrades automatically as your active referral count grows. No applications, no waiting.</p>
               <div className="space-y-4">
                 {TIERS.map((tier, i) => (
                   <div key={tier.name} className={`glass-card p-5 flex items-center gap-5 border ${tier.bg} ${tier.glow} transition-all duration-300`}>
                     <div className="text-3xl flex-shrink-0">{tier.icon}</div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-3 mb-1">
                         <span className={`font-black text-lg ${tier.color}`}>{tier.name}</span>
-                        <span className="text-xs text-muted-foreground/50">
-                          {i < TIERS.length - 1 ? `${tier.target} referral${tier.target > 1 ? 's' : ''}` : `${tier.min}+ referrals`}
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${tier.bg}`}>{tier.commission} L1</span>
+                        <span className="text-xs text-purple-400 font-semibold">+2% L2</span>
+                        <span className="text-xs text-muted-foreground/50 ml-auto">
+                          {i === 0 ? `0–${tier.target - 1} refs` : i < TIERS.length - 1 ? `${tier.min}–${tier.target - 1} refs` : `${tier.min}+ refs`}
                         </span>
                       </div>
                       <p className="text-sm text-muted-foreground">{tier.perk}</p>
@@ -315,8 +340,14 @@ export default function ReferralProgramPage() {
               {
                 icon: <DollarSign className="h-5 w-5" />,
                 color: 'bg-green-500/15 text-green-400',
-                title: 'Passive income on top of passive income',
-                desc: "You're already earning from staking. Referrals stack another income stream on top - no extra work required.",
+                title: 'Two-level commissions, one link',
+                desc: "Earn 5–8% on everything your direct referrals (L1) earn, plus 2% on earnings from their referrals (L2). One share, two income streams.",
+              },
+              {
+                icon: <TrendingUp className="h-5 w-5" />,
+                color: 'bg-cyan-500/15 text-cyan-400',
+                title: 'Commission grows as you grow',
+                desc: 'Your rate upgrades automatically — from 5% at Bronze to 8% at Platinum. Bring 25 active investors and unlock our top commission tier forever.',
               },
               {
                 icon: <Zap className="h-5 w-5" />,
@@ -327,26 +358,20 @@ export default function ReferralProgramPage() {
               {
                 icon: <Crown className="h-5 w-5" />,
                 color: 'bg-purple-500/15 text-purple-400',
-                title: 'No limit on referrals',
-                desc: 'Refer 1 person or 1,000. There is no ceiling on how many friends you can bring or how much you can earn.',
-              },
-              {
-                icon: <Trophy className="h-5 w-5" />,
-                color: 'bg-amber-500/15 text-amber-400',
-                title: 'Tier milestones unlock perks',
-                desc: 'As you refer more people you climb from Bronze to Platinum, unlocking leaderboard status, priority support, and VIP access.',
+                title: 'No cap on referrals or earnings',
+                desc: 'Refer 1 person or 1,000. No ceiling on how many investors you can bring or how much commission you can accumulate.',
               },
               {
                 icon: <Share2 className="h-5 w-5" />,
                 color: 'bg-blue-500/15 text-blue-400',
-                title: 'Share everywhere instantly',
-                desc: 'Your dashboard gives you a one-click share link for WhatsApp, Telegram, Twitter, or any other platform.',
+                title: 'Share everywhere in seconds',
+                desc: 'One-click share links for WhatsApp, Telegram, Twitter, Instagram, or email. Your dashboard generates everything you need.',
               },
               {
                 icon: <CheckCircle2 className="h-5 w-5" />,
-                color: 'bg-cyan-500/15 text-cyan-400',
-                title: 'Your friends benefit too',
-                desc: 'They join one of the most trusted staking platforms. You look good, they earn daily - everybody wins.',
+                color: 'bg-amber-500/15 text-amber-400',
+                title: 'Your referrals get a $10 welcome bonus',
+                desc: 'Everyone you refer receives a $10 credit after activating their first plan. That makes your invite more compelling — and your link more likely to convert.',
               },
             ].map((item) => (
               <div key={item.title} className="glass-card p-6 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex gap-4 items-start">

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: '%s | StakeOnix',
   },
   description:
-    'Want to earn money from your crypto without trading? StakeOnix pays you daily rewards on Bitcoin, Ethereum, USDT & more - like a high-yield savings account for crypto. Start earning from just $20. Trusted by 10,000+ investors worldwide.',
+    'Want to earn money from your crypto without trading? StakeOnix pays you daily rewards on Bitcoin, Ethereum, USDT & more - like a high-yield savings account for crypto. Start earning from just $200. Trusted by 10,000+ investors worldwide.',
   keywords: [
     'how to make money with crypto',
     'earn money online 2026',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     url: APP_URL,
     title: 'StakeOnix - Earn Daily Income on Your Crypto | Like a Savings Account',
     description:
-      'Put your crypto to work and get paid every single day. Bitcoin, Ethereum, USDT & 10+ coins. No trading needed. Start earning from just $20. Join 10,000+ people already making daily income.',
+      'Put your crypto to work and get paid every single day. Bitcoin, Ethereum, USDT & 10+ coins. No trading needed. Start earning from just $200. Join 10,000+ people already making daily income.',
     siteName: 'StakeOnix',
     images: [
       {
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'StakeOnix - Make Money With Crypto Daily (No Trading Required)',
     description:
-      'Earn daily income on your Bitcoin, Ethereum & USDT automatically. No trading, no experience needed. Start with $20. People are making real money every day - join them on StakeOnix.',
+      'Earn daily income on your Bitcoin, Ethereum & USDT automatically. No trading, no experience needed. Start with $200. People are making real money every day - join them on StakeOnix.',
     images: [`${APP_URL}/opengraph-image`],
     creator: '@StakeOnix',
     site: '@StakeOnix',
@@ -89,6 +89,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: APP_URL,
   },
+  icons: {
+    icon: [
+      { url: '/icon', sizes: '96x96', type: 'image/png' },
+    ],
+    shortcut: '/icon',
+    apple: '/apple-icon',
+  },
   verification: {
     // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN',
     // yandex: 'YOUR_YANDEX_TOKEN',
@@ -100,25 +107,50 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'StakeOnix',
   url: APP_URL,
-  logo: `${APP_URL}/logo.png`,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${APP_URL}/apple-icon`,
+    width: 180,
+    height: 180,
+  },
   description:
     'StakeOnix is a professional cryptocurrency staking platform enabling investors to earn daily passive income on Bitcoin, Ethereum, USDT, Solana and more.',
   foundingDate: '2024',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+1-613-366-4391',
-    contactType: 'customer support',
-    email: 'info@stakeonix.com',
-    availableLanguage: 'English',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '130 King St W',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    postalCode: 'M5X 2A2',
-    addressCountry: 'CA',
-  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+1-613-366-4391',
+      contactType: 'customer support',
+      areaServed: 'CA',
+      email: 'info@stakeonix.com',
+      availableLanguage: 'English',
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: '+44-056-0384-6173',
+      contactType: 'customer support',
+      areaServed: 'GB',
+      availableLanguage: 'English',
+    },
+  ],
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '130 King St W',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      postalCode: 'M5X 2A2',
+      addressCountry: 'CA',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ashley Road',
+      addressLocality: 'Altrincham',
+      addressRegion: 'Cheshire',
+      postalCode: 'WA14 2DT',
+      addressCountry: 'GB',
+    },
+  ],
   sameAs: [
     'https://x.com/StakeOnix',
     'https://twitter.com/StakeOnix',

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | StakeOnix',
   description: 'Read the StakeOnix Terms of Service governing your use of the crypto staking platform, including rules, responsibilities, and disclaimers.',
   alternates: { canonical: 'https://www.stakeonix.com/terms' },
-  robots: { index: true, follow: false },
+  robots: { index: false, follow: false },
 }
 
 export default function TermsPage() {
@@ -12,7 +12,7 @@ export default function TermsPage() {
     <div className="py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl font-bold mb-2">Terms of Service</h1>
-        <p className="text-muted-foreground mb-8">Last updated: January 1, 2025</p>
+        <p className="text-muted-foreground mb-8">Last updated: March 13, 2026</p>
 
         <div className="space-y-8">
           {[
@@ -57,9 +57,15 @@ export default function TermsPage() {
               title: '9. Contact',
               content: `Questions about the Terms of Service should be sent to: info@stakeonix.com
               
-              StakeOnix
+              StakeOnix Inc. (Canada — Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
-              Phone: +1 (613) 366-4391`,
+              Phone: +1 (613) 366-4391
+
+              StakeOnix Ltd. (United Kingdom)
+              Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
+              Phone: +44 (0) 56 0384 6173
+
+              Email: info@stakeonix.com`,
             },
           ].map((section) => (
             <div key={section.title}>

@@ -44,7 +44,7 @@ const faqSchema = {
       name: 'Is there a minimum deposit?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Minimum deposit amounts vary by cryptocurrency and staking plan. Generally, minimums start from $20 USD equivalent.',
+        text: 'Minimum deposit amounts vary by cryptocurrency and staking plan. Generally, minimums start from $200 USD equivalent.'
       },
     },
     {

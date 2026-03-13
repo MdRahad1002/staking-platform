@@ -5,19 +5,39 @@ import { sendVerificationEmail } from '@/lib/mail'
 import { generateReferralCode } from '@/lib/utils'
 import { z } from 'zod'
 import { randomBytes } from 'crypto'
+import { rateLimit, rateLimitResponse } from '@/lib/rate-limit'
+import { getClientIp, isIpBlocked } from '@/lib/ip-check'
+
+// Password must be 8–128 chars and contain uppercase, lowercase, digit, special char
+const strongPassword = z
+  .string()
+  .min(8, 'Password must be at least 8 characters.')
+  .max(128, 'Password must be at most 128 characters.')
+  .refine((p) => /[A-Z]/.test(p), { message: 'Password must contain at least one uppercase letter.' })
+  .refine((p) => /[a-z]/.test(p), { message: 'Password must contain at least one lowercase letter.' })
+  .refine((p) => /[0-9]/.test(p), { message: 'Password must contain at least one number.' })
+  .refine((p) => /[^A-Za-z0-9]/.test(p), { message: 'Password must contain at least one special character.' })
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).max(128),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
+  email: z.string().email('Invalid email address.').max(254),
+  password: strongPassword,
+  firstName: z.string().max(50).optional(),
+  lastName: z.string().max(50).optional(),
   // min(1) rejects empty strings — undefined/absent is still fine
-  username: z.string().min(1).optional(),
-  referralCode: z.string().optional(),
-  phone: z.string().optional(),
+  username: z.string().min(1).max(30).regex(/^[a-zA-Z0-9_]+$/, 'Username may only contain letters, numbers and underscores.').optional(),
+  referralCode: z.string().max(20).optional(),
+  phone: z.string().max(20).optional(),
 })
 
 export async function POST(req: NextRequest) {
+  // ── Rate limit: 5 registrations per IP per hour ─────────────────────────────
+  const ip = getClientIp(req)
+  if (ip && await isIpBlocked(ip)) {
+    return NextResponse.json({ error: 'Your access has been restricted.' }, { status: 403 })
+  }
+  const rl = rateLimit(`register:${ip ?? 'unknown'}`, 5, 60 * 60_000, 30 * 60_000)
+  if (!rl.success) return rateLimitResponse(rl.retryAfter)
+
   try {
     const body = await req.json()
     const parsed = schema.safeParse(body)

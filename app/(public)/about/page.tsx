@@ -35,15 +35,25 @@ const organizationSchema = {
   foundingDate: '2020',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
   email: 'info@stakeonix.com',
-  telephone: '+1-613-366-4391',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '130 King St W',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    postalCode: 'M5X 2A2',
-    addressCountry: 'CA',
-  },
+  telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '130 King St W',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      postalCode: 'M5X 2A2',
+      addressCountry: 'CA',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ashley Road',
+      addressLocality: 'Altrincham',
+      addressRegion: 'Cheshire',
+      postalCode: 'WA14 2DT',
+      addressCountry: 'GB',
+    },
+  ],
   contactPoint: [
     {
       '@type': 'ContactPoint',
@@ -51,8 +61,14 @@ const organizationSchema = {
       contactType: 'customer support',
       email: 'info@stakeonix.com',
       availableLanguage: 'English',
-      contactOption: 'TollFree',
-      areaServed: 'Worldwide',
+      areaServed: 'CA',
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: '+44-056-0384-6173',
+      contactType: 'customer support',
+      availableLanguage: 'English',
+      areaServed: 'GB',
     },
   ],
   sameAs: [
@@ -183,8 +199,10 @@ export default function AboutPage() {
                 <Phone className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground mb-1">Phone</p>
+                <p className="text-xs text-muted-foreground mb-1">Canada HQ</p>
                 <a href="tel:+16133664391" className="text-sm font-medium hover:text-primary transition-colors">+1 (613) 366-4391</a>
+                <p className="text-xs text-muted-foreground mt-2 mb-1">UK Office</p>
+                <a href="tel:+4405603846173" className="text-sm font-medium hover:text-primary transition-colors">+44 (0) 56 0384 6173</a>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -192,8 +210,10 @@ export default function AboutPage() {
                 <MapPin className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground mb-1">Address</p>
+                <p className="text-xs text-muted-foreground mb-1">Canada (Head Office)</p>
                 <p className="text-sm font-medium">130 King St W, Toronto,<br />ON M5X 2A2, Canada</p>
+                <p className="text-xs text-muted-foreground mt-2 mb-1">United Kingdom</p>
+                <p className="text-sm font-medium">Ashley Road, Altrincham,<br />Cheshire, WA14 2DT, UK</p>
               </div>
             </div>
           </div>

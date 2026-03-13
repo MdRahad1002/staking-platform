@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const size = { width: 32, height: 32 }
+export const size = { width: 96, height: 96 }
 export const contentType = 'image/png'
 
 export default function Icon() {
@@ -9,8 +9,9 @@ export default function Icon() {
     (
       <div
         style={{
-          width: 32,
-          height: 32,
+          width: 96,
+          height: 96,
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -18,8 +19,8 @@ export default function Icon() {
       >
         <svg
           viewBox="0 0 40 40"
-          width="32"
-          height="32"
+          width="72"
+          height="72"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -40,6 +41,6 @@ export default function Icon() {
         </svg>
       </div>
     ),
-    { ...size },
+    { width: 96, height: 96 },
   )
 }

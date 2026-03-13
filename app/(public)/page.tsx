@@ -8,7 +8,7 @@ const APP_URL = 'https://www.stakeonix.com'
 export const metadata: Metadata = {
   title: 'StakeOnix - #1 Crypto Staking Platform | Earn Daily Passive Income',
   description:
-    'Looking for a way to earn money online? StakeOnix pays you every single day on your crypto - Bitcoin, Ethereum, USDT & more. No trading needed. Works like a bank savings account but pays way more. Start from just $20.',
+    'Looking for a way to earn money online? StakeOnix pays you every single day on your crypto - Bitcoin, Ethereum, USDT & more. No trading needed. Works like a bank savings account but pays way more. Start from just $200.',
   keywords: [
     'how to make money online',
     'earn money from home 2026',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   alternates: { canonical: APP_URL },
   openGraph: {
     title: 'StakeOnix - Earn Daily Passive Income on Crypto',
-    description: 'Thousands of people earn money every day doing absolutely nothing - their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $20, get paid daily.',
+    description: 'Thousands of people earn money every day doing absolutely nothing - their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $200, get paid daily.',
     url: APP_URL,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
   },
@@ -47,17 +47,27 @@ const homepageSchema = {
   serviceType: 'Cryptocurrency Staking',
   areaServed: 'Worldwide',
   currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL',
-  priceRange: '$20+',
-  telephone: '+1-613-366-4391',
+  priceRange: '$200+',
+  telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
   email: 'info@stakeonix.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '130 King St W',
-    addressLocality: 'Toronto',
-    addressRegion: 'ON',
-    postalCode: 'M5X 2A2',
-    addressCountry: 'CA',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '130 King St W',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      postalCode: 'M5X 2A2',
+      addressCountry: 'CA',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ashley Road',
+      addressLocality: 'Altrincham',
+      addressRegion: 'Cheshire',
+      postalCode: 'WA14 2DT',
+      addressCountry: 'GB',
+    },
+  ],
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.8',
@@ -83,7 +93,7 @@ const faqHomepageSchema = {
       name: 'How much can I earn with StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Earnings depend on your staked amount and chosen plan. StakeOnix offers plans with daily returns ranging from 1% to 5%. Start with as little as $20.',
+        text: 'Earnings depend on your staked amount and chosen plan. StakeOnix offers plans with daily returns ranging from 1.5% to 4.5% per day. Start with as little as $200.',
       },
     },
     {
@@ -177,7 +187,7 @@ const features = [
   {
     icon: <Users className="h-6 w-6" />,
     title: 'Lucrative Referral Program',
-    description: 'Earn 5% lifetime commissions on every stake your referrals make. Passive income on passive income.',
+    description: 'Earn 5–8% tiered commissions (L1) + 2% on your referrals\' referrals (L2). Passive income on passive income.',
     color: 'from-pink-500/20 to-rose-500/20',
     iconColor: 'text-pink-400',
   },
@@ -736,7 +746,7 @@ export default async function HomePage() {
                     'No trading knowledge needed - zero experience required',
                     'Rewards credited to your wallet every 24 hours',
                     'Withdraw anytime - no lock-in traps',
-                    'Start with as little as $20',
+                    'Start with as little as $200 — Starter Trial plan',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400 flex-shrink-0 mt-0.5" />

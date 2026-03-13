@@ -110,7 +110,7 @@ const comparisons = [
   { feature: 'No lock-in periods', stakeonix: true, bank: false, dex: false },
   { feature: 'Instant withdrawals', stakeonix: true, bank: false, dex: true },
   { feature: 'No trading knowledge needed', stakeonix: true, bank: true, dex: false },
-  { feature: 'Start from $20', stakeonix: true, bank: false, dex: false },
+  { feature: 'Start from $200', stakeonix: true, bank: false, dex: false },
   { feature: 'Auto-compounding', stakeonix: true, bank: false, dex: false },
   { feature: 'Regulated & licensed', stakeonix: true, bank: true, dex: false },
   { feature: '24/7 human support', stakeonix: true, bank: false, dex: false },

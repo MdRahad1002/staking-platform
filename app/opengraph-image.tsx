@@ -75,7 +75,7 @@ export default function Image() {
           {[
             { label: 'Daily Returns', value: 'Up to 5%' },
             { label: 'Investors', value: '10,000+' },
-            { label: 'Min. Deposit', value: '$20' },
+            { label: 'Min. Deposit', value: '$200' },
             { label: 'Coins Supported', value: '10+' },
           ].map((s) => (
             <div

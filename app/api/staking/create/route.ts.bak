@@ -3,25 +3,13 @@ import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { calculateStakingReturns } from '@/lib/utils'
 import { z } from 'zod'
-import { rateLimit, rateLimitResponse } from '@/lib/rate-limit'
-import { getClientIp, isIpBlocked } from '@/lib/ip-check'
 
 const schema = z.object({
-  // planId must be a UUID to prevent injection via crafted strings
-  planId: z.string().uuid('Invalid plan.'),
-  // Amount must be a finite positive number; cap at 10M to prevent overflow
-  amount: z.number().positive().finite().max(10_000_000, 'Amount exceeds allowed limit.'),
+  planId: z.string(),
+  amount: z.number().positive(),
 })
 
 export async function POST(req: NextRequest) {
-  // ── Rate limit: 10 stake activations per user per hour ─────────────────────────
-  const ip = getClientIp(req)
-  if (ip && await isIpBlocked(ip)) {
-    return NextResponse.json({ error: 'Your access has been restricted.' }, { status: 403 })
-  }
-  const rl = rateLimit(`staking:${ip ?? 'unknown'}`, 10, 60 * 60_000)
-  if (!rl.success) return rateLimitResponse(rl.retryAfter)
-
   try {
     const session = await requireAuth()
     const body = await req.json()
@@ -30,10 +18,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 })
     }
     const { planId, amount } = parsed.data
-
-    // Per-user rate limit: max 5 new stakes per hour per account
-    const userRl = rateLimit(`staking:user:${session.user.id}`, 5, 60 * 60_000)
-    if (!userRl.success) return rateLimitResponse(userRl.retryAfter)
 
     const plan = await prisma.stakingPlan.findUnique({ where: { id: planId, isActive: true } })
     if (!plan) return NextResponse.json({ error: 'Plan not found.' }, { status: 404 })

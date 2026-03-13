@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | StakeOnix',
   description: 'Read the StakeOnix Privacy Policy to understand how we collect, use, and protect your personal information on our crypto staking platform.',
   alternates: { canonical: 'https://www.stakeonix.com/policy' },
-  robots: { index: true, follow: false },
+  robots: { index: false, follow: false },
 }
 
 export default function PolicyPage() {
@@ -12,7 +12,7 @@ export default function PolicyPage() {
     <div className="py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="text-4xl font-bold mb-2">Privacy Policy</h1>
-        <p className="text-muted-foreground mb-8">Last updated: January 1, 2025</p>
+        <p className="text-muted-foreground mb-8">Last updated: March 13, 2026</p>
 
         <div className="space-y-8 prose prose-invert max-w-none">
           {[
@@ -52,7 +52,11 @@ export default function PolicyPage() {
             },
             {
               title: '5. Cookies',
-              content: `We use cookies and similar tracking technologies to track activity on our platform and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.`,
+              content: `We use cookies and similar tracking technologies to operate the platform, keep your account secure, remember your preferences, and understand how you use our services.
+
+For full details on the types of cookies we use, how long they last, and how to control or delete them, please read our dedicated Cookie Policy at www.stakeonix.com/cookies.
+
+Strictly necessary cookies (login session, CSRF protection) are required for the platform to work. You can opt out of non-essential cookies via your browser settings without affecting your ability to use StakeOnix.`,
             },
             {
               title: '6. Your Rights',
@@ -67,9 +71,15 @@ export default function PolicyPage() {
               title: '7. Contact Us',
               content: `If you have any questions about this Privacy Policy, please contact us at: info@stakeonix.com
               
-              StakeOnix
+              StakeOnix Inc. (Canada — Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
-              Phone: +1 (613) 366-4391`,
+              Phone: +1 (613) 366-4391
+
+              StakeOnix Ltd. (United Kingdom)
+              Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
+              Phone: +44 (0) 56 0384 6173
+
+              Email: info@stakeonix.com`,
             },
           ].map((section) => (
             <div key={section.title}>

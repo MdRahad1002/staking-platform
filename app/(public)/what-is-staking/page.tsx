@@ -1,4 +1,4 @@
-﻿import { Metadata } from 'next'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import {
   Coins,
@@ -13,299 +13,577 @@ import {
   Banknote,
   BarChart3,
   Clock,
+  TrendingDown,
+  DollarSign,
+  Percent,
+  CheckCircle2,
+  XCircle,
+  Rocket,
+  Globe,
+  Star,
+  Users,
+  ChevronRight,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
+const APP_URL = 'https://www.stakeonix.com'
+
 export const metadata: Metadata = {
-  title: 'What is Crypto Staking? (Simple Guide - Make Money With Crypto 2026)',
+  title: 'What Is Crypto Staking & Why It Beats Every Traditional Investment | StakeOnix',
   description:
-    'Crypto staking explained simply: you deposit your crypto, it earns money every day, you withdraw whenever you want. Like putting money in a savings account - but with much higher returns. No experience needed.',
+    "Your savings account pays 0.5% per year. Inflation eats 3–5%. You're losing money standing still. Crypto staking on StakeOnix pays daily returns — start with $200 and earn from day one. No trading, no charts, no experience needed.",
   keywords: [
     'what is crypto staking',
-    'how to earn money with bitcoin',
+    'why stake crypto',
+    'crypto staking vs savings account',
+    'crypto staking vs stocks',
+    'earn daily from crypto',
+    'how does staking work',
+    'passive income crypto 2026',
     'is crypto staking worth it',
-    'how much can I make staking crypto',
-    'is staking crypto safe',
-    'how to earn from crypto without selling',
-    'staking vs savings account',
-    'can you really make money staking crypto',
     'crypto staking for beginners',
-    'how does crypto staking work',
-    'earn daily from bitcoin',
-    'make money from ethereum without trading',
-    'beginner guide to making money crypto',
-    'crypto staking explained simply',
-    'earn passive income staking',
+    'earn from bitcoin without trading',
+    'daily crypto payouts explained',
+    'inflation proof investment',
+    'staking vs bank interest',
+    'how to make money with crypto 2026',
   ],
-  alternates: { canonical: 'https://www.stakeonix.com/what-is-staking' },
+  alternates: { canonical: `${APP_URL}/what-is-staking` },
   openGraph: {
-    title: 'What is Crypto Staking? (Plain English Explanation) - StakeOnix',
-    description: 'Staking explained without jargon: deposit your crypto, earn money every day, withdraw whenever you want. Yes, it really is that simple. Here’s how it works.',
-    url: 'https://www.stakeonix.com/what-is-staking',
+    title: 'Why Crypto Staking Is Beating Every Traditional Investment in 2026',
+    description:
+      "Banks pay nothing. Inflation steals 4% a year. Stocks take a decade. Crypto staking on StakeOnix pays you every single day — starting from $200. Here's the full picture.",
+    url: `${APP_URL}/what-is-staking`,
   },
 }
 
-const steps = [
-  {
-    icon: <Coins className="h-6 w-6" />,
-    step: '1',
-    title: 'You deposit crypto',
-    description:
-      'You put some of your cryptocurrency into a staking plan - like putting money in a savings account.',
-  },
-  {
-    icon: <Lock className="h-6 w-6" />,
-    step: '2',
-    title: 'It gets locked for a period',
-    description:
-      'Your crypto stays locked for a set number of days. During this time it is working hard in the background.',
-  },
-  {
-    icon: <TrendingUp className="h-6 w-6" />,
-    step: '3',
-    title: 'You earn daily rewards',
-    description:
-      'Every 24 hours a percentage of your deposit is added to your balance as a reward - completely automatically.',
-  },
-  {
-    icon: <Unlock className="h-6 w-6" />,
-    step: '4',
-    title: 'You get everything back + profit',
-    description:
-      'When the plan ends you get your original deposit back plus all the rewards you earned. You then withdraw or reinvest.',
-  },
-]
-
-const analogies = [
-  {
-    icon: <Banknote className="h-7 w-7" />,
-    title: 'Like a bank savings account',
-    bad: 'A bank pays you 0.5% per year',
-    good: 'Staking can pay you multiple percent per month',
-    note: 'But unlike a bank, crypto markets carry risk - only stake what you can afford to hold.',
-  },
-  {
-    icon: <RefreshCw className="h-7 w-7" />,
-    title: 'Like renting out your car',
-    bad: 'Your car just sits in the driveway losing value',
-    good: 'You rent it out and it earns money while you sleep',
-    note: 'Staking puts your idle crypto to work the same way.',
-  },
-  {
-    icon: <BarChart3 className="h-7 w-7" />,
-    title: 'Like a fixed-term deposit',
-    bad: 'Lock money in a term deposit for a fixed rate',
-    good: 'Lock crypto for a fixed period and earn a fixed daily rate',
-    note: 'You know exactly what you will earn before you even start.',
-  },
-]
-
-const faqs = [
-  {
-    q: 'Do I need to be a tech expert?',
-    a: 'Not at all. You just deposit, choose a plan, and everything else is handled for you automatically.',
-  },
-  {
-    q: 'Can I lose my money staking?',
-    a: 'Crypto prices fluctuate. The number of coins you earn is fixed, but the dollar value of those coins can go up or down. Never stake money you cannot afford to keep long term.',
-  },
-  {
-    q: 'How often do I get paid?',
-    a: 'Rewards are credited to your account every 24 hours. You can watch your balance grow day by day.',
-  },
-  {
-    q: 'Can I withdraw early?',
-    a: 'Early withdrawal rules depend on the plan. Some plans allow it with a small fee, others require you to wait until the plan expires. Each plan clearly shows its terms.',
-  },
-  {
-    q: 'What cryptocurrencies can I stake?',
-    a: 'We support multiple major cryptocurrencies including Bitcoin, Ethereum, USDT, and more. Check the Staking Plans page for the full list.',
-  },
-  {
-    q: 'Is there a minimum amount?',
-    a: 'Yes, each plan has a minimum deposit - typically starting from $10 equivalent. You do not need a lot to get started.',
-  },
-]
-
-const benefits = [
-  { icon: <Zap className="h-5 w-5" />, title: 'Passive income', desc: 'Earn rewards 24/7 with zero effort after setup.' },
-  { icon: <ShieldCheck className="h-5 w-5" />, title: 'No trading skills needed', desc: 'You do not need to watch charts or time the market.' },
-  { icon: <Clock className="h-5 w-5" />, title: 'Predictable returns', desc: 'Fixed daily rates mean you know your earnings in advance.' },
-  { icon: <RefreshCw className="h-5 w-5" />, title: 'Compound it', desc: 'Reinvest your rewards to earn rewards on your rewards.' },
-]
-
 export default function WhatIsStakingPage() {
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
+    <main className="min-h-screen">
 
-        {/* ── Hero ── */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-400 mb-6">
+      {/* ── HERO: The Problem ─────────────────────────────────────────────────── */}
+      <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 via-background to-cyan-950/20" />
+        <div className="absolute inset-0 hero-grid opacity-[0.04]" />
+        <div className="glow-blob w-[700px] h-[500px] bg-cyan-500/10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/4" />
+
+        <div className="container relative mx-auto px-4 text-center">
+          <span className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
             <HelpCircle className="h-3.5 w-3.5" />
-            Beginner Friendly Guide
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-5">
-            What is <span className="gradient-text">Crypto Staking</span>?
+            Plain English Guide
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight max-w-4xl mx-auto">
+            Why Your Money Is Shrinking
+            <br />
+            <span className="gradient-text">— And Exactly How to Fix It</span>
           </h1>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            No jargon. No technical degree required. Here is everything you need to know about
-            staking - explained as simply as possible.
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
+            Inflation ran at ~4.3% in 2025. Your savings account pays ~0.45%. Every year you do
+            nothing, you lose roughly <strong className="text-white">4% of your purchasing power</strong>.
+            Crypto staking is how thousands of investors have stopped that — and started growing instead.
           </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/plans">
+              <Button size="lg" className="gap-2 rounded-xl text-base px-8">
+                <TrendingUp className="h-4 w-4" />
+                See StakeOnix Plans
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button size="lg" variant="outline" className="gap-2 rounded-xl text-base px-8 border-white/10">
+                Start with $200 <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
+      </section>
 
-        {/* ── One-liner definition ── */}
-        <div className="glass-card p-8 md:p-10 mb-16 max-w-3xl mx-auto text-center rounded-2xl border border-primary/20">
-          <p className="text-2xl md:text-3xl font-semibold leading-snug">
-            Staking = <span className="gradient-text">putting your crypto to work</span> so it earns you money while you just wait.
-          </p>
-          <p className="text-muted-foreground mt-4">
-            Think of it like a savings account - except instead of earning nearly nothing, you earn
-            meaningful daily rewards.
-          </p>
+      {/* ── THE INFLATION PROBLEM (visual) ───────────────────────────────────── */}
+      <section className="py-20 border-b border-white/5 bg-white/[0.01]">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-3">The Real Problem</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+              Traditional Finance Is <span className="text-red-400">Working Against You</span>
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Here is what actually happens to $10,000 across five years in the most common options.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+            {[
+              {
+                label: 'High-Street Savings Account',
+                icon: <Banknote className="h-6 w-6" />,
+                rate: '~0.45% / year',
+                after5: '$10,226',
+                realValue: '~$8,400',
+                note: 'Inflation erodes the real value faster than the interest adds it back.',
+                bad: true,
+                color: 'border-red-500/20 bg-red-500/5',
+                iconColor: 'text-red-400',
+              },
+              {
+                label: 'Index Fund / Stocks',
+                icon: <BarChart3 className="h-6 w-6" />,
+                rate: '~7–10% / year avg',
+                after5: '~$14,000–$16,000',
+                realValue: '~$12,500',
+                note: 'Better — but volatile, illiquid, and tied to market cycles. You could also lose.',
+                bad: false,
+                color: 'border-yellow-500/20 bg-yellow-500/5',
+                iconColor: 'text-yellow-400',
+              },
+              {
+                label: 'StakeOnix Staking',
+                icon: <TrendingUp className="h-6 w-6" />,
+                rate: '1.5%–4.5% / day',
+                after5: 'Varies by plan',
+                realValue: 'Daily payouts in your account',
+                note: 'Daily fixed-rate returns credited automatically — no market timing, no trading.',
+                bad: false,
+                color: 'border-cyan-500/30 bg-cyan-500/8',
+                iconColor: 'text-cyan-400',
+              },
+            ].map((item) => (
+              <div key={item.label} className={`glass-card p-6 rounded-2xl border ${item.color}`}>
+                <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 mb-4 ${item.iconColor}`}>
+                  {item.icon}
+                </div>
+                <h3 className="font-bold text-base mb-3 text-white">{item.label}</h3>
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Annual rate</span>
+                    <span className={`font-semibold ${item.bad ? 'text-red-400' : item.iconColor}`}>{item.rate}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Nominal value</span>
+                    <span className="text-white font-semibold">{item.after5}</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground italic border-t border-white/5 pt-3">{item.note}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="glass-card p-6 rounded-2xl border border-white/10 text-center max-w-2xl mx-auto">
+            <p className="text-lg font-semibold text-white mb-2">
+              The conclusion is simple:
+            </p>
+            <p className="text-muted-foreground">
+              Doing nothing costs you money every year. Stocks can work long-term but carry risk and require patience over a decade.
+              Staking gives you <strong className="text-cyan-400">daily fixed-rate income</strong> — predictable, automatic, no trading required.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* ── How it works step by step ── */}
-        <div className="mb-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">How does it actually work?</h2>
-          <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto">
-            Four simple steps. That is all there is to it.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.map((s) => (
+      {/* ── WHAT IS STAKING: Plain English ───────────────────────────────────── */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Explained Simply</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">So What <em>Exactly</em> Is Staking?</h2>
+          </div>
+
+          {/* One-liner */}
+          <div className="glass-card p-8 md:p-10 mb-12 text-center rounded-2xl border border-primary/20">
+            <p className="text-2xl md:text-3xl font-bold leading-snug">
+              Staking = <span className="gradient-text">putting your crypto to work</span> so it
+              generates a fixed daily return — credited to your account every 24 hours.
+            </p>
+            <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+              You deposit crypto → it earns a daily percentage → at the end of the plan period
+              you receive your original deposit back plus all accumulated rewards. You never need
+              to trade, watch charts, or touch a thing.
+            </p>
+          </div>
+
+          {/* 4 steps */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-4">
+            {[
+              {
+                step: '01',
+                icon: <Coins className="h-6 w-6" />,
+                title: 'Deposit your crypto',
+                desc: 'Send BTC, ETH, USDT or 50+ other assets into your StakeOnix wallet. Minimum $200.',
+                color: 'text-cyan-400 bg-cyan-500/10',
+              },
+              {
+                step: '02',
+                icon: <Lock className="h-6 w-6" />,
+                title: 'Choose a plan',
+                desc: '9 plans from 7-day Starter Trial to 90-day Sovereign. Pick what matches your goals.',
+                color: 'text-purple-400 bg-purple-500/10',
+              },
+              {
+                step: '03',
+                icon: <TrendingUp className="h-6 w-6" />,
+                title: 'Earn daily, automatically',
+                desc: 'Every 24 hours a percentage of your stake is added to your balance — without you doing anything.',
+                color: 'text-green-400 bg-green-500/10',
+              },
+              {
+                step: '04',
+                icon: <Unlock className="h-6 w-6" />,
+                title: 'Withdraw or reinvest',
+                desc: 'At plan maturity collect everything — principal + all profits. Or roll it into a larger plan.',
+                color: 'text-yellow-400 bg-yellow-500/10',
+              },
+            ].map((s) => (
               <div key={s.step} className="glass-card p-6 flex flex-col items-center text-center relative">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
                   {s.step}
                 </div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-4 mt-2">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${s.color} mb-4 mt-3`}>
                   {s.icon}
                 </div>
                 <h3 className="font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground">{s.description}</p>
+                <p className="text-sm text-muted-foreground">{s.desc}</p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* ── Real-world analogies ── */}
-        <div className="mb-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">Still confused? Think of it this way…</h2>
-          <p className="text-center text-muted-foreground mb-10 max-w-xl mx-auto">
-            Staking is not a new concept - you already understand it from everyday life.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {analogies.map((a) => (
-              <div key={a.title} className="glass-card p-6 rounded-2xl">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-4">
-                  {a.icon}
-                </div>
-                <h3 className="font-semibold text-lg mb-3">{a.title}</h3>
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-start gap-2 text-sm">
-                    <span className="mt-0.5 text-red-400 font-bold shrink-0">✗</span>
-                    <span className="text-muted-foreground">{a.bad}</span>
+      {/* ── THE STAKEONIX PITCH: Why Staking, Why Here ───────────────────────── */}
+      <section className="py-20 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/20 via-background to-blue-950/20" />
+        <div className="glow-blob w-[600px] h-[500px] bg-cyan-500/10 top-1/2 right-0 translate-x-1/3 -translate-y-1/2" />
+
+        <div className="container relative mx-auto px-4 max-w-5xl">
+          <div className="text-center mb-16">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">The Case for Staking</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+              Five Reasons Serious Investors Are Moving to Staking
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Not hype. Not speculation. Five clear, rational arguments for why crypto staking
+              has become the fastest-growing passive income instrument of the decade.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {[
+              {
+                num: '01',
+                icon: <Percent className="h-6 w-6" />,
+                color: 'text-cyan-400 bg-cyan-500/10',
+                title: 'Returns that actually beat inflation — by a wide margin',
+                body: 'Inflation has averaged 3–5% annually in developed economies over the last five years. A high-street savings account returns 0.3–0.5%. That gap is real money leaving your pocket every year. StakeOnix staking plans begin at 1.5%/day — that\'s not a typo. Even the entry-level Starter Trial plan (7 days at 1.5%/day) returns more in one week than a savings account returns in two years. This is why institutional capital has been quietly moving into yield-bearing crypto strategies since 2022.',
+                proof: 'Starter Trial: 1.5%/day × 7 days = 10.5% total in one week',
+              },
+              {
+                num: '02',
+                icon: <Clock className="h-6 w-6" />,
+                color: 'text-green-400 bg-green-500/10',
+                title: 'Daily liquidity — your earnings arrive every 24 hours',
+                body: "A bond or fixed-term deposit locks your money away for months or years. A stock investment can go negative the month you need it. Staking on StakeOnix credits rewards to your account every single day — visible, usable, withdrawable. You have full visibility into what you\'ve earned at any moment. This daily liquidity is psychologically and financially powerful: you\'re not waiting to feel the results. You see your balance grow every morning.",
+                proof: 'Daily settlements — earnings credited at 00:00 UTC every 24 hours',
+              },
+              {
+                num: '03',
+                icon: <RefreshCw className="h-6 w-6" />,
+                color: 'text-purple-400 bg-purple-500/10',
+                title: 'Compounding accelerates wealth exponentially — not linearly',
+                body: "Every great investor from Warren Buffett to Ray Dalio has called compounding the most powerful force in finance. When your daily rewards are reinvested — either manually or by rolling into the next plan — you earn returns on your returns. The math is unambiguous: $5,000 reinvested into consecutive 30-day plans at 3%/day grows dramatically faster than sitting in a savings account. Our Professional plan alone returns 90% in 30 days — a Booster roll converts $626 back at the $1,000+ threshold. The investors who compound consistently are the ones who see transformational results.",
+                proof: 'Professional plan: 3.0%/day × 30 days = 90% total ROI',
+              },
+              {
+                num: '04',
+                icon: <ShieldCheck className="h-6 w-6" />,
+                color: 'text-yellow-400 bg-yellow-500/10',
+                title: 'Zero trading knowledge required — machines do the work',
+                body: "Day trading requires hours of chart analysis, technical skills, emotional discipline, and a tolerance for uncertainty that most people simply don't have — nor should they need. Staking on StakeOnix requires exactly three decisions: which plan, how much, and when to start. After that, the platform's infrastructure handles everything: fund management, reward calculation, daily settlement, and reinvestment notifications. The average StakeOnix user spends under 10 minutes per month actively managing their account.",
+                proof: 'No charts, no volatility risk, no market timing required',
+              },
+              {
+                num: '05',
+                icon: <Users className="h-6 w-6" />,
+                color: 'text-pink-400 bg-pink-500/10',
+                title: 'Your referral network becomes a second income engine',
+                body: "Most investment platforms keep 100% of the margin for themselves. StakeOnix shares it. Our referral program pays you 5–8% on every dollar your referrals earn (Level 1) plus 2% on what their referrals earn (Level 2) — permanently, for as long as they stake. This is not a pyramid scheme: it is a transparent, fixed-commission affiliate structure. When you introduce three friends who each invest $2,000, you earn on their daily staking income indefinitely. Combined with your own staking returns, the income compounds both upward and outward.",
+                proof: 'Bronze 5% → Platinum 8% L1 + 2% L2 — paid daily on top of your own returns',
+              },
+            ].map((item) => (
+              <div key={item.num} className="glass-card p-7 md:p-8 flex gap-6">
+                <div className="flex-shrink-0 hidden sm:block">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.color}`}>
+                    {item.icon}
                   </div>
-                  <div className="flex items-start gap-2 text-sm">
-                    <span className="mt-0.5 text-green-400 font-bold shrink-0">✓</span>
-                    <span className="text-foreground">{a.good}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-bold text-muted-foreground/40 uppercase tracking-widest">{item.num}</span>
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-xl ${item.color} sm:hidden`}>
+                      {item.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.body}</p>
+                  <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-muted-foreground">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                    {item.proof}
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground italic border-t border-white/5 pt-3">{a.note}</p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* ── Benefits ── */}
-        <div className="mb-20 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 p-8 md:p-10">
-          <h2 className="text-2xl font-bold text-center mb-8">Why do people stake?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((b) => (
-              <div key={b.title} className="flex flex-col items-center text-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-3">
-                  {b.icon}
+      {/* ── THE STAKEONIX PATHWAY: Funnel walk-through ───────────────────────── */}
+      <section className="py-20 border-t border-white/5">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">The StakeOnix Path</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-4">
+              How investors grow from $200 to six figures
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Every investor starts somewhere. Here is exactly how the journey looks on StakeOnix —
+              from a $200 trial to institutional-grade returns.
+            </p>
+          </div>
+
+          <div className="relative space-y-4">
+            {[
+              { plan: 'Starter Trial', min: 200, max: 499, days: 7, daily: 1.5, total: 10.5, arrow: '$200 → $221 in 7 days. Your first real payout proves the system works.', tier: 'Entry', tierColor: 'text-slate-400' },
+              { plan: 'Booster Plan', min: 500, max: 999, days: 14, daily: 1.8, total: 25.2, arrow: 'Reinvest your $221 + add $279. $500 → $626 in 14 days.', tier: 'Level 2', tierColor: 'text-blue-400' },
+              { plan: 'Growth Yield', min: 1000, max: 2499, days: 21, daily: 2.2, total: 46.2, arrow: '$626 reinvested + top up to $1,000. First $1,000+ payday at maturity.', tier: 'Level 3', tierColor: 'text-blue-400' },
+              { plan: 'Momentum', min: 2500, max: 4999, days: 30, daily: 2.6, total: 78, arrow: '$1,462 compounds into $2,500+. Monthly income becomes life-changing.', tier: 'Level 4', tierColor: 'text-purple-400' },
+              { plan: 'Professional', min: 5000, max: 9999, days: 30, daily: 3.0, total: 90, arrow: '$5,000 → $9,500 in one month. The plan chosen by 60%+ of repeat investors.', tier: 'Level 5 ⭐', tierColor: 'text-cyan-400' },
+              { plan: 'Advanced Vault', min: 10000, max: 24999, days: 45, daily: 3.3, total: 148.5, arrow: '$10,000 → $24,850 in 45 days. Loyalty ROI boost on renewal.', tier: 'Level 6', tierColor: 'text-yellow-400' },
+              { plan: 'Sovereign', min: 100000, max: null, days: 90, daily: 4.5, total: 405, arrow: 'Institutional-grade. Personal fund manager. $100K+ dedicated suite.', tier: 'Institutional', tierColor: 'text-amber-400' },
+            ].map((row, i) => (
+              <div key={row.plan} className="flex gap-4 items-start">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 text-cyan-400 text-xs font-bold flex-shrink-0">
+                    {i + 1}
+                  </div>
+                  {i < 6 && <div className="w-px h-4 bg-cyan-500/20 mt-1" />}
                 </div>
-                <h3 className="font-semibold mb-1">{b.title}</h3>
-                <p className="text-sm text-muted-foreground">{b.desc}</p>
+                <div className="glass-card p-5 flex-1 mb-0 hover:border-cyan-500/20 transition-colors">
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <span className="font-bold text-white">{row.plan}</span>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-white/5 border border-white/10 ${row.tierColor}`}>{row.tier}</span>
+                    <span className="text-xs text-muted-foreground ml-auto">
+                      ${row.min.toLocaleString()}{row.max ? `–$${row.max.toLocaleString()}` : '+'} · {row.days}d · {row.daily}%/day
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{row.arrow}</p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* ── Visual example ── */}
-        <div className="mb-20 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">A real example</h2>
-          <div className="glass-card p-8 rounded-2xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
-                <Coins className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="font-semibold">Silver Staking Plan - 30 days</p>
-                <p className="text-sm text-muted-foreground">1% daily reward</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              {[
-                { label: 'You deposit', value: '$500', highlight: false },
-                { label: 'Daily reward (1%)', value: '+$5.00 / day', highlight: false },
-                { label: 'After 30 days earned', value: '$150.00', highlight: false },
-                { label: 'Total payout', value: '$650.00', highlight: true },
-              ].map((row) => (
-                <div
-                  key={row.label}
-                  className={`flex justify-between items-center rounded-xl px-4 py-3 ${
-                    row.highlight
-                      ? 'bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20'
-                      : 'bg-white/[0.03]'
-                  }`}
-                >
-                  <span className="text-sm text-muted-foreground">{row.label}</span>
-                  <span className={`font-semibold ${row.highlight ? 'gradient-text text-base' : ''}`}>{row.value}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs text-muted-foreground mt-4 text-center italic">
-              * Example for illustration only. Actual plans and rates may differ.
+          <div className="mt-8 glass-card p-6 border border-cyan-500/20 bg-cyan-500/5 text-center">
+            <p className="text-sm text-muted-foreground mb-2">
+              The key insight: <strong className="text-white">each plan is self-funding.</strong> You never need to add new money if you do not want to.
+              The system is designed so your returns from each plan naturally cover the minimum of the next tier.
+            </p>
+            <p className="text-xs text-muted-foreground/60">
+              Past performance does not guarantee future results. Returns are subject to platform terms. Always invest within your means.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* ── FAQs ── */}
-        <div className="mb-20 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">Common questions answered</h2>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <div key={faq.q} className="glass-card p-5 rounded-xl">
-                <h3 className="font-semibold mb-2 flex items-start gap-2">
-                  <span className="text-cyan-400 mt-0.5 shrink-0">Q.</span>
-                  {faq.q}
-                </h3>
-                <p className="text-sm text-muted-foreground pl-5">{faq.a}</p>
+      {/* ── REAL EXAMPLE ─────────────────────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5 bg-white/[0.01]">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
+            A Real Example: Starter Trial to Booster
+          </h2>
+
+          <div className="space-y-5">
+            {/* Starter Trial */}
+            <div className="glass-card p-6 rounded-2xl">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
+                  <Coins className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Starter Trial — Day 1</p>
+                  <p className="text-sm text-muted-foreground">7 days · 1.5%/day · Min $200</p>
+                </div>
+              </div>
+              <div className="space-y-2.5">
+                {[
+                  { label: 'You deposit', value: '$200.00', highlight: false },
+                  { label: 'Daily reward (1.5%)', value: '+$3.00 / day', highlight: false },
+                  { label: 'Total earned over 7 days', value: '$21.00', highlight: false },
+                  { label: 'Full payout at day 7', value: '$221.00', highlight: true },
+                ].map((row) => (
+                  <div key={row.label} className={`flex justify-between items-center rounded-xl px-4 py-3 ${row.highlight ? 'bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20' : 'bg-white/[0.03]'}`}>
+                    <span className="text-sm text-muted-foreground">{row.label}</span>
+                    <span className={`font-semibold ${row.highlight ? 'gradient-text' : ''}`}>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 text-muted-foreground text-sm px-2">
+              <ChevronRight className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+              <p>Now reinvest your $221 + add just $279 = $500. Activate the Booster Plan.</p>
+            </div>
+
+            {/* Booster */}
+            <div className="glass-card p-6 rounded-2xl border border-green-500/20 bg-green-500/5">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/10 text-green-400">
+                  <Rocket className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Booster Plan — Day 8</p>
+                  <p className="text-sm text-muted-foreground">14 days · 1.8%/day · $500 in</p>
+                </div>
+              </div>
+              <div className="space-y-2.5">
+                {[
+                  { label: 'Your stake', value: '$500.00', highlight: false },
+                  { label: 'Daily reward (1.8%)', value: '+$9.00 / day', highlight: false },
+                  { label: 'Total earned over 14 days', value: '$126.00', highlight: false },
+                  { label: 'Full payout at day 22', value: '$626.00', highlight: true },
+                ].map((row) => (
+                  <div key={row.label} className={`flex justify-between items-center rounded-xl px-4 py-3 ${row.highlight ? 'bg-gradient-to-r from-green-500/10 to-emerald-600/10 border border-green-500/20' : 'bg-white/[0.03]'}`}>
+                    <span className="text-sm text-muted-foreground">{row.label}</span>
+                    <span className={`font-semibold ${row.highlight ? 'text-green-400' : ''}`}>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="text-center text-xs text-muted-foreground/50 italic px-4">
+              Examples for illustration only. Returns are not guaranteed. Crypto carries inherent risk.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STAKING VS EVERYTHING ELSE: Comparison ───────────────────────────── */}
+      <section className="py-20 border-t border-white/5">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Head to Head</p>
+            <h2 className="text-3xl font-black mb-4">Staking vs Every Other Option</h2>
+          </div>
+
+          <div className="glass-card overflow-hidden rounded-2xl">
+            <div className="grid grid-cols-5 border-b border-white/10 bg-white/[0.03] text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <div className="p-4 col-span-2">Investment type</div>
+              <div className="p-4 text-center">Daily income</div>
+              <div className="p-4 text-center">Knowledge needed</div>
+              <div className="p-4 text-center">Min start</div>
+            </div>
+            {[
+              { type: 'Savings account', daily: '~0.001%', knowledge: 'None', min: '$100', bad: [true, false, false] },
+              { type: 'Government bonds', daily: '~0.014%', knowledge: 'Low', min: '$1,000', bad: [true, false, true] },
+              { type: 'Stock market', daily: '±Variable', knowledge: 'High', min: '$1', bad: [true, true, false] },
+              { type: 'Real estate', daily: '±Variable', knowledge: 'Very High', min: '$50,000+', bad: [true, true, true] },
+              { type: 'Crypto trading', daily: '±Variable', knowledge: 'Expert', min: '$100', bad: [true, true, false] },
+              { type: 'StakeOnix Staking', daily: '1.5–4.5%', knowledge: 'None', min: '$200', bad: [false, false, false], highlight: true },
+            ].map((row) => (
+              <div
+                key={row.type}
+                className={`grid grid-cols-5 border-b border-white/[0.05] last:border-0 text-sm ${row.highlight ? 'bg-cyan-500/5 border-cyan-500/10' : ''}`}
+              >
+                <div className={`p-4 col-span-2 font-medium ${row.highlight ? 'text-cyan-400 font-bold' : 'text-white'}`}>{row.type}</div>
+                <div className={`p-4 text-center font-semibold ${row.bad[0] ? 'text-red-400' : 'text-green-400'}`}>{row.daily}</div>
+                <div className={`p-4 text-center ${row.bad[1] ? 'text-red-400' : 'text-green-400'}`}>{row.knowledge}</div>
+                <div className={`p-4 text-center ${row.bad[2] ? 'text-red-400' : 'text-green-400'}`}>{row.min}</div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* ── CTA ── */}
-        <div className="text-center max-w-xl mx-auto">
-          <h2 className="text-2xl font-bold mb-3">Ready to start earning?</h2>
-          <p className="text-muted-foreground mb-7">
-            Browse our plans and see exactly how much you could earn. No commitment needed - just explore.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild size="lg" className="gap-2">
-              <Link href="/plans">
-                View Staking Plans <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/signup">Create Free Account</Link>
-            </Button>
+      {/* ── FAQs ─────────────────────────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/5 bg-white/[0.01]">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <h2 className="text-3xl font-black text-center mb-10">Common Questions, Honest Answers</h2>
+          <div className="space-y-4">
+            {[
+              {
+                q: 'Can I actually lose money staking on StakeOnix?',
+                a: 'The staking returns themselves are fixed and credited daily — that part does not fluctuate with market prices. However, cryptocurrency prices can change. If you deposit $1,000 worth of BTC and BTC drops in dollar terms, the dollar value of your holdings shifts. StakeOnix pays your rewards in USD value — if you want full stability, use USDT or USDC.',
+              },
+              {
+                q: 'What is the minimum I need to start?',
+                a: 'Our Starter Trial plan begins at $200. This is intentionally low — it is designed to let you see real payouts in your account within 7 days, so you can verify the platform works before committing larger amounts.',
+              },
+              {
+                q: 'Do I need any crypto experience?',
+                a: 'None. If you can sign up for a website and send a payment, you have all the skills needed. Our onboarding takes under 10 minutes and includes step-by-step guidance on depositing and activating your first plan.',
+              },
+              {
+                q: 'How often are rewards paid?',
+                a: 'Every 24 hours, automatically. You wake up each morning to a higher balance. No claiming, no transactions to sign, no gas fees.',
+              },
+              {
+                q: 'Is staking on StakeOnix regulated?',
+                a: 'StakeOnix operates under financial services compliance in Canada, with full KYC and AML procedures. We actively welcome regulatory oversight — it keeps the industry clean and protects you.',
+              },
+              {
+                q: 'Can I have multiple plans running at once?',
+                a: 'Yes. Many investors run the Starter Trial as a test, then immediately activate a larger plan alongside it. There is no limit on concurrent plans.',
+              },
+              {
+                q: 'What happens when a plan expires?',
+                a: 'Your principal and all accumulated rewards are returned to your StakeOnix wallet. You can then withdraw to your external crypto wallet or reinvest into the same or a higher-tier plan — most investors do the latter.',
+              },
+            ].map((faq) => (
+              <div key={faq.q} className="glass-card p-5 rounded-xl">
+                <h3 className="font-semibold mb-2 flex items-start gap-2">
+                  <span className="text-cyan-400 mt-0.5 shrink-0 font-bold">Q.</span>
+                  {faq.q}
+                </h3>
+                <p className="text-sm text-muted-foreground pl-5 leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-      </div>
-    </div>
+      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
+      <section className="py-24 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-background to-purple-950/20" />
+        <div className="glow-blob w-[600px] h-[400px] bg-cyan-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="container relative mx-auto px-4 text-center max-w-2xl">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 mx-auto mb-6">
+            <Rocket className="h-8 w-8" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-black mb-4">
+            Start With $200. See Results in 7 Days.
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed mb-3">
+            The Starter Trial is specifically designed for first-timers. It is short, low-commitment,
+            and produces real payouts in your account within a week. Try it — then decide if you want more.
+          </p>
+          <p className="text-sm text-muted-foreground/60 mb-8">
+            No lock-in beyond the plan term · Daily withdrawals available · Cancel anytime before activation
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/signup">
+              <Button size="lg" className="gap-2 rounded-xl text-base px-10">
+                <Rocket className="h-4 w-4" />
+                Create Free Account
+              </Button>
+            </Link>
+            <Link href="/plans">
+              <Button size="lg" variant="outline" className="gap-2 rounded-xl text-base px-8 border-white/10">
+                Browse All 9 Plans <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+          <p className="mt-6 text-xs text-muted-foreground/40 max-w-md mx-auto">
+            All investment carries risk. Cryptocurrency values fluctuate. Do not invest more than you can afford to lose.
+            StakeOnix is registered in Ontario, Canada. Past performance does not guarantee future results.
+          </p>
+        </div>
+      </section>
+
+    </main>
   )
 }

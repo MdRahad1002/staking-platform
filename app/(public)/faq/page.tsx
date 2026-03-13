@@ -127,7 +127,7 @@ const faqSchema = {
       name: 'What is the minimum amount I can start with?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can start earning with as little as $20 worth of cryptocurrency. This makes StakeOnix accessible to almost anyone who wants to start building a passive income from crypto, regardless of their budget.',
+        text: 'You can start earning with as little as $200 worth of cryptocurrency. This makes StakeOnix accessible to almost anyone who wants to start building a passive income from crypto, regardless of their budget.',
       },
     },
     {

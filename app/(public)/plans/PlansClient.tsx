@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { TrendingUp, Search, ChevronDown, ChevronUp, Filter, Lock } from 'lucide-react'
+import { TrendingUp, Search, ChevronDown, ChevronUp, Filter, Lock, Calculator, ArrowRight, Zap } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 import { cn } from '@/lib/utils'
@@ -48,6 +48,39 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [sortKey, setSortKey] = useState<'apr' | 'duration' | 'min'>('apr')
   const [sortAsc, setSortAsc] = useState(false)
+  const [calcAmount, setCalcAmount] = useState('')
+  const [planCalcAmounts, setPlanCalcAmounts] = useState<Record<string, string>>({})
+
+  const calcNum = useMemo(() => {
+    const n = parseFloat(calcAmount.replace(/[^0-9.]/g, ''))
+    return isNaN(n) ? 0 : n
+  }, [calcAmount])
+
+  const calcResult = useMemo(() => {
+    if (calcNum < 1) return null
+    const qualifying = plans.filter(
+      (p) => p.minAmount <= calcNum && (p.maxAmount === null || p.maxAmount >= calcNum)
+    )
+    if (qualifying.length === 0) {
+      // Not enough? find the cheapest plan
+      const cheapest = [...plans].sort((a, b) => a.minAmount - b.minAmount)[0]
+      return cheapest ? { plan: cheapest, dailyEarning: 0, totalEarning: 0, totalPayout: 0, tooLow: true } : null
+    }
+    const plan = qualifying.reduce((best, p) => (p.dailyRoi > best.dailyRoi ? p : best), qualifying[0])
+    const dailyEarning = (calcNum * plan.dailyRoi) / 100
+    const totalEarning = (calcNum * plan.totalRoi) / 100
+    const totalPayout = calcNum + totalEarning
+    return { plan, dailyEarning, totalEarning, totalPayout, tooLow: false }
+  }, [plans, calcNum])
+
+  const getPlanCalcResult = (plan: Plan, rawAmount: string) => {
+    const n = parseFloat(rawAmount.replace(/[^0-9.]/g, ''))
+    if (!n || n < plan.minAmount) return null
+    const cappedAmount = plan.maxAmount && n > plan.maxAmount ? plan.maxAmount : n
+    const dailyEarning = (cappedAmount * plan.dailyRoi) / 100
+    const totalEarning = (cappedAmount * plan.totalRoi) / 100
+    return { amount: cappedAmount, dailyEarning, totalEarning, totalPayout: cappedAmount + totalEarning }
+  }
 
   const featuredPlans = plans.filter((p) => p.isFeatured)
 
@@ -90,6 +123,83 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
 
   return (
     <>
+      {/* ── Earnings Calculator ── */}
+      <section className="mb-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-card to-card overflow-hidden">
+        <div className="px-5 pt-5 pb-4">
+          <div className="flex items-center gap-2 mb-1">
+            <Calculator className="h-4 w-4 text-primary" />
+            <p className="text-sm font-bold text-primary uppercase tracking-widest">Earnings Calculator</p>
+          </div>
+          <p className="text-xs text-muted-foreground mb-4">
+            Enter any amount to instantly see your projected daily earnings, total profit, and which plan you qualify for.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="relative flex-1">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground font-bold text-sm">$</span>
+              <input
+                type="number"
+                min={0}
+                placeholder="e.g. 5000"
+                value={calcAmount}
+                onChange={(e) => setCalcAmount(e.target.value)}
+                className="w-full rounded-xl border border-primary/30 bg-background/80 pl-8 pr-4 py-3 text-sm font-semibold outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all"
+              />
+            </div>
+            {calcResult && !calcResult.tooLow && (
+              isLoggedIn ? (
+                <Link href={`/plan/stake?planId=${calcResult.plan.id}`}>
+                  <Button variant="gradient" className="h-full font-semibold gap-2 whitespace-nowrap">
+                    Stake with {calcResult.plan.name} <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="/signup">
+                  <Button variant="gradient" className="h-full font-semibold gap-2 whitespace-nowrap">
+                    Get Started <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )
+            )}
+          </div>
+
+          {/* Results */}
+          {calcResult && (
+            <div className="mt-4">
+              {calcResult.tooLow ? (
+                <div className="rounded-xl border border-yellow-500/25 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-400 flex items-center gap-2">
+                  <Zap className="h-4 w-4 flex-shrink-0" />
+                  Minimum deposit is {formatCurrency(calcResult.plan.minAmount)}. Add more to unlock the <strong>{calcResult.plan.name}</strong> and start earning daily returns.
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Matched Plan</p>
+                    <p className="font-bold text-sm text-primary truncate">{calcResult.plan.name}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{calcResult.plan.durationDays}d · {calcResult.plan.dailyRoi}%/day</p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Daily Earnings</p>
+                    <p className="font-bold text-lg text-green-400">+{formatCurrency(calcResult.dailyEarning)}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">per day, credited</p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Total Profit</p>
+                    <p className="font-bold text-lg gradient-text">+{formatCurrency(calcResult.totalEarning)}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">over {calcResult.plan.durationDays} days</p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Total Payout</p>
+                    <p className="font-bold text-lg text-white">{formatCurrency(calcResult.totalPayout)}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">principal + profit</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* ── Featured "hot" mini-cards row ── */}
       {featuredPlans.length > 0 && (
         <section className="mb-10">
@@ -316,6 +426,54 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
                     {plan.description && (
                       <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
                     )}
+
+                    {/* Per-plan quick calculator */}
+                    <div className="mb-4 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-2 flex items-center gap-1.5">
+                        <Calculator className="h-3.5 w-3.5" /> Quick Earnings Estimate
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-2 mb-3">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                          <input
+                            type="number"
+                            min={plan.minAmount}
+                            max={plan.maxAmount ?? undefined}
+                            placeholder={`Min ${formatCurrency(plan.minAmount)}`}
+                            value={planCalcAmounts[plan.id] ?? ''}
+                            onChange={(e) =>
+                              setPlanCalcAmounts((prev) => ({ ...prev, [plan.id]: e.target.value }))
+                            }
+                            className="w-full rounded-lg border border-border bg-background/80 pl-7 pr-3 py-2 text-sm outline-none focus:border-primary/50 transition-colors"
+                          />
+                        </div>
+                      </div>
+                      {(() => {
+                        const r = getPlanCalcResult(plan, planCalcAmounts[plan.id] ?? '')
+                        if (!r) return (
+                          <p className="text-[11px] text-muted-foreground">
+                            Enter an amount ≥ {formatCurrency(plan.minAmount)} to see your projected earnings.
+                          </p>
+                        )
+                        return (
+                          <div className="grid grid-cols-3 gap-3">
+                            <div>
+                              <p className="text-[10px] text-muted-foreground mb-0.5">Daily Earnings</p>
+                              <p className="font-bold text-green-400 text-sm">+{formatCurrency(r.dailyEarning)}</p>
+                            </div>
+                            <div>
+                              <p className="text-[10px] text-muted-foreground mb-0.5">Total Profit</p>
+                              <p className="font-bold gradient-text text-sm">+{formatCurrency(r.totalEarning)}</p>
+                            </div>
+                            <div>
+                              <p className="text-[10px] text-muted-foreground mb-0.5">Total Payout</p>
+                              <p className="font-bold text-white text-sm">{formatCurrency(r.totalPayout)}</p>
+                            </div>
+                          </div>
+                        )
+                      })()}
+                    </div>
+
                     <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
                       {isLoggedIn ? (
                         <Link href={`/plan/stake?planId=${plan.id}`}>

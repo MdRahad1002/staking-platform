@@ -15,12 +15,14 @@ import {
   ArrowUpFromLine,
   Bell,
   ArrowRight,
+  Zap,
+  Rocket,
 } from 'lucide-react'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
 async function getDashboardData(userId: string) {
-  const [user, stakes, deposits, withdrawals, notifications] = await Promise.all([
+  const [user, stakes, deposits, withdrawals, notifications, allPlans] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: { balance: true, firstName: true, lastName: true },
@@ -48,6 +50,10 @@ async function getDashboardData(userId: string) {
       orderBy: { createdAt: 'desc' },
       take: 5,
     }),
+    prisma.stakingPlan.findMany({
+      where: { isActive: true },
+      orderBy: { minAmount: 'asc' },
+    }),
   ])
 
   const activeStakes = stakes.filter((s) => s.status === 'ACTIVE')
@@ -56,6 +62,17 @@ async function getDashboardData(userId: string) {
   const totalDeposited = deposits
     .filter((d) => d.status === 'CONFIRMED')
     .reduce((sum, d) => sum + d.amount, 0)
+
+  // Find the best ROI the user currently has in active stakes
+  const bestActiveRoi = activeStakes.length > 0
+    ? Math.max(...activeStakes.map((s) => s.dailyRoi))
+    : 0
+
+  // Find the next plan that offers a higher ROI than what user currently has
+  const nextTierPlan = allPlans.find((p) => p.dailyRoi > bestActiveRoi) ?? null
+
+  // Find the cheapest plan the user doesn't have an active stake on yet (for idle balance nudge)
+  const idlePlan = allPlans.find((p) => p.minAmount <= (user?.balance ?? 0)) ?? null
 
   return {
     user,
@@ -67,6 +84,10 @@ async function getDashboardData(userId: string) {
     totalStaked,
     totalEarned,
     totalDeposited,
+    allPlans,
+    bestActiveRoi,
+    nextTierPlan,
+    idlePlan,
   }
 }
 
@@ -102,6 +123,64 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </div>
+
+      {/* ── Yield Boost Nudge ── */}
+      {!data.nextTierPlan && data.activeStakes.length === 0 && data.idlePlan && (
+        <div className="rounded-2xl border border-primary/30 bg-gradient-to-r from-primary/10 via-card to-card px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary/20">
+            <Rocket className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <p className="font-bold text-sm">
+              You have {formatCurrency(data.user?.balance ?? 0)} ready to work — start earning today
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Stake with <strong className="text-white">{data.idlePlan.name}</strong> and earn{' '}
+              <strong className="text-primary">
+                +{formatCurrency(((data.user?.balance ?? 0) * data.idlePlan.dailyRoi) / 100)}/day
+              </strong>{' '}
+              at {data.idlePlan.dailyRoi}% daily — {data.idlePlan.durationDays}-day term.
+            </p>
+          </div>
+          <div className="flex gap-2 flex-shrink-0">
+            <Link href={`/plan/stake?planId=${data.idlePlan.id}`}>
+              <Button variant="gradient" size="sm" className="gap-1.5 font-semibold">
+                <Zap className="h-3.5 w-3.5" /> Stake Now
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {data.nextTierPlan && (
+        <div className="rounded-2xl border border-yellow-500/30 bg-gradient-to-r from-yellow-500/10 via-card to-card px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-yellow-500/20">
+            <TrendingUp className="h-5 w-5 text-yellow-400" />
+          </div>
+          <div className="flex-1">
+            <p className="font-bold text-sm">
+              Upgrade to <span className="text-yellow-400">{data.nextTierPlan.name}</span> — earn{' '}
+              <span className="text-yellow-400">{data.nextTierPlan.dailyRoi}%/day</span> vs your current{' '}
+              {data.bestActiveRoi}%/day
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Minimum deposit: <strong className="text-white">{formatCurrency(data.nextTierPlan.minAmount)}</strong>.{' '}
+              That&#39;s{' '}
+              <strong className="text-yellow-400">
+                +{formatCurrency((data.nextTierPlan.minAmount * (data.nextTierPlan.dailyRoi - data.bestActiveRoi)) / 100)}/day
+              </strong>{' '}
+              more in daily returns on the minimum stake.
+            </p>
+          </div>
+          <div className="flex gap-2 flex-shrink-0">
+            <Link href="/deposit">
+              <Button size="sm" className="gap-1.5 font-semibold bg-yellow-500 hover:bg-yellow-400 text-black">
+                <ArrowDownToLine className="h-3.5 w-3.5" /> Top Up &amp; Upgrade
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Stats cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

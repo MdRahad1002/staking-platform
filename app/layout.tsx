@@ -100,6 +100,9 @@ export const metadata: Metadata = {
   verification: {
     // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN',
     // yandex: 'YOUR_YANDEX_TOKEN',
+    other: {
+      'msvalidate.01': '2D9BDEB489BB2ADD2471AAE0F2C43EE9',
+    },
   },
 }
 

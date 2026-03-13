@@ -4,7 +4,7 @@ import { prisma } from '@/lib/db'
 // Protect with a secret so only authorized callers (Vercel Cron, server job, etc.) can trigger this
 function isAuthorized(req: NextRequest) {
   const auth = req.headers.get('authorization')
-  const cronSecret = process.env.CRON_SECRET
+  const cronSecret = (process.env.CRON_SECRET || '').trim()
   if (!cronSecret) return false
   return auth === `Bearer ${cronSecret}`
 }

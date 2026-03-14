@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
@@ -7,7 +7,7 @@ async function getCallerDomainId(callerId: string) {
   return me?.domainId ?? null
 }
 
-// PATCH /api/support/settings/quick-replies/[id] — update title/content
+// PATCH /api/support/settings/quick-replies/[id] update title/content
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireSupport()
   const domainId = await getCallerDomainId(session.user.id)

@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -43,9 +43,9 @@ We do not currently use third-party advertising cookies or cross-site tracking c
   },
   {
     title: '3. How Long Cookies Last',
-    content: `Session Cookies — Temporary cookies that expire when you close your browser. These are used for your login session and security tokens.
+    content: `Session Cookies Temporary cookies that expire when you close your browser. These are used for your login session and security tokens.
 
-Persistent Cookies — Remain on your device for a set period or until you delete them:
+Persistent Cookies Remain on your device for a set period or until you delete them:
 • Preference cookies: up to 12 months
 • Analytics identifiers: up to 24 months
 • Security tokens: up to 30 days (or until you log out)
@@ -67,7 +67,7 @@ Mozilla Firefox: Options → Privacy & Security → Cookies and Site Data
 Safari: Preferences → Privacy → Manage Website Data
 Microsoft Edge: Settings → Cookies and site permissions
 
-Please note: if you block or delete strictly necessary cookies, some parts of StakeOnix may not work correctly — in particular, you will not be able to log in to your account.
+Please note: if you block or delete strictly necessary cookies, some parts of StakeOnix may not work correctly in particular, you will not be able to log in to your account.
 
 You can also opt out of analytics tracking globally by enabling "Do Not Track" in your browser settings. StakeOnix respects this signal.`,
   },

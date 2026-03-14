@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
-// GET /api/support/settings/telegram — get caller's telegramChatId
+// GET /api/support/settings/telegram get caller's telegramChatId
 export async function GET() {
   const session = await requireSupport()
 
@@ -14,7 +14,7 @@ export async function GET() {
   return NextResponse.json({ telegramChatId: me?.telegramChatId ?? null })
 }
 
-// PATCH /api/support/settings/telegram — update caller's telegramChatId
+// PATCH /api/support/settings/telegram update caller's telegramChatId
 export async function PATCH(req: NextRequest) {
   const session = await requireSupport()
 

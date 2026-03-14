@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { getPaymentStatus, isPaymentConfirmed, isPaymentFailed } from '@/lib/nowpayments'
@@ -21,7 +21,7 @@ export async function GET(
       return NextResponse.json({ error: 'Deposit not found.' }, { status: 404 })
     }
 
-    // Already in a terminal state — return immediately
+    // Already in a terminal state return immediately
     if (deposit.status === 'CONFIRMED' || deposit.status === 'FAILED') {
       return NextResponse.json({ data: { status: deposit.status, deposit } })
     }
@@ -43,7 +43,7 @@ export async function GET(
     const nowStatus = npStatus.payment_status
 
     if (isPaymentConfirmed(nowStatus) && deposit.status !== 'CONFIRMED') {
-      // Credit user balance — use actually_paid amount or original estimate
+      // Credit user balance use actually_paid amount or original estimate
       const cryptoAmount = npStatus.actually_paid || npStatus.pay_amount || 0
       const usdAmount = deposit.amountUsd ?? deposit.amount
 

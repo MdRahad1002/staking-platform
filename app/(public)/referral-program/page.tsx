@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { useState } from 'react'
@@ -97,7 +97,7 @@ const steps = [
     num: '04',
     icon: <DollarSign className="h-6 w-6" />,
     color: 'bg-green-500/15 text-green-400',
-    title: 'Earn up to 8% — two levels deep',
+    title: 'Earn up to 8% two levels deep',
     desc: 'Earn 5–8% on every dollar your direct referrals earn (L1), PLUS 2% on what their referrals earn (L2). Your commission tier rises automatically as your network grows.',
   },
 ]
@@ -202,13 +202,13 @@ export default function ReferralProgramPage() {
             <span className="gradient-text">Earn Forever.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4">
-            Earn <span className="text-white font-bold">5–8% L1 commission</span> on every dollar your referrals earn, plus a <span className="text-white font-bold">2% L2 commission</span> on your referrals&apos; referrals — paid automatically every single day.
+            Earn <span className="text-white font-bold">5–8% L1 commission</span> on every dollar your referrals earn, plus a <span className="text-white font-bold">2% L2 commission</span> on your referrals&apos; referrals paid automatically every single day.
           </p>
           <p className="text-muted-foreground max-w-xl mx-auto mb-3">
-            No cap. No expiry. Your commission tier <strong className="text-white">upgrades automatically</strong> as your network grows — from 5% at Bronze to 8% at Platinum.
+            No cap. No expiry. Your commission tier <strong className="text-white">upgrades automatically</strong> as your network grows from 5% at Bronze to 8% at Platinum.
           </p>
           <p className="text-sm text-green-400/80 max-w-md mx-auto mb-10 font-medium">
-            🎁 Your referrals receive a <strong>$10 welcome bonus</strong> after activating their first plan — making it easier to share.
+            🎁 Your referrals receive a <strong>$10 welcome bonus</strong> after activating their first plan making it easier to share.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/signup">
@@ -347,7 +347,7 @@ export default function ReferralProgramPage() {
                 icon: <TrendingUp className="h-5 w-5" />,
                 color: 'bg-cyan-500/15 text-cyan-400',
                 title: 'Commission grows as you grow',
-                desc: 'Your rate upgrades automatically — from 5% at Bronze to 8% at Platinum. Bring 25 active investors and unlock our top commission tier forever.',
+                desc: 'Your rate upgrades automatically from 5% at Bronze to 8% at Platinum. Bring 25 active investors and unlock our top commission tier forever.',
               },
               {
                 icon: <Zap className="h-5 w-5" />,
@@ -371,7 +371,7 @@ export default function ReferralProgramPage() {
                 icon: <CheckCircle2 className="h-5 w-5" />,
                 color: 'bg-amber-500/15 text-amber-400',
                 title: 'Your referrals get a $10 welcome bonus',
-                desc: 'Everyone you refer receives a $10 credit after activating their first plan. That makes your invite more compelling — and your link more likely to convert.',
+                desc: 'Everyone you refer receives a $10 credit after activating their first plan. That makes your invite more compelling and your link more likely to convert.',
               },
             ].map((item) => (
               <div key={item.title} className="glass-card p-6 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex gap-4 items-start">

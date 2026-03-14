@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
-// GET /api/admin/kyc — list all submissions (admin + worker + support)
+// GET /api/admin/kyc list all submissions (admin + worker + support)
 export async function GET() {
   try {
     await requireSupport()

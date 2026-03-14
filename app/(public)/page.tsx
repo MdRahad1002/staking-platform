@@ -746,7 +746,7 @@ export default async function HomePage() {
                     'No trading knowledge needed - zero experience required',
                     'Rewards credited to your wallet every 24 hours',
                     'Withdraw anytime - no lock-in traps',
-                    'Start with as little as $200 — Starter Trial plan',
+                    'Start with as little as $200 Starter Trial plan',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400 flex-shrink-0 mt-0.5" />

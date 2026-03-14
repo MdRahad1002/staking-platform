@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 
 // ── GET  /api/unsubscribe?uid=<base64url-userId>  ─────────────────────
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   if (isPreview) {
     return new NextResponse(
       `<!DOCTYPE html><html><body style="font-family:sans-serif;text-align:center;padding:60px;background:#0a0f1e;color:#e2e8f0;">
-        <h2 style="color:#22c55e;">Preview mode — unsubscribe not processed.</h2>
+        <h2 style="color:#22c55e;">Preview mode unsubscribe not processed.</h2>
         <p>This is a test email. Real emails include a working unsubscribe link.</p>
         <a href="${appUrl}" style="color:#7c3aed;">Back to StakeOnix</a>
       </body></html>`,

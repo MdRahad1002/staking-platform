@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
-// GET /api/support/users/:id — read-only profile, domain-ownership guarded
+// GET /api/support/users/:id read-only profile, domain-ownership guarded
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await requireSupport()

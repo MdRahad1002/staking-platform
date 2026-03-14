@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
@@ -15,7 +15,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     })
     const callerDomainId = me?.domainId ?? null
 
-    // Workers (with a domainId) cannot reassign users between domains — admin only
+    // Workers (with a domainId) cannot reassign users between domains admin only
     if (callerDomainId) {
       return NextResponse.json({ error: 'Forbidden: only administrators can reassign domain membership.' }, { status: 403 })
     }

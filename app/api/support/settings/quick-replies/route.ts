@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
@@ -7,7 +7,7 @@ async function getCallerDomainId(callerId: string) {
   return me?.domainId ?? null
 }
 
-// GET /api/support/settings/quick-replies — list quick replies for caller's domain
+// GET /api/support/settings/quick-replies list quick replies for caller's domain
 export async function GET() {
   const session = await requireSupport()
   const domainId = await getCallerDomainId(session.user.id)
@@ -21,7 +21,7 @@ export async function GET() {
   return NextResponse.json({ data })
 }
 
-// POST /api/support/settings/quick-replies — create a new quick reply
+// POST /api/support/settings/quick-replies create a new quick reply
 export async function POST(req: NextRequest) {
   const session = await requireSupport()
   const domainId = await getCallerDomainId(session.user.id)

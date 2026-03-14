@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
-// GET /api/worker/users/:id — full profile for the detail page
+// GET /api/worker/users/:id full profile for the detail page
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await requireWorker()
@@ -89,7 +89,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   }
 }
 
-// PATCH /api/worker/users/:id — edit email, status, balance
+// PATCH /api/worker/users/:id edit email, status, balance
 // Body: { email?, isActive?, bannedReason?, balanceDelta?, balanceSet?, note? }
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {

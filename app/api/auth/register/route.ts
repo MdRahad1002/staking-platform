@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import bcrypt from 'bcryptjs'
 import { sendVerificationEmail } from '@/lib/mail'
@@ -23,7 +23,7 @@ const schema = z.object({
   password: strongPassword,
   firstName: z.string().max(50).optional(),
   lastName: z.string().max(50).optional(),
-  // min(1) rejects empty strings — undefined/absent is still fine
+  // min(1) rejects empty strings undefined/absent is still fine
   username: z.string().min(1).max(30).regex(/^[a-zA-Z0-9_]+$/, 'Username may only contain letters, numbers and underscores.').optional(),
   referralCode: z.string().max(20).optional(),
   phone: z.string().max(20).optional(),
@@ -105,12 +105,12 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      // Send welcome/verification email — awaited so Vercel doesn't kill it before it completes
+      // Send welcome/verification email awaited so Vercel doesn't kill it before it completes
       try {
         await sendVerificationEmail(user.email, firstName || user.email, verificationToken)
       } catch (emailError) {
         console.error('[REGISTER] Email send error:', emailError)
-        // Don't fail the request — account is created, email is cosmetic
+        // Don't fail the request account is created, email is cosmetic
       }
     } catch (createError: any) {
       // P2002 = unique constraint violation (race condition on email)

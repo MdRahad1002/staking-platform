@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -72,7 +72,7 @@ interface CompoundProjectionProps {
 }
 
 /**
- * Shows a 3-month compounding projection — anchors on the large future number
+ * Shows a 3-month compounding projection anchors on the large future number
  * to make the decision feel like a no-brainer.
  */
 export function CompoundProjection({ dailyEarning, principalStaked, planDailyRoi }: CompoundProjectionProps) {

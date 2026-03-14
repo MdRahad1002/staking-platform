@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { sendEmailBatch, getBulkEmailTemplate } from '@/lib/mail'
 
-export const maxDuration = 300 // Vercel Pro — allow up to 5 min for large sends
+export const maxDuration = 300 // Vercel Pro allow up to 5 min for large sends
 
 // ── GET  /api/admin/bulk-email  ─────────────────────────────────────────
 // Returns all campaigns (newest first) + aggregate stats
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     select: { id: true, email: true, firstName: true, lastName: true },
   })
 
-  // Create campaign record — status: sending
+  // Create campaign record status: sending
   const campaign = await prisma.bulkEmail.create({
     data: { subject, content, target: target || 'all', status: 'sending' },
   })

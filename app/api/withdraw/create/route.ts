@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import bcrypt from 'bcryptjs'
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     })
     if (!user) return NextResponse.json({ error: 'User not found.' }, { status: 404 })
 
-    // KYC gate — must be APPROVED before any withdrawal
+    // KYC gate must be APPROVED before any withdrawal
     if (!user.kyc || user.kyc.status !== 'APPROVED') {
       const kycStatus = user.kyc?.status
       const msg = !user.kyc

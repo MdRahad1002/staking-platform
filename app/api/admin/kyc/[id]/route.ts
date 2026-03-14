@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker, requireSupport } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
@@ -9,7 +9,7 @@ const actionSchema = z.object({
   rejectionReason: z.string().min(5).max(500).optional(),
 })
 
-// GET /api/admin/kyc/[id] — view single submission including document images
+// GET /api/admin/kyc/[id] view single submission including document images
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -39,7 +39,7 @@ export async function GET(
   }
 }
 
-// PATCH /api/admin/kyc/[id] — approve or reject (worker + admin only)
+// PATCH /api/admin/kyc/[id] approve or reject (worker + admin only)
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

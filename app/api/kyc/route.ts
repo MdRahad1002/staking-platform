@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
@@ -15,7 +15,7 @@ const submitSchema = z.object({
   selfieImage: z.string().min(100),  // base64 data URI
 })
 
-// GET /api/kyc — fetch own KYC status
+// GET /api/kyc fetch own KYC status
 export async function GET() {
   try {
     const session = await requireAuth()
@@ -42,7 +42,7 @@ export async function GET() {
   }
 }
 
-// POST /api/kyc — submit KYC
+// POST /api/kyc submit KYC
 export async function POST(req: NextRequest) {
   try {
     const session = await requireAuth()

@@ -28,7 +28,7 @@ const TOPICS: Topic[] = [
       },
       {
         keywords: /pending|missing|not showing|not received|not credited|confirm|stuck|delay|track/i,
-        reply: 'If your deposit is not showing:\n\n- Allow up to **2 hours** for network confirmations\n- Verify you sent to the correct address and network\n- Check the TX on a blockchain explorer using your TX hash\n\nIf it has been over 2 hours and the TX is confirmed on-chain, please reply **no** and share your TX hash — a human agent will investigate.\n\n---\n**Did that answer your question?** Reply **yes** or **no**.',
+        reply: 'If your deposit is not showing:\n\n- Allow up to **2 hours** for network confirmations\n- Verify you sent to the correct address and network\n- Check the TX on a blockchain explorer using your TX hash\n\nIf it has been over 2 hours and the TX is confirmed on-chain, please reply **no** and share your TX hash a human agent will investigate.\n\n---\n**Did that answer your question?** Reply **yes** or **no**.',
       },
     ],
     defaultAnswer: 'For deposits, go to **Dashboard → Deposit**. Confirmations can take up to 2 hours.\n\n---\n**Did that answer your question?** Reply **yes** or **no**.',
@@ -190,14 +190,14 @@ async function escalateToHuman(userId: string) {
       data: staff.map((s) => ({
         userId: s.id,
         type: 'SYSTEM',
-        title: `Support request — ${userName}`,
+        title: `Support request ${userName}`,
         message: `${userName} could not be helped by the bot and needs a human agent. Open the Live Chat panel to respond.`,
         link: chatLink,
       })),
     })
   }
 
-  // Also try to send an email alert to the admin (best-effort — never blocks the response)
+  // Also try to send an email alert to the admin (best-effort never blocks the response)
   const adminEmail = process.env.ADMIN_EMAIL
   if (adminEmail) {
     sendEmail({

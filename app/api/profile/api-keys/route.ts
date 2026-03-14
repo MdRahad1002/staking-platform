@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    // Return the full key ONCE — never returned again
+    // Return the full key ONCE never returned again
     return NextResponse.json(
       {
         data: {

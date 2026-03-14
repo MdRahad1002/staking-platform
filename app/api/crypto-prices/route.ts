@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 
 // CoinGecko id → display symbol
 const COINS: { id: string; symbol: string }[] = [
@@ -54,7 +54,7 @@ export async function GET() {
   } catch (err) {
     console.error('[crypto-prices] fetch error:', err)
     return NextResponse.json(
-      COINS.map(({ symbol }) => ({ symbol, price: '$—', change: '—', up: true })),
+      COINS.map(({ symbol }) => ({ symbol, price: '$', change: '', up: true })),
       { status: 200 }
     )
   }

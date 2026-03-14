@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
       }),
     ])
 
-    // Per-domain breakdown — scoped to caller's domain if they have one
+    // Per-domain breakdown scoped to caller's domain if they have one
     const domainFilter = callerDomainId ? { id: callerDomainId } : {}
     const domains = await prisma.domain.findMany({ where: domainFilter, orderBy: { domain: 'asc' } })
 

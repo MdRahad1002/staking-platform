@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { sendPasswordResetEmail } from '@/lib/mail'
 import crypto from 'crypto'
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     })
 
     // Always return success to avoid email enumeration.
-    // Also silently skip suspended/banned accounts — login gate will block them anyway.
+    // Also silently skip suspended/banned accounts login gate will block them anyway.
     if (!user || !user.isActive || user.bannedAt) {
       return NextResponse.json({ message: 'If that email exists, a reset link has been sent.' })
     }
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
     const resetUrl = `${baseUrl}/auth-re-password?token=${token}`
 
-    // Awaited — Vercel serverless terminates non-awaited promises before they complete
+    // Awaited Vercel serverless terminates non-awaited promises before they complete
     try {
       await sendPasswordResetEmail(user.email, resetUrl, user.firstName || undefined)
     } catch (err) {

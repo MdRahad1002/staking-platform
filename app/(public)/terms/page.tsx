@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Terms of Service | StakeOnix',
@@ -57,7 +57,7 @@ export default function TermsPage() {
               title: '9. Contact',
               content: `Questions about the Terms of Service should be sent to: info@stakeonix.com
               
-              StakeOnix Inc. (Canada — Head Office)
+              StakeOnix Inc. (Canada Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
               Phone: +1 (613) 366-4391
 

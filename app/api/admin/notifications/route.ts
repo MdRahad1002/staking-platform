@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ count: 1 })
     }
 
-    // all active users — use createMany for performance
+    // all active users use createMany for performance
     const users = await prisma.user.findMany({ where: { isActive: true }, select: { id: true } })
     await prisma.notification.createMany({
       data: users.map((u) => ({ userId: u.id, type: type || 'SYSTEM', title, message })),

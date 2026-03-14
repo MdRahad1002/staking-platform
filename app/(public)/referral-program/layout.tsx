@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
   title: 'Earn 5–8% Referral Commissions on Crypto Staking | StakeOnix',
   description:
-    'Refer friends to StakeOnix and earn 5–8% on every dollar they earn (Level 1) plus 2% on their referrals (Level 2) — paid daily, no cap. Your referrals also get a $10 welcome bonus.',
+    'Refer friends to StakeOnix and earn 5–8% on every dollar they earn (Level 1) plus 2% on their referrals (Level 2) paid daily, no cap. Your referrals also get a $10 welcome bonus.',
   keywords: [
     'crypto referral program',
     'earn money referring friends crypto',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Earn 5–8% Daily from Every Friend You Refer to StakeOnix',
     description:
-      'Two-level referral commissions: earn 5–8% on your direct referrals and 2% on their referrals — forever, paid daily. Your friends get $10 just for signing up.',
+      'Two-level referral commissions: earn 5–8% on your direct referrals and 2% on their referrals forever, paid daily. Your friends get $10 just for signing up.',
     url: `${APP_URL}/referral-program`,
   },
 }

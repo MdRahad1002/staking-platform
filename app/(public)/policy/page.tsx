@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | StakeOnix',
@@ -71,7 +71,7 @@ Strictly necessary cookies (login session, CSRF protection) are required for the
               title: '7. Contact Us',
               content: `If you have any questions about this Privacy Policy, please contact us at: info@stakeonix.com
               
-              StakeOnix Inc. (Canada — Head Office)
+              StakeOnix Inc. (Canada Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
               Phone: +1 (613) 366-4391
 

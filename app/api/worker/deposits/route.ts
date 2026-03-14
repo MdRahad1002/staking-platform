@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { requireWorker } from '@/lib/auth-helpers'
 
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     const status = searchParams.get('status') || undefined
     const page = Math.max(0, parseInt(searchParams.get('page') || '0', 10))
 
-    // Build user filter — worker can only see users belonging to domains (not global)
+    // Build user filter worker can only see users belonging to domains (not global)
     const userFilter = domainId
       ? { domainId }
       : { domainId: { not: null as string | null } }

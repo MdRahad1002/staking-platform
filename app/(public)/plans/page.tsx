@@ -8,9 +8,9 @@ export const dynamic = 'force-dynamic'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'Crypto Yield Plans — Start With $200, Earn Daily | StakeOnix',
+  title: 'Crypto Yield Plans Start With $200, Earn Daily | StakeOnix',
   description:
-    'Join StakeOnix and start earning daily crypto returns from just $200. 9 yield plans from Starter Trial to Sovereign institutional tier. Up to 4.5% daily — see real payouts in your account within 24 hours.',
+    'Join StakeOnix and start earning daily crypto returns from just $200. 9 yield plans from Starter Trial to Sovereign institutional tier. Up to 4.5% daily see real payouts in your account within 24 hours.',
   keywords: [
     'crypto yield plans 2026',
     'earn daily returns on crypto',
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {
-    title: 'StakeOnix Yield Plans — Earn Up to 4.5% Daily | StakeOnix',
-    description: 'Start with just $200. 9 plans designed to grow with you — from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
+    title: 'StakeOnix Yield Plans Earn Up to 4.5% Daily | StakeOnix',
+    description: 'Start with just $200. 9 plans designed to grow with you from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
     url: `${APP_URL}/plans`,
   },
 }
@@ -104,7 +104,7 @@ export default async function PlansPage() {
             Staking <span className="gradient-text">Plans</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-base mb-8">
-            Nine plans designed as a progressive path — start with $200 on our 7-day <strong className="text-white">Starter Trial</strong> to see real daily payouts in your account, then scale up as your confidence grows. Every plan delivers daily settlements.
+            Nine plans designed as a progressive path start with $200 on our 7-day <strong className="text-white">Starter Trial</strong> to see real daily payouts in your account, then scale up as your confidence grows. Every plan delivers daily settlements.
           </p>
 
           {/* APR range pill */}

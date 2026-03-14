@@ -1,8 +1,8 @@
-import { MetadataRoute } from 'next'
+﻿import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'StakeOnix — Crypto Staking Platform',
+    name: 'StakeOnix Crypto Staking Platform',
     short_name: 'StakeOnix',
     description: 'Earn daily passive income on Bitcoin, Ethereum, USDT, Solana & 10+ cryptocurrencies.',
     start_url: '/',

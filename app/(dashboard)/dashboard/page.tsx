@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
 import { redirect } from 'next/navigation'
@@ -163,14 +163,14 @@ export default async function DashboardPage() {
           </div>
           <div className="flex-1">
             <p className="font-bold text-sm">
-              You have {formatCurrency(data.user?.balance ?? 0)} ready to work — start earning today
+              You have {formatCurrency(data.user?.balance ?? 0)} ready to work start earning today
             </p>
             <p className="text-xs text-muted-foreground mt-0.5">
               Stake with <strong className="text-white">{data.idlePlan.name}</strong> and earn{' '}
               <strong className="text-primary">
                 +{formatCurrency(((data.user?.balance ?? 0) * data.idlePlan.dailyRoi) / 100)}/day
               </strong>{' '}
-              at {data.idlePlan.dailyRoi}% daily — {data.idlePlan.durationDays}-day term.
+              at {data.idlePlan.dailyRoi}% daily {data.idlePlan.durationDays}-day term.
             </p>
           </div>
           <div className="flex gap-2 flex-shrink-0">
@@ -190,7 +190,7 @@ export default async function DashboardPage() {
           </div>
           <div className="flex-1">
             <p className="font-bold text-sm">
-              Upgrade to <span className="text-yellow-400">{data.nextTierPlan.name}</span> — earn{' '}
+              Upgrade to <span className="text-yellow-400">{data.nextTierPlan.name}</span> earn{' '}
               <span className="text-yellow-400">{data.nextTierPlan.dailyRoi}%/day</span> vs your current{' '}
               {data.bestActiveRoi}%/day
             </p>

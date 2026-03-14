@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import path from 'path'
 import { writeFile, mkdir, unlink } from 'fs/promises'
 
-// Map validated MIME types to safe extensions — never trust the client filename
+// Map validated MIME types to safe extensions never trust the client filename
 const MIME_EXT: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/png':  'png',
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
-    // Extension is derived from server-validated MIME — no filename involvement
+    // Extension is derived from server-validated MIME no filename involvement
     const fileName = `${session.user.id}-${Date.now()}.${ext}`
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'avatars')
     await mkdir(uploadDir, { recursive: true })
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     await prisma.user.update({ where: { id: session.user.id }, data: { avatar: url } })
 
-    // Delete old avatar file if it was a local upload — non-blocking
+    // Delete old avatar file if it was a local upload non-blocking
     if (existing?.avatar?.startsWith('/uploads/avatars/')) {
       const oldPath = path.join(process.cwd(), 'public', existing.avatar)
       unlink(oldPath).catch(() => {})

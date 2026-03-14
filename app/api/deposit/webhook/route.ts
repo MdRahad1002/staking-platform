@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { verifyIpnSignature, isPaymentConfirmed, isPaymentFailed } from '@/lib/nowpayments'
 import { sendDepositConfirmedEmail } from '@/lib/mail'
@@ -10,14 +10,14 @@ export async function POST(req: NextRequest) {
     // Verify NOWPayments IPN signature (HMAC-SHA512 with recursive key sort)
     const sig = req.headers.get('x-nowpayments-sig') || ''
     if (!verifyIpnSignature(body, sig)) {
-      console.warn('[DEPOSIT_WEBHOOK] Invalid signature — rejected')
+      console.warn('[DEPOSIT_WEBHOOK] Invalid signature rejected')
       return NextResponse.json({ error: 'Invalid signature.' }, { status: 401 })
     }
 
     const payload = JSON.parse(body)
     const {
       payment_id,
-      parent_payment_id,  // set on re-deposits — do NOT auto-credit per NowPayments docs
+      parent_payment_id,  // set on re-deposits do NOT auto-credit per NowPayments docs
       payment_status,
       order_id,           // our deposit.id
       actually_paid,
@@ -31,10 +31,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Re-deposits: parent_payment_id is set when the same address receives extra funds.
-    // Per NowPayments docs: do NOT automatically credit — risk of underpayment.
+    // Per NowPayments docs: do NOT automatically credit risk of underpayment.
     if (parent_payment_id) {
       console.warn(
-        '[DEPOSIT_WEBHOOK] Re-deposit received — skipping auto-credit.',
+        '[DEPOSIT_WEBHOOK] Re-deposit received skipping auto-credit.',
         { payment_id, parent_payment_id, order_id, payment_status, actually_paid }
       )
       return NextResponse.json({ success: true })
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (deposit.status === 'CONFIRMED' || deposit.status === 'FAILED') {
-      // Already in terminal state — acknowledge silently
+      // Already in terminal state acknowledge silently
       return NextResponse.json({ success: true })
     }
 
@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
         },
       })
     } else {
-      // Intermediate states (waiting, confirming, sending…) — update payAmount only
+      // Intermediate states (waiting, confirming, sending…) update payAmount only
       await prisma.deposit.update({
         where: { id: deposit.id },
         data: {

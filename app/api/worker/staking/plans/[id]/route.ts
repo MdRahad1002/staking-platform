@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
@@ -14,7 +14,7 @@ const schema = z.object({
   description: z.string().optional(),
 })
 
-// PATCH /api/worker/staking/plans/:id — edit a domain-owned plan
+// PATCH /api/worker/staking/plans/:id edit a domain-owned plan
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await requireWorker()
@@ -54,7 +54,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 }
 
-// DELETE /api/worker/staking/plans/:id — delete a domain-owned plan
+// DELETE /api/worker/staking/plans/:id delete a domain-owned plan
 export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     await requireWorker()

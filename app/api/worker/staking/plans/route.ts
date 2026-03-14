@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireWorker } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { z } from 'zod'
@@ -15,7 +15,7 @@ const schema = z.object({
   description: z.string().optional(),
 })
 
-// GET /api/worker/staking/plans?domainId=  — list domain-owned plans
+// GET /api/worker/staking/plans?domainId=  list domain-owned plans
 export async function GET(req: NextRequest) {
   try {
     await requireWorker()
@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/worker/staking/plans — create a plan for a domain
+// POST /api/worker/staking/plans create a plan for a domain
 export async function POST(req: NextRequest) {
   try {
     await requireWorker()

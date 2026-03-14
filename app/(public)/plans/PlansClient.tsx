@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -8,7 +8,7 @@ import { formatCurrency } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 import { cn } from '@/lib/utils'
 
-// Simulated live activity — creates social proof and urgency
+// Simulated live activity creates social proof and urgency
 const ACTIVITY_NAMES = ['James T.','Sarah M.','David K.','Emma L.','Michael R.','Olivia P.','Chris W.','Priya N.','Ahmed K.','Laura B.','Tom S.','Natalie F.','Ryan H.','Ana C.','Marcus D.']
 const ACTIVITY_CITIES = ['Toronto','London','Dubai','Sydney','New York','Berlin','Singapore','Amsterdam','Zürich','Dublin','Vancouver','Los Angeles','Auckland','Frankfurt','Paris']
 

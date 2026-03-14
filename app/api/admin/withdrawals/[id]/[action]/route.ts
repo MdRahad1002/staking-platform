@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { sendWithdrawal } from '@/lib/westwallet'
@@ -92,7 +92,7 @@ export async function POST(
       const rejectedName = [withdrawal.user.firstName, withdrawal.user.lastName].filter(Boolean).join(' ') || withdrawal.user.email
       void sendEmail({
         to: withdrawal.user.email,
-        subject: `Withdrawal Rejected — Funds Returned to Your Balance`,
+        subject: `Withdrawal Rejected Funds Returned to Your Balance`,
         html: getWithdrawalStatusEmailTemplate(rejectedName, withdrawal.amount.toString(), withdrawal.currency.symbol, 'rejected'),
       }).catch(console.error)
       return NextResponse.json({ message: 'Withdrawal rejected and refunded.' })

@@ -1,12 +1,34 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { TrendingUp, Search, ChevronDown, ChevronUp, Filter, Lock, Calculator, ArrowRight, Zap } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 import { cn } from '@/lib/utils'
+
+// Simulated live activity — creates social proof and urgency
+const ACTIVITY_NAMES = ['James T.','Sarah M.','David K.','Emma L.','Michael R.','Olivia P.','Chris W.','Priya N.','Ahmed K.','Laura B.','Tom S.','Natalie F.','Ryan H.','Ana C.','Marcus D.']
+const ACTIVITY_CITIES = ['Toronto','London','Dubai','Sydney','New York','Berlin','Singapore','Amsterdam','Zürich','Dublin','Vancouver','Los Angeles','Auckland','Frankfurt','Paris']
+
+function buildActivityFeed(plans: Plan[]): { name: string; city: string; plan: string; amount: number; minsAgo: number }[] {
+  if (plans.length === 0) return []
+  const feed = []
+  const shuffled = [...plans].sort(() => Math.random() - 0.5)
+  for (let i = 0; i < 8; i++) {
+    const plan = shuffled[i % shuffled.length]
+    const amount = plan.minAmount + Math.floor(Math.random() * Math.min(plan.minAmount * 2, 5000))
+    feed.push({
+      name: ACTIVITY_NAMES[Math.floor(Math.random() * ACTIVITY_NAMES.length)],
+      city: ACTIVITY_CITIES[Math.floor(Math.random() * ACTIVITY_CITIES.length)],
+      plan: plan.name,
+      amount,
+      minsAgo: Math.floor(Math.random() * 14) + 1,
+    })
+  }
+  return feed
+}
 
 interface Plan {
   id: string
@@ -50,6 +72,22 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
   const [sortAsc, setSortAsc] = useState(false)
   const [calcAmount, setCalcAmount] = useState('')
   const [planCalcAmounts, setPlanCalcAmounts] = useState<Record<string, string>>({})
+  const [activityFeed] = useState(() => buildActivityFeed(plans))
+  const [activityIdx, setActivityIdx] = useState(0)
+  const [activityVisible, setActivityVisible] = useState(true)
+  const activityTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  useEffect(() => {
+    if (activityFeed.length === 0) return
+    activityTimerRef.current = setInterval(() => {
+      setActivityVisible(false)
+      setTimeout(() => {
+        setActivityIdx((i) => (i + 1) % activityFeed.length)
+        setActivityVisible(true)
+      }, 400)
+    }, 5000)
+    return () => { if (activityTimerRef.current) clearInterval(activityTimerRef.current) }
+  }, [activityFeed])
 
   const calcNum = useMemo(() => {
     const n = parseFloat(calcAmount.replace(/[^0-9.]/g, ''))
@@ -123,6 +161,22 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
 
   return (
     <>
+      {/* ── Live activity ticker ── */}
+      {activityFeed.length > 0 && (() => {
+        const ev = activityFeed[activityIdx]
+        return (
+          <div className={`mb-6 flex items-center gap-2.5 rounded-xl border border-green-500/20 bg-green-500/8 px-4 py-2.5 text-xs transition-opacity duration-300 ${activityVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+            <span className="text-muted-foreground">
+              <strong className="text-white">{ev.name}</strong> from {ev.city} just staked{' '}
+              <strong className="text-green-400">{formatCurrency(ev.amount)}</strong> with the{' '}
+              <strong className="text-white">{ev.plan}</strong> plan
+            </span>
+            <span className="ml-auto flex-shrink-0 text-muted-foreground/60">{ev.minsAgo}m ago</span>
+          </div>
+        )
+      })()}
+
       {/* ── Earnings Calculator ── */}
       <section className="mb-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-card to-card overflow-hidden">
         <div className="px-5 pt-5 pb-4">

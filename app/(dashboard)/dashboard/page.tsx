@@ -18,6 +18,7 @@ import {
   Zap,
   Rocket,
 } from 'lucide-react'
+import { IdleBurnCounter, CompoundProjection } from '@/components/dashboard/DashboardNudges'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
@@ -74,6 +75,23 @@ async function getDashboardData(userId: string) {
   // Find the cheapest plan the user doesn't have an active stake on yet (for idle balance nudge)
   const idlePlan = allPlans.find((p) => p.minAmount <= (user?.balance ?? 0)) ?? null
 
+  // Best available plan for idle balance (highest ROI they qualify for)
+  const idleBalance = user?.balance ?? 0
+  const qualifyingPlans = allPlans.filter(
+    (p) => p.minAmount <= idleBalance && (p.maxAmount === null || p.maxAmount >= idleBalance)
+  )
+  const bestIdlePlan = qualifyingPlans.length > 0
+    ? qualifyingPlans.reduce((best, p) => (p.dailyRoi > best.dailyRoi ? p : best), qualifyingPlans[0])
+    : allPlans[0] ?? null
+
+  // Total daily earnings across all active stakes
+  const totalDailyEarning = activeStakes.reduce((sum, s) => sum + (s.amount * s.dailyRoi) / 100, 0)
+
+  // Average daily ROI across active stakes (weighted by amount)
+  const avgDailyRoi = activeStakes.length > 0 && data.totalStaked > 0
+    ? activeStakes.reduce((sum, s) => sum + (s.amount / data.totalStaked) * s.dailyRoi, 0)
+    : 0
+
   return {
     user,
     stakes,
@@ -88,6 +106,9 @@ async function getDashboardData(userId: string) {
     bestActiveRoi,
     nextTierPlan,
     idlePlan,
+    bestIdlePlan,
+    totalDailyEarning,
+    avgDailyRoi,
   }
 }
 
@@ -123,6 +144,16 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </div>
+
+      {/* ── Idle Burn Counter (client) ── */}
+      {data.activeStakes.length === 0 && data.bestIdlePlan && (
+        <IdleBurnCounter
+          idleBalance={data.user?.balance ?? 0}
+          bestAvailableDailyRoi={data.bestIdlePlan.dailyRoi}
+          bestPlanId={data.bestIdlePlan.id}
+          bestPlanName={data.bestIdlePlan.name}
+        />
+      )}
 
       {/* ── Yield Boost Nudge ── */}
       {!data.nextTierPlan && data.activeStakes.length === 0 && data.idlePlan && (
@@ -180,6 +211,15 @@ export default async function DashboardPage() {
             </Link>
           </div>
         </div>
+      )}
+
+      {/* ── Compound Projection (client) ── */}
+      {data.activeStakes.length > 0 && data.totalDailyEarning > 0 && (
+        <CompoundProjection
+          dailyEarning={data.totalDailyEarning}
+          principalStaked={data.totalStaked}
+          planDailyRoi={data.avgDailyRoi}
+        />
       )}
 
       {/* Stats cards */}

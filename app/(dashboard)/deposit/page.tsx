@@ -8,8 +8,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { formatDateTime } from '@/lib/utils'
-import { Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw, AlertCircle } from 'lucide-react'
+import { Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw, AlertCircle, TrendingUp, Zap, ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
+import { formatCurrency } from '@/lib/utils'
 
 interface DepositCurrency {
   id: string
@@ -45,6 +46,20 @@ interface ActivePayment {
   expiresAt: string
   status: string
 }
+
+interface StakingPlan {
+  id: string
+  name: string
+  minAmount: number
+  maxAmount: number | null
+  durationDays: number
+  dailyRoi: number
+  totalRoi: number
+  isFeatured: boolean
+  sortOrder: number
+}
+
+const QUICK_PICKS = [200, 500, 1000, 5000, 10000, 25000]
 
 const STATUS_LABEL: Record<string, string> = {
   waiting: 'Waiting for payment…',
@@ -88,8 +103,23 @@ export default function DepositPage() {
   const [payment, setPayment] = useState<ActivePayment | null>(null)
   const [pollStatus, setPollStatus] = useState<string>('')
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const [plans, setPlans] = useState<StakingPlan[]>([])
 
   const selectedCurrency = currencies.find((c) => c.id === selected)
+
+  const depositNum = parseFloat(amountUsd) || 0
+
+  const matchedPlan = plans.length > 0 && depositNum > 0
+    ? plans
+        .filter((p) => p.minAmount <= depositNum && (p.maxAmount === null || p.maxAmount >= depositNum))
+        .reduce((best: StakingPlan | null, p) => (!best || p.dailyRoi > best.dailyRoi ? p : best), null)
+    : null
+
+  const nextPlan = plans.length > 0
+    ? plans.find((p) => p.minAmount > depositNum) ?? null
+    : null
+
+  const missingForNext = nextPlan ? nextPlan.minAmount - depositNum : 0
 
   useEffect(() => {
     fetch('/api/deposit/currencies')
@@ -102,6 +132,9 @@ export default function DepositPage() {
     fetch('/api/deposit/history')
       .then((r) => r.json())
       .then((d) => setHistory(d.data || []))
+    fetch('/api/staking/plans')
+      .then((r) => r.json())
+      .then((d) => setPlans(d.data || []))
   }, [])
 
   const stopPoll = useCallback(() => {
@@ -178,14 +211,101 @@ export default function DepositPage() {
           <CardContent className="space-y-4">
             {!payment ? (
               <>
+                {/* Quick-pick amounts */}
+                {plans.length > 0 && (
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Quick Select</Label>
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {QUICK_PICKS.map((amt) => {
+                        const plan = plans.find(
+                          (p) => p.minAmount <= amt && (p.maxAmount === null || p.maxAmount >= amt)
+                        )
+                        const isActive = depositNum === amt
+                        return (
+                          <button
+                            key={amt}
+                            type="button"
+                            onClick={() => setAmountUsd(String(amt))}
+                            className={`rounded-xl border px-2 py-2.5 text-center transition-all ${
+                              isActive
+                                ? 'border-primary bg-primary/15 text-primary'
+                                : 'border-border bg-secondary/40 text-muted-foreground hover:border-primary/40 hover:text-foreground'
+                            }`}
+                          >
+                            <p className="font-bold text-sm">${amt >= 1000 ? `${amt / 1000}k` : amt}</p>
+                            {plan && (
+                              <p className="text-[9px] leading-tight mt-0.5 truncate opacity-70">{plan.name}</p>
+                            )}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-1.5">
                   <Label>Amount (USD)</Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-                    <Input type="number" min="0" step="0.01" placeholder="100.00" className="pl-7" value={amountUsd} onChange={(e) => setAmountUsd(e.target.value)} />
+                    <Input type="number" min="0" step="0.01" placeholder="200.00" className="pl-7" value={amountUsd} onChange={(e) => setAmountUsd(e.target.value)} />
                   </div>
                   {selectedCurrency && <p className="text-xs text-muted-foreground">Minimum: ${selectedCurrency.minDeposit} USD</p>}
                 </div>
+
+                {/* Live earnings preview */}
+                {depositNum >= 200 && matchedPlan && (
+                  <div className="rounded-xl border border-green-500/25 bg-green-500/8 p-3 space-y-2">
+                    <div className="flex items-center gap-1.5">
+                      <TrendingUp className="h-3.5 w-3.5 text-green-400" />
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-green-400">
+                        Your Earnings Preview
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground">Matched Plan</p>
+                        <p className="font-bold text-sm text-white">{matchedPlan.name}</p>
+                        <p className="text-[10px] text-muted-foreground">{matchedPlan.durationDays}d · {matchedPlan.dailyRoi}%/day</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] text-muted-foreground">Daily Earnings</p>
+                        <p className="font-bold text-lg text-green-400">+{formatCurrency((depositNum * matchedPlan.dailyRoi) / 100)}</p>
+                        <p className="text-[10px] text-muted-foreground">per day</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 border-t border-green-500/15 pt-2">
+                      <div className="rounded-lg bg-black/20 px-2.5 py-1.5 text-center">
+                        <p className="text-[9px] text-muted-foreground">Total Profit</p>
+                        <p className="font-bold text-sm gradient-text">+{formatCurrency((depositNum * matchedPlan.totalRoi) / 100)}</p>
+                      </div>
+                      <div className="rounded-lg bg-black/20 px-2.5 py-1.5 text-center">
+                        <p className="text-[9px] text-muted-foreground">Total Payout</p>
+                        <p className="font-bold text-sm text-white">{formatCurrency(depositNum + (depositNum * matchedPlan.totalRoi) / 100)}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* "Just $X more" unlock nudge */}
+                {nextPlan && missingForNext > 0 && missingForNext <= nextPlan.minAmount * 0.35 && (
+                  <div
+                    className="rounded-xl border border-yellow-500/30 bg-yellow-500/8 px-3 py-2 flex items-center gap-2 cursor-pointer hover:border-yellow-500/50 transition-colors"
+                    onClick={() => setAmountUsd(String(nextPlan.minAmount))}
+                  >
+                    <Zap className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-yellow-400">
+                        Just {formatCurrency(missingForNext)} more to unlock <strong>{nextPlan.name}</strong>
+                      </p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {nextPlan.dailyRoi}%/day · earn{' '}
+                        +{formatCurrency((nextPlan.minAmount * nextPlan.dailyRoi) / 100)}/day at minimum
+                      </p>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                  </div>
+                )}
+
                 <div className="space-y-1.5">
                   <Label>Pay with</Label>
                   <Select value={selected} onValueChange={setSelected}>

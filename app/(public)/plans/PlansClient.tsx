@@ -35,7 +35,7 @@ interface Plan {
   name: string
   description?: string | null
   minAmount: number
-  maxAmount?: number | null
+  maxAmount: number | null
   durationDays: number
   dailyRoi: number
   totalRoi: number
@@ -97,7 +97,7 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
   const calcResult = useMemo(() => {
     if (calcNum < 1) return null
     const qualifying = plans.filter(
-      (p) => p.minAmount <= calcNum && (p.maxAmount === null || p.maxAmount >= calcNum)
+      (p) => p.minAmount <= calcNum && (p.maxAmount == null || p.maxAmount >= calcNum)
     )
     if (qualifying.length === 0) {
       // Not enough? find the cheapest plan

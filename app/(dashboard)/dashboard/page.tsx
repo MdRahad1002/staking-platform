@@ -88,8 +88,8 @@ async function getDashboardData(userId: string) {
   const totalDailyEarning = activeStakes.reduce((sum, s) => sum + (s.amount * s.dailyRoi) / 100, 0)
 
   // Average daily ROI across active stakes (weighted by amount)
-  const avgDailyRoi = activeStakes.length > 0 && data.totalStaked > 0
-    ? activeStakes.reduce((sum, s) => sum + (s.amount / data.totalStaked) * s.dailyRoi, 0)
+  const avgDailyRoi = activeStakes.length > 0 && totalStaked > 0
+    ? activeStakes.reduce((sum, s) => sum + (s.amount / totalStaked) * s.dailyRoi, 0)
     : 0
 
   return {

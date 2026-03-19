@@ -22,6 +22,8 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
       withdrawals: { include: { currency: true }, orderBy: { createdAt: 'desc' }, take: 10 },
       transactions: { orderBy: { createdAt: 'desc' }, take: 10 },
       loginHistory: { orderBy: { createdAt: 'desc' }, take: 5 },
+      kyc: true,
+      referredBy: { select: { id: true, email: true, username: true } },
     },
   })
 
@@ -39,25 +41,130 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
       {/* Profile + Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="md:col-span-2">
-          <CardContent className="p-5 grid grid-cols-2 gap-3 text-sm">
-            {[
-              { l: 'Email', v: user.email },
-              { l: 'Username', v: user.username || '-' },
-              { l: 'Full Name', v: [user.firstName, user.lastName].filter(Boolean).join(' ') || '-' },
-              { l: 'Role', v: user.role },
-              { l: 'Balance', v: formatCurrency(user.balance) },
-              { l: 'Status', v: user.bannedAt ? 'Banned' : user.isActive ? 'Active' : 'Inactive' },
-              { l: 'Joined', v: formatDateTime(user.createdAt) },
-              { l: 'Last Login', v: user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-' },
-              { l: 'Last IP', v: user.lastLoginIp || '-' },
-              { l: '2FA', v: user.twoFaEnabled ? 'Enabled' : 'Disabled' },
-              { l: 'Referral Code', v: user.referralCode || '-' },
-            ].map((row) => (
-              <div key={row.l}>
-                <p className="text-muted-foreground text-xs">{row.l}</p>
-                <p className="font-medium">{row.v}</p>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Profile Details</CardTitle>
+          </CardHeader>
+          <CardContent className="p-5 pt-0">
+            {/* Identity */}
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Identity</p>
+            <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+              {[
+                { l: 'Email', v: user.email },
+                { l: 'Username', v: user.username || '-' },
+                { l: 'First Name', v: user.firstName || '-' },
+                { l: 'Last Name', v: user.lastName || '-' },
+                { l: 'Phone', v: user.phone || '-' },
+                { l: 'Telegram Chat ID', v: user.telegramChatId || '-' },
+              ].map((row) => (
+                <div key={row.l}>
+                  <p className="text-muted-foreground text-xs">{row.l}</p>
+                  <p className="font-medium break-all">{row.v}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Account */}
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Account</p>
+            <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+              <div>
+                <p className="text-muted-foreground text-xs">Role</p>
+                <p className="font-medium">{user.role}</p>
               </div>
-            ))}
+              <div>
+                <p className="text-muted-foreground text-xs">Balance</p>
+                <p className="font-medium">{formatCurrency(user.balance)}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">Status</p>
+                <p className="font-medium">
+                  {user.bannedAt
+                    ? <span className="text-red-500">Banned</span>
+                    : user.isActive
+                      ? <span className="text-green-500">Active</span>
+                      : <span className="text-yellow-500">Inactive</span>}
+                </p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">Email Verified</p>
+                <p className="font-medium">
+                  {user.emailVerified
+                    ? <span className="text-green-500">{formatDateTime(user.emailVerified)}</span>
+                    : <span className="text-yellow-500">Not Verified</span>}
+                </p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">2FA</p>
+                <p className="font-medium">{user.twoFaEnabled ? 'Enabled' : 'Disabled'}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">PIN</p>
+                <p className="font-medium">{user.pinEnabled ? 'Enabled' : 'Disabled'}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">Email Opt-Out</p>
+                <p className="font-medium">{user.emailOptOut ? 'Yes' : 'No'}</p>
+              </div>
+              <div>
+                <p className="text-muted-foreground text-xs">KYC Status</p>
+                <p className="font-medium">
+                  {user.kyc
+                    ? <span className={user.kyc.status === 'APPROVED' ? 'text-green-500' : user.kyc.status === 'REJECTED' ? 'text-red-500' : 'text-yellow-500'}>{user.kyc.status}</span>
+                    : <span className="text-muted-foreground">Not Submitted</span>}
+                </p>
+              </div>
+            </div>
+
+            {/* Dates & Activity */}
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Activity</p>
+            <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+              {[
+                { l: 'Joined', v: formatDateTime(user.createdAt) },
+                { l: 'Last Login', v: user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-' },
+                { l: 'Last IP', v: user.lastLoginIp || '-' },
+                { l: 'Referral Code', v: user.referralCode || '-' },
+                { l: 'Referred By', v: user.referredBy ? (user.referredBy.username || user.referredBy.email) : '-' },
+              ].map((row) => (
+                <div key={row.l}>
+                  <p className="text-muted-foreground text-xs">{row.l}</p>
+                  <p className="font-medium break-all">{row.v}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Banned Reason (only if banned) */}
+            {user.bannedAt && (
+              <div className="mt-2 p-3 rounded-md bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800">
+                <p className="text-xs font-semibold text-red-600 dark:text-red-400 mb-1">
+                  Banned on {formatDateTime(user.bannedAt)}
+                </p>
+                <p className="text-sm text-red-700 dark:text-red-300">
+                  {user.bannedReason || 'No reason provided'}
+                </p>
+              </div>
+            )}
+
+            {/* KYC Details (if submitted) */}
+            {user.kyc && (
+              <>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 mt-4">KYC Details</p>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  {[
+                    { l: 'KYC First Name', v: user.kyc.firstName },
+                    { l: 'KYC Last Name', v: user.kyc.lastName },
+                    { l: 'Date of Birth', v: user.kyc.dateOfBirth },
+                    { l: 'Country', v: user.kyc.country },
+                    { l: 'Document Type', v: user.kyc.documentType },
+                    { l: 'Document Number', v: user.kyc.documentNumber },
+                    ...(user.kyc.rejectionReason ? [{ l: 'Rejection Reason', v: user.kyc.rejectionReason }] : []),
+                  ].map((row) => (
+                    <div key={row.l}>
+                      <p className="text-muted-foreground text-xs">{row.l}</p>
+                      <p className="font-medium">{row.v}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
 

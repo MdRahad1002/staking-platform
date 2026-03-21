@@ -784,6 +784,178 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
   void appUrl // suppress unused warning
 }
 
+// ─────────────────────────────────────────────
+//  Follow-up deposit nudge — sent via cron to verified
+//  users who still have zero deposits after 3+ days
+// ─────────────────────────────────────────────
+export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUrl: string): string {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const year   = new Date().getFullYear()
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Still thinking it over, ${firstName}?</title>
+</head>
+<body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- HEADER -->
+  <tr><td style="background:linear-gradient(135deg,#0f1a2e 0%,#1a2d4a 50%,#0f1a2e 100%);border-radius:16px 16px 0 0;padding:40px 48px 36px;text-align:center;">
+    <a href="${appUrl}" style="text-decoration:none;">
+      <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:10px 22px;margin-bottom:24px;">
+        <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
+      </div>
+    </a>
+    <h1 style="color:#ffffff;font-size:26px;font-weight:800;margin:0 0 10px;letter-spacing:-0.5px;line-height:1.3;">
+      Still thinking it over,&nbsp;<span style="color:#f59e0b;">${firstName}?</span>
+    </h1>
+    <p style="color:#94a3b8;font-size:15px;margin:0;line-height:1.6;">
+      Your account is ready. Your $100 bonus is waiting.<br/>Every day without a deposit is a day your money isn&rsquo;t working for you.
+    </p>
+  </td></tr>
+
+  <!-- PERSONAL NOTE -->
+  <tr><td style="background:#0d1520;padding:36px 48px 0;">
+    <p style="color:#d1d5db;font-size:15px;line-height:1.8;margin:0 0 24px;">
+      Hi <strong style="color:#ffffff;">${firstName}</strong>,
+    </p>
+    <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 20px;">
+      We noticed you created your StakeOnix account but haven&rsquo;t made your first deposit yet.
+      We completely understand — starting something new takes confidence.
+    </p>
+    <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 32px;">
+      So here are three things we want you to know:
+    </p>
+
+    <!-- 3 reassurance points -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #00d4aa;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
+        <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; You can start with as little as $100</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">No need for large amounts. Even a small stake earns daily — $100 at 2%/day = $2 every single day, $60/month.</p>
+      </td></tr>
+      <tr><td style="height:8px;"></td></tr>
+      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #f59e0b;border-radius:8px;padding:16px 20px;">
+        <p style="color:#f59e0b;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your $100 welcome bonus is still reserved for you</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">Make your first deposit and we&rsquo;ll add $100 straight to your account balance — instantly, no strings attached.</p>
+      </td></tr>
+      <tr><td style="height:8px;"></td></tr>
+      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;">
+        <p style="color:#a78bfa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your funds are fully protected</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">256-bit SSL, cold wallet storage, daily audits. Over 87,000 investors trust StakeOnix with their crypto — and we&rsquo;ve never missed a payout.</p>
+      </td></tr>
+    </table>
+
+    <!-- What others are earning today -->
+    <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 14px;">What members are earning right now</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+      <tr>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;width:30%;vertical-align:top;">
+          <p style="color:#00d4aa;font-size:22px;font-weight:800;margin:0 0 2px;">$6</p>
+          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
+          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Starter<br/>$300 deposit</p>
+        </td>
+        <td style="width:6px;"></td>
+        <td style="background:linear-gradient(135deg,#0d1e36,#0f2a4a);border:1px solid #1e4060;border-radius:10px;padding:16px;text-align:center;width:36%;vertical-align:top;">
+          <div style="background:#164e6b;display:inline-block;border-radius:4px;padding:2px 8px;margin-bottom:8px;">
+            <span style="color:#38bdf8;font-size:10px;font-weight:700;">MOST POPULAR</span>
+          </div>
+          <p style="color:#38bdf8;font-size:22px;font-weight:800;margin:0 0 2px;">$40</p>
+          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
+          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Growth<br/>$2,000 deposit</p>
+        </td>
+        <td style="width:6px;"></td>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;width:30%;vertical-align:top;">
+          <p style="color:#a78bfa;font-size:22px;font-weight:800;margin:0 0 2px;">$175</p>
+          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
+          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Elite<br/>$5,000 deposit</p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Testimonial -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-radius:12px;padding:24px;">
+        <p style="color:#e5e7eb;font-size:14px;font-style:italic;line-height:1.7;margin:0 0 16px;">
+          &ldquo;I was hesitant at first. I deposited a small amount just to test. Within 24 hours I saw my first daily payment. I&rsquo;ve been here for 6 months and never looked back.&rdquo;
+        </p>
+        <table cellpadding="0" cellspacing="0"><tr>
+          <td style="vertical-align:middle;padding-right:10px;">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:50%;line-height:36px;text-align:center;">
+              <span style="color:#ffffff;font-size:14px;font-weight:700;">M</span>
+            </div>
+          </td>
+          <td style="vertical-align:middle;">
+            <p style="color:#e5e7eb;font-size:13px;font-weight:600;margin:0;">Marcus T.</p>
+            <p style="color:#4b5563;font-size:12px;margin:0;">StakeOnix member since 2024 &middot; Growth Plan</p>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+
+    <!-- CTA -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;">
+      <tr><td style="background:linear-gradient(135deg,#0a2a1a,#0f3d2e);border:1px solid #00d4aa33;border-radius:14px;padding:32px;text-align:center;">
+        <p style="color:#00d4aa;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">Your $100 bonus is still available</p>
+        <h2 style="color:#ffffff;font-size:20px;font-weight:800;margin:0 0 12px;line-height:1.3;">Make your first deposit today<br/>and start earning tomorrow</h2>
+        <p style="color:#6b7280;font-size:13px;margin:0 0 24px;line-height:1.6;">
+          Takes under 3 minutes &middot; BTC, ETH, USDT &amp; more accepted
+        </p>
+        <a href="${appUrl}/deposit"
+           style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;padding:16px 52px;border-radius:12px;letter-spacing:0.3px;">
+          Claim My $100 Bonus &rarr;
+        </a>
+        <p style="color:#374151;font-size:12px;margin:16px 0 0;">
+          Questions? Reply to this email or <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">contact our support team</a>.
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- Divider -->
+    <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding-top:24px;"></td></tr></table>
+    <p style="color:#4b5563;font-size:12px;margin:16px 0 0;line-height:1.6;">
+      You are receiving this because you have a StakeOnix account and haven&rsquo;t made your first deposit yet.<br/>
+      <a href="${unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">Unsubscribe from follow-up emails</a>
+    </p>
+  </td></tr>
+
+  <!-- FOOTER -->
+  <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
+    <p style="color:#4b5563;font-size:12px;margin:0 0 6px;">
+      &copy; ${year} StakeOnix &mdash; Operated by ONIX HOLDINGS LIMITED &mdash; Company No. 03449482
+    </p>
+    <p style="color:#374151;font-size:11px;margin:0;">
+      <a href="${appUrl}/deposit" style="color:#6b7280;text-decoration:none;">Make a Deposit</a>
+      &nbsp;&middot;&nbsp;
+      <a href="${appUrl}/plans" style="color:#6b7280;text-decoration:none;">View Plans</a>
+      &nbsp;&middot;&nbsp;
+      <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">Contact Support</a>
+    </p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`
+}
+
+export async function sendDepositFollowUpEmail(email: string, name: string): Promise<void> {
+  const appUrl    = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const firstName = name.includes('@') ? name.split('@')[0] : name.split(' ')[0]
+  const unsubUrl  = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=activation`
+  await sendEmail({
+    to: email,
+    subject: `${firstName}, your $100 bonus is still waiting for you`,
+    html: getDepositFollowUpEmailTemplate(firstName, unsubUrl),
+  })
+}
+
+// ─────────────────────────────────────────────
 export async function sendContactEmail({
   name,
   email,

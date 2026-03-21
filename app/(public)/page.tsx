@@ -598,10 +598,11 @@ export default async function HomePage() {
 
               <div className="flex items-center gap-3 pt-2">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex-shrink-0">
-                  <svg viewBox="0 0 28 28" fill="none" className="h-6 w-6" aria-hidden>
-                    <circle cx="14" cy="14" r="13" fill="#FEDF00"/>
-                    <path d="M7 10h14v2H7zM7 16h14v2H7zM12 7h4v14h-4z" fill="#000"/>
-                  </svg>
+                  <img
+                    src="/logos/bodo-glimt.no.png"
+                    alt="Bodø/Glimt crest"
+                    className="h-8 w-8 object-contain"
+                  />
                 </div>
                 <p className="text-sm text-muted-foreground leading-snug">
                   <span className="text-white font-semibold">FK Bodø/Glimt</span> — Founded 1916, based in Bodø, Norway. Multiple-time Eliteserien champions and Europa League regulars.

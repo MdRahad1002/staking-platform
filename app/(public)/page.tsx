@@ -340,7 +340,7 @@ export default async function HomePage() {
                 <strong className="text-white font-semibold">passive income</strong> from your digital assets.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <Link href={session ? '/dashboard' : '/signup'} className="w-full sm:w-auto">
                   <Button
                     size="xl"
@@ -361,6 +361,12 @@ export default async function HomePage() {
                   </Button>
                 </Link>
               </div>
+
+              {!session && (
+                <p className="text-xs text-muted-foreground mb-8">
+                  No credit card required &bull; 2-minute setup &bull; $100 welcome bonus
+                </p>
+              )}
 
               <div className="flex flex-wrap gap-3">
                 {[
@@ -528,6 +534,141 @@ export default async function HomePage() {
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AS SEEN IN / PARTNERS */}
+      <section className="py-12 relative border-y border-white/5 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-white/[0.01] to-background pointer-events-none z-10" />
+        <div className="container mx-auto px-4 mb-8 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/30">
+            As featured in &amp; trusted by
+          </p>
+        </div>
+
+        {/* Scrolling marquee */}
+        <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex shrink-0 gap-12 items-center animate-marquee pr-12" aria-hidden>
+            {/* BBC */}
+            <div className="flex items-center justify-center px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[110px]">
+              <span className="text-xl font-black tracking-tighter text-white/60 hover:text-white/90 transition-colors select-none">
+                BBC
+              </span>
+            </div>
+
+            {/* Bloomberg */}
+            <div className="flex items-center justify-center px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[130px]">
+              <span className="text-sm font-black tracking-tight text-white/60 hover:text-white/90 transition-colors select-none uppercase">
+                Bloomberg
+              </span>
+            </div>
+
+            {/* JP Morgan */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-50 hover:opacity-80 transition-opacity" aria-hidden>
+                <rect width="28" height="28" rx="4" fill="#0A0F5C"/>
+                <path d="M6 8h6v12H6zM16 8h6v7h-6zM16 18h6v2h-6z" fill="white"/>
+              </svg>
+              <span className="text-sm font-bold tracking-tight text-white/60 hover:text-white/90 transition-colors select-none whitespace-nowrap">
+                J.P. Morgan
+              </span>
+            </div>
+
+            {/* CoinGecko */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60 hover:opacity-90 transition-opacity" aria-hidden>
+                <circle cx="14" cy="14" r="13" fill="#8DC63F"/>
+                <circle cx="11" cy="11" r="3" fill="white"/>
+                <circle cx="17" cy="11" r="3" fill="white"/>
+                <path d="M9 17c1 2 9 2 10 0" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+              <span className="text-sm font-bold text-white/60 hover:text-white/90 transition-colors select-none">
+                CoinGecko
+              </span>
+            </div>
+
+            {/* ING */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[100px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60 hover:opacity-90 transition-opacity" aria-hidden>
+                <rect width="28" height="28" rx="4" fill="#FF6200"/>
+                <path d="M8 8h4v12H8zM12 14l6-6v12l-6-6z" fill="white"/>
+              </svg>
+              <span className="text-sm font-black text-white/60 hover:text-white/90 transition-colors select-none tracking-widest">
+                ING
+              </span>
+            </div>
+
+            {/* Shell */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[110px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60 hover:opacity-90 transition-opacity" aria-hidden>
+                <circle cx="14" cy="14" r="13" fill="#FBCE07"/>
+                <path d="M14 4c0 0-8 6-8 10s3 7 8 8c5-1 8-4 8-8S14 4 14 4z" fill="#DD1D21"/>
+                <rect x="11" y="10" width="6" height="8" rx="1" fill="#FBCE07"/>
+              </svg>
+              <span className="text-sm font-bold text-white/60 hover:text-white/90 transition-colors select-none tracking-wider">
+                Shell
+              </span>
+            </div>
+
+            {/* Bodø/Glimt */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity" aria-hidden>
+                <circle cx="14" cy="14" r="13" fill="#FEDF00"/>
+                <path d="M7 10h14v2H7zM7 16h14v2H7zM12 7h4v14h-4z" fill="#000"/>
+              </svg>
+              <span className="text-sm font-bold text-white/60 hover:text-white/90 transition-colors select-none whitespace-nowrap">
+                Bodø/Glimt
+              </span>
+            </div>
+
+            {/* Scania */}
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] hover:border-white/20 transition-colors min-w-[120px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60 hover:opacity-90 transition-opacity" aria-hidden>
+                <circle cx="14" cy="14" r="13" fill="#0062A3"/>
+                <path d="M7 11c1-2 4-3 7-3s6 1 7 3" stroke="#FFC61A" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M8 14h12M8 17h12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                <rect x="10" y="19" width="3" height="2" rx="1" fill="#FFC61A"/>
+                <rect x="15" y="19" width="3" height="2" rx="1" fill="#FFC61A"/>
+              </svg>
+              <span className="text-sm font-bold text-white/60 hover:text-white/90 transition-colors select-none tracking-wider">
+                Scania
+              </span>
+            </div>
+          </div>
+
+          {/* Duplicate for seamless loop */}
+          <div className="flex shrink-0 gap-12 items-center animate-marquee pr-12" aria-hidden>
+            <div className="flex items-center justify-center px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[110px]">
+              <span className="text-xl font-black tracking-tighter text-white/60 select-none">BBC</span>
+            </div>
+            <div className="flex items-center justify-center px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[130px]">
+              <span className="text-sm font-black tracking-tight text-white/60 select-none uppercase">Bloomberg</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-50" aria-hidden><rect width="28" height="28" rx="4" fill="#0A0F5C"/><path d="M6 8h6v12H6zM16 8h6v7h-6zM16 18h6v2h-6z" fill="white"/></svg>
+              <span className="text-sm font-bold tracking-tight text-white/60 select-none whitespace-nowrap">J.P. Morgan</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60" aria-hidden><circle cx="14" cy="14" r="13" fill="#8DC63F"/><circle cx="11" cy="11" r="3" fill="white"/><circle cx="17" cy="11" r="3" fill="white"/><path d="M9 17c1 2 9 2 10 0" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <span className="text-sm font-bold text-white/60 select-none">CoinGecko</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[100px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60" aria-hidden><rect width="28" height="28" rx="4" fill="#FF6200"/><path d="M8 8h4v12H8zM12 14l6-6v12l-6-6z" fill="white"/></svg>
+              <span className="text-sm font-black text-white/60 select-none tracking-widest">ING</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[110px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60" aria-hidden><circle cx="14" cy="14" r="13" fill="#FBCE07"/><path d="M14 4c0 0-8 6-8 10s3 7 8 8c5-1 8-4 8-8S14 4 14 4z" fill="#DD1D21"/><rect x="11" y="10" width="6" height="8" rx="1" fill="#FBCE07"/></svg>
+              <span className="text-sm font-bold text-white/60 select-none tracking-wider">Shell</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[140px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-70" aria-hidden><circle cx="14" cy="14" r="13" fill="#FEDF00"/><path d="M7 10h14v2H7zM7 16h14v2H7zM12 7h4v14h-4z" fill="#000"/></svg>
+              <span className="text-sm font-bold text-white/60 select-none whitespace-nowrap">Bodø/Glimt</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-white/[0.07] bg-white/[0.03] min-w-[120px]">
+              <svg viewBox="0 0 28 28" fill="none" className="h-5 w-5 flex-shrink-0 opacity-60" aria-hidden><circle cx="14" cy="14" r="13" fill="#0062A3"/><path d="M7 11c1-2 4-3 7-3s6 1 7 3" stroke="#FFC61A" strokeWidth="2" strokeLinecap="round"/><path d="M8 14h12M8 17h12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/><rect x="10" y="19" width="3" height="2" rx="1" fill="#FFC61A"/><rect x="15" y="19" width="3" height="2" rx="1" fill="#FFC61A"/></svg>
+              <span className="text-sm font-bold text-white/60 select-none tracking-wider">Scania</span>
+            </div>
           </div>
         </div>
       </section>

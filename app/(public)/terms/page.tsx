@@ -57,11 +57,12 @@ export default function TermsPage() {
               title: '9. Contact',
               content: `Questions about the Terms of Service should be sent to: info@stakeonix.com
               
-              StakeOnix Inc. (Canada Head Office)
+              ONIX HOLDINGS LIMITED (Canada Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
               Phone: +1 (613) 366-4391
 
-              StakeOnix Ltd. (United Kingdom)
+              ONIX HOLDINGS LIMITED (United Kingdom)
+              Company No. 03449482 — Registered in England & Wales
               Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
               Phone: +44 (0) 56 0384 6173
 

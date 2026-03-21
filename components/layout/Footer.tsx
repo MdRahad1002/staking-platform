@@ -156,10 +156,13 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>© {new Date().getFullYear()} StakeOnix.</span>
-            <span className="text-white/20">|</span>
-            <span>All rights reserved.</span>
+          <div className="flex flex-col gap-1 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <span>© {new Date().getFullYear()} StakeOnix.</span>
+              <span className="text-white/20">|</span>
+              <span>All rights reserved.</span>
+            </div>
+            <span className="text-xs text-white/40">Operated by ONIX HOLDINGS LIMITED &mdash; Company No. 03449482 &mdash; Registered in England &amp; Wales</span>
           </div>
           <div className="flex gap-5 text-sm text-muted-foreground">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>

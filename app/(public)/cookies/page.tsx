@@ -94,12 +94,13 @@ We encourage you to review this page periodically to stay informed about our use
 Email: info@stakeonix.com
 
 Canada (Head Office)
-StakeOnix Inc.
+ONIX HOLDINGS LIMITED
 130 King St W, Toronto, ON M5X 2A2, Canada
 Phone: +1 (613) 366-4391
 
 United Kingdom (UK Office)
-StakeOnix Ltd.
+ONIX HOLDINGS LIMITED
+Company No. 03449482 — Registered in England & Wales
 Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
 Phone: +44 (0) 56 0384 6173
 
@@ -118,7 +119,7 @@ export default function CookiesPage() {
           <p className="text-muted-foreground">Last updated: March 13, 2026</p>
           <div className="mt-4 p-4 rounded-xl bg-cyan-500/5 border border-cyan-500/20">
             <p className="text-sm text-muted-foreground">
-              This Cookie Policy explains how StakeOnix Inc. and StakeOnix Ltd. (together, &quot;StakeOnix&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) use cookies and similar technologies
+              This Cookie Policy explains how ONIX HOLDINGS LIMITED (Canada) and ONIX HOLDINGS LIMITED (Company No. 03449482, registered in England &amp; Wales) (together, &quot;StakeOnix&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) use cookies and similar technologies
               when you visit <Link href="/" className="text-cyan-400 hover:underline">www.stakeonix.com</Link>.
               It should be read alongside our{' '}
               <Link href="/policy" className="text-cyan-400 hover:underline">Privacy Policy</Link> and{' '}

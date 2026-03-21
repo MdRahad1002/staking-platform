@@ -34,6 +34,7 @@ const organizationSchema = {
     'StakeOnix is a professional cryptocurrency staking platform enabling investors to earn daily passive income on Bitcoin, Ethereum, USDT, Solana and more. Founded in 2020, serving 15,000+ investors worldwide.',
   foundingDate: '2020',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
+  legalName: 'ONIX HOLDINGS LIMITED',
   email: 'info@stakeonix.com',
   telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
   address: [
@@ -214,6 +215,7 @@ export default function AboutPage() {
                 <p className="text-sm font-medium">130 King St W, Toronto,<br />ON M5X 2A2, Canada</p>
                 <p className="text-xs text-muted-foreground mt-2 mb-1">United Kingdom</p>
                 <p className="text-sm font-medium">Ashley Road, Altrincham,<br />Cheshire, WA14 2DT, UK</p>
+                <p className="text-xs text-muted-foreground mt-1">ONIX HOLDINGS LIMITED<br />Company No. 03449482<br />Registered in England &amp; Wales</p>
               </div>
             </div>
           </div>

@@ -411,8 +411,23 @@ export default function SignupPage() {
               <span className="gradient-text">Reward Awaits</span>
             </h2>
             <p className="text-muted-foreground max-w-sm">
-              Create a free account, deposit crypto, choose a plan - and earn passive income on autopilot.
+              Create a free account, deposit crypto, choose a plan &mdash; and earn passive income on autopilot.
             </p>
+          </div>
+
+          {/* Social proof stats */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { value: '480K+', label: 'Active stakers' },
+              { value: '$2.5B+', label: 'Total paid out' },
+              { value: '4.8/5', label: 'User rating' },
+              { value: '100%', label: 'Payout rate' },
+            ].map((s) => (
+              <div key={s.label} className="rounded-xl bg-white/[0.04] border border-white/[0.08] px-4 py-3">
+                <p className="text-xl font-black gradient-text">{s.value}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
+              </div>
+            ))}
           </div>
 
           <div className="space-y-4">
@@ -431,9 +446,9 @@ export default function SignupPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs text-primary">
-            <div className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-            Free to join &nbsp;&middot;&nbsp; No credit card required
+          <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs text-yellow-300">
+            <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
+            $100 welcome bonus &nbsp;&middot;&nbsp; No credit card required
           </div>
         </div>
       </div>

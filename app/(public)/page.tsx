@@ -673,6 +673,76 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* BODO/GLIMT SPONSORSHIP SHOWCASE */}
+      <section className="py-16 relative border-t border-white/5 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-950/20 via-background to-background pointer-events-none" />
+        <div className="glow-blob w-[500px] h-[400px] bg-yellow-500/5 top-0 right-0" />
+        <div className="container relative mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+
+            {/* Left: image */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-yellow-500/10 border border-yellow-500/20 group">
+              <img
+                src="/bodo-glimt-jersey.jpg"
+                alt="Bodø/Glimt players wearing StakeOnix jerseys"
+                className="w-full h-full object-cover object-center aspect-[4/3] group-hover:scale-105 transition-transform duration-700"
+              />
+              {/* overlay badge */}
+              <div className="absolute bottom-4 left-4">
+                <div className="flex items-center gap-2 bg-black/70 backdrop-blur-md border border-yellow-500/30 rounded-xl px-3 py-2">
+                  <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                  <span className="text-xs font-bold text-yellow-300 uppercase tracking-widest">Official Kit Sponsor</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: copy */}
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-yellow-400 mb-3">
+                  Sponsorship &amp; Partnerships
+                </p>
+                <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
+                  Proudly on the<br />
+                  <span className="text-yellow-400">Bodø/Glimt</span> Jersey
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  StakeOnix is the official front-of-shirt sponsor of FK Bodø/Glimt — Norway&apos;s most
+                  decorated club and regular UEFA Champions League competitor. Our brand is worn by
+                  players every matchday, watched by millions across Europe.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { value: 'Eliteserien', label: 'Top-flight Norway' },
+                  { value: 'UEFA', label: 'European competition' },
+                  { value: '10K+', label: 'Home stadium capacity' },
+                  { value: '4×', label: 'Norwegian champions' },
+                ].map((s) => (
+                  <div key={s.label} className="rounded-xl bg-yellow-500/5 border border-yellow-500/15 px-4 py-3">
+                    <p className="text-base font-black text-yellow-300">{s.value}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex-shrink-0">
+                  <svg viewBox="0 0 28 28" fill="none" className="h-6 w-6" aria-hidden>
+                    <circle cx="14" cy="14" r="13" fill="#FEDF00"/>
+                    <path d="M7 10h14v2H7zM7 16h14v2H7zM12 7h4v14h-4z" fill="#000"/>
+                  </svg>
+                </div>
+                <p className="text-sm text-muted-foreground leading-snug">
+                  <span className="text-white font-semibold">FK Bodø/Glimt</span> — Founded 1916, based in Bodø, Norway. Multiple-time Eliteserien champions and Europa League regulars.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* LIVE RATES */}
       <section className="py-20 relative border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />

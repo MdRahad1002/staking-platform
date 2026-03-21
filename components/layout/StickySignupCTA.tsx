@@ -41,7 +41,7 @@ export function StickySignupCTA() {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-bold text-white leading-tight">Start earning daily today</p>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Join 480,000+ stakers &mdash; first reward in minutes
+              Join 480,000+ stakers - first reward in minutes
             </p>
           </div>
 

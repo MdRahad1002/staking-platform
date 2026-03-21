@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { Mail, Shield, TrendingUp, Globe, Zap, Phone, MapPin } from 'lucide-react'
 import { Logo } from '@/components/shared/Logo'
 
@@ -162,7 +162,7 @@ export function Footer() {
               <span className="text-white/20">|</span>
               <span>All rights reserved.</span>
             </div>
-            <span className="text-xs text-white/40">Operated by ONIX HOLDINGS LIMITED &mdash; Company No. 03449482 &mdash; Registered in England &amp; Wales</span>
+            <span className="text-xs text-white/40">Operated by ONIX HOLDINGS LIMITED - Company No. 03449482 - Registered in England &amp; Wales</span>
           </div>
           <div className="flex gap-5 text-sm text-muted-foreground">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>

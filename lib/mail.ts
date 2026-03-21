@@ -1,6 +1,6 @@
-import { Resend } from 'resend'
+﻿import { Resend } from 'resend'
 
-// Lazily instantiated — env vars are not available at module evaluation during build
+// Lazily instantiated - env vars are not available at module evaluation during build
 let _resend: Resend | null = null
 function getResend(): Resend {
   if (!_resend) {
@@ -200,7 +200,7 @@ export function getBulkEmailTemplate(
         <!-- Footer -->
         <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
           <p style="color:#4b5563;font-size:12px;margin:0 0 6px;">
-            &copy; ${year} StakeOnix &mdash; 130 King St W, Toronto, ON M5X 2A2, Canada
+            &copy; ${year} StakeOnix - 130 King St W, Toronto, ON M5X 2A2, Canada
           </p>
           <p style="color:#374151;font-size:11px;margin:0;">
             <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">Contact Support</a>
@@ -258,7 +258,7 @@ export function getWelcomeEmailTemplate(name: string, _email: string): string {
         <strong>🔒 Security tip:</strong> StakeOnix will never ask for your password via email or chat. Enable 2FA in your account settings for maximum protection.
       </div>
     </div>
-  `, 'Your StakeOnix account is ready — claim your \$100 welcome bonus today.')
+  `, 'Your StakeOnix account is ready - claim your \$100 welcome bonus today.')
 }
 
 export function getPasswordResetEmailTemplate(name: string, resetLink: string): string {
@@ -282,7 +282,7 @@ export function getPasswordResetEmailTemplate(name: string, resetLink: string): 
       <p style="margin:0;"><a href="${resetLink}" style="color:#8b5cf6;word-break:break-all;font-size:12px;">${resetLink}</a></p>
       <p style="color:#ef4444;font-size:12px;margin:10px 0 0;">⏱ Expires in <strong>1 hour</strong>.</p>
     </div>
-  `, 'Reset your StakeOnix password — link valid for 1 hour.')
+  `, 'Reset your StakeOnix password - link valid for 1 hour.')
 }
 
 export function getDepositConfirmedEmailTemplate(name: string, amount: string, currency: string): string {
@@ -340,10 +340,10 @@ export function getVerificationEmailTemplate(name: string, verifyUrl: string): s
         <p style="font-size:13px;color:#065f46;margin:0;">Instant credit on your first deposit</p>
       </div>
       <div class="steps" style="margin-top:28px;">
-        <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Verify your email</strong> — click the button above</div></div>
-        <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Make your first deposit</strong> — starting from \$100</div></div>
-        <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Choose a plan</strong> — up to 3.5% daily returns</div></div>
-        <div class="step"><span class="step-num">4</span><div class="step-text"><strong>Earn every day</strong> — rewards credited every 24 hours</div></div>
+        <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Verify your email</strong> - click the button above</div></div>
+        <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Make your first deposit</strong> - starting from \$100</div></div>
+        <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Choose a plan</strong> - up to 3.5% daily returns</div></div>
+        <div class="step"><span class="step-num">4</span><div class="step-text"><strong>Earn every day</strong> - rewards credited every 24 hours</div></div>
       </div>
       <div class="divider"></div>
       <p style="color:#475569;font-size:12px;margin:0 0 6px;"><strong style="color:#64748b;">Button not working?</strong> Paste this into your browser:</p>
@@ -359,7 +359,7 @@ export async function sendVerificationEmail(email: string, name: string, token: 
   const verifyUrl = `${appUrl}/verify-email?token=${token}`
   await sendEmail({
     to: email,
-    subject: 'Welcome to StakeOnix — Please Verify Your Email',
+    subject: 'Welcome to StakeOnix - Please Verify Your Email',
     html: getVerificationEmailTemplate(name, verifyUrl),
   })
 }
@@ -381,7 +381,7 @@ export async function sendDepositConfirmedEmail(email: string, amount: number, c
 }
 
 // ─────────────────────────────────────────────
-//  Referral nudge email — sent to referrers
+//  Referral nudge email - sent to referrers
 //  whose referrals signed up but haven't staked
 // ─────────────────────────────────────────────
 export function getReferralNudgeEmailTemplate(
@@ -515,7 +515,7 @@ export async function sendReferralNudgeEmail(
 }
 
 // ─────────────────────────────────────────────
-//  First-deposit nudge — sent ~8 min after email verification
+//  First-deposit nudge - sent ~8 min after email verification
 // ─────────────────────────────────────────────
 export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
@@ -526,7 +526,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your account is ready — start earning today</title>
+  <title>Your account is ready - start earning today</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
@@ -621,7 +621,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
       </td></tr>
     </table>
 
-    <!-- How it works — 3 steps -->
+    <!-- How it works - 3 steps -->
     <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 40px 32px;">
       <tr><td>
         <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 16px;">It takes under 3 minutes</p>
@@ -716,7 +716,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
   <!-- FOOTER -->
   <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
     <p style="color:#4b5563;font-size:12px;margin:0 0 8px;">
-      &copy; ${year} StakeOnix &mdash; 130 King St W, Toronto, ON M5X 2A2, Canada
+      &copy; ${year} StakeOnix - 130 King St W, Toronto, ON M5X 2A2, Canada
     </p>
     <p style="color:#374151;font-size:11px;margin:0;">
       <a href="${appUrl}/deposit" style="color:#6b7280;text-decoration:none;">Make a Deposit</a>
@@ -746,7 +746,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
   if (!key) return
 
   const html    = getFirstDepositNudgeEmailTemplate(firstName)
-  const subject = `${firstName}, your account is ready — but it's earning $0 right now`
+  const subject = `${firstName}, your account is ready - but it's earning $0 right now`
   const scheduledAt = new Date(Date.now() + 8 * 60 * 1000).toISOString() // 8 minutes from now
 
   try {
@@ -777,7 +777,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
       console.warn('[MAIL] First deposit nudge failed to schedule:', data)
     }
   } catch (err) {
-    // Non-critical — swallow error so it never breaks the verify flow
+    // Non-critical - swallow error so it never breaks the verify flow
     console.warn('[MAIL] First deposit nudge error (non-critical):', err)
   }
 
@@ -785,7 +785,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
 }
 
 // ─────────────────────────────────────────────
-//  Follow-up deposit nudge — sent via cron to verified
+//  Follow-up deposit nudge - sent via cron to verified
 //  users who still have zero deposits after 3+ days
 // ─────────────────────────────────────────────
 export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUrl: string): string {
@@ -826,7 +826,7 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
     </p>
     <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 20px;">
       We noticed you created your StakeOnix account but haven&rsquo;t made your first deposit yet.
-      We completely understand — starting something new takes confidence.
+      We completely understand - starting something new takes confidence.
     </p>
     <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 32px;">
       So here are three things we want you to know:
@@ -836,17 +836,17 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
       <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #00d4aa;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
         <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; You can start with as little as $100</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">No need for large amounts. Even a small stake earns daily — $100 at 2%/day = $2 every single day, $60/month.</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">No need for large amounts. Even a small stake earns daily - $100 at 2%/day = $2 every single day, $60/month.</p>
       </td></tr>
       <tr><td style="height:8px;"></td></tr>
       <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #f59e0b;border-radius:8px;padding:16px 20px;">
         <p style="color:#f59e0b;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your $100 welcome bonus is still reserved for you</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">Make your first deposit and we&rsquo;ll add $100 straight to your account balance — instantly, no strings attached.</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">Make your first deposit and we&rsquo;ll add $100 straight to your account balance - instantly, no strings attached.</p>
       </td></tr>
       <tr><td style="height:8px;"></td></tr>
       <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;">
         <p style="color:#a78bfa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your funds are fully protected</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">256-bit SSL, cold wallet storage, daily audits. Over 87,000 investors trust StakeOnix with their crypto — and we&rsquo;ve never missed a payout.</p>
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">256-bit SSL, cold wallet storage, daily audits. Over 87,000 investors trust StakeOnix with their crypto - and we&rsquo;ve never missed a payout.</p>
       </td></tr>
     </table>
 
@@ -926,7 +926,7 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
   <!-- FOOTER -->
   <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
     <p style="color:#4b5563;font-size:12px;margin:0 0 6px;">
-      &copy; ${year} StakeOnix &mdash; Operated by ONIX HOLDINGS LIMITED &mdash; Company No. 03449482
+      &copy; ${year} StakeOnix - Operated by ONIX HOLDINGS LIMITED - Company No. 03449482
     </p>
     <p style="color:#374151;font-size:11px;margin:0;">
       <a href="${appUrl}/deposit" style="color:#6b7280;text-decoration:none;">Make a Deposit</a>
@@ -979,7 +979,7 @@ export async function sendContactEmail({
     </div>
     <div class="card-body">
       <p class="greeting">Hi <strong>${name}</strong>,</p>
-      <p class="body-text">Thanks for reaching out to StakeOnix. We have received your message and our support team will get back to you shortly — typically within a few hours.</p>
+      <p class="body-text">Thanks for reaching out to StakeOnix. We have received your message and our support team will get back to you shortly - typically within a few hours.</p>
       <div class="highlight-box">
         <div class="stat-row"><span class="stat-label">Subject</span><span class="stat-value">${subject}</span></div>
         <div class="stat-row"><span class="stat-label">Reference</span><span class="stat-value tag">#${refId}</span></div>
@@ -997,7 +997,7 @@ export async function sendContactEmail({
     <div class="card-header">
       <div class="icon-circle icon-blue">📩</div>
       <div class="card-title">New Contact Form Submission</div>
-      <div class="card-subtitle">Requires a reply — Ref #${refId}</div>
+      <div class="card-subtitle">Requires a reply - Ref #${refId}</div>
     </div>
     <div class="card-body">
       <div class="highlight-box">
@@ -1013,7 +1013,7 @@ export async function sendContactEmail({
 
   await Promise.all([
     sendEmail({ to: email, subject: `We received your message at StakeOnix`, html: userHtml }),
-    sendEmail({ to: adminEmail, subject: `[Contact] ${subject} — from ${name}`, html: adminHtml }),
+    sendEmail({ to: adminEmail, subject: `[Contact] ${subject} - from ${name}`, html: adminHtml }),
   ])
 }
 
@@ -1072,13 +1072,13 @@ export async function sendWithdrawalEmail({
       </div>
       <a href="${appUrl}/withdraw" class="cta-btn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;">View Transaction History</a>
       <div class="security-note">
-        <strong>🔒 Not you?</strong> Contact us immediately at <a href="mailto:info@stakeonix.com" style="color:#60a5fa;">info@stakeonix.com</a> — transactions cannot be reversed once confirmed on-chain.
+        <strong>🔒 Not you?</strong> Contact us immediately at <a href="mailto:info@stakeonix.com" style="color:#60a5fa;">info@stakeonix.com</a> - transactions cannot be reversed once confirmed on-chain.
       </div>
     </div>
   `, `Your ${amount} ${currency} withdrawal is on its way.`)
   await sendEmail({
     to: email,
-    subject: `Withdrawal Sent 🚀 — ${amount} ${currency} is on its way`,
+    subject: `Withdrawal Sent 🚀 - ${amount} ${currency} is on its way`,
     html,
   })
 }
@@ -1100,9 +1100,9 @@ export async function sendKycStatusEmail({
     pending_review: { icon: '🔍', iconClass: 'icon-blue',   title: 'Under Review',            subtitle: 'We are verifying your documents'  },
   }[status]
   const subjects: Record<typeof status, string> = {
-    approved:       'Identity Verified ✅ — Full account access unlocked',
+    approved:       'Identity Verified ✅ - Full account access unlocked',
     rejected:       'Action Required: KYC verification needs attention',
-    pending_review: 'KYC Under Review 🔍 — We will notify you within 1–3 days',
+    pending_review: 'KYC Under Review 🔍 - We will notify you within 1–3 days',
   }
   const html = layout(`
     <div class="card-header">
@@ -1131,14 +1131,14 @@ export async function sendKycStatusEmail({
         <p class="body-text">Unfortunately, we were unable to verify your identity with the documents provided. Please resubmit with the corrections noted below.</p>
         ${rejectionReason ? `<div class="highlight-box highlight-box-red"><p style="color:#fca5a5;font-size:13px;font-weight:600;margin:0 0 4px;">Reason</p><p style="color:#f87171;font-size:14px;margin:0;">${rejectionReason}</p></div>` : ''}
         <div class="steps">
-          <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Check your document</strong> — valid, not expired, all four corners visible.</div></div>
-          <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Re-upload high-quality images</strong> — avoid glare, blur, or cropping.</div></div>
-          <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Contact support</strong> if you need help — live chat is available 24/7.</div></div>
+          <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Check your document</strong> - valid, not expired, all four corners visible.</div></div>
+          <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Re-upload high-quality images</strong> - avoid glare, blur, or cropping.</div></div>
+          <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Contact support</strong> if you need help - live chat is available 24/7.</div></div>
         </div>
         <a href="${appUrl}/settings" class="cta-btn">Resubmit Documents</a>
       `}
     </div>
-  `, status === 'approved' ? 'Your identity is verified — full access is now unlocked.' : 'Update on your KYC verification status.')
+  `, status === 'approved' ? 'Your identity is verified - full access is now unlocked.' : 'Update on your KYC verification status.')
   await sendEmail({ to: email, subject: subjects[status], html })
 }
 

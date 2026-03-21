@@ -100,7 +100,7 @@ Phone: +1 (613) 366-4391
 
 United Kingdom (UK Office)
 ONIX HOLDINGS LIMITED
-Company No. 03449482 — Registered in England & Wales
+Company No. 03449482 - Registered in England & Wales
 Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
 Phone: +44 (0) 56 0384 6173
 

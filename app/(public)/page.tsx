@@ -326,7 +326,7 @@ export default async function HomePage() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
                 </span>
-                Live &middot; Earn up to {topApr > 0 ? `${topApr}% APR` : '365% APR'} &mdash; Join 480K+ stakers
+                Live &middot; Earn up to {topApr > 0 ? `${topApr}% APR` : '365% APR'} - Join 480K+ stakers
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
@@ -576,7 +576,7 @@ export default async function HomePage() {
                   <span className="text-yellow-400">Bodø/Glimt</span> Jersey
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  StakeOnix is the official front-of-shirt sponsor of FK Bodø/Glimt — Norway&apos;s most
+                  StakeOnix is the official front-of-shirt sponsor of FK Bodø/Glimt - Norway&apos;s most
                   decorated club and regular UEFA Champions League competitor. Our brand is worn by
                   players every matchday, watched by millions across Europe.
                 </p>
@@ -605,7 +605,7 @@ export default async function HomePage() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground leading-snug">
-                  <span className="text-white font-semibold">FK Bodø/Glimt</span> — Founded 1916, based in Bodø, Norway. Multiple-time Eliteserien champions and Europa League regulars.
+                  <span className="text-white font-semibold">FK Bodø/Glimt</span> - Founded 1916, based in Bodø, Norway. Multiple-time Eliteserien champions and Europa League regulars.
                 </p>
               </div>
             </div>

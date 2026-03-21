@@ -411,7 +411,7 @@ export default function SignupPage() {
               <span className="gradient-text">Reward Awaits</span>
             </h2>
             <p className="text-muted-foreground max-w-sm">
-              Create a free account, deposit crypto, choose a plan &mdash; and earn passive income on autopilot.
+              Create a free account, deposit crypto, choose a plan - and earn passive income on autopilot.
             </p>
           </div>
 

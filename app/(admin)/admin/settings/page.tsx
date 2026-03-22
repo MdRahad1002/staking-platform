@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
-import { Settings, Save } from 'lucide-react'
+import { Settings, Save, Lock } from 'lucide-react'
 
 interface Setting {
   key: string
@@ -18,6 +18,45 @@ interface Setting {
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<Setting[]>([])
   const [saving, setSaving] = useState(false)
+  const [pwForm, setPwForm] = useState({ current: '', newPass: '', confirm: '' })
+  const [savingPw, setSavingPw] = useState(false)
+
+  const handleChangePassword = async () => {
+    if (!pwForm.current || !pwForm.newPass || !pwForm.confirm) {
+      toast.error('Fill in all fields.')
+      return
+    }
+    if (pwForm.newPass !== pwForm.confirm) {
+      toast.error('New passwords do not match.')
+      return
+    }
+    if (pwForm.newPass.length < 8) {
+      toast.error('Password must be at least 8 characters.')
+      return
+    }
+    if (pwForm.newPass === pwForm.current) {
+      toast.error('New password must be different from your current password.')
+      return
+    }
+    setSavingPw(true)
+    try {
+      const res = await fetch('/api/profile/password', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword: pwForm.current, newPassword: pwForm.newPass }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        toast.success('Password changed successfully!')
+        setPwForm({ current: '', newPass: '', confirm: '' })
+      } else {
+        toast.error(data.error || 'Failed to change password.')
+      }
+    } catch {
+      toast.error('Something went wrong.')
+    }
+    setSavingPw(false)
+  }
 
   const load = async () => {
     const res = await fetch('/api/admin/settings')
@@ -135,6 +174,50 @@ export default function AdminSettingsPage() {
       <div className="flex justify-end">
         <Button variant="gradient" className="gap-2" onClick={handleSave} loading={saving}><Save className="h-4 w-4" />Save All</Button>
       </div>
+
+      {/* Change Admin Password */}
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Lock className="h-4 w-4" />
+            Change Admin Password
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4 max-w-lg">
+          <div className="space-y-1.5">
+            <Label>Current Password</Label>
+            <Input
+              type="password"
+              placeholder="Enter current password"
+              value={pwForm.current}
+              onChange={(e) => setPwForm((p) => ({ ...p, current: e.target.value }))}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <Label>New Password</Label>
+              <Input
+                type="password"
+                placeholder="Min. 8 characters"
+                value={pwForm.newPass}
+                onChange={(e) => setPwForm((p) => ({ ...p, newPass: e.target.value }))}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Confirm New Password</Label>
+              <Input
+                type="password"
+                placeholder="Re-enter new password"
+                value={pwForm.confirm}
+                onChange={(e) => setPwForm((p) => ({ ...p, confirm: e.target.value }))}
+              />
+            </div>
+          </div>
+          <Button onClick={handleChangePassword} variant="gradient" loading={savingPw}>
+            Change Password
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Shield, Smartphone, Key, Clock, Copy, CheckCircle2 } from 'lucide-react'
+import { Shield, Smartphone, Key, Clock, Copy, CheckCircle2, Lock } from 'lucide-react'
 import { formatDateTime } from '@/lib/utils'
 import { SafeImg } from '@/components/shared/SafeImg'
 
@@ -36,6 +36,8 @@ export default function SecurityPage() {
   const [disabling2FA, setDisabling2FA] = useState(false)
   const [loginHistory, setLoginHistory] = useState<LoginRecord[]>([])
   const [secretCopied, setSecretCopied] = useState(false)
+  const [pwForm, setPwForm] = useState({ current: '', newPass: '', confirm: '' })
+  const [savingPw, setSavingPw] = useState(false)
 
   useEffect(() => {
     fetch('/api/profile/security')
@@ -138,6 +140,43 @@ export default function SecurityPage() {
     } catch {
       toast.error('Failed to copy.')
     }
+  }
+
+  const handleChangePassword = async () => {
+    if (!pwForm.current || !pwForm.newPass || !pwForm.confirm) {
+      toast.error('Fill in all fields.')
+      return
+    }
+    if (pwForm.newPass !== pwForm.confirm) {
+      toast.error('New passwords do not match.')
+      return
+    }
+    if (pwForm.newPass.length < 8) {
+      toast.error('Password must be at least 8 characters.')
+      return
+    }
+    if (pwForm.newPass === pwForm.current) {
+      toast.error('New password must be different from your current password.')
+      return
+    }
+    setSavingPw(true)
+    try {
+      const res = await fetch('/api/profile/password', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword: pwForm.current, newPassword: pwForm.newPass }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        toast.success('Password changed successfully!')
+        setPwForm({ current: '', newPass: '', confirm: '' })
+      } else {
+        toast.error(data.error || 'Failed to change password.')
+      }
+    } catch {
+      toast.error('Something went wrong.')
+    }
+    setSavingPw(false)
   }
 
   const disable2FA = async () => {
@@ -372,6 +411,53 @@ export default function SecurityPage() {
               </div>
             </div>
           )}
+        </CardContent>
+      </Card>
+
+      {/* Change Password */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base flex items-center gap-2">
+            <Lock className="h-4 w-4" />
+            Change Password
+          </CardTitle>
+          <CardDescription>
+            Use at least 8 characters with a mix of letters, numbers, and symbols.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-1.5">
+            <Label>Current Password</Label>
+            <Input
+              type="password"
+              placeholder="Enter current password"
+              value={pwForm.current}
+              onChange={(e) => setPwForm((p) => ({ ...p, current: e.target.value }))}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-1.5">
+              <Label>New Password</Label>
+              <Input
+                type="password"
+                placeholder="Min. 8 characters"
+                value={pwForm.newPass}
+                onChange={(e) => setPwForm((p) => ({ ...p, newPass: e.target.value }))}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Confirm New Password</Label>
+              <Input
+                type="password"
+                placeholder="Re-enter new password"
+                value={pwForm.confirm}
+                onChange={(e) => setPwForm((p) => ({ ...p, confirm: e.target.value }))}
+              />
+            </div>
+          </div>
+          <Button onClick={handleChangePassword} variant="gradient" loading={savingPw}>
+            Change Password
+          </Button>
         </CardContent>
       </Card>
 

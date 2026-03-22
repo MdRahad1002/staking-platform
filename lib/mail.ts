@@ -526,7 +526,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your account is ready - start earning today</title>
+  <title>${firstName}, your account earns $0 until you deposit</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
@@ -534,176 +534,166 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
   <!-- HEADER -->
-  <tr><td style="background:linear-gradient(135deg,#0f2027 0%,#1a3a4a 50%,#0f2027 100%);border-radius:16px 16px 0 0;padding:40px 48px 36px;text-align:center;">
+  <tr><td style="background:linear-gradient(135deg,#1a0000 0%,#3a0a0a 50%,#1a0000 100%);border-radius:16px 16px 0 0;padding:40px 48px 36px;text-align:center;">
     <a href="${appUrl}" style="text-decoration:none;">
       <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:10px 22px;margin-bottom:24px;">
         <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
       </div>
     </a>
-    <!-- Verified badge -->
-    <div style="display:inline-block;background:#052e16;border:1px solid #166534;border-radius:999px;padding:6px 18px;margin-bottom:20px;">
-      <span style="color:#4ade80;font-size:13px;font-weight:600;">&#10003;&nbsp; Email Verified</span>
-    </div>
-    <h1 style="color:#ffffff;font-size:28px;font-weight:800;margin:0 0 10px;letter-spacing:-0.5px;line-height:1.25;">
-      Your account is ready.<br/>
-      <span style="color:#f59e0b;">But it&rsquo;s not earning yet.</span>
+    <h1 style="color:#ffffff;font-size:30px;font-weight:900;margin:0 0 10px;letter-spacing:-0.5px;line-height:1.2;">
+      ${firstName}, you are losing<br/>
+      <span style="color:#ef4444;">money right now.</span>
     </h1>
     <p style="color:#94a3b8;font-size:15px;margin:0;line-height:1.6;">
-      Every day without a deposit is money you&rsquo;re leaving on the table.
+      Every hour you wait is passive income you will never recover.<br/>
+      Your $100 bonus is reserved. Your account is ready. What are you waiting for?
     </p>
   </td></tr>
 
-  <!-- BODY -->
-  <tr><td style="background:#0d1520;padding:0;">
-
-    <!-- Opportunity cost banner -->
+  <!-- URGENT LOSS TICKER -->
+  <tr><td>
     <table width="100%" cellpadding="0" cellspacing="0">
-      <tr><td style="background:linear-gradient(135deg,#1c1207,#2d1e08);border-left:4px solid #f59e0b;padding:20px 32px;">
-        <p style="color:#fbbf24;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;margin:0 0 4px;">&#9888;&nbsp; You&rsquo;re Missing Out Right Now</p>
-        <p style="color:#92400e;font-size:13px;margin:0;line-height:1.6;">
-          Users who deposited today are already earning. A $1,000 stake at 2%/day earns
-          <strong style="color:#fbbf24;">$20 today</strong>, <strong style="color:#fbbf24;">$600 this month</strong>.
-          Your account has earned exactly <strong style="color:#ef4444;">$0.00</strong> so far.
-        </p>
-      </td></tr>
-    </table>
-
-    <!-- Earnings preview table -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:36px 40px 0;">
-      <tr><td>
-        <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 16px;">What you could be earning daily</p>
-        <!-- Row 1 -->
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
-          <tr>
-            <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px 18px;width:33%;vertical-align:middle;">
-              <p style="color:#6b7280;font-size:11px;margin:0 0 3px;">Deposit $500</p>
-              <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0;">$10<span style="font-size:13px;font-weight:500;color:#4b5563;">/day</span></p>
-              <p style="color:#374151;font-size:11px;margin:3px 0 0;">$300/month</p>
-            </td>
-            <td style="width:8px;"></td>
-            <td style="background:linear-gradient(135deg,#0c2340,#0a3a5c);border:1px solid #0e4a73;border-radius:10px;padding:14px 18px;width:33%;vertical-align:middle;">
-              <div style="display:inline-block;background:#0e4a73;border-radius:4px;padding:2px 8px;margin-bottom:6px;">
-                <span style="color:#38bdf8;font-size:10px;font-weight:700;">POPULAR</span>
-              </div>
-              <p style="color:#6b7280;font-size:11px;margin:0 0 3px;">Deposit $2,000</p>
-              <p style="color:#38bdf8;font-size:20px;font-weight:800;margin:0;">$40<span style="font-size:13px;font-weight:500;color:#4b5563;">/day</span></p>
-              <p style="color:#374151;font-size:11px;margin:3px 0 0;">$1,200/month</p>
-            </td>
-            <td style="width:8px;"></td>
-            <td style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e);border:1px solid #4c1d95;border-radius:10px;padding:14px 18px;width:33%;vertical-align:middle;">
-              <p style="color:#6b7280;font-size:11px;margin:0 0 3px;">Deposit $5,000</p>
-              <p style="color:#a78bfa;font-size:20px;font-weight:800;margin:0;">$100<span style="font-size:13px;font-weight:500;color:#4b5563;">/day</span></p>
-              <p style="color:#374151;font-size:11px;margin:3px 0 0;">$3,000/month</p>
-            </td>
-          </tr>
-        </table>
-        <p style="color:#374151;font-size:11px;margin:8px 0 0;text-align:right;">Based on Growth plan at 2%/day &middot; <a href="${appUrl}/plans" style="color:#6b7280;text-decoration:none;">View all plans</a></p>
-      </td></tr>
-    </table>
-
-    <!-- CTA Section -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:32px 40px;">
-      <tr><td style="background:linear-gradient(135deg,#0a2a1a,#0f3d2e);border:1px solid #00d4aa33;border-radius:14px;padding:32px;text-align:center;">
-        <p style="color:#00d4aa;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 10px;">Ready to start earning?</p>
-        <h2 style="color:#ffffff;font-size:22px;font-weight:800;margin:0 0 12px;line-height:1.3;">
-          Make Your First Deposit &amp;<br/>Get Paid Tomorrow
-        </h2>
-        <p style="color:#6b7280;font-size:14px;margin:0 0 24px;line-height:1.6;">
-          Deposit crypto, choose a plan, and your first daily reward lands in your account within 24 hours. It really is that simple.
-        </p>
-        <a href="${appUrl}/deposit"
-           style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;padding:16px 52px;border-radius:12px;letter-spacing:0.3px;">
-          Make My First Deposit &rarr;
-        </a>
-        <p style="color:#374151;font-size:12px;margin:16px 0 0;">
-          No minimum lock-up &middot; Withdraw anytime &middot; Rewards in 24h
-        </p>
-      </td></tr>
-    </table>
-
-    <!-- How it works - 3 steps -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 40px 32px;">
-      <tr><td>
-        <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 16px;">It takes under 3 minutes</p>
+      <tr><td style="background:linear-gradient(135deg,#450a0a,#7f1d1d);padding:22px 40px;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="width:33%;vertical-align:top;padding-right:8px;">
-              <div style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:18px;text-align:center;">
-                <div style="width:32px;height:32px;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:50%;margin:0 auto 10px;line-height:32px;text-align:center;">
-                  <span style="color:#ffffff;font-size:14px;font-weight:800;">1</span>
-                </div>
-                <p style="color:#e5e7eb;font-size:13px;font-weight:600;margin:0 0 4px;">Deposit Crypto</p>
-                <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.5;">BTC, ETH, USDT &amp; more accepted</p>
-              </div>
+            <td style="width:50%;padding-right:16px;border-right:1px solid #991b1b;text-align:center;">
+              <p style="color:#fca5a5;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 4px;">Your earnings right now</p>
+              <p style="color:#ef4444;font-size:36px;font-weight:900;margin:0;line-height:1;">$0.00</p>
             </td>
-            <td style="width:33%;vertical-align:top;padding:0 4px;">
-              <div style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:18px;text-align:center;">
-                <div style="width:32px;height:32px;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:50%;margin:0 auto 10px;line-height:32px;text-align:center;">
-                  <span style="color:#ffffff;font-size:14px;font-weight:800;">2</span>
-                </div>
-                <p style="color:#e5e7eb;font-size:13px;font-weight:600;margin:0 0 4px;">Choose a Plan</p>
-                <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.5;">Pick daily ROI &amp; duration that suits you</p>
-              </div>
-            </td>
-            <td style="width:33%;vertical-align:top;padding-left:8px;">
-              <div style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:18px;text-align:center;">
-                <div style="width:32px;height:32px;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:50%;margin:0 auto 10px;line-height:32px;text-align:center;">
-                  <span style="color:#ffffff;font-size:14px;font-weight:800;">3</span>
-                </div>
-                <p style="color:#e5e7eb;font-size:13px;font-weight:600;margin:0 0 4px;">Earn Daily</p>
-                <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.5;">Rewards credited while you sleep</p>
-              </div>
+            <td style="width:50%;padding-left:16px;text-align:center;">
+              <p style="color:#fca5a5;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 4px;">$1,000 deposit earns per hour</p>
+              <p style="color:#fb923c;font-size:36px;font-weight:900;margin:0;line-height:1;">$0.83</p>
+              <p style="color:#991b1b;font-size:12px;margin:4px 0 0;">= $20 today &middot; $600 this month</p>
             </td>
           </tr>
         </table>
       </td></tr>
     </table>
+  </td></tr>
 
-    <!-- Social proof strip -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 40px 32px;">
+  <!-- BODY -->
+  <tr><td style="background:#0d1520;padding:36px 40px 0;">
+
+    <p style="color:#d1d5db;font-size:15px;line-height:1.8;margin:0 0 8px;">
+      Hi <strong style="color:#ffffff;">${firstName}</strong>,
+    </p>
+    <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 20px;">
+      You verified your email - great. But your balance shows <strong style="color:#ef4444;">exactly $0.00</strong> and it will stay that way until you make your first deposit.
+    </p>
+    <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 32px;">
+      Right now, <strong style="color:#ffffff;">hundreds of StakeOnix members</strong> are collecting daily rewards in their sleep. Every hour you hold off is money you hand to someone else.
+    </p>
+
+    <!-- Earnings grid -->
+    <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 14px;">What you could already be collecting every day</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
       <tr>
-        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px 20px;text-align:center;width:33%;">
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#6b7280;font-size:11px;margin:0 0 4px;">Deposit $500</p>
+          <p style="color:#00d4aa;font-size:26px;font-weight:900;margin:0 0 2px;">$10</p>
+          <p style="color:#4b5563;font-size:11px;margin:0;">every day</p>
+          <p style="color:#374151;font-size:11px;margin:4px 0 0;">$300/month</p>
+        </td>
+        <td style="width:8px;"></td>
+        <td style="background:linear-gradient(135deg,#0c2340,#0a3a5c);border:2px solid #0ea5e9;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#38bdf8;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Most Popular</p>
+          <p style="color:#6b7280;font-size:11px;margin:0 0 4px;">Deposit $2,000</p>
+          <p style="color:#38bdf8;font-size:26px;font-weight:900;margin:0 0 2px;">$40</p>
+          <p style="color:#4b5563;font-size:11px;margin:0;">every day</p>
+          <p style="color:#374151;font-size:11px;margin:4px 0 0;">$1,200/month</p>
+        </td>
+        <td style="width:8px;"></td>
+        <td style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e);border:1px solid #4c1d95;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#6b7280;font-size:11px;margin:0 0 4px;">Deposit $5,000</p>
+          <p style="color:#a78bfa;font-size:26px;font-weight:900;margin:0 0 2px;">$150</p>
+          <p style="color:#4b5563;font-size:11px;margin:0;">every day</p>
+          <p style="color:#374151;font-size:11px;margin:4px 0 0;">$4,500/month</p>
+        </td>
+      </tr>
+    </table>
+    <p style="color:#374151;font-size:11px;margin:6px 0 32px;text-align:right;">
+      <a href="${appUrl}/plans" style="color:#6b7280;text-decoration:none;">See all plans &rarr;</a>
+    </p>
+
+    <!-- Bonus box -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:linear-gradient(135deg,#1c1207,#2d1e08);border:1px solid #92400e;border-radius:12px;padding:24px 28px;">
+        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">&#9888;&nbsp; Your $100 Welcome Bonus Is Waiting</p>
+        <p style="color:#d97706;font-size:14px;line-height:1.7;margin:0 0 10px;">
+          Make any deposit and we will add <strong>$100 instantly</strong> to your account balance. No hoops, no waiting, no fine print.
+          <strong style="color:#fbbf24;">This offer will not be available forever.</strong>
+        </p>
+        <p style="color:#92400e;font-size:13px;margin:0;">
+          Deposit now and your first daily reward lands within 24 hours.
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- CTA -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:linear-gradient(135deg,#0a2a1a,#0f3d2e);border:2px solid #00d4aa;border-radius:14px;padding:36px 32px;text-align:center;">
+        <h2 style="color:#ffffff;font-size:24px;font-weight:900;margin:0 0 8px;line-height:1.3;">
+          Deposit Now. Earn Tomorrow.<br/>
+          <span style="color:#f59e0b;">Pocket Your $100 Instantly.</span>
+        </h2>
+        <p style="color:#6b7280;font-size:13px;margin:0 0 24px;line-height:1.5;">
+          Under 3 minutes to set up &middot; BTC, ETH, USDT accepted
+        </p>
+        <a href="${appUrl}/deposit"
+           style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#000000;font-size:17px;font-weight:900;text-decoration:none;padding:18px 60px;border-radius:12px;letter-spacing:0.5px;">
+          CLAIM MY $100 BONUS NOW &rarr;
+        </a>
+        <p style="color:#374151;font-size:12px;margin:16px 0 0;">
+          First rewards credited within 24 hours of deposit
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- Social proof -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
           <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">87,000+</p>
           <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Active Investors</p>
         </td>
         <td style="width:8px;"></td>
-        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px 20px;text-align:center;width:33%;">
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
           <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">$2.5B+</p>
-          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Total Paid Out</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Paid to Investors</p>
         </td>
         <td style="width:8px;"></td>
-        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px 20px;text-align:center;width:33%;">
-          <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">99.95%</p>
-          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Platform Uptime</p>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
+          <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">5 Years</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Zero Missed Payouts</p>
         </td>
       </tr>
     </table>
 
-    <!-- Security reassurance -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 40px 36px;">
-      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-radius:10px;padding:18px 22px;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="vertical-align:top;padding-right:12px;width:24px;font-size:18px;">&#128274;</td>
-            <td style="vertical-align:top;">
-              <p style="color:#d1d5db;font-size:13px;font-weight:600;margin:0 0 4px;">Your funds are safe</p>
-              <p style="color:#4b5563;font-size:13px;margin:0;line-height:1.6;">
-                256-bit SSL encryption &middot; Multi-signature cold wallets &middot; KYC/AML compliant &middot; Licensed in Canada
-              </p>
-            </td>
-          </tr>
-        </table>
+    <!-- Testimonial -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-left:3px solid #00d4aa;border-radius:12px;padding:20px 24px;">
+        <p style="color:#e5e7eb;font-size:14px;font-style:italic;line-height:1.7;margin:0 0 12px;">
+          &ldquo;I kept putting it off for two weeks. I finally deposited $1,000. By the next morning I had $20 sitting in my account. I felt stupid for waiting so long.&rdquo;
+        </p>
+        <p style="color:#4b5563;font-size:12px;margin:0;">
+          <strong style="color:#9ca3af;">James K.</strong> &middot; StakeOnix member &middot; Growth Plan
+        </p>
       </td></tr>
     </table>
 
-    <!-- Divider -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:0 40px;">
-      <tr><td style="border-top:1px solid #1f2937;"></td></tr>
+    <!-- Security note -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-radius:10px;padding:16px 22px;">
+        <p style="color:#d1d5db;font-size:13px;font-weight:600;margin:0 0 4px;">&#128274;&nbsp; Your funds are fully protected</p>
+        <p style="color:#4b5563;font-size:13px;margin:0;line-height:1.6;">
+          256-bit SSL &middot; Multi-signature cold wallets &middot; KYC/AML compliant &middot; Regulated in Canada
+        </p>
+      </td></tr>
     </table>
 
-    <!-- Footer links -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px 40px 0;">
-      <tr><td>
+    <!-- Footer note -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding-bottom:12px;">
+      <tr><td style="border-top:1px solid #1f2937;padding-top:20px;">
         <p style="color:#374151;font-size:12px;margin:0;line-height:1.7;">
           You received this because you recently verified your StakeOnix account.<br/>
           <a href="${appUrl}/api/unsubscribe?type=activation&amp;email=" style="color:#6b7280;text-decoration:underline;">Unsubscribe from promotional emails</a>
@@ -716,7 +706,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
   <!-- FOOTER -->
   <tr><td style="background:#0d131f;border-radius:0 0 16px 16px;padding:24px 48px;text-align:center;border-top:1px solid #1f2937;">
     <p style="color:#4b5563;font-size:12px;margin:0 0 8px;">
-      &copy; ${year} StakeOnix - 130 King St W, Toronto, ON M5X 2A2, Canada
+      &copy; ${year} StakeOnix - Operated by ONIX HOLDINGS LIMITED - Company No. 03449482
     </p>
     <p style="color:#374151;font-size:11px;margin:0;">
       <a href="${appUrl}/deposit" style="color:#6b7280;text-decoration:none;">Make a Deposit</a>
@@ -746,7 +736,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
   if (!key) return
 
   const html    = getFirstDepositNudgeEmailTemplate(firstName)
-  const subject = `${firstName}, your account is ready - but it's earning $0 right now`
+  const subject = `${firstName}, you verified but your money still earns $0 - fix it now`
   const scheduledAt = new Date(Date.now() + 8 * 60 * 1000).toISOString() // 8 minutes from now
 
   try {
@@ -797,7 +787,7 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Still thinking it over, ${firstName}?</title>
+  <title>Final warning: 3 days of earnings gone - ${firstName}</title>
 </head>
 <body style="margin:0;padding:0;background-color:#0a0f1e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0a0f1e;padding:40px 20px;">
@@ -805,122 +795,174 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
   <!-- HEADER -->
-  <tr><td style="background:linear-gradient(135deg,#0f1a2e 0%,#1a2d4a 50%,#0f1a2e 100%);border-radius:16px 16px 0 0;padding:40px 48px 36px;text-align:center;">
+  <tr><td style="background:linear-gradient(135deg,#1a0a00 0%,#3d1a00 50%,#1a0a00 100%);border-radius:16px 16px 0 0;padding:40px 48px 36px;text-align:center;">
     <a href="${appUrl}" style="text-decoration:none;">
       <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:12px;padding:10px 22px;margin-bottom:24px;">
         <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:2px;">STAKE<span style="color:#a8f0e0;">ONIX</span></span>
       </div>
     </a>
-    <h1 style="color:#ffffff;font-size:26px;font-weight:800;margin:0 0 10px;letter-spacing:-0.5px;line-height:1.3;">
-      Still thinking it over,&nbsp;<span style="color:#f59e0b;">${firstName}?</span>
+    <div style="display:inline-block;background:#7f1d1d;border-radius:999px;padding:6px 18px;margin-bottom:20px;">
+      <span style="color:#fca5a5;font-size:13px;font-weight:700;">&#9888;&nbsp; FINAL REMINDER</span>
+    </div>
+    <h1 style="color:#ffffff;font-size:26px;font-weight:900;margin:0 0 10px;letter-spacing:-0.5px;line-height:1.3;">
+      ${firstName}, it has been 3 days.<br/>
+      <span style="color:#f97316;">You have earned nothing.</span>
     </h1>
     <p style="color:#94a3b8;font-size:15px;margin:0;line-height:1.6;">
-      Your account is ready. Your $100 bonus is waiting.<br/>Every day without a deposit is a day your money isn&rsquo;t working for you.
+      This is the last reminder we will send you. Your $100 bonus is still available - but it will not wait forever.
     </p>
   </td></tr>
 
-  <!-- PERSONAL NOTE -->
-  <tr><td style="background:#0d1520;padding:36px 48px 0;">
-    <p style="color:#d1d5db;font-size:15px;line-height:1.8;margin:0 0 24px;">
+  <!-- 3-DAY LOSS BANNER -->
+  <tr><td>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr><td style="background:linear-gradient(135deg,#450a0a,#7f1d1d);padding:24px 40px;">
+        <p style="color:#fca5a5;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 14px;text-align:center;">What a $1,000 deposit would have earned you in the last 3 days</p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="text-align:center;padding-right:12px;border-right:1px solid #991b1b;">
+              <p style="color:#ef4444;font-size:28px;font-weight:900;margin:0 0 2px;">$60</p>
+              <p style="color:#9ca3af;font-size:11px;margin:0;">missed in 3 days</p>
+            </td>
+            <td style="text-align:center;padding:0 12px;border-right:1px solid #991b1b;">
+              <p style="color:#ef4444;font-size:28px;font-weight:900;margin:0 0 2px;">$600</p>
+              <p style="color:#9ca3af;font-size:11px;margin:0;">you would earn this month</p>
+            </td>
+            <td style="text-align:center;padding-left:12px;">
+              <p style="color:#ef4444;font-size:28px;font-weight:900;margin:0 0 2px;">$7,300</p>
+              <p style="color:#9ca3af;font-size:11px;margin:0;">you would earn this year</p>
+            </td>
+          </tr>
+        </table>
+        <p style="color:#7f1d1d;font-size:11px;margin:10px 0 0;text-align:center;">Based on $1,000 at 2%/day on the Growth plan</p>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- BODY -->
+  <tr><td style="background:#0d1520;padding:36px 40px 0;">
+
+    <p style="color:#d1d5db;font-size:15px;line-height:1.8;margin:0 0 8px;">
       Hi <strong style="color:#ffffff;">${firstName}</strong>,
     </p>
     <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 20px;">
-      We noticed you created your StakeOnix account but haven&rsquo;t made your first deposit yet.
-      We completely understand - starting something new takes confidence.
+      Three days ago you created your StakeOnix account and verified your email. But you still have not made a deposit.
     </p>
     <p style="color:#9ca3af;font-size:15px;line-height:1.8;margin:0 0 32px;">
-      So here are three things we want you to know:
+      In those 3 days, <strong style="color:#ffffff;">thousands of StakeOnix members</strong> collected their daily rewards. That money went to them - not you. Every additional day you wait is more passive income you will never recover.
     </p>
 
-    <!-- 3 reassurance points -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
-      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #00d4aa;border-radius:8px;padding:16px 20px;margin-bottom:12px;">
-        <p style="color:#00d4aa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; You can start with as little as $100</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">No need for large amounts. Even a small stake earns daily - $100 at 2%/day = $2 every single day, $60/month.</p>
-      </td></tr>
-      <tr><td style="height:8px;"></td></tr>
-      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #f59e0b;border-radius:8px;padding:16px 20px;">
-        <p style="color:#f59e0b;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your $100 welcome bonus is still reserved for you</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">Make your first deposit and we&rsquo;ll add $100 straight to your account balance - instantly, no strings attached.</p>
-      </td></tr>
-      <tr><td style="height:8px;"></td></tr>
-      <tr><td style="background:#111827;border:1px solid #1f2937;border-left:3px solid #a78bfa;border-radius:8px;padding:16px 20px;">
-        <p style="color:#a78bfa;font-size:13px;font-weight:700;margin:0 0 4px;">&#10003;&nbsp; Your funds are fully protected</p>
-        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.6;">256-bit SSL, cold wallet storage, daily audits. Over 87,000 investors trust StakeOnix with their crypto - and we&rsquo;ve never missed a payout.</p>
+    <!-- Bonus urgency box -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:linear-gradient(135deg,#1c1207,#2d1e08);border:2px solid #f59e0b;border-radius:12px;padding:24px 28px;">
+        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 10px;">&#9888;&nbsp; Your $100 Bonus - Act Now</p>
+        <p style="color:#d97706;font-size:14px;line-height:1.7;margin:0 0 10px;">
+          We set aside a <strong>$100 welcome bonus</strong> for your account when you signed up.
+          It is added instantly to your balance the moment you make your first deposit.
+        </p>
+        <p style="color:#fbbf24;font-size:14px;font-weight:700;margin:0;">
+          We cannot hold this indefinitely. Deposit today and lock it in before it is gone.
+        </p>
       </td></tr>
     </table>
 
-    <!-- What others are earning today -->
-    <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 14px;">What members are earning right now</p>
+    <!-- Earnings table -->
+    <p style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 14px;">Passive income you could collect every single day</p>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
       <tr>
-        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;width:30%;vertical-align:top;">
-          <p style="color:#00d4aa;font-size:22px;font-weight:800;margin:0 0 2px;">$6</p>
-          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
-          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Starter<br/>$300 deposit</p>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#6b7280;font-size:11px;margin:0 0 6px;">Deposit $500</p>
+          <p style="color:#00d4aa;font-size:24px;font-weight:900;margin:0 0 2px;">$10<span style="font-size:12px;font-weight:400;color:#4b5563;">/day</span></p>
+          <p style="color:#374151;font-size:11px;margin:0;">$300/month</p>
         </td>
-        <td style="width:6px;"></td>
-        <td style="background:linear-gradient(135deg,#0d1e36,#0f2a4a);border:1px solid #1e4060;border-radius:10px;padding:16px;text-align:center;width:36%;vertical-align:top;">
-          <div style="background:#164e6b;display:inline-block;border-radius:4px;padding:2px 8px;margin-bottom:8px;">
-            <span style="color:#38bdf8;font-size:10px;font-weight:700;">MOST POPULAR</span>
-          </div>
-          <p style="color:#38bdf8;font-size:22px;font-weight:800;margin:0 0 2px;">$40</p>
-          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
-          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Growth<br/>$2,000 deposit</p>
+        <td style="width:8px;"></td>
+        <td style="background:linear-gradient(135deg,#0c2340,#0a3a5c);border:2px solid #0ea5e9;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#38bdf8;font-size:10px;font-weight:700;text-transform:uppercase;margin:0 0 6px;">Most Popular</p>
+          <p style="color:#6b7280;font-size:11px;margin:0 0 6px;">Deposit $2,000</p>
+          <p style="color:#38bdf8;font-size:24px;font-weight:900;margin:0 0 2px;">$40<span style="font-size:12px;font-weight:400;color:#4b5563;">/day</span></p>
+          <p style="color:#374151;font-size:11px;margin:0;">$1,200/month</p>
         </td>
-        <td style="width:6px;"></td>
-        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;width:30%;vertical-align:top;">
-          <p style="color:#a78bfa;font-size:22px;font-weight:800;margin:0 0 2px;">$175</p>
-          <p style="color:#4b5563;font-size:11px;margin:0 0 6px;">per day</p>
-          <p style="color:#374151;font-size:11px;margin:0;line-height:1.4;">Elite<br/>$5,000 deposit</p>
+        <td style="width:8px;"></td>
+        <td style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e);border:1px solid #4c1d95;border-radius:10px;padding:16px;text-align:center;vertical-align:top;">
+          <p style="color:#6b7280;font-size:11px;margin:0 0 6px;">Deposit $5,000</p>
+          <p style="color:#a78bfa;font-size:24px;font-weight:900;margin:0 0 2px;">$150<span style="font-size:12px;font-weight:400;color:#4b5563;">/day</span></p>
+          <p style="color:#374151;font-size:11px;margin:0;">$4,500/month</p>
         </td>
       </tr>
     </table>
 
-    <!-- Testimonial -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
-      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-radius:12px;padding:24px;">
-        <p style="color:#e5e7eb;font-size:14px;font-style:italic;line-height:1.7;margin:0 0 16px;">
-          &ldquo;I was hesitant at first. I deposited a small amount just to test. Within 24 hours I saw my first daily payment. I&rsquo;ve been here for 6 months and never looked back.&rdquo;
-        </p>
-        <table cellpadding="0" cellspacing="0"><tr>
-          <td style="vertical-align:middle;padding-right:10px;">
-            <div style="width:36px;height:36px;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:50%;line-height:36px;text-align:center;">
-              <span style="color:#ffffff;font-size:14px;font-weight:700;">M</span>
-            </div>
-          </td>
-          <td style="vertical-align:middle;">
-            <p style="color:#e5e7eb;font-size:13px;font-weight:600;margin:0;">Marcus T.</p>
-            <p style="color:#4b5563;font-size:12px;margin:0;">StakeOnix member since 2024 &middot; Growth Plan</p>
-          </td>
-        </tr></table>
-      </td></tr>
-    </table>
-
     <!-- CTA -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:36px;">
-      <tr><td style="background:linear-gradient(135deg,#0a2a1a,#0f3d2e);border:1px solid #00d4aa33;border-radius:14px;padding:32px;text-align:center;">
-        <p style="color:#00d4aa;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;">Your $100 bonus is still available</p>
-        <h2 style="color:#ffffff;font-size:20px;font-weight:800;margin:0 0 12px;line-height:1.3;">Make your first deposit today<br/>and start earning tomorrow</h2>
-        <p style="color:#6b7280;font-size:13px;margin:0 0 24px;line-height:1.6;">
-          Takes under 3 minutes &middot; BTC, ETH, USDT &amp; more accepted
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:linear-gradient(135deg,#3d0000,#600000);border:2px solid #ef4444;border-radius:14px;padding:36px 32px;text-align:center;">
+        <p style="color:#fca5a5;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Stop leaving money on the table</p>
+        <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 10px;line-height:1.3;">
+          Make Your First Deposit Now.<br/>
+          <span style="color:#f59e0b;">Grab Your $100. Start Earning Today.</span>
+        </h2>
+        <p style="color:#9ca3af;font-size:13px;margin:0 0 24px;line-height:1.5;">
+          Less than 3 minutes &middot; BTC, ETH, USDT and more accepted
         </p>
         <a href="${appUrl}/deposit"
-           style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;padding:16px 52px;border-radius:12px;letter-spacing:0.3px;">
-          Claim My $100 Bonus &rarr;
+           style="display:inline-block;background:linear-gradient(135deg,#ef4444,#dc2626);color:#ffffff;font-size:17px;font-weight:900;text-decoration:none;padding:18px 52px;border-radius:12px;letter-spacing:0.5px;">
+          I WANT MY $100 BONUS &rarr;
         </a>
-        <p style="color:#374151;font-size:12px;margin:16px 0 0;">
-          Questions? Reply to this email or <a href="${appUrl}/contact" style="color:#6b7280;text-decoration:none;">contact our support team</a>.
+        <p style="color:#6b7280;font-size:12px;margin:16px 0 0;">
+          Rewards credited within 24 hours &middot; Withdraw your funds at any time
         </p>
       </td></tr>
     </table>
 
-    <!-- Divider -->
-    <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #1f2937;padding-top:24px;"></td></tr></table>
-    <p style="color:#4b5563;font-size:12px;margin:16px 0 0;line-height:1.6;">
-      You are receiving this because you have a StakeOnix account and haven&rsquo;t made your first deposit yet.<br/>
-      <a href="${unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">Unsubscribe from follow-up emails</a>
-    </p>
+    <!-- Testimonial -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr><td style="background:#0d1117;border:1px solid #1f2937;border-left:3px solid #f59e0b;border-radius:12px;padding:20px 24px;">
+        <p style="color:#e5e7eb;font-size:14px;font-style:italic;line-height:1.7;margin:0 0 12px;">
+          &ldquo;I signed up and did nothing for a week. That cost me $140 in earnings I will never get back. Do not make the same mistake. Just deposit and let it run.&rdquo;
+        </p>
+        <p style="color:#4b5563;font-size:12px;margin:0;">
+          <strong style="color:#9ca3af;">Sarah M.</strong> &middot; StakeOnix member &middot; Elite Plan
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- Social proof -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+      <tr>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px;text-align:center;">
+          <p style="color:#00d4aa;font-size:18px;font-weight:800;margin:0 0 2px;">87,000+</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Active Investors</p>
+        </td>
+        <td style="width:8px;"></td>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px;text-align:center;">
+          <p style="color:#00d4aa;font-size:18px;font-weight:800;margin:0 0 2px;">$2.5B+</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Paid to Investors</p>
+        </td>
+        <td style="width:8px;"></td>
+        <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px;text-align:center;">
+          <p style="color:#00d4aa;font-size:18px;font-weight:800;margin:0 0 2px;">5 years</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Zero Missed Payouts</p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Final note -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+      <tr><td style="background:#111827;border:1px solid #374151;border-radius:10px;padding:16px 20px;">
+        <p style="color:#6b7280;font-size:13px;margin:0;line-height:1.7;">
+          This is our final reminder about your first deposit. We respect your inbox and will not keep emailing you. But if there is any part of you that is curious about what daily passive income from crypto staking could do for your finances - today is the day to find out.
+        </p>
+      </td></tr>
+    </table>
+
+    <!-- Unsubscribe -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding-bottom:12px;">
+      <tr><td style="border-top:1px solid #1f2937;padding-top:20px;">
+        <p style="color:#374151;font-size:12px;margin:0;line-height:1.7;">
+          You are receiving this because you have a StakeOnix account and have not made your first deposit yet.<br/>
+          <a href="${unsubscribeUrl}" style="color:#7c3aed;text-decoration:underline;">Unsubscribe from follow-up emails</a>
+        </p>
+      </td></tr>
+    </table>
+
   </td></tr>
 
   <!-- FOOTER -->
@@ -950,7 +992,7 @@ export async function sendDepositFollowUpEmail(email: string, name: string): Pro
   const unsubUrl  = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=activation`
   await sendEmail({
     to: email,
-    subject: `${firstName}, your $100 bonus is still waiting for you`,
+    subject: `Final warning, ${firstName}: 3 days gone, $0 earned - claim your $100 before it expires`,
     html: getDepositFollowUpEmailTemplate(firstName, unsubUrl),
   })
 }

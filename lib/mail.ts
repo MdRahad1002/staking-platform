@@ -758,13 +758,9 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
 
     const data = await res.json()
 
-    // If scheduledAt not supported (free plan), fall back to immediate send
-    if (!res.ok && data?.name === 'restricted_feature') {
+    // scheduled_at requires Resend paid plan - fall back to immediate send on any failure
+    if (!res.ok) {
       await sendEmail({ to: email, subject, html })
-    }
-
-    if (!res.ok && data?.name !== 'restricted_feature') {
-      console.warn('[MAIL] First deposit nudge failed to schedule:', data)
     }
   } catch (err) {
     // Non-critical - swallow error so it never breaks the verify flow

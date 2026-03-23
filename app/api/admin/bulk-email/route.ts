@@ -25,7 +25,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   await requireAdmin()
 
-  const { subject, content, target } = await req.json()
+  const { subject, content, target, rawHtml } = await req.json()
   if (!subject?.trim() || !content?.trim())
     return NextResponse.json({ error: 'Subject and content are required.' }, { status: 400 })
 
@@ -53,7 +53,9 @@ export async function POST(req: NextRequest) {
     return {
       to: u.email,
       subject,
-      html: getBulkEmailTemplate(firstName, subject, content, unsubscribeUrl),
+      html: rawHtml
+        ? content.replace(/\{\{firstName\}\}/g, firstName).replace(/\{\{unsubscribeUrl\}\}/g, unsubscribeUrl)
+        : getBulkEmailTemplate(firstName, subject, content, unsubscribeUrl),
     }
   })
 

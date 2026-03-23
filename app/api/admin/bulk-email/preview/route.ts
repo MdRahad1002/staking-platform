@@ -9,7 +9,7 @@ import { authOptions } from '@/lib/auth'
 export async function POST(req: NextRequest) {
   await requireAdmin()
 
-  const { subject, content, testEmail } = await req.json()
+  const { subject, content, testEmail, rawHtml } = await req.json()
   if (!subject?.trim() || !content?.trim())
     return NextResponse.json({ error: 'Subject and content are required.' }, { status: 400 })
 
@@ -28,7 +28,9 @@ export async function POST(req: NextRequest) {
   await sendEmail({
     to: recipientEmail,
     subject: `[TEST] ${subject}`,
-    html: getBulkEmailTemplate('Admin', subject, content, unsubscribeUrl),
+    html: rawHtml
+      ? content.replace(/\{\{firstName\}\}/g, 'Admin').replace(/\{\{unsubscribeUrl\}\}/g, unsubscribeUrl)
+      : getBulkEmailTemplate('Admin', subject, content, unsubscribeUrl),
   })
 
   return NextResponse.json({ success: true, sentTo: recipientEmail })

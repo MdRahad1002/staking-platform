@@ -34,7 +34,7 @@ interface Campaign {
 // ─── Email templates ──────────────────────────────────────────────────────────
 const APP_URL = typeof window !== 'undefined' ? window.location.origin : 'https://www.stakeonix.com'
 
-const TEMPLATES = [
+const TEMPLATES: { id: string; label: string; subject: string; body: string; rawHtml?: boolean }[] = [
   {
     id: 'announcement',
     label: '📢 Announcement',
@@ -55,6 +55,136 @@ const TEMPLATES = [
 </td></tr></table>
 <p>Don't miss out - this offer is for a limited time only.</p>
 <p>Best regards,<br/><strong>The StakeOnix Team</strong></p>`,
+  },
+  {
+    id: 'urgency-promo',
+    label: '🔥 Urgency Promo (Full HTML)',
+    subject: '⚠️ Your Reserved Spot Expires in 24 Hours – Act Now',
+    rawHtml: true,
+    body: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>⚠️ Your Spot Is About To Expire – StakeOnix</title>
+</head>
+<body style="margin:0;padding:0;background-color:#04080f;font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">⚠️ WARNING: Your reserved spot expires in 24 hours. 847 users already deposited today — don't get left behind.</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#04080f;">
+  <tr>
+    <td align="center" style="padding:32px 16px;">
+      <table width="600" cellpadding="0" cellspacing="0" border="0"
+        style="max-width:600px;width:100%;border-radius:20px;overflow:hidden;background:linear-gradient(175deg,#080f1e 0%,#060d1c 100%);border:1px solid rgba(0,212,170,0.2);box-shadow:0 0 80px rgba(0,212,170,0.06),0 0 0 1px rgba(0,212,170,0.04);">
+        <tr><td style="height:5px;background:linear-gradient(90deg,#ff4e00,#ff9500,#ffcc00,#00d4aa,#00b4d8);"></td></tr>
+        <tr>
+          <td align="center" style="background:linear-gradient(90deg,rgba(255,78,0,0.12),rgba(255,149,0,0.1),rgba(255,78,0,0.12));padding:14px 24px;border-bottom:1px solid rgba(255,100,0,0.2);">
+            <span style="font-size:13px;font-weight:700;color:#ff9500;text-transform:uppercase;letter-spacing:2px;">⚠️ &nbsp;URGENT — LIMITED SPOTS REMAINING &nbsp;⚠️</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:36px 48px 24px;">
+            <div style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);border-radius:10px;padding:8px 16px;margin-bottom:28px;">
+              <span style="font-size:20px;font-weight:900;color:#04080f;letter-spacing:-0.5px;">StakeOnix</span>
+            </div>
+            <h1 style="margin:0 0 8px;font-size:40px;font-weight:900;line-height:1.1;color:#ffffff;text-align:center;letter-spacing:-1px;">Hi {{firstName}},<br/>You're Leaving<br/><span style="background:linear-gradient(90deg,#ff9500,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Free Money</span> on the Table.</h1>
+            <p style="margin:16px auto 0;font-size:17px;color:#7a9bbf;line-height:1.65;text-align:center;max-width:440px;">While you wait, <strong style="color:#ffffff;">847 other users</strong> deposited today and started earning. Your account is sitting idle — and every hour costs you.</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:0 48px 32px;">
+            <p style="margin:0 0 14px;font-size:12px;font-weight:700;color:#ff9500;text-transform:uppercase;letter-spacing:2px;">⏳ Offer expires in</p>
+            <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
+              <td align="center" style="background:rgba(255,149,0,0.1);border:1px solid rgba(255,149,0,0.3);border-radius:12px;padding:14px 18px;min-width:60px;">
+                <div style="font-size:32px;font-weight:900;color:#ffcc00;line-height:1;">23</div>
+                <div style="font-size:10px;color:#7a9bbf;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Hours</div>
+              </td>
+              <td style="padding:0 8px;font-size:28px;font-weight:900;color:#ff9500;">:</td>
+              <td align="center" style="background:rgba(255,149,0,0.1);border:1px solid rgba(255,149,0,0.3);border-radius:12px;padding:14px 18px;min-width:60px;">
+                <div style="font-size:32px;font-weight:900;color:#ffcc00;line-height:1;">47</div>
+                <div style="font-size:10px;color:#7a9bbf;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Mins</div>
+              </td>
+              <td style="padding:0 8px;font-size:28px;font-weight:900;color:#ff9500;">:</td>
+              <td align="center" style="background:rgba(255,149,0,0.1);border:1px solid rgba(255,149,0,0.3);border-radius:12px;padding:14px 18px;min-width:60px;">
+                <div style="font-size:32px;font-weight:900;color:#ffcc00;line-height:1;">12</div>
+                <div style="font-size:10px;color:#7a9bbf;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Secs</div>
+              </td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 48px 32px;">
+            <div style="background:linear-gradient(135deg,rgba(0,212,170,0.1),rgba(0,180,216,0.06));border:1px solid rgba(0,212,170,0.25);border-radius:18px;padding:28px;text-align:center;">
+              <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#00d4aa;text-transform:uppercase;letter-spacing:2px;">🔥 Today Only</p>
+              <p style="margin:0 0 4px;font-size:42px;font-weight:900;background:linear-gradient(90deg,#00d4aa,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">+3% BONUS</p>
+              <p style="margin:0 0 16px;font-size:17px;color:#c5daf0;font-weight:600;">on top of your standard APY — for any deposit made today</p>
+              <div style="display:inline-block;background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:100px;padding:8px 20px;">
+                <span style="font-size:14px;font-weight:700;color:#ffcc00;">📈 Standard 15% APY &nbsp;→&nbsp; <span style="font-size:17px;">18% APY TODAY</span></span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 48px 28px;">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 18px;">
+              <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:1.5px;">🟢 Live activity</p>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><span style="font-size:13px;color:#7a9bbf;"><strong style="color:#00d4aa;">J***n</strong> from London deposited <strong style="color:#ffffff;">$2,500</strong> &nbsp;·&nbsp; <span style="color:#4a6a8a;">3 mins ago</span></span></td></tr>
+                <tr><td style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><span style="font-size:13px;color:#7a9bbf;"><strong style="color:#00d4aa;">M***a</strong> from Dubai deposited <strong style="color:#ffffff;">$10,000</strong> &nbsp;·&nbsp; <span style="color:#4a6a8a;">11 mins ago</span></span></td></tr>
+                <tr><td style="padding:5px 0;"><span style="font-size:13px;color:#7a9bbf;"><strong style="color:#00d4aa;">R***s</strong> from New York deposited <strong style="color:#ffffff;">$5,000</strong> &nbsp;·&nbsp; <span style="color:#4a6a8a;">18 mins ago</span></span></td></tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 48px 28px;">
+            <div style="background:rgba(255,78,0,0.05);border:1px solid rgba(255,78,0,0.15);border-radius:14px;padding:20px 22px;">
+              <p style="margin:0 0 12px;font-size:13px;font-weight:700;color:#ff7040;text-transform:uppercase;letter-spacing:1px;">💸 What waiting costs you</p>
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="font-size:14px;color:#c5daf0;">If you deposit <strong style="color:#fff;">$1,000</strong> today at 18%</td><td align="right" style="font-size:14px;font-weight:700;color:#00d4aa;">+$180/yr</td></tr></table></td></tr>
+                <tr><td style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="font-size:14px;color:#c5daf0;">If you deposit <strong style="color:#fff;">$5,000</strong> today at 18%</td><td align="right" style="font-size:14px;font-weight:700;color:#00d4aa;">+$900/yr</td></tr></table></td></tr>
+                <tr><td style="padding:6px 0;"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="font-size:14px;color:#c5daf0;">Every day you wait</td><td align="right" style="font-size:14px;font-weight:700;color:#ff7040;">Lost earnings ❌</td></tr></table></td></tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:0 48px 12px;">
+            <a href="https://www.stakeonix.com/deposit" style="display:block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#04080f;font-size:18px;font-weight:900;text-decoration:none;padding:18px 52px;border-radius:14px;letter-spacing:0.2px;text-align:center;box-shadow:0 10px 40px rgba(0,212,170,0.35);">🚀 &nbsp;Deposit Now &amp; Claim My Bonus</a>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:0 48px 32px;">
+            <p style="margin:10px 0 0;font-size:13px;color:#4a6a8a;text-align:center;">Takes less than 2 minutes &nbsp;·&nbsp; Instant activation &nbsp;·&nbsp; Withdraw anytime</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:0 48px 36px;">
+            <a href="https://www.stakeonix.com/plan" style="display:inline-block;background:transparent;color:#00b4d8;font-size:14px;font-weight:700;text-decoration:none;padding:12px 36px;border-radius:10px;letter-spacing:0.2px;border:1px solid rgba(0,180,216,0.35);">Browse All Plans First →</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 48px 32px;">
+            <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,170,0.15),transparent);margin-bottom:24px;"></div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+              <td align="center" width="33%"><div style="font-size:20px;margin-bottom:4px;">🔒</div><div style="font-size:11px;color:#4a6a8a;font-weight:600;text-transform:uppercase;letter-spacing:1px;">SSL Secured</div></td>
+              <td align="center" width="33%"><div style="font-size:20px;margin-bottom:4px;">⚡</div><div style="font-size:11px;color:#4a6a8a;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Instant Payouts</div></td>
+              <td align="center" width="33%"><div style="font-size:20px;margin-bottom:4px;">🌍</div><div style="font-size:11px;color:#4a6a8a;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Global Access</div></td>
+            </tr></table>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="background:rgba(0,0,0,0.2);padding:20px 48px 24px;border-top:1px solid rgba(255,255,255,0.05);">
+            <p style="margin:0 0 8px;font-size:13px;color:#4a6a8a;line-height:1.6;">You're receiving this because you have an account on <a href="https://www.stakeonix.com" style="color:#00d4aa;text-decoration:none;">StakeOnix</a>.</p>
+            <p style="margin:0;font-size:12px;color:#2a3a4a;">© 2026 StakeOnix &nbsp;·&nbsp; <a href="{{unsubscribeUrl}}" style="color:#2a3a4a;text-decoration:underline;">Unsubscribe</a> &nbsp;·&nbsp; <a href="https://www.stakeonix.com/policy" style="color:#2a3a4a;text-decoration:underline;">Privacy Policy</a></p>
+          </td>
+        </tr>
+        <tr><td style="height:5px;background:linear-gradient(90deg,#00d4aa,#00b4d8,#7b61ff,#ff4e00);"></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`,
   },
   {
     id: 'maintenance',
@@ -133,6 +263,7 @@ export default function AdminBulkEmailPage() {
 
   // Compose state
   const [activeTemplate, setActiveTemplate] = useState('custom')
+  const [isRawHtml, setIsRawHtml] = useState(false)
   const [subject, setSubject] = useState('')
   const [body, setBody] = useState('')
   const [target, setTarget] = useState('all')
@@ -163,6 +294,7 @@ export default function AdminBulkEmailPage() {
     const tpl = TEMPLATES.find((t) => t.id === id)
     if (tpl?.subject) setSubject(tpl.subject)
     if (tpl?.body) setBody(tpl.body)
+    setIsRawHtml(!!tpl?.rawHtml)
   }
 
   const handleTestSend = async () => {
@@ -172,7 +304,7 @@ export default function AdminBulkEmailPage() {
       const res = await fetch('/api/admin/bulk-email/preview', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subject, content: body, testEmail: testEmail.trim() || undefined }),
+        body: JSON.stringify({ subject, content: body, testEmail: testEmail.trim() || undefined, rawHtml: isRawHtml }),
       })
       const data = await res.json()
       if (res.ok) toast.success(`Test email sent to ${data.sentTo}`)
@@ -189,7 +321,7 @@ export default function AdminBulkEmailPage() {
       const res = await fetch('/api/admin/bulk-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subject, content: body, target }),
+        body: JSON.stringify({ subject, content: body, target, rawHtml: isRawHtml }),
       })
       const data = await res.json()
       if (res.ok) {

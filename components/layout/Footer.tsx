@@ -84,6 +84,25 @@ export function Footer() {
                 <span>130 King St W, Toronto, ON M5X 2A2, Canada</span>
               </div>
             </div>
+
+            {/* Registration & Licensing badges */}
+            <div className="space-y-2 mb-5">
+              <div className="flex items-start gap-2.5 rounded-xl bg-white/[0.04] border border-white/8 px-3 py-2.5">
+                <Shield className="h-4 w-4 text-green-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-white leading-tight">FCA Authorised — UK</p>
+                  <p className="text-xs text-muted-foreground leading-tight mt-0.5">ONIX HOLDINGS LIMITED · Co. No. 03449482 · Registered in England &amp; Wales · FCA Ref. No. 820033</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 rounded-xl bg-white/[0.04] border border-white/8 px-3 py-2.5">
+                <Shield className="h-4 w-4 text-red-400 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-xs font-semibold text-white leading-tight">FINTRAC Registered — Canada</p>
+                  <p className="text-xs text-muted-foreground leading-tight mt-0.5">ONIX INTERNATIONAL INC. · BN: 820033090 · Registry ID: 1782217 · Ontario Business Corp.</p>
+                </div>
+              </div>
+            </div>
+
             <div className="flex flex-wrap gap-2">
               {/* X / Twitter */}
               <a href="https://x.com/StakeOnix" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"

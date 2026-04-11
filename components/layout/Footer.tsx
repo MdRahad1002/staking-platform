@@ -83,6 +83,10 @@ export function Footer() {
                 <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                 <span>130 King St W, Toronto, ON M5X 2A2, Canada</span>
               </div>
+              <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                <span>3rd Floor, 1 Ashley Road, Altrincham, Cheshire, WA14 2DT, UK</span>
+              </div>
             </div>
 
             {/* Registration & Licensing badges */}

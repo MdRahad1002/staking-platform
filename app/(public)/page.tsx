@@ -284,10 +284,17 @@ const cryptoCoins = [
 
 async function getActivePlans() {
   try {
+    const plans = await prisma.stakingPlan.findMany({
+      where: { isActive: true, minAmount: { lte: 100 } },
+      orderBy: [{ isFeatured: 'desc' }, { minAmount: 'asc' }],
+      take: 1,
+    })
+    if (plans.length > 0) return plans
+    // fallback: just return the lowest-minimum active plan
     return await prisma.stakingPlan.findMany({
       where: { isActive: true },
-      orderBy: [{ isFeatured: 'desc' }, { sortOrder: 'asc' }],
-      take: 6,
+      orderBy: [{ isFeatured: 'desc' }, { minAmount: 'asc' }],
+      take: 1,
     })
   } catch {
     return []
@@ -719,29 +726,17 @@ export default async function HomePage() {
         <section className="py-20 relative border-t border-white/5">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/15 to-transparent pointer-events-none" />
           <div className="container relative mx-auto px-4">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking Products</p>
-                <h2 className="text-3xl md:text-4xl font-bold">Popular Plans</h2>
-                <p className="text-muted-foreground mt-2 max-w-lg">
-                  Our most popular staking options delivering the best risk-adjusted returns.
-                </p>
+            <div className="text-center mb-10">
+              <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking Products</p>
+              <h2 className="text-3xl md:text-4xl font-bold">Popular Plans</h2>
+              <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
+                Our most popular staking option delivering the best risk-adjusted returns.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full max-w-sm">
+                <PlanCard key={plans[0].id} plan={plans[0]} isLoggedIn={!!session} />
               </div>
-              <Link href="/plans" className="hidden md:flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-medium">
-                View all plans <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {plans.map((plan) => (
-                <PlanCard key={plan.id} plan={plan} isLoggedIn={!!session} />
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link href="/plans">
-                <Button variant="outline" size="lg" className="gap-2 border-white/10 hover:border-cyan-500/40 rounded-xl">
-                  View All Plans <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
             </div>
           </div>
         </section>

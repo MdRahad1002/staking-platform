@@ -1,11 +1,11 @@
-/**
+﻿/**
  * Seeds DepositCurrency and WithdrawalCurrency records.
  * Run: node prisma/seed-currencies.mjs
  */
 import { PrismaClient } from '@prisma/client'
 const db = new PrismaClient()
 
-// NowPayments minimum is ~$19.18 USD for all currencies — use $20 as safe minimum
+// NowPayments minimum is ~$19.18 USD for all currencies use $20 as safe minimum
 const depositCurrencies = [
   { symbol: 'BTC',  name: 'Bitcoin',   network: 'BTC',   minDeposit: 20, isActive: true },
   { symbol: 'ETH',  name: 'Ethereum',  network: 'ERC20', minDeposit: 20, isActive: true },

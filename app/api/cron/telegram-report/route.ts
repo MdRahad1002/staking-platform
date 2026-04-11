@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { sendTelegramMessage } from '@/lib/telegram'
 
-// Protect with CRON_SECRET — same pattern as other cron routes
+// Protect with CRON_SECRET same pattern as other cron routes
 function isAuthorized(req: NextRequest) {
   const auth = req.headers.get('authorization')
   const cronSecret = (process.env.CRON_SECRET || '').trim()

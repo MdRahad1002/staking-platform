@@ -1,4 +1,4 @@
-import { NextAuthOptions, getServerSession } from 'next-auth'
+﻿import { NextAuthOptions, getServerSession } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { prisma } from '@/lib/db'
 import bcrypt from 'bcryptjs'
@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email and password are required')
         }
 
-        // Parse IP — x-forwarded-for may be "ip1, ip2" from proxy chains; take first
+        // Parse IP x-forwarded-for may be "ip1, ip2" from proxy chains; take first
         const rawIp = (req.headers?.['x-forwarded-for'] as string) ||
                       (req.headers?.['x-real-ip'] as string) ||
                       'unknown'
@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
         const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
 
         if (!isPasswordValid) {
-          // Log failed attempt — non-blocking, must not throw
+          // Log failed attempt non-blocking, must not throw
           prisma.loginHistory.create({
             data: { userId: user.id, ipAddress: ip, userAgent, isSuccess: false },
           }).catch(() => {})
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         // ── 2FA gate ──────────────────────────────────────────────────
-        // Password is correct but 2FA is enabled — return a pending marker.
+        // Password is correct but 2FA is enabled return a pending marker.
         // The JWT callback will flag the session as twoFaPending so the
         // login page renders the TOTP challenge instead of redirecting.
         if (user.twoFaEnabled) {
@@ -140,7 +140,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         const u = user as any
         if (u.twoFaPending) {
-          // Partial token — holds userId only; no role until TOTP verified
+          // Partial token holds userId only; no role until TOTP verified
           token.twoFaPending = true
           token.twoFaUserId  = u.id
           token.role  = ''

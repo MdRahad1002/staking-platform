@@ -1,4 +1,4 @@
-import { withAuth } from 'next-auth/middleware'
+﻿import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
 // ── Static patterns that are always public ────────────────────────────────────
@@ -28,7 +28,7 @@ const PUBLIC_PREFIXES = [
   '/api/crypto-prices',
   '/api/contact',
   '/api/unsubscribe',
-  // NOTE: /api/test-email is intentionally NOT public — guarded by CRON_SECRET
+  // NOTE: /api/test-email is intentionally NOT public guarded by CRON_SECRET
   '/_next',
   '/favicon',
   '/uploads',
@@ -58,21 +58,21 @@ export default withAuth(
 
     // ── Role-based access control ────────────────────────────────────────────
 
-    // Admin routes — ADMIN only
+    // Admin routes ADMIN only
     if (pathname.startsWith('/admin')) {
       if (token?.role !== 'ADMIN') {
         return NextResponse.redirect(new URL('/dashboard', req.url))
       }
     }
 
-    // Worker routes — WORKER or ADMIN
+    // Worker routes WORKER or ADMIN
     if (pathname.startsWith('/worker')) {
       if (token?.role !== 'WORKER' && token?.role !== 'ADMIN') {
         return NextResponse.redirect(new URL('/dashboard', req.url))
       }
     }
 
-    // Support routes — SUPPORT, WORKER, or ADMIN
+    // Support routes SUPPORT, WORKER, or ADMIN
     if (pathname.startsWith('/support')) {
       if (
         token?.role !== 'SUPPORT' &&
@@ -98,7 +98,7 @@ export default withAuth(
         if (isPublicPath(pathname)) return true
 
         // A twoFaPending token means password was correct but TOTP not yet
-        // verified — treat as unauthenticated for all protected routes.
+        // verified treat as unauthenticated for all protected routes.
         return !!token && !token.twoFaPending
       },
     },

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * NOWPayments integration
  * Docs: https://documenter.getpostman.com/view/7907941/2s93JqTRWN
  */
@@ -93,7 +93,7 @@ async function nowFetch<T>(
  * @param priceUsd  - Amount in USD the user wants to deposit
  * @param payCrypto - Crypto they will pay with (e.g. "btc")
  * @param orderId   - Your internal deposit DB id
- * @param ipnUrl    - Webhook URL (optional — polling works without it)
+ * @param ipnUrl    - Webhook URL (optional polling works without it)
  */
 export async function createPayment(
   priceUsd: number,
@@ -216,7 +216,7 @@ export function toNowPaymentsCode(symbol: string, network: string): string {
   const s = symbol.toLowerCase()
   const n = network.toLowerCase()
 
-  // Stablecoins — network-specific codes
+  // Stablecoins network-specific codes
   if (s === 'usdt') {
     if (n === 'trc20') return 'usdttrc20'
     if (n === 'bep20' || n === 'bsc') return 'usdtbsc'

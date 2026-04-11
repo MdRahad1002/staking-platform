@@ -69,7 +69,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
 <title>⚠️ Your Spot Is About To Expire – StakeOnix</title>
 </head>
 <body style="margin:0;padding:0;background-color:#04080f;font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
-<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">⚠️ WARNING: Your reserved spot expires in 24 hours. 847 users already deposited today — don't get left behind.</div>
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">⚠️ WARNING: Your reserved spot expires in 24 hours. 847 users already deposited today don't get left behind.</div>
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#04080f;">
   <tr>
     <td align="center" style="padding:32px 16px;">
@@ -78,7 +78,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
         <tr><td style="height:5px;background:linear-gradient(90deg,#ff4e00,#ff9500,#ffcc00,#00d4aa,#00b4d8);"></td></tr>
         <tr>
           <td align="center" style="background:linear-gradient(90deg,rgba(255,78,0,0.12),rgba(255,149,0,0.1),rgba(255,78,0,0.12));padding:14px 24px;border-bottom:1px solid rgba(255,100,0,0.2);">
-            <span style="font-size:13px;font-weight:700;color:#ff9500;text-transform:uppercase;letter-spacing:2px;">⚠️ &nbsp;URGENT — LIMITED SPOTS REMAINING &nbsp;⚠️</span>
+            <span style="font-size:13px;font-weight:700;color:#ff9500;text-transform:uppercase;letter-spacing:2px;">⚠️ &nbsp;URGENT LIMITED SPOTS REMAINING &nbsp;⚠️</span>
           </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
               <span style="font-size:20px;font-weight:900;color:#04080f;letter-spacing:-0.5px;">StakeOnix</span>
             </div>
             <h1 style="margin:0 0 8px;font-size:40px;font-weight:900;line-height:1.1;color:#ffffff;text-align:center;letter-spacing:-1px;">Hi {{firstName}},<br/>You're Leaving<br/><span style="background:linear-gradient(90deg,#ff9500,#ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Free Money</span> on the Table.</h1>
-            <p style="margin:16px auto 0;font-size:17px;color:#7a9bbf;line-height:1.65;text-align:center;max-width:440px;">While you wait, <strong style="color:#ffffff;">847 other users</strong> deposited today and started earning. Your account is sitting idle — and every hour costs you.</p>
+            <p style="margin:16px auto 0;font-size:17px;color:#7a9bbf;line-height:1.65;text-align:center;max-width:440px;">While you wait, <strong style="color:#ffffff;">847 other users</strong> deposited today and started earning. Your account is sitting idle and every hour costs you.</p>
           </td>
         </tr>
         <tr>
@@ -116,7 +116,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
             <div style="background:linear-gradient(135deg,rgba(0,212,170,0.1),rgba(0,180,216,0.06));border:1px solid rgba(0,212,170,0.25);border-radius:18px;padding:28px;text-align:center;">
               <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#00d4aa;text-transform:uppercase;letter-spacing:2px;">🔥 Today Only</p>
               <p style="margin:0 0 4px;font-size:42px;font-weight:900;background:linear-gradient(90deg,#00d4aa,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;">+3% BONUS</p>
-              <p style="margin:0 0 16px;font-size:17px;color:#c5daf0;font-weight:600;">on top of your standard APY — for any deposit made today</p>
+              <p style="margin:0 0 16px;font-size:17px;color:#c5daf0;font-weight:600;">on top of your standard APY for any deposit made today</p>
               <div style="display:inline-block;background:rgba(255,204,0,0.1);border:1px solid rgba(255,204,0,0.3);border-radius:100px;padding:8px 20px;">
                 <span style="font-size:14px;font-weight:700;color:#ffcc00;">📈 Standard 15% APY &nbsp;→&nbsp; <span style="font-size:17px;">18% APY TODAY</span></span>
               </div>

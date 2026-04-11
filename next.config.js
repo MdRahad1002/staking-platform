@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+﻿/** @type {import('next').NextConfig} */
 
 const APP_DOMAIN = process.env.NEXTAUTH_URL
   ? new URL(process.env.NEXTAUTH_URL).hostname
@@ -57,7 +57,7 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      // Lock Server Actions to the app's own origin — never wildcard in production
+      // Lock Server Actions to the app's own origin never wildcard in production
       allowedOrigins: [APP_DOMAIN, `www.${APP_DOMAIN}`, 'localhost:3000'],
     },
   },

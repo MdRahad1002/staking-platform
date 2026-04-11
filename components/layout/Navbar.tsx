@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
@@ -96,7 +96,7 @@ export function Navbar() {
           {/* Logo */}
           <Logo />
 
-          {/* Desktop Nav — only visible on lg+ */}
+          {/* Desktop Nav only visible on lg+ */}
           <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {navLinks.map((link) => (
               <Link
@@ -117,7 +117,7 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Auth buttons — desktop only */}
+          {/* Auth buttons desktop only */}
           <div className="hidden lg:flex items-center gap-3">
             {session ? (
               <div className="relative" ref={dropdownRef}>
@@ -183,7 +183,7 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Hamburger — shown on mobile & tablet (< lg) */}
+          {/* Hamburger shown on mobile & tablet (< lg) */}
           <button
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
@@ -197,7 +197,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile / Tablet Drawer — full-screen overlay */}
+      {/* Mobile / Tablet Drawer full-screen overlay */}
       <div
         className={cn(
           'fixed inset-0 z-50 lg:hidden transition-all duration-300',
@@ -214,7 +214,7 @@ export function Navbar() {
           onClick={() => setMobileOpen(false)}
         />
 
-        {/* Drawer panel — slides down from top */}
+        {/* Drawer panel slides down from top */}
         <div
           className={cn(
             'absolute top-0 left-0 right-0 bg-background border-b border-white/10 shadow-2xl shadow-black/40 transition-transform duration-300 ease-out',

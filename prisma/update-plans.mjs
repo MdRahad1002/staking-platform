@@ -1,4 +1,4 @@
-/**
+﻿/**
  * One-time script: replace all staking plans with the new 9-tier funnel.
  *
  * What it does:
@@ -15,7 +15,7 @@ const db = new PrismaClient()
 const NEW_PLANS = [
   {
     name: 'Starter Trial',
-    description: 'The perfect entry point. Deposit just $200, earn 1.5% every day for 7 days, and receive your full principal + $21 profit back in one week. No commitment beyond trial period — designed to prove the platform works before you invest more.',
+    description: 'The perfect entry point. Deposit just $200, earn 1.5% every day for 7 days, and receive your full principal + $21 profit back in one week. No commitment beyond trial period designed to prove the platform works before you invest more.',
     minAmount: 200,
     maxAmount: 499,
     durationDays: 7,
@@ -39,7 +39,7 @@ const NEW_PLANS = [
   },
   {
     name: 'Growth Yield',
-    description: 'Unlock the power of compounding returns. At $1,000+ you cross our algorithmic yield threshold — 2.2%/day for 21 days = 46.2% total. Day-1 Booster investors who reinvest here see their first $1,000+ payday.',
+    description: 'Unlock the power of compounding returns. At $1,000+ you cross our algorithmic yield threshold 2.2%/day for 21 days = 46.2% total. Day-1 Booster investors who reinvest here see their first $1,000+ payday.',
     minAmount: 1000,
     maxAmount: 2499,
     durationDays: 21,
@@ -51,7 +51,7 @@ const NEW_PLANS = [
   },
   {
     name: 'Momentum',
-    description: 'Where serious returns begin. 2.6%/day over 30 days delivers 78% total ROI — enough to turn $2,500 into $4,450. Over 3x the best Bybit or Nexo fixed-term APY. Daily settlements, no lock penalties.',
+    description: 'Where serious returns begin. 2.6%/day over 30 days delivers 78% total ROI enough to turn $2,500 into $4,450. Over 3x the best Bybit or Nexo fixed-term APY. Daily settlements, no lock penalties.',
     minAmount: 2500,
     maxAmount: 4999,
     durationDays: 30,
@@ -75,7 +75,7 @@ const NEW_PLANS = [
   },
   {
     name: 'Advanced Vault',
-    description: 'Our 45-day advanced yield engine running at 3.3%/day — 148.5% total return. $10,000 in = $24,850 out at maturity. Includes weekly performance reports, loyalty ROI boost (+0.1% on renewal), and VIP chat support.',
+    description: 'Our 45-day advanced yield engine running at 3.3%/day 148.5% total return. $10,000 in = $24,850 out at maturity. Includes weekly performance reports, loyalty ROI boost (+0.1% on renewal), and VIP chat support.',
     minAmount: 10000,
     maxAmount: 24999,
     durationDays: 45,
@@ -134,7 +134,7 @@ async function main() {
     data: { isActive: false },
   })
   if (deactivated.count > 0) {
-    console.log(`⚠️  Deactivated ${deactivated.count} old plan(s) (not deleted — preserves active staking records)`)
+    console.log(`⚠️  Deactivated ${deactivated.count} old plan(s) (not deleted preserves active staking records)`)
   } else {
     console.log('✅ No old plans to deactivate')
   }

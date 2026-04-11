@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import Link from 'next/link'
 import {
   Cpu,
@@ -72,7 +72,7 @@ export default function WhatIsMiningPage() {
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
             Millions of computers around the world are racing to solve puzzles 24/7. The winners
-            earn crypto. That, in a nutshell, is mining. Here's the full picture — and why most
+            earn crypto. That, in a nutshell, is mining. Here's the full picture and why most
             people choose staking instead.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -115,7 +115,7 @@ export default function WhatIsMiningPage() {
                   'You spend enormous energy digging through rock and earth',
                   'Occasionally you strike gold and earn a reward',
                   'The more land you cover, the better your odds of finding gold',
-                  'Competition is fierce — thousands of miners fighting for the same gold',
+                  'Competition is fierce thousands of miners fighting for the same gold',
                   'Your profits shrink as gold becomes harder to find',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
@@ -132,12 +132,12 @@ export default function WhatIsMiningPage() {
               <h3 className="text-xl font-bold text-orange-400 mb-3">Crypto Mining</h3>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 {[
-                  'You invest in expensive hardware (GPUs, ASICs — special mining computers)',
+                  'You invest in expensive hardware (GPUs, ASICs special mining computers)',
                   'Your machines consume massive amounts of electricity 24/7',
                   'Occasionally your machine wins a block and earns a crypto reward',
                   'The more computing power you have, the better your odds',
-                  'Competition is fierce — millions of machines fighting for the same reward',
-                  'Rewards halve every 4 years (Bitcoin halving) — mining gets harder over time',
+                  'Competition is fierce millions of machines fighting for the same reward',
+                  'Rewards halve every 4 years (Bitcoin halving) mining gets harder over time',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <span className="text-orange-400 mt-0.5 flex-shrink-0">•</span>
@@ -179,7 +179,7 @@ export default function WhatIsMiningPage() {
                 step: '01',
                 icon: '🛒',
                 title: 'Someone sends crypto to someone else',
-                desc: 'When Alice sends 1 Bitcoin to Bob, that transaction is broadcast to the entire Bitcoin network. But it is not confirmed yet — it is sitting in a waiting room called the "mempool".',
+                desc: 'When Alice sends 1 Bitcoin to Bob, that transaction is broadcast to the entire Bitcoin network. But it is not confirmed yet it is sitting in a waiting room called the "mempool".',
                 color: 'border-orange-500/20 bg-orange-500/5',
                 numColor: 'from-orange-500 to-yellow-500',
               },
@@ -211,7 +211,7 @@ export default function WhatIsMiningPage() {
                 step: '05',
                 icon: '🔁',
                 title: 'The race starts again immediately',
-                desc: 'A new block is targeted every 10 minutes. The network automatically adjusts the difficulty of the puzzle every 2,016 blocks to keep that 10-minute window consistent — even if more miners join or leave.',
+                desc: 'A new block is targeted every 10 minutes. The network automatically adjusts the difficulty of the puzzle every 2,016 blocks to keep that 10-minute window consistent even if more miners join or leave.',
                 color: 'border-blue-500/20 bg-blue-500/5',
                 numColor: 'from-blue-500 to-cyan-500',
               },
@@ -316,7 +316,7 @@ export default function WhatIsMiningPage() {
                 <p className="text-sm text-muted-foreground">
                   Mining machines generate extreme heat. Farms require industrial cooling systems
                   running 24/7. This is one reason mining operations are often located in cold
-                  climates like Iceland, Canada, or Norway — to reduce cooling costs.
+                  climates like Iceland, Canada, or Norway to reduce cooling costs.
                 </p>
               </div>
             </div>
@@ -422,7 +422,7 @@ export default function WhatIsMiningPage() {
             <p className="text-xl font-bold text-white mb-2">The Bottom Line on Mining</p>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               The average person starting mining today with $5,000 invested in hardware and
-              electricity would take 12–24 months just to break even — assuming Bitcoin's price
+              electricity would take 12–24 months just to break even assuming Bitcoin's price
               doesn't drop. The window for home mining profitability largely closed after 2021.
               Today it is dominated by industrial operators in low-electricity countries.
             </p>
@@ -484,28 +484,28 @@ export default function WhatIsMiningPage() {
             },
             {
               label: 'Predictability',
-              mine: 'Unpredictable — depends on luck, difficulty, price',
-              stake: 'Fixed daily % — you know exactly what you earn',
+              mine: 'Unpredictable depends on luck, difficulty, price',
+              stake: 'Fixed daily % you know exactly what you earn',
               mineColor: 'text-red-400',
               stakeColor: 'text-green-400',
             },
             {
               label: 'Technical skill',
-              mine: 'High — hardware, software, networking, maintenance',
-              stake: 'None — deposit and the platform does the rest',
+              mine: 'High hardware, software, networking, maintenance',
+              stake: 'None deposit and the platform does the rest',
               mineColor: 'text-red-400',
               stakeColor: 'text-green-400',
             },
             {
               label: 'Returns',
-              mine: 'Variable — can be negative during bear markets',
+              mine: 'Variable can be negative during bear markets',
               stake: '1.5%–4.5%/day fixed across 9 plans',
               mineColor: 'text-yellow-400',
               stakeColor: 'text-green-400',
             },
             {
               label: 'Risk to capital',
-              mine: 'Hardware loses value — becomes worthless fast',
+              mine: 'Hardware loses value becomes worthless fast',
               stake: 'Principal returned at plan maturity',
               mineColor: 'text-red-400',
               stakeColor: 'text-green-400',
@@ -520,14 +520,14 @@ export default function WhatIsMiningPage() {
             {
               label: 'Noise & heat',
               mine: 'Extremely loud (80+ dB), extremely hot',
-              stake: 'Silent — runs on our servers, not yours',
+              stake: 'Silent runs on our servers, not yours',
               mineColor: 'text-red-400',
               stakeColor: 'text-green-400',
             },
             {
               label: 'Passive income',
               mine: 'Requires constant monitoring and management',
-              stake: 'Truly passive — earnings credited every 24h',
+              stake: 'Truly passive earnings credited every 24h',
               mineColor: 'text-yellow-400',
               stakeColor: 'text-green-400',
             },
@@ -631,7 +631,7 @@ export default function WhatIsMiningPage() {
                 className="gap-2 rounded-xl text-base px-10 h-13 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white border-0 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all hover:scale-105 font-semibold"
               >
                 <Rocket className="h-4 w-4" />
-                Start Earning Today — From $100
+                Start Earning Today From $100
               </Button>
             </Link>
             <Link href="/what-is-staking">

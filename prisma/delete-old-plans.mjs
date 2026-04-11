@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hard-delete all inactive (old) staking plans IF no stakes reference them.
  * Plans that still have stake records will remain (deactivated) to preserve history.
  */
@@ -24,7 +24,7 @@ async function main() {
     }
   }
 
-  console.log(`\n✅ Done — deleted ${deleted}, kept ${skipped} (has stake history)`)
+  console.log(`\n✅ Done deleted ${deleted}, kept ${skipped} (has stake history)`)
 
   const remaining = await db.stakingPlan.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } })
   console.log('\nActive plans now in DB:')

@@ -76,7 +76,7 @@ async function main() {
   // FUNNEL DESIGN: Entry at $200 → quick 7-day proof → natural upgrades each cycle
   // Each tier pays out fast enough that users reinvest into the next tier up.
   const plans = [
-    // ── TIER 1 — TRIAL GATE ($200): The "prove it" plan ─────────────────────
+    // ── TIER 1 TRIAL GATE ($200): The "prove it" plan ─────────────────────
     // Psychology: lowest barrier, shortest lock. User sees real money hit their
     // account within days → platform is trusted → next step is natural.
     {
@@ -91,7 +91,7 @@ async function main() {
       isFeatured: false,
       sortOrder: 1,
     },
-    // ── TIER 2 — FIRST UPGRADE ($500): After tasting success ─────────────────
+    // ── TIER 2 FIRST UPGRADE ($500): After tasting success ─────────────────
     // $200 × 110.5% = $221 returned. User naturally adds ~$279 to reach $500.
     {
       name: 'Booster Plan',
@@ -105,10 +105,10 @@ async function main() {
       isFeatured: false,
       sortOrder: 2,
     },
-    // ── TIER 3 — GROWTH ($1,000): Mid-range commitment ───────────────────────
+    // ── TIER 3 GROWTH ($1,000): Mid-range commitment ───────────────────────
     {
       name: 'Growth Yield',
-      description: 'Unlock the power of compounding returns. At $1,000+ you cross our algorithmic yield threshold — 2.2%/day for 21 days = 46.2% total. Day-1 Booster investors who reinvest here see their first $1,000+ payday.',
+      description: 'Unlock the power of compounding returns. At $1,000+ you cross our algorithmic yield threshold 2.2%/day for 21 days = 46.2% total. Day-1 Booster investors who reinvest here see their first $1,000+ payday.',
       minAmount: 1000,
       maxAmount: 2499,
       durationDays: 21,
@@ -118,10 +118,10 @@ async function main() {
       isFeatured: false,
       sortOrder: 3,
     },
-    // ── TIER 4 — MOMENTUM ($2,500): Serious stakers ──────────────────────────
+    // ── TIER 4 MOMENTUM ($2,500): Serious stakers ──────────────────────────
     {
       name: 'Momentum',
-      description: 'Where serious returns begin. 2.6%/day over 30 days delivers 78% total ROI — enough to turn $2,500 into $4,450. Over 3x the best Bybit or Nexo fixed-term APY. Daily settlements, no lock penalties.',
+      description: 'Where serious returns begin. 2.6%/day over 30 days delivers 78% total ROI enough to turn $2,500 into $4,450. Over 3x the best Bybit or Nexo fixed-term APY. Daily settlements, no lock penalties.',
       minAmount: 2500,
       maxAmount: 4999,
       durationDays: 30,
@@ -131,7 +131,7 @@ async function main() {
       isFeatured: false,
       sortOrder: 4,
     },
-    // ── TIER 5 — PROFESSIONAL ($5,000): Portfolio builders ───────────────────
+    // ── TIER 5 PROFESSIONAL ($5,000): Portfolio builders ───────────────────
     {
       name: 'Professional',
       description: 'Chosen by over 60% of our repeat investors. 3.0%/day × 30 days = 90% total. Turn $5,000 into $9,500 in one month. Priority queue processing, dedicated account dashboard, and same-day withdrawal approvals.',
@@ -144,10 +144,10 @@ async function main() {
       isFeatured: true,
       sortOrder: 5,
     },
-    // ── TIER 6 — ADVANCED ($10,000): High-yield investors ────────────────────
+    // ── TIER 6 ADVANCED ($10,000): High-yield investors ────────────────────
     {
       name: 'Advanced Vault',
-      description: 'Our 45-day advanced yield engine running at 3.3%/day — 148.5% total return. $10,000 in = $24,850 out at maturity. Includes weekly performance reports, loyalty ROI boost (+0.1% on renewal), and VIP chat support.',
+      description: 'Our 45-day advanced yield engine running at 3.3%/day 148.5% total return. $10,000 in = $24,850 out at maturity. Includes weekly performance reports, loyalty ROI boost (+0.1% on renewal), and VIP chat support.',
       minAmount: 10000,
       maxAmount: 24999,
       durationDays: 45,
@@ -157,7 +157,7 @@ async function main() {
       isFeatured: true,
       sortOrder: 6,
     },
-    // ── TIER 7 — ELITE ($25,000): Wealth accumulation tier ───────────────────
+    // ── TIER 7 ELITE ($25,000): Wealth accumulation tier ───────────────────
     {
       name: 'Elite Vault',
       description: 'Reserved for committed wealth-builders. 3.6%/day over 60 days = 216% total ROI. $25,000 becomes $79,000 by maturity. Dedicated relationship manager, instant withdrawals, and exclusive early access to new plans.',
@@ -170,7 +170,7 @@ async function main() {
       isFeatured: true,
       sortOrder: 7,
     },
-    // ── TIER 8 — BLACK DIAMOND ($50,000): Near-institutional ─────────────────
+    // ── TIER 8 BLACK DIAMOND ($50,000): Near-institutional ─────────────────
     {
       name: 'Black Diamond',
       description: 'The pinnacle of personal staking. 3.9%/day × 90 days = 351% total ROI. $50,000 grows to $225,500 in 90 days. Includes a private liquidity suite, zero withdrawal fees, 24/7 concierge support, and monthly strategy calls.',
@@ -183,7 +183,7 @@ async function main() {
       isFeatured: true,
       sortOrder: 8,
     },
-    // ── TIER 9 — SOVEREIGN ($100,000+): Institutional access ─────────────────
+    // ── TIER 9 SOVEREIGN ($100,000+): Institutional access ─────────────────
     {
       name: 'Sovereign',
       description: 'Institutional-grade staking with sovereign-level yields. 4.5%/day × 90 days = 405% total ROI. Minimum $100,000. Includes a dedicated liquidity desk, white-glove onboarding, unlimited withdrawals, tax report generation, and a personal fund manager.',
@@ -209,7 +209,7 @@ async function main() {
   }
 
   // ─── Deposit currencies ────────────────────────────────────────────────────
-  // minDeposit is in USD — NowPayments minimum is ~$19.18, so $20 is the safe floor
+  // minDeposit is in USD NowPayments minimum is ~$19.18, so $20 is the safe floor
   const depositCurrencies = [
     { symbol: 'BTC',  name: 'Bitcoin',   network: 'BTC',   minDeposit: 20, isActive: true },
     { symbol: 'ETH',  name: 'Ethereum',  network: 'ERC20', minDeposit: 20, isActive: true },
@@ -249,7 +249,7 @@ async function main() {
   const settings = [
     { key: 'site_name', value: 'StakeOnix' },
     { key: 'site_url', value: 'https://www.stakeonix.com' },
-    { key: 'site_description', value: 'World-class crypto yield platform — earn daily returns on your crypto with StakeOnix' },
+    { key: 'site_description', value: 'World-class crypto yield platform earn daily returns on your crypto with StakeOnix' },
     { key: 'support_email', value: 'support@stakeonix.com' },
     { key: 'support_phone', value: '' },
     { key: 'min_deposit', value: '200' },

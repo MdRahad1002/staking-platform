@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from 'clsx'
+﻿import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { format, formatDistanceToNow } from 'date-fns'
 
@@ -20,7 +20,7 @@ export function sanitizeUrl(url: string | null | undefined): string {
   try {
     const parsed = new URL(trimmed)
     if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return ''
-    // Return parsed.href — a freshly constructed string that breaks the taint chain
+    // Return parsed.href a freshly constructed string that breaks the taint chain
     return parsed.href
   } catch {
     return ''

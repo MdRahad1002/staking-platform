@@ -128,6 +128,7 @@ import { PlanCard } from '@/components/shared/PlanCard'
 import CryptoTicker from '@/components/layout/CryptoTicker'
 import ProfitCalculator from '@/components/shared/ProfitCalculator'
 import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
+import { StickySignupCTA } from '@/components/layout/StickySignupCTA'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
 import {
@@ -1133,6 +1134,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <StickySignupCTA />
     </div>
   )
 }

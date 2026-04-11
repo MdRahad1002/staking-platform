@@ -163,7 +163,7 @@ export function Footer() {
               <span>All rights reserved.</span>
             </div>
             <span className="text-xs text-white/40">Operated by ONIX HOLDINGS LIMITED - Company No. 03449482 - Registered in England &amp; Wales</span>
-            <span className="text-xs text-white/40">Canadian Business Registry: ONIX INTERNATIONAL INC. &mdash; BN: 820033090 &mdash; Registry ID: 1782217 &mdash; Ontario Business Corp.</span>
+            <span className="text-xs text-white/40">Canadian Business Registry: ONIX INTERNATIONAL INC. | BN: 820033090 | Registry ID: 1782217 | Ontario Business Corp.</span>
           </div>
           <div className="flex gap-5 text-sm text-muted-foreground">
             <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>

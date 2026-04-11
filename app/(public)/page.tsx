@@ -647,7 +647,7 @@ export default async function HomePage() {
               <div className="mt-4 flex items-center gap-3">
                 <img src="/logos/shell.com.png" alt="Shell logo" className="h-8 w-8 object-contain" />
                 <p className="text-sm text-muted-foreground">
-                  <span className="text-white font-semibold">Shell V-Power</span> — StakeOnix.com prominently displayed across Shell forecourt signage in partnership campaign.
+                  <span className="text-white font-semibold">Shell V-Power</span> StakeOnix.com prominently displayed across Shell forecourt signage in partnership campaign.
                 </p>
               </div>
             </div>
@@ -666,7 +666,7 @@ export default async function HomePage() {
               <div className="mt-4 flex items-center gap-3">
                 <img src="/logos/bloomberg.com.png" alt="Bloomberg logo" className="h-8 w-8 object-contain" />
                 <p className="text-sm text-muted-foreground">
-                  <span className="text-white font-semibold">Bloomberg News</span> — StakeOnix.com featured in Bloomberg broadcast segment on emerging crypto staking platforms.
+                  <span className="text-white font-semibold">Bloomberg News</span> StakeOnix.com featured in Bloomberg broadcast segment on emerging crypto staking platforms.
                 </p>
               </div>
             </div>

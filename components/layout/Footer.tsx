@@ -6,6 +6,7 @@ const footerLinks = {
   Platform: [
     { href: '/plans', label: 'Staking Plans' },
     { href: '/what-is-staking', label: 'What is Staking?' },
+    { href: '/what-is-mining', label: 'What is Mining?' },
     { href: '/why-choose-us', label: 'Why Choose Us' },
     { href: '/referral-program', label: 'Referral Program' },
     { href: '/about', label: 'About Us' },

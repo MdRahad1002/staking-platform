@@ -24,6 +24,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/plans', label: 'Staking Plans' },
   { href: '/what-is-staking', label: 'What is Staking?' },
+  { href: '/what-is-mining', label: 'What is Mining?' },
   { href: '/why-choose-us', label: 'Why Us' },
   { href: '/referral-program', label: 'Referrals' },
   { href: '/about', label: 'About' },

@@ -283,23 +283,23 @@ const cryptoCoins = [
 
 
 
+const STARTER_PLAN = {
+  id: 'starter',
+  name: 'Starter Plan',
+  description: 'Start staking with just $100 and earn daily rewards on a simple, reliable plan designed for new users.',
+  minAmount: 100,
+  maxAmount: null,
+  durationDays: 30,
+  dailyRoi: 0.33,
+  totalRoi: 12,
+  isFeatured: true,
+  sortOrder: 0,
+  isActive: true,
+  iconUrl: null,
+}
+
 async function getActivePlans() {
-  try {
-    const plans = await prisma.stakingPlan.findMany({
-      where: { isActive: true, minAmount: { lte: 100 } },
-      orderBy: [{ isFeatured: 'desc' }, { minAmount: 'asc' }],
-      take: 1,
-    })
-    if (plans.length > 0) return plans
-    // fallback: just return the lowest-minimum active plan
-    return await prisma.stakingPlan.findMany({
-      where: { isActive: true },
-      orderBy: [{ isFeatured: 'desc' }, { minAmount: 'asc' }],
-      take: 1,
-    })
-  } catch {
-    return []
-  }
+  return [STARTER_PLAN]
 }
 
 export default async function HomePage() {

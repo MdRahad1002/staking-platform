@@ -621,6 +621,59 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* MEDIA COVERAGE */}
+      <section className="py-16 relative border-t border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Media &amp; Partnerships</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Featured Coverage</h2>
+            <p className="text-muted-foreground mt-2 max-w-md mx-auto">
+              StakeOnix featured across global media and major brand partnerships.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Shell */}
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-xl shadow-black/10 group overflow-hidden">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-yellow-300 font-semibold">
+                Sponsored Partnership
+              </div>
+              <div className="relative rounded-2xl overflow-hidden">
+                <img
+                  src="/sponsors/shell-stakeonix.jpg"
+                  alt="Shell V-Power StakeOnix.com partnership"
+                  className="w-full h-auto rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover"
+                />
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <img src="/logos/shell.com.png" alt="Shell logo" className="h-8 w-8 object-contain" />
+                <p className="text-sm text-muted-foreground">
+                  <span className="text-white font-semibold">Shell V-Power</span> — StakeOnix.com prominently displayed across Shell forecourt signage in partnership campaign.
+                </p>
+              </div>
+            </div>
+            {/* Bloomberg */}
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-4 shadow-xl shadow-black/10 group overflow-hidden">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-blue-300 font-semibold">
+                Media Coverage
+              </div>
+              <div className="relative rounded-2xl overflow-hidden">
+                <img
+                  src="/sponsors/bloomberg-stakeonix.jpg"
+                  alt="Bloomberg News StakeOnix.com coverage"
+                  className="w-full h-auto rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover"
+                />
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <img src="/logos/bloomberg.com.png" alt="Bloomberg logo" className="h-8 w-8 object-contain" />
+                <p className="text-sm text-muted-foreground">
+                  <span className="text-white font-semibold">Bloomberg News</span> — StakeOnix.com featured in Bloomberg broadcast segment on emerging crypto staking platforms.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* LIVE RATES */}
       <section className="py-20 relative border-t border-white/5">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />

@@ -6,33 +6,29 @@ import Link from 'next/link'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'StakeOnix - #1 Crypto Staking Platform | Earn Daily Passive Income',
+  title: 'StakeOnix | Professional Crypto Staking Platform',
   description:
-    'Looking for a way to earn money online? StakeOnix pays you every single day on your crypto - Bitcoin, Ethereum, USDT & more. No trading needed. Works like a bank savings account but pays way more. Start from just $200.',
+    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ assets with institutional-grade security and transparent daily rewards.',
   keywords: [
-    'how to make money online',
-    'earn money from home 2026',
-    'passive income ideas',
-    'make money with crypto',
-    'how to earn daily income',
-    'earn money while you sleep',
-    'crypto that pays you daily',
-    'how to earn interest on bitcoin',
-    'make money without working',
-    'best passive income 2026',
-    'how to invest $100 and make money',
-    'money making apps 2026',
-    'earn rewards on cryptocurrency',
     'crypto staking platform',
     'bitcoin staking rewards',
     'ethereum staking',
     'USDT staking',
+    'regulated crypto staking',
+    'institutional crypto staking',
+    'FCA authorised crypto platform',
+    'FINTRAC registered crypto',
+    'staking rewards platform',
+    'cryptocurrency yield platform',
     'best staking platform 2026',
+    'crypto interest account',
+    'earn rewards on cryptocurrency',
+    'secure crypto staking',
   ],
   alternates: { canonical: APP_URL },
   openGraph: {
-    title: 'StakeOnix - Earn Daily Passive Income on Crypto',
-    description: 'Thousands of people earn money every day doing absolutely nothing - their crypto earns for them on StakeOnix. Bitcoin, Ethereum, USDT. Start with $200, get paid daily.',
+    title: 'StakeOnix | Professional Crypto Staking Platform',
+    description: 'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform trusted by 480,000+ investors. Stake BTC, ETH, USDT and 170+ assets. Regulated in Canada and the UK.',
     url: APP_URL,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
   },
@@ -43,7 +39,7 @@ const homepageSchema = {
   '@type': 'FinancialService',
   name: 'StakeOnix',
   url: APP_URL,
-  description: 'Professional cryptocurrency staking platform offering daily passive income on Bitcoin, Ethereum, USDT, Solana and 10+ cryptocurrencies.',
+  description: 'Regulated cryptocurrency staking platform offering institutional-grade staking on Bitcoin, Ethereum, USDT, Solana and 170+ digital assets. FCA Authorised. FINTRAC Registered.',
   serviceType: 'Cryptocurrency Staking',
   areaServed: 'Worldwide',
   currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL',
@@ -128,7 +124,6 @@ import { PlanCard } from '@/components/shared/PlanCard'
 import CryptoTicker from '@/components/layout/CryptoTicker'
 import ProfitCalculator from '@/components/shared/ProfitCalculator'
 import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
-import { StickySignupCTA } from '@/components/layout/StickySignupCTA'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
 import {
@@ -147,7 +142,6 @@ import {
   Cpu,
   Activity,
   DollarSign,
-  Rocket,
   Eye,
   RefreshCw,
   BadgeCheck,
@@ -188,8 +182,8 @@ const features = [
   },
   {
     icon: <Users className="h-6 w-6" />,
-    title: 'Lucrative Referral Program',
-    description: 'Earn 5–8% tiered commissions (L1) + 2% on your referrals\' referrals (L2). Passive income on passive income.',
+    title: 'Referral Programme',
+    description: 'Earn 5-8% tiered commissions on direct referrals and 2% on second-tier referrals. Build a network and earn on every level.',
     color: 'from-pink-500/20 to-rose-500/20',
     iconColor: 'text-pink-400',
   },
@@ -330,23 +324,19 @@ export default async function HomePage() {
             {/* Left: Text content */}
             <div className="text-left">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300 mb-6 backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
-                </span>
-                Live &middot; Earn up to {topApr > 0 ? `${topApr}% APR` : '365% APR'} - Join 480K+ stakers
+                <Shield className="h-3.5 w-3.5 flex-shrink-0" />
+                FCA Authorised &middot; FINTRAC Registered &middot; 480K+ Stakers
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
-                Fast, Secure &amp;<br />
-                <span className="gradient-text">Effortless Crypto</span><br />
-                <span className="text-white">Staking for All</span>
+                Secure, Regulated &amp;<br />
+                <span className="gradient-text">Professional Crypto</span><br />
+                <span className="text-white">Staking Platform</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
                 Choose a plan, deposit crypto, and earn automatic daily rewards. No lockups,
-                no complexity, just steady{' '}
-                <strong className="text-white font-semibold">passive income</strong> from your digital assets.
+                no complexity, just transparent staking returns on your digital assets.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -355,8 +345,8 @@ export default async function HomePage() {
                     size="xl"
                     className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
                   >
-                    <Rocket className="h-5 w-5" />
-                    {session ? 'Go to Dashboard' : 'Start Earning Now'}
+                    <ArrowRight className="h-5 w-5" />
+                    {session ? 'Go to Dashboard' : 'Get Started'}
                   </Button>
                 </Link>
                 <Link href="/plans" className="w-full sm:w-auto">
@@ -851,11 +841,11 @@ export default async function HomePage() {
               Why StakeOnix
             </span>
             <h2 className="text-4xl md:text-5xl font-black mb-5 leading-tight">
-              The Smarter Way to{' '}
+              The Professional Way to{' '}
               <span className="gradient-text">Grow Your Crypto</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              While others watch the charts and stress about timing the market, StakeOnix users earn daily - automatically, securely, and without lifting a finger.
+              StakeOnix pools assets into professionally managed staking protocols, delivering transparent daily rewards to your account with institutional-grade security and full regulatory compliance.
             </p>
           </div>
 
@@ -867,16 +857,16 @@ export default async function HomePage() {
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 text-cyan-400 mb-6">
                   <ShieldCheck className="h-7 w-7" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Your money works. You rest.</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">Institutional staking infrastructure. Accessible to all.</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Traditional banks pay you 0.01% a year. The stock market demands research, timing, and nerves. StakeOnix gives you a third option - put your crypto to work in a proven staking protocol and collect rewards every single day, whether you are sleeping, working, or on vacation.
+                  Traditional savings accounts return fractions of a percent annually. StakeOnix channels user assets into professionally managed staking protocols, delivering daily rewards directly to your account. Every transaction is fully transparent and auditable.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    'No trading knowledge needed - zero experience required',
-                    'Rewards credited to your wallet every 24 hours',
-                    'Withdraw anytime - no lock-in traps',
-                    'Start with as little as $200 Starter Trial plan',
+                    'No minimum lock-up period - withdraw whenever you choose',
+                    'Daily rewards credited automatically to your account',
+                    'Full KYC/AML compliance - licensed in Canada and the UK',
+                    'Starting from $200 with the Starter plan',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400 flex-shrink-0 mt-0.5" />
@@ -888,8 +878,8 @@ export default async function HomePage() {
               <div className="mt-8 pt-6 border-t border-white/[0.06]">
                 <Link href="/signup">
                   <Button size="lg" className="gap-2 rounded-xl w-full sm:w-auto">
-                    <Rocket className="h-4 w-4" />
-                    Start Earning Today
+                    <ArrowRight className="h-4 w-4" />
+                    Create Account
                   </Button>
                 </Link>
               </div>
@@ -1098,14 +1088,14 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <div key={t.name} className="glass-card p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/5 flex flex-col">
+                  <div key={t.name} className="glass-card p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/5 flex flex-col">
                 <div className="flex gap-1 mb-4">
                   {[...Array(t.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">"{t.text}"</p>
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                <div className="flex items-center pt-4 border-t border-white/5">
                   <div className="flex items-center gap-3">
                     <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br ${t.color} flex items-center justify-center text-xs font-bold text-white`}>
                       {t.avatar}
@@ -1114,10 +1104,6 @@ export default async function HomePage() {
                       <p className="text-sm font-semibold text-white">{t.name}</p>
                       <p className="text-xs text-muted-foreground">{t.title}</p>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Total Return</p>
-                    <p className="text-sm font-bold text-green-400">{t.amount}</p>
                   </div>
                 </div>
               </div>
@@ -1141,12 +1127,12 @@ export default async function HomePage() {
                 Start earning in under 5 minutes
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-5 leading-tight">
-                Ready to Start{' '}
-                <span className="gradient-text">Staking?</span>
+                Start Staking with{' '}
+                <span className="gradient-text">StakeOnix</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                Create your free account today and earn your first daily reward within minutes.
-                No minimum lockup. Withdraw anytime. Join 480,000+ smart investors.
+                Create your account today and receive your first daily reward within minutes.
+                No minimum lock-up. Withdraw anytime. Join 480,000+ investors worldwide.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>
@@ -1154,8 +1140,8 @@ export default async function HomePage() {
                     size="xl"
                     className="gap-2 font-bold text-base px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105"
                   >
-                    <Rocket className="h-5 w-5" />
-                    {session ? 'View Dashboard' : 'Create Free Account'}
+                    <ArrowRight className="h-5 w-5" />
+                    {session ? 'View Dashboard' : 'Create Account'}
                   </Button>
                 </Link>
                 <Link href="/plans">
@@ -1174,7 +1160,7 @@ export default async function HomePage() {
                   'No hidden fees',
                   'Withdraw anytime',
                   'Instant activation',
-                  'Instant activation',
+                  'KYC & AML compliant',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-green-400" />
@@ -1187,7 +1173,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <StickySignupCTA />
     </div>
   )
 }

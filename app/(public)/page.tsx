@@ -1123,7 +1123,7 @@ export default async function HomePage() {
 
             <div className="relative p-12 md:p-20 text-center">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300 mb-6">
-                <Rocket className="h-3.5 w-3.5" />
+                <ArrowRight className="h-3.5 w-3.5" />
                 Start earning in under 5 minutes
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-5 leading-tight">

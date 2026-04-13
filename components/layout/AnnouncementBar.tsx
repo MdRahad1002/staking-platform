@@ -26,14 +26,14 @@ export function AnnouncementBar() {
       <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-center">
         <Gift className="h-4 w-4 flex-shrink-0 text-yellow-300" />
         <span className="leading-snug">
-          <span className="font-semibold">Limited offer:</span> Start earning daily returns from just $100. No trading experience needed.
-        </span>
-        <Link
-          href="/signup"
-          className="hidden sm:inline-flex items-center gap-1 font-bold underline underline-offset-2 whitespace-nowrap hover:text-yellow-200 transition-colors ml-1"
-        >
-          Claim yours →
-        </Link>
+            Earn daily passive income from crypto staking. No trading experience needed.
+          </span>
+          <Link
+            href="/signup"
+            className="hidden sm:inline-flex items-center gap-1 font-bold underline underline-offset-2 whitespace-nowrap hover:text-yellow-200 transition-colors ml-1"
+          >
+            Get started →
+          </Link>
         <button
           onClick={dismiss}
           aria-label="Dismiss"

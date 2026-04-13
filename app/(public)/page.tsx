@@ -373,7 +373,7 @@ export default async function HomePage() {
 
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
-                  No credit card required &bull; 2-minute setup &bull; Start from $100
+                  No credit card required &bull; 2-minute setup &bull; Daily payouts
                 </p>
               )}
 

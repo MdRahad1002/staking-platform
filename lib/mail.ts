@@ -249,16 +249,16 @@ export function getWelcomeEmailTemplate(name: string, _email: string): string {
       <p class="greeting">Hi <strong>${name}</strong> 👋</p>
       <p class="body-text">Welcome aboard! You've just joined <strong style="color:#f59e0b;">480,000+ investors</strong> earning daily passive income through staking.</p>
       <div class="highlight-box highlight-box-green" style="text-align:center;padding:20px 24px;">
-        <p style="font-size:13px;color:#059669;font-weight:600;margin:0 0 4px;">🎁 Welcome Bonus</p>
-        <p style="font-size:36px;font-weight:700;color:#10b981;margin:4px 0;">\$100</p>
-        <p style="font-size:13px;color:#065f46;margin:0;">Credited on your first deposit</p>
+        <p style="font-size:13px;color:#059669;font-weight:600;margin:0 0 4px;">Start Earning</p>
+        <p style="font-size:36px;font-weight:700;color:#10b981;margin:4px 0;">Daily</p>
+        <p style="font-size:13px;color:#065f46;margin:0;">Returns credited every 24 hours</p>
       </div>
       <a href="${appUrl}/dashboard" class="cta-btn cta-btn-green">Go to My Dashboard</a>
       <div class="security-note">
         <strong>🔒 Security tip:</strong> StakeOnix will never ask for your password via email or chat. Enable 2FA in your account settings for maximum protection.
       </div>
     </div>
-  `, 'Your StakeOnix account is ready - claim your \$100 welcome bonus today.')
+  `, 'Your StakeOnix account is ready - start earning daily returns today.')
 }
 
 export function getPasswordResetEmailTemplate(name: string, resetLink: string): string {
@@ -335,8 +335,8 @@ export function getVerificationEmailTemplate(name: string, verifyUrl: string): s
       <p class="body-text">You're almost in! Verify your email address to activate your account and start earning daily staking rewards.</p>
       <a href="${verifyUrl}" class="cta-btn">Verify My Email →</a>
       <div class="highlight-box highlight-box-green" style="text-align:center;padding:20px 24px;margin-top:28px;">
-        <p style="font-size:13px;color:#059669;font-weight:600;margin:0 0 4px;">🎁 First Deposit Bonus</p>
-        <p style="font-size:36px;font-weight:700;color:#10b981;margin:4px 0;">\$100</p>
+        <p style="font-size:13px;color:#059669;font-weight:600;margin:0 0 4px;">Start Earning</p>
+        <p style="font-size:36px;font-weight:700;color:#10b981;margin:4px 0;">Daily</p>
         <p style="font-size:13px;color:#065f46;margin:0;">Instant credit on your first deposit</p>
       </div>
       <div class="steps" style="margin-top:28px;">
@@ -350,7 +350,7 @@ export function getVerificationEmailTemplate(name: string, verifyUrl: string): s
       <p style="margin:0 0 8px;"><a href="${verifyUrl}" style="color:#f59e0b;word-break:break-all;font-size:12px;">${verifyUrl}</a></p>
       <p style="color:#ef4444;font-size:12px;margin:0;">⚠ This link expires in <strong>24 hours</strong>.</p>
     </div>
-  `, 'One click to verify and claim your \$100 welcome bonus.')
+  `, 'One click to verify and start earning daily returns.')
   void appUrl
 }
 
@@ -546,7 +546,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
     </h1>
     <p style="color:#94a3b8;font-size:15px;margin:0;line-height:1.6;">
       Every hour you wait is passive income you will never recover.<br/>
-      Your $100 bonus is reserved. Your account is ready. What are you waiting for?
+      Your account is ready. Start earning daily returns now.
     </p>
   </td></tr>
 
@@ -618,13 +618,9 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
     <!-- Bonus box -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
       <tr><td style="background:linear-gradient(135deg,#1c1207,#2d1e08);border:1px solid #92400e;border-radius:12px;padding:24px 28px;">
-        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">&#9888;&nbsp; Your $100 Welcome Bonus Is Waiting</p>
+        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">&#9888;&nbsp; Your Account Is Ready - Start Earning</p>
         <p style="color:#d97706;font-size:14px;line-height:1.7;margin:0 0 10px;">
-          Make any deposit and we will add <strong>$100 instantly</strong> to your account balance. No hoops, no waiting, no fine print.
-          <strong style="color:#fbbf24;">This offer will not be available forever.</strong>
-        </p>
-        <p style="color:#92400e;font-size:13px;margin:0;">
-          Deposit now and your first daily reward lands within 24 hours.
+          Deposit now and start earning. Your first daily reward lands within 24 hours.
         </p>
       </td></tr>
     </table>
@@ -634,14 +630,14 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
       <tr><td style="background:linear-gradient(135deg,#0a2a1a,#0f3d2e);border:2px solid #00d4aa;border-radius:14px;padding:36px 32px;text-align:center;">
         <h2 style="color:#ffffff;font-size:24px;font-weight:900;margin:0 0 8px;line-height:1.3;">
           Deposit Now. Earn Tomorrow.<br/>
-          <span style="color:#f59e0b;">Pocket Your $100 Instantly.</span>
+          <span style="color:#f59e0b;">Start Earning Today.</span>
         </h2>
         <p style="color:#6b7280;font-size:13px;margin:0 0 24px;line-height:1.5;">
           Under 3 minutes to set up &middot; BTC, ETH, USDT accepted
         </p>
         <a href="${appUrl}/deposit"
            style="display:inline-block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#000000;font-size:17px;font-weight:900;text-decoration:none;padding:18px 60px;border-radius:12px;letter-spacing:0.5px;">
-          CLAIM MY $100 BONUS NOW &rarr;
+          START EARNING NOW &rarr;
         </a>
         <p style="color:#374151;font-size:12px;margin:16px 0 0;">
           First rewards credited within 24 hours of deposit
@@ -805,7 +801,7 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
       <span style="color:#f97316;">You have earned nothing.</span>
     </h1>
     <p style="color:#94a3b8;font-size:15px;margin:0;line-height:1.6;">
-      This is the last reminder we will send you. Your $100 bonus is still available - but it will not wait forever.
+      This is the last reminder we will send you. Your account is ready - start earning daily returns now.
     </p>
   </td></tr>
 
@@ -851,9 +847,9 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
     <!-- Bonus urgency box -->
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
       <tr><td style="background:linear-gradient(135deg,#1c1207,#2d1e08);border:2px solid #f59e0b;border-radius:12px;padding:24px 28px;">
-        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 10px;">&#9888;&nbsp; Your $100 Bonus - Act Now</p>
+        <p style="color:#f59e0b;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin:0 0 10px;">&#9888;&nbsp; Your Account Is Ready - Act Now</p>
         <p style="color:#d97706;font-size:14px;line-height:1.7;margin:0 0 10px;">
-          We set aside a <strong>$100 welcome bonus</strong> for your account when you signed up.
+          Your account is set up and ready to earn daily returns on your crypto.
           It is added instantly to your balance the moment you make your first deposit.
         </p>
         <p style="color:#fbbf24;font-size:14px;font-weight:700;margin:0;">
@@ -893,14 +889,14 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
         <p style="color:#fca5a5;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;">Stop leaving money on the table</p>
         <h2 style="color:#ffffff;font-size:22px;font-weight:900;margin:0 0 10px;line-height:1.3;">
           Make Your First Deposit Now.<br/>
-          <span style="color:#f59e0b;">Grab Your $100. Start Earning Today.</span>
+          <span style="color:#f59e0b;">Start Earning Today.</span>
         </h2>
         <p style="color:#9ca3af;font-size:13px;margin:0 0 24px;line-height:1.5;">
           Less than 3 minutes &middot; BTC, ETH, USDT and more accepted
         </p>
         <a href="${appUrl}/deposit"
            style="display:inline-block;background:linear-gradient(135deg,#ef4444,#dc2626);color:#ffffff;font-size:17px;font-weight:900;text-decoration:none;padding:18px 52px;border-radius:12px;letter-spacing:0.5px;">
-          I WANT MY $100 BONUS &rarr;
+          START EARNING NOW &rarr;
         </a>
         <p style="color:#6b7280;font-size:12px;margin:16px 0 0;">
           Rewards credited within 24 hours &middot; Withdraw your funds at any time
@@ -988,7 +984,7 @@ export async function sendDepositFollowUpEmail(email: string, name: string): Pro
   const unsubUrl  = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=activation`
   await sendEmail({
     to: email,
-    subject: `Final warning, ${firstName}: 3 days gone, $0 earned - claim your $100 before it expires`,
+    subject: `Final reminder, ${firstName}: Your account is ready - start earning now`,
     html: getDepositFollowUpEmailTemplate(firstName, unsubUrl),
   })
 }

@@ -448,7 +448,7 @@ export default function SignupPage() {
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs text-yellow-300">
             <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
-            $100 welcome bonus &nbsp;&middot;&nbsp; No credit card required
+            Start earning daily &nbsp;&middot;&nbsp; No credit card required
           </div>
         </div>
       </div>

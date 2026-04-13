@@ -109,7 +109,7 @@ export function StickySignupCTA() {
                 </button>
               </Link>
               <p className="text-center text-[11px] text-muted-foreground mt-2">
-                No credit card &bull; Takes 2 minutes &bull; $100 bonus
+                No credit card &bull; Takes 2 minutes &bull; Start from $100
               </p>
             </div>
           </div>

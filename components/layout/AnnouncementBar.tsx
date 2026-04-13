@@ -26,8 +26,7 @@ export function AnnouncementBar() {
       <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-3 text-center">
         <Gift className="h-4 w-4 flex-shrink-0 text-yellow-300" />
         <span className="leading-snug">
-          <span className="font-semibold">Limited offer:</span> New members receive a{' '}
-          <span className="font-bold text-yellow-300">$100 welcome bonus</span> on their first stake.
+          <span className="font-semibold">Limited offer:</span> Start earning daily returns from just $100. No trading experience needed.
         </span>
         <Link
           href="/signup"

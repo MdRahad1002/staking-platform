@@ -373,7 +373,7 @@ export default async function HomePage() {
 
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
-                  No credit card required &bull; 2-minute setup &bull; $100 welcome bonus
+                  No credit card required &bull; 2-minute setup &bull; Start from $100
                 </p>
               )}
 
@@ -1174,7 +1174,7 @@ export default async function HomePage() {
                   'No hidden fees',
                   'Withdraw anytime',
                   'Instant activation',
-                  '$100 welcome bonus',
+                  'Instant activation',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-green-400" />

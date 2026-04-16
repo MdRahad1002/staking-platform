@@ -4,9 +4,9 @@ import { Shield, Target, Users, TrendingUp, Mail, Phone, MapPin } from 'lucide-r
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'About StakeOnix - Trusted Crypto Staking Company',
+  title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
   description:
-    'StakeOnix helps everyday people earn money from their crypto automatically - no trading, no expertise needed. Learn who we are, what we stand for, and why 10,000+ investors trust us to grow their crypto every day.',
+    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform operated by ONIX HOLDINGS LIMITED. Learn about our mission, regulatory credentials, and how we make professional crypto staking accessible.',
   keywords: [
     'about StakeOnix',
     'who is behind StakeOnix',
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
-    title: 'About StakeOnix - Trusted Crypto Staking Company',
-    description: 'Meet the team making crypto staking simple, secure, and profitable for thousands of investors worldwide.',
+    title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
+    description: 'FCA-authorised, FINTRAC-registered crypto staking platform. Learn about our mission, regulatory credentials, security standards, and the team behind the platform.',
     url: `${APP_URL}/about`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'About StakeOnix' }],
   },
@@ -31,7 +31,7 @@ const organizationSchema = {
   name: 'StakeOnix',
   url: APP_URL,
   description:
-    'StakeOnix is a professional cryptocurrency staking platform enabling investors to earn daily passive income on Bitcoin, Ethereum, USDT, Solana and more. Founded in 2020, serving 15,000+ investors worldwide.',
+    'StakeOnix is a regulated cryptocurrency staking platform built on professional-grade infrastructure. Authorised by the FCA in the UK and registered with FINTRAC in Canada, we provide transparent, compliant staking services on 170+ digital assets.',
   foundingDate: '2020',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
   legalName: 'ONIX HOLDINGS LIMITED',
@@ -97,23 +97,23 @@ const team = [
 const values = [
   {
     icon: <Shield className="h-6 w-6" />,
-    title: 'Security First',
-    description: 'We implement bank-grade security to protect your assets at all times.',
+    title: 'Regulatory Compliance',
+    description: 'FCA-authorised in the UK, FINTRAC-registered in Canada. We operate under the same standards as traditional financial institutions.',
   },
   {
     icon: <Target className="h-6 w-6" />,
     title: 'Transparency',
-    description: 'All our staking returns and operations are fully transparent and verifiable.',
+    description: 'Every reward, fee, and transaction is visible on your dashboard. No fine print, no hidden charges, no surprises.',
   },
   {
     icon: <Users className="h-6 w-6" />,
-    title: 'Community',
-    description: 'We put our users first, building a thriving community of investors.',
+    title: 'Accessibility',
+    description: 'Professional staking infrastructure made available to individuals, not just institutions. One account, 170+ assets.',
   },
   {
     icon: <TrendingUp className="h-6 w-6" />,
-    title: 'Innovation',
-    description: 'Continuously improving our platform with the latest DeFi technologies.',
+    title: 'Security First',
+    description: 'AES-256 encryption, multi-signature cold wallets, 2FA, withdrawal PIN protection and 24/7 automated threat monitoring.',
   },
 ]
 
@@ -128,8 +128,8 @@ export default function AboutPage() {
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">About StakeOnix</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We are a team of passionate crypto experts dedicated to making staking accessible,
-            profitable, and secure for everyone.
+            A regulated, transparent cryptocurrency staking platform built for individuals
+            who want professional-grade infrastructure without the institutional barriers.
           </p>
         </div>
 
@@ -137,15 +137,15 @@ export default function AboutPage() {
         <div className="glass-card p-8 md:p-12 mb-16 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-4 gradient-text">Our Mission</h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            Founded in 2020, StakeOnix was created with a single mission: to democratize
-            access to DeFi staking rewards. We believe that everyone should have the opportunity
-            to grow their wealth through crypto staking, regardless of their technical background
-            or the size of their portfolio.
+            StakeOnix was founded to make professional crypto staking accessible to individuals.
+            Institutional-grade staking has historically been the preserve of large capital allocators.
+            We built the infrastructure to change that, regulated in both Canada and the UK, so that
+            anyone with a verified account and eligible assets can participate.
           </p>
           <p className="text-muted-foreground text-lg leading-relaxed mt-4">
-            Today, we serve over 15,000 investors across the globe with a platform that combines
-            simplicity, security, and competitive returns. Our automated staking system ensures
-            you earn rewards 24/7 without any manual intervention.
+            We do not promise specific returns. Staking rewards are variable and depend on network
+            conditions, asset type, and plan terms. What we do promise: full transparency, regulatory
+            compliance, and infrastructure that operates to the standard of a licensed financial entity.
           </p>
         </div>
 
@@ -167,13 +167,13 @@ export default function AboutPage() {
 
         {/* Stats */}
         <div className="rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 p-8 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">Platform Statistics</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <h2 className="text-2xl font-bold text-center mb-8">Regulatory Credentials</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
             {[
-              { value: '$50M+', label: 'Assets Staked' },
-              { value: '15,000+', label: 'Active Users' },
-              { value: '3+', label: 'Years Operating' },
-              { value: '100%', label: 'Payout Rate' },
+              { value: 'FCA', label: 'Authorised \u00b7 UK (Ref. 820033)' },
+              { value: 'FINTRAC', label: 'Registered \u00b7 Canada (BN: 820033090)' },
+              { value: '170+', label: 'Supported Assets' },
+              { value: '99.9%', label: 'Platform Uptime Target' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="text-2xl font-bold gradient-text">{stat.value}</div>

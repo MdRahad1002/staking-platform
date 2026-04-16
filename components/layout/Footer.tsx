@@ -26,8 +26,7 @@ const footerLinks = {
 
 const trustBadges = [
   { label: 'SSL Secured' },
-  { label: 'Instant Payouts' },
-  { label: '$2.5B+ Managed' },
+  { label: 'FCA Authorised' },
   { label: '170+ Countries' },
 ]
 
@@ -46,16 +45,16 @@ export function Footer() {
               <span className="font-medium">SSL Secured</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Zap className="h-4 w-4 text-yellow-400" />
-              <span className="font-medium">Instant Payouts</span>
+              <Shield className="h-4 w-4 text-blue-400" />
+              <span className="font-medium">FCA Authorised</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <TrendingUp className="h-4 w-4 text-cyan-400" />
-              <span className="font-medium">$2.5B+ Managed</span>
+              <Shield className="h-4 w-4 text-red-400" />
+              <span className="font-medium">FINTRAC Registered</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Globe className="h-4 w-4 text-blue-400" />
-              <span className="font-medium">170+ Countries</span>
+              <span className="font-medium">170+ Assets</span>
             </div>
           </div>
         </div>
@@ -67,8 +66,9 @@ export function Footer() {
           <div className="md:col-span-2">
             <Logo linkClassName="mb-4" />
             <p className="text-sm text-muted-foreground max-w-xs leading-relaxed mb-5">
-              The most trusted crypto staking platform. Grow your digital assets with
-              institutional-grade security and competitive daily returns.
+              FCA-authorised, FINTRAC-registered crypto staking platform.
+              Stake 170+ digital assets with institutional-grade security and full regulatory compliance.
+              Staking rewards are variable and not guaranteed.
             </p>
             <div className="space-y-2 mb-5">
               <a href="mailto:info@stakeonix.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">

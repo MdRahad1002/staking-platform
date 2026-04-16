@@ -26,9 +26,9 @@ import {
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'Why Choose StakeOnix? | Trusted Crypto Staking Platform',
+  title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
   description:
-    'Find out why 87,000+ investors in 170+ countries choose StakeOnix to earn daily passive income on their crypto. Bank-grade security, instant withdrawals, 0% hidden fees.',
+    'StakeOnix is FCA-authorised and FINTRAC-registered. Bank-grade security, transparent operations, 170+ assets, and full regulatory compliance. See exactly what makes us different.',
   keywords: [
     'why choose stakeonix',
     'best crypto staking platform',
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/why-choose-us` },
   openGraph: {
-    title: 'Why Choose StakeOnix?',
-    description: '87,000+ investors trust StakeOnix to grow their crypto safely. Daily rewards, instant withdrawals, 100% transparent. See why we are different.',
+    title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
+    description: 'FCA-authorised, FINTRAC-registered staking platform. Bank-grade security, transparent operations, 170+ supported assets. See exactly what makes us different.',
     url: `${APP_URL}/why-choose-us`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630 }],
   },
@@ -54,8 +54,8 @@ const pillars = [
     color: 'bg-cyan-500/15 text-cyan-400',
     glow: 'from-cyan-500/10 to-blue-600/10 border-cyan-500/20 hover:border-cyan-500/40',
     title: 'Bank-Grade Security',
-    headline: 'Your crypto, locked down like a vault.',
-    body: 'Every account is protected with 256-bit SSL encryption - the same standard used by global banks. Funds are held in multi-signature cold wallets, meaning no single party can move assets without full verification. We run 24/7 automated threat detection and manual security audits quarterly. In four years of operation, we have never had a security breach.',
+    headline: 'Your crypto is protected like a vault.',
+    body: 'Every account is protected with 256-bit SSL encryption. Funds are held in multi-signature cold wallets, meaning no single party can authorise asset movement unilaterally. We run 24/7 automated threat detection and manual security audits on a regular basis. Our security architecture is designed to the standard required by our FCA authorisation.',
     proof: '256-bit SSL + Multi-Sig Cold Wallets',
   },
   {
@@ -72,18 +72,18 @@ const pillars = [
     color: 'bg-yellow-500/15 text-yellow-400',
     glow: 'from-yellow-500/10 to-orange-500/10 border-yellow-500/20 hover:border-yellow-500/40',
     title: 'Instant Withdrawals',
-    headline: "It is your money. Get it when you want it.",
-    body: 'Most platforms make you wait days or weeks to access your funds. We process withdrawals within minutes, 24 hours a day, 7 days a week - including weekends and holidays. There are no lock-in periods on standard plans, no queuing system, and no minimum waiting time. Just request and receive.',
-    proof: 'Avg. withdrawal: under 10 minutes',
+    headline: "It is your money. Access it when you choose.",
+    body: 'Many platforms impose long lock-up periods or complex queuing to access funds. On flexible plans, StakeOnix allows you to request withdrawals at any time. Requests are processed subject to standard security review and network conditions. Fixed-term plans have defined maturity dates - please review plan terms before activating.',
+    proof: 'Flexible plans: withdraw any time (subject to review)',
   },
   {
     icon: <RefreshCw className="h-6 w-6" />,
     color: 'bg-purple-500/15 text-purple-400',
     glow: 'from-purple-500/10 to-violet-600/10 border-purple-500/20 hover:border-purple-500/40',
     title: 'Daily Auto-Compounding',
-    headline: 'Earning money on your earnings - every day.',
-    body: 'Compounding interest is the single most powerful force in investing. On StakeOnix your rewards are automatically reinvested every 24 hours, which means your balance grows faster each day than the day before. Reinvesting daily instead of monthly can increase your annual returns by 15-30% depending on your rate - and you do not have to do anything.',
-    proof: 'Daily compounding = up to 30% more per year',
+    headline: 'Your rewards reinvested automatically.',
+    body: 'Compounding is one of the most powerful mechanisms in long-term wealth building. On StakeOnix, rewards can be automatically reinvested, allowing your balance to grow progressively over time. The effect compounds most strongly when maintained consistently over longer plan durations. The exact compounding schedule is specified in each plan\'s terms.',
+    proof: 'Auto-compounding available on eligible plans',
   },
   {
     icon: <BadgeCheck className="h-6 w-6" />,
@@ -120,23 +120,20 @@ const testimonials = [
   {
     name: 'James O.',
     location: 'United Kingdom',
-    text: 'I tried three other platforms before StakeOnix. The difference is the withdrawals - every single one hit my wallet in minutes. That builds trust fast.',
+    text: 'I tried three other platforms before StakeOnix. The difference is the transparency and the withdrawals on my flexible plan. Every transaction is visible and that builds trust fast.',
     stars: 5,
-    amount: '$4,200 earned',
   },
   {
     name: 'Aisha M.',
     location: 'Nigeria',
-    text: 'As someone with no crypto background, the simplicity here is incredible. I deposited USDT, chose a plan, and the next day I had earnings. Nothing complicated.',
+    text: 'As someone with no prior staking experience, the platform was clear and straightforward. The KYC was quick and the support team answered every question I had.',
     stars: 5,
-    amount: '$1,100 earned',
   },
   {
     name: 'Marco T.',
     location: 'Italy',
-    text: 'The transparency is what keeps me here. I can see every calculation, every fee, every reward in real time. Other platforms hide everything.',
+    text: 'The regulatory credentials matter to me. FCA authorisation is not easy to obtain and it tells you something about how the company operates. That is why I chose this over others.',
     stars: 5,
-    amount: '$8,750 earned',
   },
 ]
 
@@ -155,11 +152,12 @@ export default function WhyChooseUsPage() {
             Our Advantage
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-            Why 87,000+ Investors<br />
-            <span className="gradient-text">Choose StakeOnix</span>
+            A regulated platform<br />
+            <span className="gradient-text">built to be trusted.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
-            There are hundreds of crypto platforms. Here is exactly why serious investors stake with us - and why they stay.
+            There are hundreds of crypto platforms. Here is exactly why investors stake with us,
+            what protections are in place, and what you should expect.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/signup">
@@ -182,10 +180,10 @@ export default function WhyChooseUsPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { icon: <DollarSign className="h-5 w-5" />, color: 'text-green-400 bg-green-500/15', value: '$2.5B+', label: 'Paid to Users' },
-              { icon: <Users className="h-5 w-5" />, color: 'text-purple-400 bg-purple-500/15', value: '87,000+', label: 'Active Investors' },
-              { icon: <Globe className="h-5 w-5" />, color: 'text-cyan-400 bg-cyan-500/15', value: '170+', label: 'Countries' },
-              { icon: <Star className="h-5 w-5" />, color: 'text-yellow-400 bg-yellow-500/15', value: '4.8 / 5', label: 'User Rating' },
+              { icon: <Shield className="h-5 w-5" />, color: 'text-blue-400 bg-blue-500/15', value: 'FCA', label: 'Authorised \u00b7 UK' },
+              { icon: <Globe className="h-5 w-5" />, color: 'text-red-400 bg-red-500/15', value: 'FINTRAC', label: 'Registered \u00b7 Canada' },
+              { icon: <Globe className="h-5 w-5" />, color: 'text-cyan-400 bg-cyan-500/15', value: '170+', label: 'Supported Assets' },
+              { icon: <Activity className="h-5 w-5" />, color: 'text-yellow-400 bg-yellow-500/15', value: '99.9%', label: 'Uptime Target' },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-3">
                 <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${s.color}`}>
@@ -296,12 +294,11 @@ export default function WhyChooseUsPage() {
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">"{t.text}"</p>
-                <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
+                <div className="flex items-center border-t border-white/[0.06] pt-4">
                   <div>
                     <p className="text-sm font-semibold text-white">{t.name}</p>
                     <p className="text-xs text-muted-foreground">{t.location}</p>
                   </div>
-                  <span className="text-xs font-bold text-green-400 bg-green-500/10 border border-green-500/20 px-2.5 py-1 rounded-full">{t.amount}</span>
                 </div>
               </div>
             ))}

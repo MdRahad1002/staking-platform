@@ -10,15 +10,15 @@ const faqs = [
     items: [
       {
         q: 'What is StakeOnix?',
-        a: 'StakeOnix is a cryptocurrency staking platform that allows you to earn passive income by staking your digital assets. We pool staking resources and distribute rewards to our users daily.',
+        a: 'StakeOnix is an FCA-authorised, FINTRAC-registered cryptocurrency staking platform. We pool assets into professionally managed staking protocols and distribute rewards to members according to their chosen plan terms. We are operated by ONIX HOLDINGS LIMITED (FCA Ref. 820033) in the UK and ONIX INTERNATIONAL INC. (FINTRAC BN: 820033090) in Canada.',
       },
       {
         q: 'How do I start staking?',
-        a: 'Simply create a free account, deposit funds in your preferred cryptocurrency, choose a staking plan that fits your goals, and activate your stake. You will start earning daily rewards immediately.',
+        a: 'Create a free account, complete KYC verification, deposit your chosen cryptocurrency, and select a staking plan. Once your stake is activated your account will reflect reward credits according to the plan schedule. Please note that staking rewards are variable and not guaranteed.',
       },
       {
         q: 'Is there a minimum deposit?',
-        a: "Minimum deposit amounts vary by cryptocurrency and staking plan. You can find specific minimums on each plan's details page. Generally, minimums start from $10 USD equivalent.",
+        a: 'Minimum deposit amounts vary by cryptocurrency and staking plan. Specific minimums are shown on each plan\'s details page after you log in. Generally, minimums start from the USD equivalent of $200.',
       },
     ],
   },
@@ -27,15 +27,15 @@ const faqs = [
     items: [
       {
         q: 'How are staking rewards calculated?',
-        a: 'Rewards are calculated based on your staked amount multiplied by the daily ROI percentage of your chosen plan. Rewards are credited to your account every 24 hours.',
+        a: 'Rewards are calculated based on your staked amount, the plan you have chosen, and prevailing network conditions. Plan terms (including reward rates) are visible after you log in. Rewards are credited to your account on the schedule defined by your plan. Returns are variable and past performance does not guarantee future results.',
       },
       {
         q: 'Can I have multiple active stakes?',
-        a: 'Yes! You can have multiple active stakes with different plans simultaneously. This allows you to diversify your staking strategy.',
+        a: 'Yes. You can hold multiple active stakes across different plans simultaneously, which allows you to diversify your staking approach across different term lengths and assets.',
       },
       {
         q: 'What happens when my stake completes?',
-        a: 'When your stake reaches its end date, your principal amount plus all earned rewards are automatically credited to your account balance. You can then withdraw or reinvest.',
+        a: 'When your stake reaches its end date, your principal and any rewards earned during the plan period are credited to your account balance, subject to plan terms. You can then withdraw or activate a new stake.',
       },
     ],
   },
@@ -48,7 +48,7 @@ const faqs = [
       },
       {
         q: 'How long do withdrawals take?',
-        a: 'Withdrawal requests are typically processed within 24 hours. Processing time may vary depending on network congestion and our security review process.',
+        a: 'Withdrawal requests are reviewed and processed subject to our standard security checks. Processing times vary depending on network conditions and our compliance review process. We aim to process withdrawals promptly. Some plans may have specific lock-up or notice periods - check your plan terms.',
       },
       {
         q: 'Are there withdrawal fees?',
@@ -74,11 +74,11 @@ const faqs = [
     items: [
       {
         q: 'How does the referral program work?',
-        a: 'Share your unique referral link with friends. When they create an account and activate a stake, you earn a commission based on the staking amount. Commissions are automatically credited to your account.',
+        a: 'When a person you refer creates a verified account and activates a staking plan, you earn a commission based on their staking activity. Commission rates are tiered and depend on the number of verified referrals you have. Full details are available on the Referral Program page. Commissions are credited to your account automatically.',
       },
       {
         q: 'Is there a limit to referral earnings?',
-        a: 'There is no limit! You can refer as many users as you like and earn commissions on all their stakes.',
+        a: 'There is no hard cap on the number of referrals you can make. However, commissions are calculated on actual staking activity and are subject to our referral terms. Abuse of the referral system (e.g., self-referral, fake accounts) will result in account suspension.',
       },
     ],
   },

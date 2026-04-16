@@ -654,8 +654,8 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
         </td>
         <td style="width:8px;"></td>
         <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
-          <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">$2.5B+</p>
-          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Paid to Investors</p>
+          <p style="color:#00d4aa;font-size:20px;font-weight:800;margin:0 0 2px;">FCA</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Authorised</p>
         </td>
         <td style="width:8px;"></td>
         <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:16px;text-align:center;">
@@ -925,8 +925,8 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
         </td>
         <td style="width:8px;"></td>
         <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px;text-align:center;">
-          <p style="color:#00d4aa;font-size:18px;font-weight:800;margin:0 0 2px;">$2.5B+</p>
-          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Paid to Investors</p>
+          <p style="color:#00d4aa;font-size:18px;font-weight:800;margin:0 0 2px;">FCA</p>
+          <p style="color:#4b5563;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0;">Authorised</p>
         </td>
         <td style="width:8px;"></td>
         <td style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:14px;text-align:center;">

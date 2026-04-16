@@ -29,9 +29,9 @@ import { Button } from '@/components/ui/button'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'What Is Crypto Staking & Why It Beats Every Traditional Investment | StakeOnix',
+  title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
   description:
-    "Your savings account pays 0.5% per year. Inflation eats 3–5%. You're losing money standing still. Crypto staking on StakeOnix pays daily returns start with $200 and earn from day one. No trading, no charts, no experience needed.",
+    'Learn how crypto staking works in plain English. Understand proof-of-stake networks, how rewards are generated, the risks involved, and how StakeOnix makes staking accessible on 170+ assets.',
   keywords: [
     'what is crypto staking',
     'why stake crypto',
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${APP_URL}/what-is-staking` },
   openGraph: {
-    title: 'Why Crypto Staking Is Beating Every Traditional Investment in 2026',
+    title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
     description:
-      "Banks pay nothing. Inflation steals 4% a year. Stocks take a decade. Crypto staking on StakeOnix pays you every single day starting from $200. Here's the full picture.",
+      'Understand how proof-of-stake networks work, how staking rewards are generated, and the risks to know before you start. Plain English, no jargon.',
     url: `${APP_URL}/what-is-staking`,
   },
 }
@@ -73,14 +73,14 @@ export default function WhatIsStakingPage() {
             Plain English Guide
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight max-w-4xl mx-auto">
-            Why Your Money Is Shrinking
+            What Is Crypto Staking?
             <br />
-            <span className="gradient-text">And Exactly How to Fix It</span>
+            <span className="gradient-text">A plain English explanation</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
-            Inflation ran at ~4.3% in 2025. Your savings account pays ~0.45%. Every year you do
-            nothing, you lose roughly <strong className="text-white">4% of your purchasing power</strong>.
-            Crypto staking is how thousands of investors have stopped that and started growing instead.
+            Proof-of-stake blockchains pay rewards to participants who help validate transactions.
+            That mechanism exists whether you use it or not. This page explains how it works,
+            what the risks are, and how StakeOnix connects your assets to it.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/plans">
@@ -102,12 +102,13 @@ export default function WhatIsStakingPage() {
       <section className="py-20 border-b border-white/5 bg-white/[0.01]">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-3">The Real Problem</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-3">Context</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">
-              Traditional Finance Is <span className="text-red-400">Working Against You</span>
+              Why people look for alternatives to <span className="text-red-400">traditional savings</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Here is what actually happens to $10,000 across five years in the most common options.
+              Here is how the most common options compare on paper. Note: all investments involve risk.
+              Crypto staking rewards are variable and not guaranteed.
             </p>
           </div>
 
@@ -136,12 +137,12 @@ export default function WhatIsStakingPage() {
                 iconColor: 'text-yellow-400',
               },
               {
-                label: 'StakeOnix Staking',
+                label: 'Crypto Staking (StakeOnix)',
                 icon: <TrendingUp className="h-6 w-6" />,
-                rate: '1.5%–4.5% / day',
-                after5: 'Varies by plan',
-                realValue: 'Daily payouts in your account',
-                note: 'Daily fixed-rate returns credited automatically no market timing, no trading.',
+                rate: 'Variable · see plan terms',
+                after5: 'Depends on plan, asset, network',
+                realValue: 'Rewards credited per plan schedule',
+                note: 'Returns are variable and not guaranteed. Sign in to view current plan rates. Past performance is not indicative of future results.',
                 bad: false,
                 color: 'border-cyan-500/30 bg-cyan-500/8',
                 iconColor: 'text-cyan-400',
@@ -169,11 +170,12 @@ export default function WhatIsStakingPage() {
 
           <div className="glass-card p-6 rounded-2xl border border-white/10 text-center max-w-2xl mx-auto">
             <p className="text-lg font-semibold text-white mb-2">
-              The conclusion is simple:
+              The key question to ask yourself:
             </p>
             <p className="text-muted-foreground">
-              Doing nothing costs you money every year. Stocks can work long-term but carry risk and require patience over a decade.
-              Staking gives you <strong className="text-cyan-400">daily fixed-rate income</strong> predictable, automatic, no trading required.
+              Are your assets actively working, or sitting idle? Staking is one way to put them to work.
+              But it involves risk. Always review plan terms, understand what you are committing,
+              and only stake what you can afford.
             </p>
           </div>
         </div>
@@ -190,13 +192,14 @@ export default function WhatIsStakingPage() {
           {/* One-liner */}
           <div className="glass-card p-8 md:p-10 mb-12 text-center rounded-2xl border border-primary/20">
             <p className="text-2xl md:text-3xl font-bold leading-snug">
-              Staking = <span className="gradient-text">putting your crypto to work</span> so it
-              generates a fixed daily return credited to your account every 24 hours.
+              Staking = <span className="gradient-text">contributing your crypto to network validation</span> in
+              exchange for a share of the network's reward output.
             </p>
             <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-              You deposit crypto → it earns a daily percentage → at the end of the plan period
-              you receive your original deposit back plus all accumulated rewards. You never need
-              to trade, watch charts, or touch a thing.
+              You deposit crypto into a staking plan. The assets participate in proof-of-stake
+              network validation. The network issues rewards. Those rewards are credited to your
+              account per your plan schedule. Returns are variable and depend on network conditions,
+              asset type, and the plan you choose.
             </p>
           </div>
 
@@ -220,15 +223,15 @@ export default function WhatIsStakingPage() {
               {
                 step: '03',
                 icon: <TrendingUp className="h-6 w-6" />,
-                title: 'Earn daily, automatically',
-                desc: 'Every 24 hours a percentage of your stake is added to your balance without you doing anything.',
+                title: 'Rewards credited to your account',
+                desc: 'Staking rewards are generated by the network and credited to your StakeOnix account per your plan schedule. Rewards are variable, not guaranteed.',
                 color: 'text-green-400 bg-green-500/10',
               },
               {
                 step: '04',
                 icon: <Unlock className="h-6 w-6" />,
                 title: 'Withdraw or reinvest',
-                desc: 'At plan maturity collect everything principal + all profits. Or roll it into a larger plan.',
+                desc: 'At plan maturity, you can withdraw principal and accumulated rewards, or roll into a new plan. Flexible plans allow early withdrawal subject to plan terms.',
                 color: 'text-yellow-400 bg-yellow-500/10',
               },
             ].map((s) => (
@@ -254,13 +257,13 @@ export default function WhatIsStakingPage() {
 
         <div className="container relative mx-auto px-4 max-w-5xl">
           <div className="text-center mb-16">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">The Case for Staking</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Why Staking? Why StakeOnix?</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">
-              Five Reasons Serious Investors Are Moving to Staking
+              Five reasons serious investors stake
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Not hype. Not speculation. Five clear, rational arguments for why crypto staking
-              has become the fastest-growing passive income instrument of the decade.
+              Not hype. Five clear, rational arguments for why crypto staking
+              deserves a place in a considered portfolio strategy.
             </p>
           </div>
 
@@ -270,42 +273,41 @@ export default function WhatIsStakingPage() {
                 num: '01',
                 icon: <Percent className="h-6 w-6" />,
                 color: 'text-cyan-400 bg-cyan-500/10',
-                title: 'Returns that actually beat inflation by a wide margin',
-                body: 'Inflation has averaged 3–5% annually in developed economies over the last five years. A high-street savings account returns 0.3–0.5%. That gap is real money leaving your pocket every year. StakeOnix staking plans begin at 1.5%/day that\'s not a typo. Even the entry-level Starter Trial plan (7 days at 1.5%/day) returns more in one week than a savings account returns in two years. This is why institutional capital has been quietly moving into yield-bearing crypto strategies since 2022.',
-                proof: 'Starter Trial: 1.5%/day × 7 days = 10.5% total in one week',
+                title: 'Network rewards exist whether you participate or not',
+                body: 'Proof-of-stake blockchains issue rewards to validators every day. That mechanism runs 24/7 regardless of whether any individual participates. Staking is the mechanism for participating. The question is not whether those rewards exist - they do. The question is whether you are positioned to receive a share of them.',
+                proof: 'Ethereum, Solana, Cosmos and 170+ other PoS networks all issue staking rewards',
               },
               {
                 num: '02',
                 icon: <Clock className="h-6 w-6" />,
                 color: 'text-green-400 bg-green-500/10',
-                title: 'Daily liquidity your earnings arrive every 24 hours',
-                body: "A bond or fixed-term deposit locks your money away for months or years. A stock investment can go negative the month you need it. Staking on StakeOnix credits rewards to your account every single day visible, usable, withdrawable. You have full visibility into what you\'ve earned at any moment. This daily liquidity is psychologically and financially powerful: you\'re not waiting to feel the results. You see your balance grow every morning.",
-                proof: 'Daily settlements earnings credited at 00:00 UTC every 24 hours',
+                title: 'Rewards are credited on a defined schedule',
+                body: 'Unlike stock dividends that may pay quarterly or annually, staking rewards on most networks are calculated and distributed on shorter cycles. StakeOnix credits rewards to your account according to your chosen plan’s schedule. The exact schedule varies by plan and is shown after account creation. You can track every credit in your dashboard.',
+                proof: 'Full transaction history visible in your StakeOnix dashboard',
               },
               {
                 num: '03',
                 icon: <RefreshCw className="h-6 w-6" />,
                 color: 'text-purple-400 bg-purple-500/10',
-                title: 'Compounding accelerates wealth exponentially not linearly',
-                body: "Every great investor from Warren Buffett to Ray Dalio has called compounding the most powerful force in finance. When your daily rewards are reinvested either manually or by rolling into the next plan you earn returns on your returns. The math is unambiguous: $5,000 reinvested into consecutive 30-day plans at 3%/day grows dramatically faster than sitting in a savings account. Our Professional plan alone returns 90% in 30 days a Booster roll converts $626 back at the $1,000+ threshold. The investors who compound consistently are the ones who see transformational results.",
-                proof: 'Professional plan: 3.0%/day × 30 days = 90% total ROI',
+                title: 'Compounding accelerates growth over time',
+                body: 'When rewards are reinvested, you earn returns on your accumulated balance, not just your original deposit. Over longer plan durations this effect compounds meaningfully. The exact compounding schedules and rates vary by plan. StakeOnix offers auto-compounding on eligible plans, shown in full in your plan terms after login.',
+                proof: 'Auto-compounding available on eligible plans',
               },
               {
                 num: '04',
                 icon: <ShieldCheck className="h-6 w-6" />,
                 color: 'text-yellow-400 bg-yellow-500/10',
-                title: 'Zero trading knowledge required machines do the work',
-                body: "Day trading requires hours of chart analysis, technical skills, emotional discipline, and a tolerance for uncertainty that most people simply don't have nor should they need. Staking on StakeOnix requires exactly three decisions: which plan, how much, and when to start. After that, the platform's infrastructure handles everything: fund management, reward calculation, daily settlement, and reinvestment notifications. The average StakeOnix user spends under 10 minutes per month actively managing their account.",
-                proof: 'No charts, no volatility risk, no market timing required',
+                title: 'No trading knowledge required',
+                body: 'Staking is not trading. You are not predicting price movements or timing the market. You deposit an asset, select a plan, and the platform handles the technical infrastructure. The three decisions you make: which asset, which plan, and how much to stake. Everything else is managed by StakeOnix.',
+                proof: 'No charts, no market timing, no active management required',
               },
               {
                 num: '05',
                 icon: <Users className="h-6 w-6" />,
                 color: 'text-pink-400 bg-pink-500/10',
-                title: 'Your referral network becomes a second income engine',
-                body: "Most investment platforms keep 100% of the margin for themselves. StakeOnix shares it. Our referral program pays you 5–8% on every dollar your referrals earn (Level 1) plus 2% on what their referrals earn (Level 2) permanently, for as long as they stake. This is not a pyramid scheme: it is a transparent, fixed-commission affiliate structure. When you introduce three friends who each invest $2,000, you earn on their daily staking income indefinitely. Combined with your own staking returns, the income compounds both upward and outward.",
-                proof: 'Bronze 5% → Platinum 8% L1 + 2% L2 paid daily on top of your own returns',
-              },
+                title: 'Regulated infrastructure you can verify',
+                body: 'StakeOnix is authorised by the FCA in the UK (Ref. 820033) and registered with FINTRAC in Canada (BN: 820033090). These are not self-issued badges. FCA authorisation requires compliance with financial services standards, anti-money laundering controls, and ongoing regulatory reporting. Both registrations are publicly verifiable on the respective regulator websites.',
+                proof: 'FCA Ref. 820033 · FINTRAC BN: 820033090 · both publicly verifiable',
             ].map((item) => (
               <div key={item.num} className="glass-card p-7 md:p-8 flex gap-6">
                 <div className="flex-shrink-0 hidden sm:block">
@@ -483,7 +485,7 @@ export default function WhatIsStakingPage() {
               { type: 'Stock market', daily: '±Variable', knowledge: 'High', min: '$1', bad: [true, true, false] },
               { type: 'Real estate', daily: '±Variable', knowledge: 'Very High', min: '$50,000+', bad: [true, true, true] },
               { type: 'Crypto trading', daily: '±Variable', knowledge: 'Expert', min: '$100', bad: [true, true, false] },
-              { type: 'StakeOnix Staking', daily: '1.5–4.5%', knowledge: 'None', min: '$200', bad: [false, false, false], highlight: true },
+              { type: 'StakeOnix Staking', daily: 'Variable · see plans', knowledge: 'None', min: '$200', bad: [false, false, false], highlight: true },
             ].map((row) => (
               <div
                 key={row.type}
@@ -507,15 +509,15 @@ export default function WhatIsStakingPage() {
             {[
               {
                 q: 'Can I actually lose money staking on StakeOnix?',
-                a: 'The staking returns themselves are fixed and credited daily that part does not fluctuate with market prices. However, cryptocurrency prices can change. If you deposit $1,000 worth of BTC and BTC drops in dollar terms, the dollar value of your holdings shifts. StakeOnix pays your rewards in USD value if you want full stability, use USDT or USDC.',
+                a: 'Staking rewards on StakeOnix are variable, not guaranteed. Cryptocurrency values can also change - if the underlying asset depreciates in dollar terms, the dollar value of your holdings changes accordingly. If you want to reduce price exposure, staking stablecoins (USDT or USDC) denominated in USD is an option.',
               },
               {
                 q: 'What is the minimum I need to start?',
-                a: 'Our Starter Trial plan begins at $200. This is intentionally low it is designed to let you see real payouts in your account within 7 days, so you can verify the platform works before committing larger amounts.',
+                a: 'The minimum deposit is $200 equivalent. This applies to the entry-level plan. Larger plans have higher minimums. Full details are available after account creation.',
               },
               {
                 q: 'Do I need any crypto experience?',
-                a: 'None. If you can sign up for a website and send a payment, you have all the skills needed. Our onboarding takes under 10 minutes and includes step-by-step guidance on depositing and activating your first plan.',
+                a: 'No. If you can sign up for a website and send a payment, you have all the skills needed. Our onboarding includes step-by-step guidance on depositing and activating your first plan.',
               },
               {
                 q: 'How often are rewards paid?',

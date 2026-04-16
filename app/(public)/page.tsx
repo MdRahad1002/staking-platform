@@ -296,15 +296,16 @@ export default async function HomePage() {
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
-                Secure, Regulated &amp;<br />
-                <span className="gradient-text">Professional Crypto</span><br />
-                <span className="text-white">Staking Platform</span>
+                Your crypto<br />
+                <span className="gradient-text">shouldn&apos;t sit still.</span><br />
+                <span className="text-white/75 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">The regulated way to make it work.</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                Staking puts your crypto to work on blockchain networks — in return, you earn
-                staking rewards. We handle the complexity. Create a free account to explore
-                our plans and see estimated yields on your assets.
+                Blockchain networks pay rewards to participants who help validate transactions.
+                That happens every day, whether you participate or not. StakeOnix is an
+                FCA-authorised platform that connects your assets to those networks.
+                Create a free account to see what your portfolio could earn.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -314,7 +315,7 @@ export default async function HomePage() {
                     className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
                   >
                     <ArrowRight className="h-5 w-5" />
-                    {session ? 'Go to Dashboard' : 'Get Started'}
+                    {session ? 'Go to Dashboard' : 'Discover My Rates'}
                   </Button>
                 </Link>
                 <Link href="/what-is-staking" className="w-full sm:w-auto">
@@ -331,7 +332,7 @@ export default async function HomePage() {
 
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
-                  No credit card required &bull; KYC required &bull; Staking rewards not guaranteed
+                  KYC required &bull; Returns variable, not guaranteed &bull; Rates visible to registered members
                 </p>
               )}
 
@@ -362,7 +363,7 @@ export default async function HomePage() {
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-400/80 mb-1">Estimated Yields</p>
                       <h3 className="text-lg font-bold text-white leading-tight">Typical rates by asset</h3>
-                      <p className="text-xs text-muted-foreground mt-0.5">Est. network yields — actual returns vary.</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Est. network yields. Actual returns vary.</p>
                     </div>
                     <div className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 flex-shrink-0 ml-4">
                       <span className="relative flex h-2 w-2">
@@ -513,11 +514,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking explained</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">What is Crypto Staking?</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Understand the opportunity</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What actually happens when you stake</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              In simple terms: you hold crypto, and by participating in the network you earn rewards.
-              Think of it like earning interest on a savings account — but for blockchain.
+              Blockchain networks need participants to validate transactions. In exchange, they issue rewards.
+              That is staking. Not lending, not trading, not speculation. Participation in infrastructure that runs regardless.
             </p>
           </div>
 
@@ -529,7 +530,7 @@ export default async function HomePage() {
                 color: 'from-cyan-500/20 to-blue-600/20',
                 iconColor: 'text-cyan-400',
                 title: 'You deposit crypto',
-                desc: 'You contribute your crypto to a staking pool. Your assets remain in your account and are never sold — they simply participate in network validation.',
+                desc: 'You contribute your crypto to a staking pool. Your assets remain in your account and are never sold; they simply participate in network validation.',
               },
               {
                 step: '02',
@@ -545,7 +546,7 @@ export default async function HomePage() {
                 color: 'from-green-500/20 to-emerald-600/20',
                 iconColor: 'text-green-400',
                 title: 'You receive your share',
-                desc: 'StakeOnix manages the technical infrastructure — nodes, uptime, compounding — and credits your share of rewards to your account based on your chosen plan.',
+                desc: 'StakeOnix manages the technical infrastructure (nodes, uptime, compounding) and credits your share of rewards to your account based on your chosen plan.',
               },
             ].map((item) => (
               <div key={item.step} className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group">
@@ -654,9 +655,9 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Media &amp; Partnerships</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Featured Coverage</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Independent coverage and verified partnerships</h2>
             <p className="text-muted-foreground mt-2 max-w-md mx-auto">
-              StakeOnix featured across global media and major brand partnerships.
+              Real-world exposure across global media and brand partnerships, independently covered.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -707,11 +708,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Estimated Network Yields</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Typical Staking Yields</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Network yields</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What networks are paying right now</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              These are estimated annual yields for popular proof-of-stake assets based on current network conditions.
-              Actual returns vary and are not guaranteed.
+              Estimated annual yields for popular proof-of-stake networks, based on current conditions.
+              Sign in to see personalised rates for your portfolio. Returns vary and are not guaranteed.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
@@ -812,10 +813,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/15 to-transparent pointer-events-none" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking Products</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Choose Your Staking Plan</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking tiers</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Four plans. Rates visible to members.</h2>
             <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
-              We offer multiple staking tiers to match your goals. Create a free account to view available rates and start earning.
+              Yields vary by asset, term, and network conditions. Create a free account to unlock current rates
+              and see exactly what your portfolio could earn.
             </p>
           </div>
 
@@ -916,15 +918,69 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* WHO IS THIS FOR */}
+      <section className="py-16 relative border-t border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Who is this for?</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Whoever you are, there is a plan for you</h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              Beginners, seasoned holders, and institutional clients all stake under the same regulated roof.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group flex flex-col">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 mb-5 group-hover:scale-110 transition-transform duration-300">
+                <Zap className="h-6 w-6" />
+              </div>
+              <h3 className="font-bold text-base text-white mb-3">New to staking</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">
+                We walk you through every step. Start with as little as $200. No technical knowledge needed.
+                The platform handles the infrastructure. You just choose your plan.
+              </p>
+              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                Start with our Flexible plan <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="glass-card p-7 hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-300 group flex flex-col">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 text-green-400 mb-5 group-hover:scale-110 transition-transform duration-300">
+                <RefreshCw className="h-6 w-6" />
+              </div>
+              <h3 className="font-bold text-base text-white mb-3">Already hold crypto</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">
+                Your assets are sitting idle in a wallet right now. Staking lets them participate in network
+                rewards without selling. You keep ownership. You earn rewards.
+              </p>
+              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-green-400 hover:text-green-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                Put your portfolio to work <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="glass-card p-7 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300 group flex flex-col">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/20 to-violet-600/20 text-purple-400 mb-5 group-hover:scale-110 transition-transform duration-300">
+                <BarChart3 className="h-6 w-6" />
+              </div>
+              <h3 className="font-bold text-base text-white mb-3">Experienced staker</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">
+                Regulated infrastructure, full auditability, 170+ assets, institutional-grade terms.
+                Compare us properly. FCA authorised in the UK, FINTRAC registered in Canada.
+              </p>
+              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                Explore our Elite tier <ChevronRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
       <section className="py-20 relative border-t border-white/5">
         <div className="absolute inset-0 hero-grid opacity-10" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Simple Process</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Start Earning in 4 Steps</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">The process</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">From account to active stake in four steps</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              No crypto expertise required. Go from zero to earning in under 5 minutes.
+              Whether you are new to crypto or already hold a portfolio, the process is the same. Simple by design.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
@@ -972,7 +1028,9 @@ export default async function HomePage() {
               <span className="gradient-text">Grow Your Crypto</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              StakeOnix pools assets into professionally managed staking protocols, delivering transparent daily rewards to your account with institutional-grade security and full regulatory compliance.
+              While traditional savings accounts pay almost nothing, blockchain networks distribute rewards
+              to validators every single day. StakeOnix connects your assets to that infrastructure,
+              with full regulatory oversight, transparent reporting, and institutional-grade security.
             </p>
           </div>
 
@@ -986,13 +1044,16 @@ export default async function HomePage() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Institutional staking infrastructure. Accessible to all.</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Traditional savings accounts return fractions of a percent annually. StakeOnix channels user assets into professionally managed staking protocols, delivering daily rewards directly to your account. Every transaction is fully transparent and auditable.
+                  Your bank pays you almost nothing to hold your money. Meanwhile, blockchain networks
+                  actively reward participants who help validate transactions, every single day.
+                  StakeOnix channels your assets into those networks. Every reward, every fee,
+                  every transaction is logged and visible on your dashboard. Nothing hidden.
                 </p>
                 <ul className="space-y-3">
                   {[
-                    'No minimum lock-up on flexible plans — withdraw whenever you choose',
+                    'No minimum lock-up on flexible plans. Withdraw whenever you choose.',
                     'Staking rewards distributed based on your chosen plan terms',
-                    'Full KYC/AML compliance — licensed in Canada and the UK',
+                    'Full KYC/AML compliance, licensed in Canada and the UK',
                     'Multiple staking tiers available to match your goals',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -1121,10 +1182,11 @@ export default async function HomePage() {
         <div className="glow-blob w-[900px] h-[400px] bg-cyan-500/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Platform Benefits</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Built for Serious Earners</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">What you get</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Designed for every level of investor</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Everything you need to grow your crypto portfolio safely, efficiently and profitably.
+              Whether you are holding your first $200 in crypto or managing a diversified portfolio,
+              you get the same institutional-grade tools.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -1149,10 +1211,11 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Enterprise Security</p>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Funds Are Always Safe</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Your security is our baseline</h2>
               <p className="text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                We employ the same security standards used by the world's top financial institutions.
-                Your assets are protected 24/7 with real-time threat monitoring and instant response.
+                We employ the same security standards as regulated financial institutions.
+                AES-256 encryption, cold wallet storage, real-time monitoring, multi-signature
+                authorisation, and round-the-clock threat detection.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
@@ -1209,9 +1272,9 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Community</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">What Our Members Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What our members say</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Feedback from members on their experience using the StakeOnix platform.
+              Unscripted feedback from people using the platform.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1255,12 +1318,12 @@ export default async function HomePage() {
                 FCA Authorised &middot; FINTRAC Registered
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-5 leading-tight">
-                Start Staking with{' '}
-                <span className="gradient-text">StakeOnix</span>
+                Curious what your<br />
+                <span className="gradient-text">crypto could earn?</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                Create a free account, complete KYC, and access our range of staking plans.
-                Flexible terms, transparent reporting, and institutional-grade security.
+                The only way to see current yield estimates is to create a free account.
+                Two minutes. No credit card. No commitment. Just numbers.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>
@@ -1269,7 +1332,7 @@ export default async function HomePage() {
                     className="gap-2 font-bold text-base px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105"
                   >
                     <ArrowRight className="h-5 w-5" />
-                    {session ? 'View Dashboard' : 'Create Account'}
+                    {session ? 'View Dashboard' : 'See My Estimated Yields'}
                   </Button>
                 </Link>
                 <Link href="/plans">

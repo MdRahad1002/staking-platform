@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   alternates: { canonical: APP_URL },
   openGraph: {
     title: 'StakeOnix | Professional Crypto Staking Platform',
-    description: 'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform trusted by 480,000+ investors. Stake BTC, ETH, USDT and 170+ assets. Regulated in Canada and the UK.',
+    description: 'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake BTC, ETH, USDT and 170+ assets with institutional-grade security. Regulated in Canada and the UK.',
     url: APP_URL,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
   },
@@ -64,12 +64,6 @@ const homepageSchema = {
       addressCountry: 'GB',
     },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.8',
-    reviewCount: '2340',
-    bestRating: '5',
-  },
 }
 
 const faqHomepageSchema = {
@@ -89,7 +83,7 @@ const faqHomepageSchema = {
       name: 'How much can I earn with StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Earnings depend on your staked amount and chosen plan. StakeOnix offers plans with daily returns ranging from 1.5% to 4.5% per day. Start with as little as $200.',
+        text: 'Staking rewards depend on the assets staked, plan chosen, and prevailing network conditions. Returns are variable and not guaranteed. Refer to individual plan terms for details.',
       },
     },
     {
@@ -153,8 +147,8 @@ import {
 const features = [
   {
     icon: <TrendingUp className="h-6 w-6" />,
-    title: 'High Daily Returns',
-    description: 'Earn competitive daily returns on your crypto assets with transparent, audited staking plans.',
+    title: 'Competitive Staking Yields',
+    description: 'Access professionally managed staking protocols across leading proof-of-stake blockchains. Yields vary by asset and network conditions.',
     color: 'from-cyan-500/20 to-blue-500/20',
     iconColor: 'text-cyan-400',
   },
@@ -196,10 +190,10 @@ const features = [
 ]
 
 const stats = [
-  { value: '$2.5B+', label: 'Total Value Staked', icon: <DollarSign className="h-5 w-5" /> },
-  { value: '480K+', label: 'Active Stakers', icon: <Users className="h-5 w-5" /> },
-  { value: '170+', label: 'Assets Supported', icon: <Globe className="h-5 w-5" /> },
-  { value: '99.98%', label: 'Uptime Guarantee', icon: <Activity className="h-5 w-5" /> },
+  { value: 'FCA', label: 'Authorised · UK Regulated', icon: <BadgeCheck className="h-5 w-5" /> },
+  { value: 'FINTRAC', label: 'Registered · Canada', icon: <Shield className="h-5 w-5" /> },
+  { value: '170+', label: 'Supported Assets', icon: <Globe className="h-5 w-5" /> },
+  { value: '99.9%', label: 'Platform Uptime SLA', icon: <Activity className="h-5 w-5" /> },
 ]
 
 const howItWorks = [
@@ -223,38 +217,35 @@ const howItWorks = [
   },
   {
     step: '04',
-    title: 'Earn Daily',
-    desc: 'Watch your balance grow with automatic daily reward payouts deposited directly to your account.',
+    title: 'Receive Rewards',
+    desc: 'Staking rewards are credited to your account per your plan terms. Track all earnings and transactions in real time on your dashboard.',
     icon: <TrendingUp className="h-6 w-6" />,
   },
 ]
 
 const testimonials = [
   {
-    name: 'Marcus Holloway',
-    title: 'Professional Trader',
+    name: 'Marcus H.',
+    title: 'Crypto Staker',
     avatar: 'MH',
     rating: 5,
-    text: 'I have used multiple staking platforms and this one stands out for its transparency, consistent payouts, and exceptional support. My portfolio has grown 3x in 8 months.',
-    amount: '+340%',
+    text: 'The transparency and reliability of the platform stands out. The dashboard makes it easy to track rewards and the support team is responsive whenever I have questions.',
     color: 'from-cyan-500 to-blue-600',
   },
   {
-    name: 'Sarah Chen',
+    name: 'Sarah C.',
     title: 'Crypto Investor',
     avatar: 'SC',
     rating: 5,
-    text: 'The daily returns are consistent and withdrawals are always instant. The security features give me complete peace of mind. Best staking platform I have ever used.',
-    amount: '+218%',
+    text: 'The onboarding process was straightforward, KYC was quick, and the security features give me peace of mind. I appreciate that the platform is clear about risks and how rewards work.',
     color: 'from-purple-500 to-violet-600',
   },
   {
-    name: 'Ahmed Karimi',
-    title: 'DeFi Enthusiast',
+    name: 'Ahmed K.',
+    title: 'DeFi User',
     avatar: 'AK',
     rating: 5,
-    text: 'Started with just $500 and now earning passive income daily. The referral program is incredibly generous too. Highly recommended to anyone serious about crypto.',
-    amount: '+192%',
+    text: 'I appreciate the honest communication about how staking works and what affects yields. The interface is clean, withdrawals are smooth, and the regulatory credentials matter to me.',
     color: 'from-green-500 to-emerald-600',
   },
 ]
@@ -301,7 +292,7 @@ export default async function HomePage() {
             <div className="text-left">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300 mb-6 backdrop-blur-sm">
                 <Shield className="h-3.5 w-3.5 flex-shrink-0" />
-                FCA Authorised &middot; FINTRAC Registered &middot; 480K+ Stakers
+                FCA Authorised &middot; FINTRAC Registered &middot; KYC / AML Compliant
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
@@ -340,7 +331,7 @@ export default async function HomePage() {
 
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
-                  No credit card required &bull; 2-minute setup &bull; Daily payouts
+                  No credit card required &bull; KYC required &bull; Staking rewards not guaranteed
                 </p>
               )}
 
@@ -349,7 +340,7 @@ export default async function HomePage() {
                   { icon: <ShieldCheck className="h-4 w-4 text-green-400" />, label: 'SSL Secured' },
                   { icon: <BadgeCheck className="h-4 w-4 text-blue-400" />, label: 'KYC Compliant' },
                   { icon: <Lock className="h-4 w-4 text-yellow-400" />, label: '2FA Protected' },
-                  { icon: <RefreshCw className="h-4 w-4 text-cyan-400" />, label: 'Instant Payouts' },
+                  { icon: <BadgeCheck className="h-4 w-4 text-cyan-400" />, label: 'FCA Authorised' },
                 ].map((b) => (
                   <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground bg-white/5 border border-white/[0.08] rounded-full px-3 py-1.5">
                     {b.icon}
@@ -462,26 +453,26 @@ export default async function HomePage() {
                   </div>
                 </div>
 
-                {/* Floating stat pill */}
-                <div className="hidden sm:flex absolute -bottom-4 left-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-green-500/20 z-10 items-center gap-2">
+                {/* Floating credential pills */}
+                <div className="hidden sm:flex absolute -bottom-4 left-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-blue-500/20 z-10 items-center gap-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="h-3.5 w-3.5 text-green-400" />
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <BadgeCheck className="h-3.5 w-3.5 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-[9px] text-muted-foreground">Daily Reward</p>
-                      <p className="text-sm font-bold text-green-400">+$248.50</p>
+                      <p className="text-[9px] text-muted-foreground">UK Regulator</p>
+                      <p className="text-sm font-bold text-blue-300">FCA Authorised</p>
                     </div>
                   </div>
                 </div>
-                <div className="hidden sm:flex absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-yellow-500/20 z-10 items-center gap-2" style={{ animationDelay: '-2s' }}>
+                <div className="hidden sm:flex absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-cyan-500/20 z-10 items-center gap-2" style={{ animationDelay: '-2s' }}>
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
-                      <Award className="h-3.5 w-3.5 text-yellow-400" />
+                    <div className="w-7 h-7 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                      <Shield className="h-3.5 w-3.5 text-cyan-400" />
                     </div>
                     <div>
-                      <p className="text-[9px] text-muted-foreground">Active Stakers</p>
-                      <p className="text-sm font-bold gradient-text">480K+</p>
+                      <p className="text-[9px] text-muted-foreground">Canada Regulator</p>
+                      <p className="text-sm font-bold text-cyan-300">FINTRAC Registered</p>
                     </div>
                   </div>
                 </div>
@@ -1021,50 +1012,51 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right - Proof stats */}
+            {/* Right - Regulatory credentials + trust */}
             <div className="flex flex-col gap-5">
-              {/* Big stat */}
-              <div className="glass-card p-7 bg-gradient-to-br from-green-500/[0.07] to-emerald-600/[0.07] border-green-500/20 hover:border-green-500/35 transition-all duration-300">
+              {/* FCA block */}
+              <div className="glass-card p-7 bg-gradient-to-br from-blue-500/[0.07] to-cyan-600/[0.07] border-blue-500/20 hover:border-blue-500/35 transition-all duration-300">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Total Paid to Users</p>
-                    <p className="text-5xl font-black text-white">$2.5B+</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">UK Financial Regulator</p>
+                    <p className="text-2xl font-black text-white">FCA Authorised</p>
+                    <p className="text-xs text-muted-foreground mt-1">ONIX HOLDINGS LIMITED · Co. No. 03449482 · FCA Ref. 820033</p>
                   </div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/15 text-green-400">
-                    <DollarSign className="h-6 w-6" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/15 text-blue-400 flex-shrink-0">
+                    <BadgeCheck className="h-6 w-6" />
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Distributed across 170+ countries since launch - every dollar fully verifiable on-chain.</p>
+                <p className="text-sm text-muted-foreground">Authorised and regulated by the Financial Conduct Authority in England &amp; Wales.</p>
               </div>
 
               <div className="grid grid-cols-2 gap-5">
                 <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-400 mx-auto mb-3">
-                    <Users className="h-5 w-5" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/15 text-green-400 mx-auto mb-3">
+                    <Shield className="h-5 w-5" />
                   </div>
-                  <p className="text-3xl font-black text-white mb-1">87K+</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Active Investors</p>
+                  <p className="text-sm font-black text-white mb-1 leading-tight">FINTRAC</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Canada Registered</p>
                 </div>
                 <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-yellow-500/15 text-yellow-400 mx-auto mb-3">
-                    <Star className="h-5 w-5" />
+                    <Lock className="h-5 w-5" />
                   </div>
-                  <p className="text-3xl font-black text-white mb-1">4.8/5</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">User Rating</p>
+                  <p className="text-sm font-black text-white mb-1 leading-tight">KYC / AML</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Full Compliance</p>
                 </div>
                 <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-400 mx-auto mb-3">
-                    <Clock className="h-5 w-5" />
+                    <Activity className="h-5 w-5" />
                   </div>
-                  <p className="text-3xl font-black text-white mb-1">99.95%</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Uptime SLA</p>
+                  <p className="text-sm font-black text-white mb-1 leading-tight">99.9%</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Uptime Target</p>
                 </div>
                 <div className="glass-card p-6 hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-center">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-400 mx-auto mb-3">
                     <Globe className="h-5 w-5" />
                   </div>
-                  <p className="text-3xl font-black text-white mb-1">170+</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Countries</p>
+                  <p className="text-sm font-black text-white mb-1 leading-tight">170+</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Supported Assets</p>
                 </div>
               </div>
             </div>
@@ -1217,9 +1209,9 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Community</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Trusted by Thousands</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What Our Members Say</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Real stories from real investors growing their wealth every single day.
+              Feedback from members on their experience using the StakeOnix platform.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1259,17 +1251,16 @@ export default async function HomePage() {
 
             <div className="relative p-12 md:p-20 text-center">
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300 mb-6">
-                <ArrowRight className="h-3.5 w-3.5" />
-                Start earning in under 5 minutes
+                <BadgeCheck className="h-3.5 w-3.5" />
+                FCA Authorised &middot; FINTRAC Registered
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-5 leading-tight">
                 Start Staking with{' '}
                 <span className="gradient-text">StakeOnix</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                Create your account today and start your staking journey.
-                Flexible plans, transparent reporting, and institutional-grade security.
-                Join 480,000+ investors worldwide.
+                Create a free account, complete KYC, and access our range of staking plans.
+                Flexible terms, transparent reporting, and institutional-grade security.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>
@@ -1295,9 +1286,9 @@ export default async function HomePage() {
               <div className="flex flex-wrap justify-center gap-6 mt-10 text-sm text-muted-foreground">
                 {[
                   'No hidden fees',
-                  'Withdraw anytime',
-                  'Instant activation',
                   'KYC & AML compliant',
+                  'FCA Authorised',
+                  'FINTRAC Registered',
                 ].map((item) => (
                   <div key={item} className="flex items-center gap-1.5">
                     <CheckCircle2 className="h-4 w-4 text-green-400" />
@@ -1305,6 +1296,27 @@ export default async function HomePage() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FCA / FINTRAC RISK WARNING */}
+      <section className="py-8 border-t border-white/5 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-yellow-500/20 bg-yellow-500/5 px-6 py-5 flex flex-col sm:flex-row gap-4 items-start">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-400 flex-shrink-0 mt-0.5">
+              <Shield className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-1">Risk Warning</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Cryptocurrency staking involves risk. The value of crypto assets can go down as well as up, and staking rewards are variable and not guaranteed.
+                Past performance is not a reliable indicator of future results. You may receive less than you stake.
+                This platform is not providing financial advice. Please ensure you fully understand the risks before staking any assets.
+                StakeOnix is operated by ONIX HOLDINGS LIMITED (FCA Ref. 820033, Co. No. 03449482, registered in England &amp; Wales) and
+                ONIX INTERNATIONAL INC. (FINTRAC BN: 820033090, Ontario Business Corp.).
+              </p>
             </div>
           </div>
         </div>

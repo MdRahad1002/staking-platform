@@ -87,13 +87,23 @@ export function PlanCard({ plan, isLoggedIn = false, showActions = true }: PlanC
 
         {/* APR highlight */}
         <div className="mb-5">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground mb-1">Est. APR</p>
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-primary">{aprMin}%</span>
-            <span className="text-muted-foreground text-sm">~</span>
-            <span className="text-2xl font-bold gradient-text">{apr}%</span>
-          </div>
-          <p className="text-[11px] text-muted-foreground mt-0.5">{plan.dailyRoi}% daily · {plan.totalRoi}% total ROI</p>
+          {isLoggedIn ? (
+            <>
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground mb-1">Est. APR</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-primary">{aprMin}%</span>
+                <span className="text-muted-foreground text-sm">~</span>
+                <span className="text-2xl font-bold gradient-text">{apr}%</span>
+              </div>
+              <p className="text-[11px] text-muted-foreground mt-0.5">{plan.dailyRoi}% daily · {plan.totalRoi}% total ROI</p>
+            </>
+          ) : (
+            <div className="rounded-xl border border-dashed border-white/10 p-4 text-center bg-secondary/40">
+              <Lock className="h-5 w-5 mx-auto text-muted-foreground mb-1.5" />
+              <p className="text-sm font-semibold text-foreground">Members only</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Sign in to view rates</p>
+            </div>
+          )}
         </div>
 
         {/* Stats grid */}
@@ -112,13 +122,15 @@ export function PlanCard({ plan, isLoggedIn = false, showActions = true }: PlanC
           </div>
         </div>
 
-        {/* Daily earn on min deposit */}
-        <div className="rounded-lg border border-dashed border-border p-3 mb-4 bg-primary/5 text-center">
-          <p className="text-[11px] text-muted-foreground">Daily earn on min. deposit</p>
-          <p className="text-base font-bold text-primary mt-0.5">
-            +{formatCurrency((plan.minAmount * plan.dailyRoi) / 100)}/day
-          </p>
-        </div>
+        {/* Daily earn on min deposit - only for logged in users */}
+        {isLoggedIn && (
+          <div className="rounded-lg border border-dashed border-border p-3 mb-4 bg-primary/5 text-center">
+            <p className="text-[11px] text-muted-foreground">Daily earn on min. deposit</p>
+            <p className="text-base font-bold text-primary mt-0.5">
+              +{formatCurrency((plan.minAmount * plan.dailyRoi) / 100)}/day
+            </p>
+          </div>
+        )}
 
         {showActions && (
           isLoggedIn ? (

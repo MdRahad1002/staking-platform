@@ -120,9 +120,8 @@ function HomePageSchemas() {
   )
 }
 import { Button } from '@/components/ui/button'
-import { PlanCard } from '@/components/shared/PlanCard'
+
 import CryptoTicker from '@/components/layout/CryptoTicker'
-import ProfitCalculator from '@/components/shared/ProfitCalculator'
 import { PartnersMarquee } from '@/components/layout/PartnersMarquee'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/auth'
@@ -277,31 +276,8 @@ const cryptoCoins = [
 
 
 
-const STARTER_PLAN = {
-  id: 'starter',
-  name: 'Starter Plan',
-  description: 'Start staking with just $100 and earn daily rewards on a simple, reliable plan designed for new users.',
-  minAmount: 100,
-  maxAmount: null,
-  durationDays: 30,
-  dailyRoi: 0.33,
-  totalRoi: 12,
-  isFeatured: true,
-  sortOrder: 0,
-  isActive: true,
-  iconUrl: null,
-}
-
-async function getActivePlans() {
-  return [STARTER_PLAN]
-}
-
 export default async function HomePage() {
-  const [plans, session] = await Promise.all([getActivePlans(), getAuthSession()])
-
-  const topApr = plans.length > 0
-    ? Math.max(...plans.map((p) => parseFloat((p.dailyRoi * 365).toFixed(2))))
-    : 0
+  const session = await getAuthSession()
 
   return (
     <div className="relative overflow-hidden">
@@ -335,8 +311,9 @@ export default async function HomePage() {
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                Choose a plan, deposit crypto, and earn automatic daily rewards. No lockups,
-                no complexity, just transparent staking returns on your digital assets.
+                Staking puts your crypto to work on blockchain networks — in return, you earn
+                staking rewards. We handle the complexity. Create a free account to explore
+                our plans and see estimated yields on your assets.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -349,14 +326,14 @@ export default async function HomePage() {
                     {session ? 'Go to Dashboard' : 'Get Started'}
                   </Button>
                 </Link>
-                <Link href="/plans" className="w-full sm:w-auto">
+                <Link href="/what-is-staking" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
                     size="xl"
                     className="w-full sm:w-auto gap-2 font-semibold text-base px-8 py-4 border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 rounded-2xl transition-all duration-300"
                   >
                     <Eye className="h-5 w-5" />
-                    View Plans
+                    What is Staking?
                   </Button>
                 </Link>
               </div>
@@ -392,9 +369,9 @@ export default async function HomePage() {
                   {/* Card header */}
                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-white/[0.06]">
                     <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-400/80 mb-1">APY snapshot</p>
-                      <h3 className="text-lg font-bold text-white leading-tight">Live rates across top assets</h3>
-                      <p className="text-xs text-muted-foreground mt-0.5">Compare &quot;up to&quot; APYs and start earning instantly.</p>
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-400/80 mb-1">Estimated Yields</p>
+                      <h3 className="text-lg font-bold text-white leading-tight">Typical rates by asset</h3>
+                      <p className="text-xs text-muted-foreground mt-0.5">Est. network yields — actual returns vary.</p>
                     </div>
                     <div className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 flex-shrink-0 ml-4">
                       <span className="relative flex h-2 w-2">
@@ -474,7 +451,7 @@ export default async function HomePage() {
                         </div>
                       </div>
                       <p className="text-[9px] text-muted-foreground/60 leading-relaxed">
-                        APYs are &ldquo;up to&rdquo; and may vary by network conditions.
+                        Estimated network yields. Actual returns vary by conditions.
                       </p>
                       <Link href={session ? '/dashboard' : '/signup'}>
                         <button className="w-full text-[11px] font-bold py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all">
@@ -539,6 +516,76 @@ export default async function HomePage() {
 
       {/* AS SEEN IN / PARTNERS */}
       <PartnersMarquee />
+
+      {/* WHAT IS STAKING? */}
+      <section className="py-20 relative border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking explained</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What is Crypto Staking?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              In simple terms: you hold crypto, and by participating in the network you earn rewards.
+              Think of it like earning interest on a savings account — but for blockchain.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {[
+              {
+                step: '01',
+                icon: <Wallet className="h-6 w-6" />,
+                color: 'from-cyan-500/20 to-blue-600/20',
+                iconColor: 'text-cyan-400',
+                title: 'You deposit crypto',
+                desc: 'You contribute your crypto to a staking pool. Your assets remain in your account and are never sold — they simply participate in network validation.',
+              },
+              {
+                step: '02',
+                icon: <Cpu className="h-6 w-6" />,
+                color: 'from-purple-500/20 to-violet-600/20',
+                iconColor: 'text-purple-400',
+                title: 'The network pays validators',
+                desc: 'Proof-of-stake blockchains reward participants who help validate transactions. These network rewards are distributed proportionally to stakers.',
+              },
+              {
+                step: '03',
+                icon: <TrendingUp className="h-6 w-6" />,
+                color: 'from-green-500/20 to-emerald-600/20',
+                iconColor: 'text-green-400',
+                title: 'You receive your share',
+                desc: 'StakeOnix manages the technical infrastructure — nodes, uptime, compounding — and credits your share of rewards to your account based on your chosen plan.',
+              },
+            ].map((item) => (
+              <div key={item.step} className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} ${item.iconColor} mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                  {item.icon}
+                </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-3xl font-black text-white/5">{item.step}</span>
+                  <h3 className="font-bold text-base text-white">{item.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-2xl border border-yellow-500/20 bg-yellow-500/5 px-5 py-4 flex flex-col sm:flex-row gap-3 items-start sm:items-center max-w-3xl mx-auto">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-400 flex-shrink-0">
+              <Shield className="h-4 w-4" />
+            </div>
+            <p className="text-sm text-muted-foreground flex-1">
+              <strong className="text-yellow-300">Important:</strong> Staking rewards are not guaranteed. Returns depend on network conditions, protocol rules, and market factors.
+              Past performance is not indicative of future results. Always consider your risk tolerance before staking.
+            </p>
+            <Link href="/what-is-staking" className="flex-shrink-0">
+              <Button variant="outline" size="sm" className="gap-1.5 border-yellow-500/30 text-yellow-300 hover:bg-yellow-500/10">
+                Learn More <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* BODO/GLIMT SPONSORSHIP SHOWCASE */}
       <section className="py-16 relative border-t border-white/5 overflow-hidden">
@@ -669,10 +716,11 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Real-Time APR</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Live Staking Rates</h2>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Estimated Network Yields</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Typical Staking Yields</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Competitive yields updated continuously - stake any of these assets and start earning today.
+              These are estimated annual yields for popular proof-of-stake assets based on current network conditions.
+              Actual returns vary and are not guaranteed.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
@@ -712,16 +760,19 @@ export default async function HomePage() {
                 </div>
                 <div className="text-right flex-shrink-0">
                   <p className="text-lg font-black text-cyan-400">{coin.apr}%</p>
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">APR</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Est. APY</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
+          <div className="text-center mt-8">
+            <p className="text-xs text-muted-foreground/60 mb-4">
+              Yields shown are estimates based on current network data. Not a guarantee of returns.
+            </p>
             <Link href={session ? '/dashboard' : '/signup'}>
               <Button className="gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white border-0 rounded-xl font-semibold px-8">
                 <TrendingUp className="h-4 w-4" />
-                Start Earning Now
+                Explore Our Plans
               </Button>
             </Link>
           </div>
@@ -765,29 +816,114 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* POPULAR PLANS */}
-      {plans.length > 0 && (
-        <section className="py-20 relative border-t border-white/5">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/15 to-transparent pointer-events-none" />
-          <div className="container relative mx-auto px-4">
-            <div className="text-center mb-10">
-              <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking Products</p>
-              <h2 className="text-3xl md:text-4xl font-bold">Popular Plans</h2>
-              <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
-                Our most popular staking option delivering the best risk-adjusted returns.
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <div className="w-full max-w-sm">
-                <PlanCard key={plans[0].id} plan={plans[0]} isLoggedIn={!!session} />
-              </div>
-            </div>
+      {/* STAKING PLANS PREVIEW */}
+      <section className="py-20 relative border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/15 to-transparent pointer-events-none" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Staking Products</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Choose Your Staking Plan</h2>
+            <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
+              We offer multiple staking tiers to match your goals. Create a free account to view available rates and start earning.
+            </p>
           </div>
-        </section>
-      )}
 
-      {/* PROFIT CALCULATOR */}
-      <ProfitCalculator />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            {[
+              {
+                tier: 'Flexible',
+                duration: '7–30 days',
+                icon: <RefreshCw className="h-6 w-6" />,
+                color: 'from-cyan-500/20 to-blue-600/20',
+                iconColor: 'text-cyan-400',
+                border: 'border-cyan-500/20',
+                badge: null,
+                features: ['Withdraw at any time', 'No lock-up period', 'Ideal for newcomers', 'Instant activation'],
+              },
+              {
+                tier: 'Growth',
+                duration: '30–60 days',
+                icon: <TrendingUp className="h-6 w-6" />,
+                color: 'from-green-500/20 to-emerald-600/20',
+                iconColor: 'text-green-400',
+                border: 'border-green-500/20',
+                badge: 'Popular',
+                features: ['Fixed-term commitment', 'Enhanced yield rates', 'Auto-compounding', 'Daily reward credits'],
+              },
+              {
+                tier: 'Premium',
+                duration: '60–90 days',
+                icon: <BarChart3 className="h-6 w-6" />,
+                color: 'from-purple-500/20 to-violet-600/20',
+                iconColor: 'text-purple-400',
+                border: 'border-purple-500/20',
+                badge: null,
+                features: ['Higher staking rewards', 'Priority support', 'Dedicated account manager', 'Advanced analytics'],
+              },
+              {
+                tier: 'Elite',
+                duration: '90+ days',
+                icon: <Award className="h-6 w-6" />,
+                color: 'from-yellow-500/20 to-orange-600/20',
+                iconColor: 'text-yellow-400',
+                border: 'border-yellow-500/20',
+                badge: 'Top Tier',
+                features: ['Maximum network yields', 'Institutional-grade terms', 'Custom staking strategy', 'VIP support access'],
+              },
+            ].map((plan) => (
+              <div
+                key={plan.tier}
+                className={`relative rounded-2xl border ${plan.border} bg-card hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col overflow-hidden`}
+              >
+                {plan.badge && (
+                  <div className="absolute top-3 right-3">
+                    <span className="inline-flex items-center gap-1 rounded-md bg-primary/20 border border-primary/30 px-2 py-0.5 text-[10px] font-bold text-primary uppercase tracking-wide">
+                      <Star className="h-2.5 w-2.5" /> {plan.badge}
+                    </span>
+                  </div>
+                )}
+                <div className="p-6 flex-1">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${plan.color} ${plan.iconColor} mb-4`}>
+                    {plan.icon}
+                  </div>
+                  <h3 className="font-bold text-lg text-white mb-1">{plan.tier}</h3>
+                  <p className="text-xs text-muted-foreground mb-4">{plan.duration} term</p>
+                  <ul className="space-y-2 mb-6">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-green-400 flex-shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="rounded-xl border border-dashed border-white/10 p-3 text-center bg-secondary/30">
+                    <Lock className="h-4 w-4 mx-auto text-muted-foreground mb-1.5" />
+                    <p className="text-xs font-semibold text-foreground">Rates available to members</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">Sign in to view yield rates</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link href={session ? '/dashboard' : '/signup'}>
+              <Button
+                size="lg"
+                className="gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white border-0 rounded-2xl font-bold px-10 shadow-xl shadow-cyan-500/20"
+              >
+                <ArrowRight className="h-5 w-5" />
+                {session ? 'View My Plans' : 'Create Free Account to View Plans'}
+              </Button>
+            </Link>
+            {!session && (
+              <p className="text-xs text-muted-foreground mt-3">
+                Free account · No credit card required · 2-minute setup
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* HOW IT WORKS */}
       <section className="py-20 relative border-t border-white/5">
@@ -863,10 +999,10 @@ export default async function HomePage() {
                 </p>
                 <ul className="space-y-3">
                   {[
-                    'No minimum lock-up period - withdraw whenever you choose',
-                    'Daily rewards credited automatically to your account',
-                    'Full KYC/AML compliance - licensed in Canada and the UK',
-                    'Starting from $200 with the Starter plan',
+                    'No minimum lock-up on flexible plans — withdraw whenever you choose',
+                    'Staking rewards distributed based on your chosen plan terms',
+                    'Full KYC/AML compliance — licensed in Canada and the UK',
+                    'Multiple staking tiers available to match your goals',
                   ].map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-cyan-400 flex-shrink-0 mt-0.5" />
@@ -1131,8 +1267,9 @@ export default async function HomePage() {
                 <span className="gradient-text">StakeOnix</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                Create your account today and receive your first daily reward within minutes.
-                No minimum lock-up. Withdraw anytime. Join 480,000+ investors worldwide.
+                Create your account today and start your staking journey.
+                Flexible plans, transparent reporting, and institutional-grade security.
+                Join 480,000+ investors worldwide.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>

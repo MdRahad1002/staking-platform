@@ -161,6 +161,28 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
 
   return (
     <>
+      {/* ── Sign-in prompt for guests ── */}
+      {!isLoggedIn && (
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 px-4 py-4">
+          <div className="flex items-center gap-2.5 flex-1 min-w-0">
+            <Lock className="h-4 w-4 text-primary flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Create a free account</strong> to view plan rates, run earnings calculations, and start staking your crypto.
+            </p>
+          </div>
+          <div className="flex gap-2 flex-shrink-0">
+            <Link href="/login">
+              <Button variant="secondary" size="sm" className="font-semibold">Sign In</Button>
+            </Link>
+            <Link href="/signup">
+              <Button variant="gradient" size="sm" className="font-semibold gap-1.5">
+                <ArrowRight className="h-3.5 w-3.5" /> Sign Up Free
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* ── Live activity ticker ── */}
       {activityFeed.length > 0 && (() => {
         const ev = activityFeed[activityIdx]
@@ -409,9 +431,17 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
 
                   {/* APR */}
                   <div className="hidden md:block">
-                    <span className="font-bold text-primary">{aprMin}%</span>
-                    <span className="text-muted-foreground text-sm"> ~ </span>
-                    <span className="font-bold gradient-text">{apr}%</span>
+                    {isLoggedIn ? (
+                      <>
+                        <span className="font-bold text-primary">{aprMin}%</span>
+                        <span className="text-muted-foreground text-sm"> ~ </span>
+                        <span className="font-bold gradient-text">{apr}%</span>
+                      </>
+                    ) : (
+                      <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <Lock className="h-3.5 w-3.5" /> Members only
+                      </span>
+                    )}
                   </div>
 
                   {/* Duration */}
@@ -450,8 +480,14 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
 
                   {/* Mobile expand icon */}
                   <div className="md:hidden flex flex-col items-end gap-1">
-                    <span className="font-bold gradient-text text-sm">{apr}%</span>
-                    <span className="text-[10px] text-muted-foreground">APR</span>
+                    {isLoggedIn ? (
+                      <>
+                        <span className="font-bold gradient-text text-sm">{apr}%</span>
+                        <span className="text-[10px] text-muted-foreground">APR</span>
+                      </>
+                    ) : (
+                      <Lock className="h-4 w-4 text-muted-foreground mb-1" />
+                    )}
                     {isExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
                   </div>
                 </div>
@@ -459,90 +495,108 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
                 {/* Expanded detail */}
                 {isExpanded && (
                   <div className="border-t border-border px-4 py-4">
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
-                      <div>
-                        <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Daily ROI</p>
-                        <p className="font-bold text-primary">{plan.dailyRoi}%</p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Total ROI</p>
-                        <p className="font-bold text-green-500">{plan.totalRoi}%</p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Min Stake</p>
-                        <p className="font-bold">{formatCurrency(plan.minAmount)}</p>
-                      </div>
-                      <div>
-                        <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Daily Earn</p>
-                        <p className="font-bold text-primary">+{formatCurrency((plan.minAmount * plan.dailyRoi) / 100)}/day</p>
-                      </div>
-                    </div>
-                    {plan.description && (
-                      <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
-                    )}
-
-                    {/* Per-plan quick calculator */}
-                    <div className="mb-4 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-2 flex items-center gap-1.5">
-                        <Calculator className="h-3.5 w-3.5" /> Quick Earnings Estimate
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-2 mb-3">
-                        <div className="relative flex-1">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-                          <input
-                            type="number"
-                            min={plan.minAmount}
-                            max={plan.maxAmount ?? undefined}
-                            placeholder={`Min ${formatCurrency(plan.minAmount)}`}
-                            value={planCalcAmounts[plan.id] ?? ''}
-                            onChange={(e) =>
-                              setPlanCalcAmounts((prev) => ({ ...prev, [plan.id]: e.target.value }))
-                            }
-                            className="w-full rounded-lg border border-border bg-background/80 pl-7 pr-3 py-2 text-sm outline-none focus:border-primary/50 transition-colors"
-                          />
+                    {isLoggedIn ? (
+                      <>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+                          <div>
+                            <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Daily ROI</p>
+                            <p className="font-bold text-primary">{plan.dailyRoi}%</p>
+                          </div>
+                          <div>
+                            <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Total ROI</p>
+                            <p className="font-bold text-green-500">{plan.totalRoi}%</p>
+                          </div>
+                          <div>
+                            <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Min Stake</p>
+                            <p className="font-bold">{formatCurrency(plan.minAmount)}</p>
+                          </div>
+                          <div>
+                            <p className="text-[11px] text-muted-foreground uppercase tracking-widest mb-1">Daily Earn</p>
+                            <p className="font-bold text-primary">+{formatCurrency((plan.minAmount * plan.dailyRoi) / 100)}/day</p>
+                          </div>
                         </div>
-                      </div>
-                      {(() => {
-                        const r = getPlanCalcResult(plan, planCalcAmounts[plan.id] ?? '')
-                        if (!r) return (
-                          <p className="text-[11px] text-muted-foreground">
-                            Enter an amount ≥ {formatCurrency(plan.minAmount)} to see your projected earnings.
+                        {plan.description && (
+                          <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
+                        )}
+
+                        {/* Per-plan quick calculator */}
+                        <div className="mb-4 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                          <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-2 flex items-center gap-1.5">
+                            <Calculator className="h-3.5 w-3.5" /> Quick Earnings Estimate
                           </p>
-                        )
-                        return (
-                          <div className="grid grid-cols-3 gap-3">
-                            <div>
-                              <p className="text-[10px] text-muted-foreground mb-0.5">Daily Earnings</p>
-                              <p className="font-bold text-green-400 text-sm">+{formatCurrency(r.dailyEarning)}</p>
-                            </div>
-                            <div>
-                              <p className="text-[10px] text-muted-foreground mb-0.5">Total Profit</p>
-                              <p className="font-bold gradient-text text-sm">+{formatCurrency(r.totalEarning)}</p>
-                            </div>
-                            <div>
-                              <p className="text-[10px] text-muted-foreground mb-0.5">Total Payout</p>
-                              <p className="font-bold text-white text-sm">{formatCurrency(r.totalPayout)}</p>
+                          <div className="flex flex-col sm:flex-row gap-2 mb-3">
+                            <div className="relative flex-1">
+                              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
+                              <input
+                                type="number"
+                                min={plan.minAmount}
+                                max={plan.maxAmount ?? undefined}
+                                placeholder={`Min ${formatCurrency(plan.minAmount)}`}
+                                value={planCalcAmounts[plan.id] ?? ''}
+                                onChange={(e) =>
+                                  setPlanCalcAmounts((prev) => ({ ...prev, [plan.id]: e.target.value }))
+                                }
+                                className="w-full rounded-lg border border-border bg-background/80 pl-7 pr-3 py-2 text-sm outline-none focus:border-primary/50 transition-colors"
+                              />
                             </div>
                           </div>
-                        )
-                      })()}
-                    </div>
+                          {(() => {
+                            const r = getPlanCalcResult(plan, planCalcAmounts[plan.id] ?? '')
+                            if (!r) return (
+                              <p className="text-[11px] text-muted-foreground">
+                                Enter an amount ≥ {formatCurrency(plan.minAmount)} to see your projected earnings.
+                              </p>
+                            )
+                            return (
+                              <div className="grid grid-cols-3 gap-3">
+                                <div>
+                                  <p className="text-[10px] text-muted-foreground mb-0.5">Daily Earnings</p>
+                                  <p className="font-bold text-green-400 text-sm">+{formatCurrency(r.dailyEarning)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-[10px] text-muted-foreground mb-0.5">Total Profit</p>
+                                  <p className="font-bold gradient-text text-sm">+{formatCurrency(r.totalEarning)}</p>
+                                </div>
+                                <div>
+                                  <p className="text-[10px] text-muted-foreground mb-0.5">Total Payout</p>
+                                  <p className="font-bold text-white text-sm">{formatCurrency(r.totalPayout)}</p>
+                                </div>
+                              </div>
+                            )
+                          })()}
+                        </div>
 
-                    <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-                      {isLoggedIn ? (
-                        <Link href={`/plan/stake?planId=${plan.id}`}>
-                          <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold gap-2">
-                            Stake Now
-                          </Button>
-                        </Link>
-                      ) : (
-                        <Link href="/signup">
-                          <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold">
-                            Sign Up to Stake
-                          </Button>
-                        </Link>
-                      )}
-                    </div>
+                        <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                          <Link href={`/plan/stake?planId=${plan.id}`}>
+                            <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold gap-2">
+                              Stake Now
+                            </Button>
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex-1">
+                          {plan.description && (
+                            <p className="text-sm text-muted-foreground mb-3">{plan.description}</p>
+                          )}
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Lock className="h-4 w-4 text-primary flex-shrink-0" />
+                            <span>Rate details, earnings calculator and staking access are available to members.</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2 flex-shrink-0">
+                          <Link href="/login">
+                            <Button variant="secondary" size="sm" className="font-semibold">Sign In</Button>
+                          </Link>
+                          <Link href="/signup">
+                            <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold">
+                              Create Account
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

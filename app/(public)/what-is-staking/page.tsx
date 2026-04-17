@@ -308,6 +308,7 @@ export default function WhatIsStakingPage() {
                 title: 'Regulated infrastructure you can verify',
                 body: 'StakeOnix is authorised by the FCA in the UK (Ref. 820033) and registered with FINTRAC in Canada (BN: 820033090). These are not self-issued badges. FCA authorisation requires compliance with financial services standards, anti-money laundering controls, and ongoing regulatory reporting. Both registrations are publicly verifiable on the respective regulator websites.',
                 proof: 'FCA Ref. 820033 · FINTRAC BN: 820033090 · both publicly verifiable',
+              },
             ].map((item) => (
               <div key={item.num} className="glass-card p-7 md:p-8 flex gap-6">
                 <div className="flex-shrink-0 hidden sm:block">

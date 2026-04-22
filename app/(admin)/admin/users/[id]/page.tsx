@@ -7,6 +7,7 @@ import { formatCurrency, formatDateTime } from '@/lib/utils'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import AdminUserActions from './AdminUserActions'
+import AdminStakesTable from './AdminStakesTable'
 
 export const dynamic = 'force-dynamic'
 
@@ -177,32 +178,17 @@ export default async function AdminUserDetailPage({ params }: { params: Promise<
           <CardTitle className="text-base">Recent Stakes</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border text-muted-foreground">
-                  <th className="text-left pb-2 font-medium">Plan</th>
-                  <th className="text-left pb-2 font-medium">Amount</th>
-                  <th className="text-left pb-2 font-medium">Return</th>
-                  <th className="text-left pb-2 font-medium">Status</th>
-                  <th className="text-left pb-2 font-medium">Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {user.stakes.map((s) => (
-                  <tr key={s.id}>
-                    <td className="py-2">{s.plan.name}</td>
-                    <td className="py-2">{formatCurrency(s.amount)}</td>
-                    <td className="py-2 text-primary">{formatCurrency(s.expectedReturn)}</td>
-                    <td className="py-2">
-                      <Badge variant={s.status === 'ACTIVE' ? 'success' : 'info'} className="text-xs">{s.status}</Badge>
-                    </td>
-                    <td className="py-2 text-muted-foreground text-xs">{formatDateTime(s.createdAt)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <AdminStakesTable stakes={user.stakes.map((s) => ({
+            id: s.id,
+            amount: s.amount,
+            totalEarned: s.totalEarned,
+            expectedReturn: s.expectedReturn,
+            dailyRoi: s.dailyRoi,
+            status: s.status,
+            currency: s.currency,
+            createdAt: s.createdAt.toISOString(),
+            plan: { name: s.plan.name },
+          }))} />
         </CardContent>
       </Card>
 

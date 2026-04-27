@@ -46,8 +46,26 @@ async function getPlans() {
   }
 }
 
+async function checkUsedStarterPlan(userId: string, plans: Awaited<ReturnType<typeof getPlans>>) {
+  try {
+    const starterPlan = plans.find((p) => p.name === 'Starter Trial')
+    if (!starterPlan) return false
+    const used = await prisma.stake.findFirst({
+      where: { userId, planId: starterPlan.id },
+      select: { id: true },
+    })
+    return !!used
+  } catch {
+    return false
+  }
+}
+
 export default async function PlansPage() {
   const [plans, session] = await Promise.all([getPlans(), getAuthSession()])
+
+  const hasUsedStarterPlan = session?.user?.id
+    ? await checkUsedStarterPlan(session.user.id, plans)
+    : false
 
   const maxApr = plans.length > 0
     ? Math.max(...plans.map((p) => parseFloat((p.dailyRoi * 365).toFixed(2))))
@@ -144,7 +162,7 @@ export default async function PlansPage() {
               No staking plans available at this time. Please check back later.
             </div>
           ) : (
-            <PlansClient plans={plans} isLoggedIn={!!session} />
+            <PlansClient plans={plans} isLoggedIn={!!session} hasUsedStarterPlan={hasUsedStarterPlan} />
           )}
         </div>
       </section>

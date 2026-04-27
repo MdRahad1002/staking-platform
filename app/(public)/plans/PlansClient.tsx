@@ -48,6 +48,7 @@ interface Plan {
 interface PlansClientProps {
   plans: Plan[]
   isLoggedIn: boolean
+  hasUsedStarterPlan?: boolean
 }
 
 const DURATION_FILTERS = [
@@ -63,7 +64,7 @@ const YIELD_FILTERS = [
   { label: 'High Yield (>5%/day)', value: 'high' },
 ]
 
-export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
+export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: PlansClientProps) {
   const [search, setSearch] = useState('')
   const [durationFilter, setDurationFilter] = useState('all')
   const [yieldFilter, setYieldFilter] = useState('all')
@@ -464,11 +465,17 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
                   {/* CTA */}
                   <div className="hidden md:block" onClick={(e) => e.stopPropagation()}>
                     {isLoggedIn ? (
-                      <Link href={`/plan/stake?planId=${plan.id}`}>
-                        <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold">
-                          Stake Now
+                      plan.name === 'Starter Trial' && hasUsedStarterPlan ? (
+                        <Button variant="secondary" size="sm" className="font-semibold opacity-60" disabled>
+                          Trial Used
                         </Button>
-                      </Link>
+                      ) : (
+                        <Link href={`/plan/stake?planId=${plan.id}`}>
+                          <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold">
+                            Stake Now
+                          </Button>
+                        </Link>
+                      )
                     ) : (
                       <Link href="/signup">
                         <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold">
@@ -567,11 +574,17 @@ export function PlansClient({ plans, isLoggedIn }: PlansClientProps) {
                         </div>
 
                         <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-                          <Link href={`/plan/stake?planId=${plan.id}`}>
-                            <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold gap-2">
-                              Stake Now
-                            </Button>
-                          </Link>
+                          {plan.name === 'Starter Trial' && hasUsedStarterPlan ? (
+                            <div className="rounded-lg border border-yellow-500/25 bg-yellow-500/10 px-4 py-2 text-sm text-yellow-400">
+                              You have already used the Starter Trial. Please choose another plan.
+                            </div>
+                          ) : (
+                            <Link href={`/plan/stake?planId=${plan.id}`}>
+                              <Button variant={plan.isFeatured ? 'gradient' : 'secondary'} size="sm" className="font-semibold gap-2">
+                                Stake Now
+                              </Button>
+                            </Link>
+                          )}
                         </div>
                       </>
                     ) : (

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { COMPANY_NAME, CTA_HREF } from '../data'
+import { LogoIcon } from '@/components/shared/Logo'
 
 export function CanadaNav() {
   const [scrolled, setScrolled] = useState(false)
@@ -33,17 +34,19 @@ export function CanadaNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group" aria-label={`${COMPANY_NAME} home`}>
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#00C896] to-[#0077B6] flex items-center justify-center">
-              <span className="text-white font-bold text-sm tracking-tight">S</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2.5 group" aria-label={`${COMPANY_NAME} home`}>
+            <LogoIcon className="h-9 w-9 transition-transform duration-300 group-hover:scale-105" />
             <span
               className={cn(
-                'font-bold text-lg tracking-tight transition-colors',
+                'font-extrabold text-lg tracking-tight transition-colors leading-none',
                 scrolled ? 'text-[#0A1628]' : 'text-white'
               )}
             >
-              {COMPANY_NAME}
+              <span className={scrolled ? 'text-gray-500 font-bold' : 'text-white/70 font-bold'}>Stake</span>
+              <span className={scrolled
+                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent'
+                : 'bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent'
+              }>onix</span>
             </span>
           </Link>
 

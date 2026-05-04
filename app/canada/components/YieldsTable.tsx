@@ -1,21 +1,4 @@
-'use client'
-
-import { useState } from 'react'
-import { ChevronRight, Info } from 'lucide-react'
-import { yields, CTA_HREF } from '../data'
-import Link from 'next/link'
-
-function TokenLogo({ symbol, color }: { symbol: string; color: string }) {
-  return (
-    <div
-      className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-md"
-      style={{ backgroundColor: color }}
-      aria-hidden="true"
-    >
-      {symbol.slice(0, 1)}
-    </div>
-  )
-}
+'use client'\n\nimport { useState } from 'react'\nimport Image from 'next/image'\nimport { ChevronRight, Info } from 'lucide-react'\nimport { yields, CTA_HREF } from '../data'\nimport Link from 'next/link'\n\nconst CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'\n\nfunction TokenLogo({ symbol, name }: { symbol: string; name: string }) {\n  return (\n    <div className=\"h-9 w-9 rounded-full overflow-hidden flex-shrink-0 shadow-md bg-white/10\" aria-hidden=\"true\">\n      <Image\n        src={`${CDN}/${symbol}.svg`}\n        alt={name}\n        width={36}\n        height={36}\n        className=\"h-9 w-9\"\n        unoptimized\n      />\n    </div>\n  )\n}
 
 export function YieldsTable() {
   const [activeRow, setActiveRow] = useState<string | null>(null)
@@ -81,7 +64,7 @@ export function YieldsTable() {
                   >
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">
-                        <TokenLogo symbol={row.logoSymbol} color={row.color} />
+                        <TokenLogo symbol={row.logoSymbol} name={row.token} />
                         <span className="font-semibold text-[#0A1628]">{row.token}</span>
                       </div>
                     </td>
@@ -113,7 +96,7 @@ export function YieldsTable() {
               <div key={row.network} className="px-4 py-4 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <TokenLogo symbol={row.logoSymbol} color={row.color} />
+                    <TokenLogo symbol={row.logoSymbol} name={row.token} />
                     <div>
                       <p className="font-semibold text-[#0A1628]">{row.token}</p>
                       <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">

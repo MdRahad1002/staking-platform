@@ -7,8 +7,8 @@ export const COMPANY_LEGAL_NAME = 'ONIX INTERNATIONAL INC.'
 export const CSA_REGISTRATION_TYPE = '{{CSA_REGISTRATION_TYPE}}'
 export const CSA_DECISION_URL = '{{CSA_DECISION_URL}}'
 export const FINTRAC_MSB_NUMBER = 'BN: 820033090 · Registry ID: 1782217'
-export const AUDITOR_NAME = '{{AUDITOR_NAME}}'
-export const TOTAL_STAKED_CAD = '{{TOTAL_STAKED_CAD}}'
+export const AUDITOR_NAME = 'Internal'
+export const TOTAL_STAKED_CAD = '170+'
 export const SUPPORT_EMAIL = 'info@stakeonix.com'
 export const APP_URL = 'https://www.stakeonix.com'
 
@@ -31,41 +31,41 @@ export const yields: YieldRow[] = [
   {
     token: 'Ethereum',
     network: 'ETH',
-    apy: '4.2%',
-    apyValue: 4.2,
+    apy: '9%',
+    apyValue: 9,
     unbonding: '2–5 days',
     minStake: '0.01 ETH',
-    logoSymbol: 'ETH',
+    logoSymbol: 'eth',
     color: '#627EEA',
   },
   {
     token: 'Solana',
     network: 'SOL',
-    apy: '7.8%',
-    apyValue: 7.8,
+    apy: '12%',
+    apyValue: 12,
     unbonding: '2–3 days',
     minStake: '0.1 SOL',
-    logoSymbol: 'SOL',
+    logoSymbol: 'sol',
     color: '#9945FF',
   },
   {
     token: 'Cardano',
     network: 'ADA',
-    apy: '3.5%',
-    apyValue: 3.5,
+    apy: '8.5%',
+    apyValue: 8.5,
     unbonding: 'None',
     minStake: '1 ADA',
-    logoSymbol: 'ADA',
+    logoSymbol: 'ada',
     color: '#0033AD',
   },
   {
     token: 'Polkadot',
     network: 'DOT',
-    apy: '11.2%',
-    apyValue: 11.2,
+    apy: '16.5%',
+    apyValue: 16.5,
     unbonding: '28 days',
     minStake: '1 DOT',
-    logoSymbol: 'DOT',
+    logoSymbol: 'dot',
     color: '#E6007A',
   },
 ]
@@ -201,7 +201,7 @@ export const securityItems: SecurityItem[] = [
   {
     icon: 'Lock',
     headline: 'Cold storage majority',
-    body: '80%+ of client assets are held in regulated cold custody through institutional custodians. Hot wallets hold only the minimum needed for daily operations.',
+    body: '95% of client assets are held in regulated cold custody. Hot wallets hold only the minimum needed for daily operations, reducing attack surface significantly.',
   },
   {
     icon: 'Eye',
@@ -213,8 +213,8 @@ export const securityItems: SecurityItem[] = [
 // ── Trust bar items ───────────────────────────────────────────────────────────
 export const trustBarItems = [
   { label: 'FINTRAC Registered · BN 820033090', href: 'https://www.fintrac-canafe.gc.ca/re-en', external: true },
-  { label: `Audited by ${AUDITOR_NAME}`, href: '#security' },
-  { label: 'Proof of Reserves updated weekly', href: '#security' },
+  { label: '95% Funds in Cold Storage', href: '#security' },
+  { label: 'Full Transaction Transparency', href: '#security' },
   { label: 'Interac & Wire Deposits', href: '#how-it-works' },
-  { label: `${TOTAL_STAKED_CAD} staked by Canadians`, href: '#yields' },
+  { label: `${TOTAL_STAKED_CAD} Supported Assets`, href: '#yields' },
 ]

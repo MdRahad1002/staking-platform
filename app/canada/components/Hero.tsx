@@ -1,32 +1,33 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Coins } from 'lucide-react'
 import { CTA_HREF, yields } from '../data'
+import { LogoIcon } from '@/components/shared/Logo'
 
 const trustBadges = [
   { label: 'FINTRAC Registered', icon: ShieldCheck, href: 'https://www.fintrac-canafe.gc.ca/re-en' },
   { label: 'FINTRAC BN 820033090', icon: CheckCircle2, href: 'https://www.fintrac-canafe.gc.ca/re-en' },
-  { label: 'Proof of Reserves', icon: BarChart3, href: '#security' },
+  { label: '95% Cold Storage', icon: BarChart3, href: '#security' },
 ]
 
-// Token color map
-const tokenColors: Record<string, string> = {
-  ETH: '#627EEA',
-  SOL: '#9945FF',
-  ADA: '#0033AD',
-  DOT: '#E6007A',
-}
+const CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'
 
-// Simple SVG token logos
 function TokenLogo({ symbol, color }: { symbol: string; color: string }) {
   return (
     <div
-      className="h-8 w-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
-      style={{ backgroundColor: color }}
+      className="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
       aria-hidden="true"
     >
-      {symbol.slice(0, 1)}
+      <Image
+        src={`${CDN}/${symbol}.svg`}
+        alt={symbol.toUpperCase()}
+        width={32}
+        height={32}
+        className="h-8 w-8"
+        unoptimized
+      />
     </div>
   )
 }

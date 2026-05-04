@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { LogoIcon } from '@/components/shared/Logo'
 import {
   COMPANY_NAME,
   COMPANY_LEGAL_NAME,
@@ -62,11 +63,12 @@ export function CanadaFooter() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
           {/* Brand column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4" aria-label={`${COMPANY_NAME} home`}>
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#00C896] to-[#0077B6] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
-              <span className="font-bold text-white text-lg">{COMPANY_NAME}</span>
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4 group" aria-label={`${COMPANY_NAME} home`}>
+              <LogoIcon className="h-9 w-9 transition-transform duration-300 group-hover:scale-105" />
+              <span className="font-extrabold text-xl tracking-tight leading-none">
+                <span className="text-white/60 font-bold">Stake</span>
+                <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent font-extrabold">onix</span>
+              </span>
             </Link>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
               Canada&apos;s CSA-registered multi-chain staking platform. Built for Canadian investors

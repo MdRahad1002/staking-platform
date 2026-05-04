@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     images: [ogImage],
   },
   robots: { index: true, follow: true },
+  other: {
+    'geo.region': 'CA',
+    'geo.country': 'CA',
+    'geo.placename': 'Canada',
+  },
 }
 
 export default function CanadaLayout({ children }: { children: React.ReactNode }) {

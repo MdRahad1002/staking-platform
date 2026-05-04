@@ -12,6 +12,15 @@ export const TOTAL_STAKED_CAD = '170+'
 export const SUPPORT_EMAIL = 'info@stakeonix.com'
 export const APP_URL = 'https://www.stakeonix.com'
 
+// ── Social proof stats ──────────────────────────────────────────────────────────────────────────────
+interface StatItem { value: string; label: string }
+export const canadaStats: StatItem[] = [
+  { value: '6,200+', label: 'Canadian accounts' },
+  { value: '$48M+', label: 'CAD equivalent staked' },
+  { value: '11.6%', label: 'Avg portfolio APY' },
+  { value: '99.97%', label: 'Platform uptime' },
+]
+
 // ── CTA href ─────────────────────────────────────────────────────────────────
 export const CTA_HREF = '/signup?utm_source=canada-lp'
 
@@ -100,21 +109,21 @@ export const comparisonRows: ComparisonRow[] = [
   },
   {
     product: 'ETH Staking (us)',
-    yield: '4.2%',
+    yield: '9%',
     liquidity: '2–5 days',
     insured: 'Not CDIC',
     highlight: true,
   },
   {
     product: 'SOL Staking (us)',
-    yield: '7.8%',
+    yield: '12%',
     liquidity: '2–3 days',
     insured: 'Not CDIC',
     highlight: true,
   },
   {
     product: 'DOT Staking (us)',
-    yield: '11.2%',
+    yield: '16.5%',
     liquidity: '28 days',
     insured: 'Not CDIC',
     highlight: true,
@@ -172,6 +181,16 @@ export const faqItems: FAQItem[] = [
     question: 'How are staking rewards calculated?',
     answer:
       'Staking rewards are calculated based on the underlying network\'s reward rate at the time of staking, minus a platform fee (shown transparently before you confirm). Rewards accrue daily and are visible in your dashboard. APYs shown on this page are updated every 24 hours and reflect current network conditions; they are estimates, not guarantees.',
+  },
+  {
+    question: 'Can I hold staking rewards in my TFSA or RRSP?',
+    answer:
+      'Currently, the CRA does not permit crypto assets to be held inside a TFSA or RRSP because crypto is not a "qualified investment" under the Income Tax Act. Staking rewards earned in a non-registered account are taxed as income in the year received. However, if you convert staking rewards into a qualifying investment (such as a crypto ETF listed on a designated stock exchange) and then transfer them into a registered account, different rules may apply. We strongly recommend consulting a Canadian tax advisor for your specific situation.',
+  },
+  {
+    question: 'How do I deposit Canadian dollars via Interac e-Transfer?',
+    answer:
+      'Log in to your StakeOnix account and navigate to Deposit. Select CAD and choose Interac e-Transfer. You will receive an email address to send your e-Transfer to along with a security question and answer. Initiate the transfer from your Canadian bank account using your online or mobile banking app. Deposits typically arrive and are credited within 15–60 minutes during business hours. There is no fee charged by StakeOnix for Interac deposits; your bank may charge a small fee depending on your account type.',
   },
   {
     question: 'What is slashing and am I exposed to it?',

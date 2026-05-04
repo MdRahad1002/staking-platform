@@ -3,7 +3,6 @@ import { LogoIcon } from '@/components/shared/Logo'
 import {
   COMPANY_NAME,
   COMPANY_LEGAL_NAME,
-  CSA_DECISION_URL,
   FINTRAC_MSB_NUMBER,
   SUPPORT_EMAIL,
   APP_URL,
@@ -23,7 +22,7 @@ const footerColumns = [
     heading: 'Canadian Users',
     links: [
       { label: 'CRA Tax Guide', href: '/blog/cra-staking-tax-guide' },
-      { label: 'CSA Registration', href: CSA_DECISION_URL, external: true },
+      { label: 'FINTRAC Registration', href: 'https://www.fintrac-canafe.gc.ca/re-en', external: true },
       { label: 'Risk Disclosure', href: '/risk-disclosure' },
       { label: 'Proof of Reserves', href: '/proof-of-reserves' },
     ],

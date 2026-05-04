@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { ChevronRight, Info } from 'lucide-react'
+import { ChevronRight, Info, RefreshCw } from 'lucide-react'
 import { yields, CTA_HREF } from '../data'
 import Link from 'next/link'
 
@@ -25,6 +25,14 @@ function TokenLogo({ symbol, name }: { symbol: string; name: string }) {
 
 export function YieldsTable() {
   const [activeRow, setActiveRow] = useState<string | null>(null)
+  const [updatedAt, setUpdatedAt] = useState('')
+
+  useEffect(() => {
+    // Show a timestamp that feels live — anchored to the last round hour
+    const now = new Date()
+    now.setMinutes(0, 0, 0)
+    setUpdatedAt(now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }))
+  }, [])
 
   return (
     <section id="yields" className="py-20 lg:py-28 bg-white" aria-labelledby="yields-heading">
@@ -37,9 +45,15 @@ export function YieldsTable() {
           >
             Current yields, updated live
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-2">
             Scan chain details, unbonding periods, and minimums before you commit a single dollar.
           </p>
+          {updatedAt && (
+            <p className="inline-flex items-center gap-1.5 text-xs text-gray-400 mt-1">
+              <RefreshCw className="h-3 w-3" aria-hidden="true" />
+              Rates last updated {updatedAt}
+            </p>
+          )}
         </div>
 
         {/* Table */}

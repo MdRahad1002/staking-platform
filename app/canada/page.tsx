@@ -10,6 +10,8 @@ import { FinalCTA } from './components/FinalCTA'
 import { CanadaFooter } from './components/Footer'
 import { CanadaNav } from './components/CanadaNav'
 import { StickyMobileCTA } from './components/StickyMobileCTA'
+import { CanadaStats } from './components/CanadaStats'
+import { CADCalculator } from './components/CADCalculator'
 import {
   COMPANY_NAME,
   APP_URL,
@@ -103,7 +105,9 @@ export default function CanadaPage() {
         <main id="main-content">
           <Hero />
           <TrustBar />
+          <CanadaStats />
           <YieldsTable />
+          <CADCalculator />
           <TaxAdvantage />
           <ComparisonTable />
           <HowItWorks />

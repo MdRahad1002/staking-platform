@@ -37,10 +37,10 @@ function StatCard({ value, label, active }: { value: string; label: string; acti
   const display = useCountUp(value, 1600, active)
   return (
     <div className="flex flex-col items-center text-center px-6 py-4">
-      <span className="text-3xl sm:text-4xl font-extrabold text-[#0A1628] tabular-nums tracking-tight">
+      <span className="text-3xl sm:text-4xl font-extrabold text-white tabular-nums tracking-tight">
         {active ? display : '0'}
       </span>
-      <span className="mt-1 text-sm text-gray-500 font-medium">{label}</span>
+      <span className="mt-1 text-sm text-white/60 font-medium">{label}</span>
     </div>
   )
 }

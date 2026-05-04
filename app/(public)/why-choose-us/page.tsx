@@ -29,22 +29,12 @@ export const metadata: Metadata = {
   title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
   description:
     'StakeOnix is FCA-authorised and FINTRAC-registered. Bank-grade security, transparent operations, 170+ assets, and full regulatory compliance. See exactly what makes us different.',
-  keywords: [
-    'why choose stakeonix',
-    'best crypto staking platform',
-    'safe crypto staking',
-    'trusted staking platform',
-    'earn daily on crypto',
-    'passive income crypto platform',
-    'staking platform review',
-    'crypto staking benefits',
-  ],
   alternates: { canonical: `${APP_URL}/why-choose-us` },
   openGraph: {
     title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
     description: 'FCA-authorised, FINTRAC-registered staking platform. Bank-grade security, transparent operations, 170+ supported assets. See exactly what makes us different.',
     url: `${APP_URL}/why-choose-us`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630 }],
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'Why Choose StakeOnix — FCA-authorised crypto staking platform' }],
   },
 }
 
@@ -137,9 +127,37 @@ const testimonials = [
   },
 ]
 
+const whyChooseBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+    { '@type': 'ListItem', position: 2, name: 'Why Choose StakeOnix?', item: `${APP_URL}/why-choose-us` },
+  ],
+}
+
+const whyChooseWebPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Why Choose StakeOnix?',
+  description: 'StakeOnix is FCA-authorised and FINTRAC-registered. Bank-grade security, transparent operations, 170+ assets, and full regulatory compliance.',
+  url: `${APP_URL}/why-choose-us`,
+  isPartOf: { '@type': 'WebSite', name: 'StakeOnix', url: APP_URL },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+      { '@type': 'ListItem', position: 2, name: 'Why Choose StakeOnix?', item: `${APP_URL}/why-choose-us` },
+    ],
+  },
+}
+
 export default function WhyChooseUsPage() {
   return (
-    <main className="min-h-screen">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(whyChooseWebPageSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(whyChooseBreadcrumbSchema) }} />
+      <main className="min-h-screen">
       {/* HERO */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-background to-blue-950/25" />
@@ -338,5 +356,6 @@ export default function WhyChooseUsPage() {
         </div>
       </section>
     </main>
+    </>
   )
 }

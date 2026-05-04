@@ -7,16 +7,6 @@ export const metadata: Metadata = {
   title: 'Contact StakeOnix - Get Help & Support | StakeOnix',
   description:
     'Reach the StakeOnix team by email, phone, or contact form. Support available for deposits, withdrawals, staking plans, and account questions. Canada and UK offices.',
-  keywords: [
-    'contact StakeOnix',
-    'StakeOnix support',
-    'crypto staking help',
-    'StakeOnix customer service',
-    'staking platform support',
-    'contact crypto investment platform',
-    'StakeOnix email',
-    'StakeOnix phone number',
-  ],
   alternates: { canonical: `${APP_URL}/contact` },
   openGraph: {
     title: 'Contact StakeOnix - We Are Here to Help',

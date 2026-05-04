@@ -27,30 +27,50 @@ export const metadata: Metadata = {
   title: 'What Is Crypto Mining? Plain English Explanation | StakeOnix',
   description:
     'What is crypto mining? Learn how it works with simple real-life comparisons, see inside massive mining farms, and discover why staking is the smarter, cheaper alternative for everyday investors.',
-  keywords: [
-    'what is crypto mining',
-    'how does bitcoin mining work',
-    'crypto mining explained simply',
-    'bitcoin mining farm',
-    'crypto mining vs staking',
-    'is crypto mining profitable',
-    'proof of work explained',
-    'mining vs staking difference',
-    'crypto passive income 2026',
-    'staking better than mining',
-  ],
   alternates: { canonical: `${APP_URL}/what-is-mining` },
   openGraph: {
     title: 'What Is Crypto Mining? Plain English Guide + Mining vs Staking',
     description:
       'Understand crypto mining in simple terms, see real mining farms, and learn whether mining or staking is better for you in 2026.',
     url: `${APP_URL}/what-is-mining`,
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Mining? Plain English Guide — StakeOnix' }],
   },
+}
+
+const miningBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+    { '@type': 'ListItem', position: 2, name: 'What Is Crypto Mining?', item: `${APP_URL}/what-is-mining` },
+  ],
+}
+
+const miningArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is Crypto Mining? Plain English Explanation',
+  description: 'Learn how crypto mining works with real-life comparisons, see inside massive mining farms, and discover why staking is the smarter alternative for everyday investors.',
+  url: `${APP_URL}/what-is-mining`,
+  image: `${APP_URL}/opengraph-image`,
+  datePublished: '2024-01-01',
+  dateModified: '2026-05-01',
+  author: { '@type': 'Organization', name: 'StakeOnix', url: APP_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'StakeOnix',
+    url: APP_URL,
+    logo: { '@type': 'ImageObject', url: `${APP_URL}/apple-icon`, width: 180, height: 180 },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${APP_URL}/what-is-mining` },
 }
 
 export default function WhatIsMiningPage() {
   return (
-    <main className="min-h-screen">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miningArticleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(miningBreadcrumbSchema) }} />
+      <main className="min-h-screen">
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
@@ -647,5 +667,6 @@ export default function WhatIsMiningPage() {
       </section>
 
     </main>
+    </>
   )
 }

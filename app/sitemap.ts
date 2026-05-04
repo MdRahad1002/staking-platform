@@ -54,5 +54,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.85,
     },
+    {
+      url: `${APP_URL}/what-is-mining`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.80,
+    },
+    {
+      url: `${APP_URL}/policy`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.30,
+    },
+    {
+      url: `${APP_URL}/cookies`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.20,
+    },
+    {
+      url: `${APP_URL}/terms`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.20,
+    },
   ]
 }

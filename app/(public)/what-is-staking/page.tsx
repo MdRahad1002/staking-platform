@@ -32,34 +32,50 @@ export const metadata: Metadata = {
   title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
   description:
     'Learn how crypto staking works in plain English. Understand proof-of-stake networks, how rewards are generated, the risks involved, and how StakeOnix makes staking accessible on 170+ assets.',
-  keywords: [
-    'what is crypto staking',
-    'why stake crypto',
-    'crypto staking vs savings account',
-    'crypto staking vs stocks',
-    'earn daily from crypto',
-    'how does staking work',
-    'passive income crypto 2026',
-    'is crypto staking worth it',
-    'crypto staking for beginners',
-    'earn from bitcoin without trading',
-    'daily crypto payouts explained',
-    'inflation proof investment',
-    'staking vs bank interest',
-    'how to make money with crypto 2026',
-  ],
   alternates: { canonical: `${APP_URL}/what-is-staking` },
   openGraph: {
     title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
     description:
       'Understand how proof-of-stake networks work, how staking rewards are generated, and the risks to know before you start. Plain English, no jargon.',
     url: `${APP_URL}/what-is-staking`,
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Staking? A plain English explanation — StakeOnix' }],
   },
+}
+
+const stakingBreadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
+    { '@type': 'ListItem', position: 2, name: 'What Is Crypto Staking?', item: `${APP_URL}/what-is-staking` },
+  ],
+}
+
+const stakingArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is Crypto Staking? A Plain English Explanation',
+  description: 'Learn how crypto staking works, how rewards are generated, the risks involved, and how StakeOnix makes staking accessible on 170+ digital assets.',
+  url: `${APP_URL}/what-is-staking`,
+  image: `${APP_URL}/opengraph-image`,
+  datePublished: '2024-01-01',
+  dateModified: '2026-05-01',
+  author: { '@type': 'Organization', name: 'StakeOnix', url: APP_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'StakeOnix',
+    url: APP_URL,
+    logo: { '@type': 'ImageObject', url: `${APP_URL}/apple-icon`, width: 180, height: 180 },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${APP_URL}/what-is-staking` },
 }
 
 export default function WhatIsStakingPage() {
   return (
-    <main className="min-h-screen">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stakingArticleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(stakingBreadcrumbSchema) }} />
+      <main className="min-h-screen">
 
       {/* ── HERO: The Problem ─────────────────────────────────────────────────── */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
@@ -588,5 +604,6 @@ export default function WhatIsStakingPage() {
       </section>
 
     </main>
+    </>
   )
 }

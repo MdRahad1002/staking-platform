@@ -4,7 +4,6 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | StakeOnix',
   description: 'Read the StakeOnix Privacy Policy to understand how we collect, use, and protect your personal information on our crypto staking platform.',
   alternates: { canonical: 'https://www.stakeonix.com/policy' },
-  robots: { index: false, follow: false },
 }
 
 export default function PolicyPage() {

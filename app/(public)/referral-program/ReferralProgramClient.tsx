@@ -1,43 +1,24 @@
-﻿import { Metadata } from 'next'
-import ReferralProgramClient from './ReferralProgramClient'
+'use client'
 
-const APP_URL = 'https://www.stakeonix.com'
-
-export const metadata: Metadata = {
-  title: 'Earn Up to 8% Commission by Referring Friends | StakeOnix Referral Program',
-  description:
-    'Invite friends to StakeOnix and earn 5–8% commission on everything they earn, plus 2% on their referrals. Daily automatic payouts, no cap. Your friends get a $10 welcome bonus.',
-  alternates: { canonical: `${APP_URL}/referral-program` },
-  openGraph: {
-    title: 'Earn Up to 8% Commission Referring Friends | StakeOnix',
-    description:
-      'Share one link. Earn 5–8% L1 commission + 2% L2 commission on everything your referrals earn. Paid daily, no cap. Friends get a $10 welcome bonus.',
-    url: `${APP_URL}/referral-program`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Referral Program' }],
-  },
-}
-
-const referralBreadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: APP_URL },
-    { '@type': 'ListItem', position: 2, name: 'Referral Program', item: `${APP_URL}/referral-program` },
-  ],
-}
-
-export default function ReferralProgramPage() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(referralBreadcrumbSchema) }}
-      />
-      <ReferralProgramClient />
-    </>
-  )
-}
-
+import Link from 'next/link'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import {
+  Users,
+  DollarSign,
+  TrendingUp,
+  Gift,
+  Share2,
+  CheckCircle2,
+  ArrowRight,
+  Rocket,
+  Star,
+  Crown,
+  Zap,
+  Trophy,
+  ChevronRight,
+  Wallet,
+} from 'lucide-react'
 
 const TIERS = [
   {
@@ -124,12 +105,10 @@ const steps = [
 function EarningsCalc() {
   const [friends, setFriends] = useState(5)
   const [avgStake, setAvgStake] = useState(1000)
-  // Tier commission is determined by number of direct referrals
   const l1Rate = friends < 5 ? 0.05 : friends < 10 ? 0.06 : friends < 25 ? 0.07 : 0.08
   const l2Rate = 0.02
-  // L2 network estimate: assume each L1 referral brings 1 more person on average
   const l2Friends = Math.round(friends * 0.6)
-  const AVG_DAILY = 0.022 // ~2.2% avg daily yield across StakeOnix plans
+  const AVG_DAILY = 0.022
   const dailyL1 = avgStake * AVG_DAILY * l1Rate
   const dailyL2 = avgStake * AVG_DAILY * l2Rate
   const monthlyL1 = dailyL1 * friends * 30
@@ -202,7 +181,7 @@ function EarningsCalc() {
   )
 }
 
-export default function ReferralProgramPage() {
+export default function ReferralProgramClient() {
   return (
     <main className="min-h-screen">
       {/* HERO */}

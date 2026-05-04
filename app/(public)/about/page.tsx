@@ -7,19 +7,10 @@ export const metadata: Metadata = {
   title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
   description:
     'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform operated by ONIX HOLDINGS LIMITED. Learn about our mission, regulatory credentials, and how we make professional crypto staking accessible.',
-  keywords: [
-    'about StakeOnix',
-    'who is behind StakeOnix',
-    'is StakeOnix a real company',
-    'trusted crypto earning platform',
-    'legit way to make money with crypto',
-    'earn money crypto company',
-    'reliable crypto investment platform',
-  ],
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
     title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
-    description: 'FCA-authorised, FINTRAC-registered crypto staking platform. Learn about our mission, regulatory credentials, security standards, and the team behind the platform.',
+    description: 'FCA-authorised, FINTRAC-registered crypto staking platform. Learn about our mission, regulatory credentials, and security standards.',
     url: `${APP_URL}/about`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'About StakeOnix' }],
   },
@@ -48,7 +39,7 @@ const organizationSchema = {
     },
     {
       '@type': 'PostalAddress',
-      streetAddress: 'Ashley Road',
+      streetAddress: '1 Ashley Road',
       addressLocality: 'Altrincham',
       addressRegion: 'Cheshire',
       postalCode: 'WA14 2DT',
@@ -73,7 +64,7 @@ const organizationSchema = {
     },
   ],
   sameAs: [
-    'https://twitter.com/StakeOnix',
+    'https://x.com/StakeOnix',
     'https://t.me/StakeOnix',
   ],
 }
@@ -86,13 +77,6 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 2, name: 'About', item: `${APP_URL}/about` },
   ],
 }
-
-const team = [
-  { name: 'Alex Johnson', role: 'CEO & Founder', avatar: '👤' },
-  { name: 'Sarah Williams', role: 'CTO', avatar: '👤' },
-  { name: 'Michael Chen', role: 'Head of Security', avatar: '👤' },
-  { name: 'Emma Davis', role: 'Head of Finance', avatar: '👤' },
-]
 
 const values = [
   {

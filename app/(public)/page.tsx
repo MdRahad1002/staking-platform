@@ -9,22 +9,6 @@ export const metadata: Metadata = {
   title: 'StakeOnix | Professional Crypto Staking Platform',
   description:
     'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ assets with institutional-grade security and transparent daily rewards.',
-  keywords: [
-    'crypto staking platform',
-    'bitcoin staking rewards',
-    'ethereum staking',
-    'USDT staking',
-    'regulated crypto staking',
-    'institutional crypto staking',
-    'FCA authorised crypto platform',
-    'FINTRAC registered crypto',
-    'staking rewards platform',
-    'cryptocurrency yield platform',
-    'best staking platform 2026',
-    'crypto interest account',
-    'earn rewards on cryptocurrency',
-    'secure crypto staking',
-  ],
   alternates: { canonical: APP_URL },
   openGraph: {
     title: 'StakeOnix | Professional Crypto Staking Platform',

@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     'Read the StakeOnix Cookie Policy to understand how we use cookies and similar tracking technologies to operate and improve our crypto staking platform.',
   alternates: { canonical: 'https://www.stakeonix.com/cookies' },
-  robots: { index: false, follow: false },
 }
 
 const sections = [

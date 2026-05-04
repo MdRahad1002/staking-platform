@@ -13,6 +13,12 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ['finance', 'business'],
     icons: [
       {
+        src: '/favicon.svg',
+        sizes: 'any',
+        type: 'image/svg+xml',
+        purpose: 'any',
+      },
+      {
         src: '/icon',
         sizes: '96x96',
         type: 'image/png',
@@ -22,13 +28,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/apple-icon',
         sizes: '180x180',
         type: 'image/png',
-        purpose: 'any',
-      },
-      {
-        src: '/icon',
-        sizes: '192x192',
-        type: 'image/png',
-        purpose: 'maskable',
+        purpose: 'any maskable',
       },
     ],
   }

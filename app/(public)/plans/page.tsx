@@ -10,28 +10,13 @@ const APP_URL = 'https://www.stakeonix.com'
 export const metadata: Metadata = {
   title: 'Crypto Yield Plans Start With $200, Earn Daily | StakeOnix',
   description:
-    'Join StakeOnix and start earning daily crypto returns from just $200. 9 yield plans from Starter Trial to Sovereign institutional tier. Up to 4.5% daily see real payouts in your account within 24 hours.',
-  keywords: [
-    'crypto yield plans 2026',
-    'earn daily returns on crypto',
-    'best crypto investment plan',
-    'daily crypto payouts',
-    'high yield staking platform',
-    'bitcoin daily earnings',
-    'ethereum yield plan',
-    'USDT daily interest',
-    'start crypto investing 200 dollars',
-    'passive income crypto',
-    'best staking platform 2026',
-    'stakeonix plans',
-    'crypto income daily',
-    'short term crypto investment',
-  ],
+    'Join StakeOnix and start earning daily crypto returns from just $200. Nine yield plans ranging from the 7-day Starter Trial to the 90-day Sovereign institutional tier. Staking rewards are variable and not guaranteed.',
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {
-    title: 'StakeOnix Yield Plans Earn Up to 4.5% Daily | StakeOnix',
+    title: 'StakeOnix Staking Plans | Up to 4.5% Daily | StakeOnix',
     description: 'Start with just $200. 9 plans designed to grow with you from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
     url: `${APP_URL}/plans`,
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Staking Plans — Variable yield from $200' }],
   },
 }
 

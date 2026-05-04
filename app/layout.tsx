@@ -12,39 +12,11 @@ const APP_URL = 'https://www.stakeonix.com'
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: 'StakeOnix - #1 Crypto Staking Platform | Earn Daily Passive Income',
+    default: 'StakeOnix – Professional Crypto Staking Platform | Earn Daily Passive Income',
     template: '%s | StakeOnix',
   },
   description:
-    'Want to earn money from your crypto without trading? StakeOnix pays you daily rewards on Bitcoin, Ethereum, USDT & more - like a high-yield savings account for crypto. Start earning from just $200. Trusted by 10,000+ investors worldwide.',
-  keywords: [
-    'how to make money with crypto',
-    'earn money online 2026',
-    'passive income ideas for beginners',
-    'how to earn money while you sleep',
-    'earn interest on bitcoin',
-    'how to make money from home',
-    'crypto savings account',
-    'earn daily income online',
-    'how to make $100 a day crypto',
-    'make money with ethereum',
-    'best way to earn with cryptocurrency',
-    'how to grow money with crypto',
-    'earn money without trading crypto',
-    'daily income from crypto',
-    'how to invest small amounts in crypto',
-    'money making investments 2026',
-    'earn rewards on crypto automatically',
-    'how to double money with crypto',
-    'crypto staking platform',
-    'bitcoin staking',
-    'ethereum staking',
-    'USDT staking',
-    'best staking platform 2026',
-    'high yield crypto staking',
-    'earn passive income crypto',
-    'StakeOnix',
-  ],
+    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ digital assets with institutional-grade security. Staking rewards are variable and not guaranteed.',
   authors: [{ name: 'StakeOnix', url: APP_URL }],
   creator: 'StakeOnix',
   publisher: 'StakeOnix',
@@ -54,9 +26,9 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: APP_URL,
-    title: 'StakeOnix - Earn Daily Income on Your Crypto | Like a Savings Account',
+    title: 'StakeOnix – Professional Crypto Staking Platform | Earn Daily Passive Income',
     description:
-      'Put your crypto to work and get paid every single day. Bitcoin, Ethereum, USDT & 10+ coins. No trading needed. Start earning from just $200. Join 10,000+ people already making daily income.',
+      'FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ digital assets with institutional-grade security and full regulatory compliance. Staking rewards are variable.',
     siteName: 'StakeOnix',
     images: [
       {
@@ -69,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'StakeOnix - Make Money With Crypto Daily (No Trading Required)',
+    title: 'StakeOnix – FCA-Authorised Crypto Staking Platform',
     description:
-      'Earn daily income on your Bitcoin, Ethereum & USDT automatically. No trading, no experience needed. Start with $200. People are making real money every day - join them on StakeOnix.',
+      'Stake Bitcoin, Ethereum, USDT and 170+ digital assets on a regulated platform. FCA authorised in the UK. FINTRAC registered in Canada. Staking rewards are variable and not guaranteed.',
     images: [`${APP_URL}/opengraph-image`],
     creator: '@StakeOnix',
     site: '@StakeOnix',
@@ -92,10 +64,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/icon', sizes: '96x96', type: 'image/png' },
     ],
-    shortcut: '/icon',
-    apple: '/apple-icon',
+    shortcut: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
     // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN',
@@ -148,12 +121,46 @@ const organizationSchema = {
     },
     {
       '@type': 'PostalAddress',
-      streetAddress: 'Ashley Road',
+      streetAddress: '1 Ashley Road',
       addressLocality: 'Altrincham',
       addressRegion: 'Cheshire',
       postalCode: 'WA14 2DT',
       addressCountry: 'GB',
     },
+  ],
+  legalName: 'ONIX HOLDINGS LIMITED',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Regulatory Authorisation',
+      name: 'FCA Authorisation',
+      description: 'Authorised by the Financial Conduct Authority (FCA) of the United Kingdom. Reference number: 820033.',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Financial Conduct Authority',
+        url: 'https://www.fca.org.uk',
+      },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Regulatory Registration',
+      name: 'FINTRAC Registration',
+      description: 'Registered with the Financial Transactions and Reports Analysis Centre of Canada (FINTRAC). Business Number: 820033090.',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'FINTRAC',
+        url: 'https://www.fintrac-canafe.gc.ca',
+      },
+    },
+  ],
+  knowsAbout: [
+    'Cryptocurrency Staking',
+    'Bitcoin',
+    'Ethereum',
+    'Digital Asset Management',
+    'Proof-of-Stake',
+    'Passive Income',
+    'Blockchain Technology',
   ],
   sameAs: [
     'https://x.com/StakeOnix',
@@ -173,14 +180,6 @@ const websiteSchema = {
   name: 'StakeOnix',
   url: APP_URL,
   description: 'Professional crypto staking platform. Earn daily passive income on 10+ cryptocurrencies.',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${APP_URL}/plans?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
 }
 
 export default function RootLayout({

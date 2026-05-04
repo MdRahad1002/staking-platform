@@ -4,7 +4,6 @@ export const metadata: Metadata = {
   title: 'Terms of Service | StakeOnix',
   description: 'Read the StakeOnix Terms of Service governing your use of the crypto staking platform, including rules, responsibilities, and disclaimers.',
   alternates: { canonical: 'https://www.stakeonix.com/terms' },
-  robots: { index: false, follow: false },
 }
 
 export default function TermsPage() {

@@ -6,6 +6,7 @@ const PUBLIC_EXACT = new Set([
   '/',
   '/about',
   '/what-is-staking',
+  '/what-is-mining',
   '/why-choose-us',
   '/policy',
   '/terms',
@@ -15,6 +16,7 @@ const PUBLIC_EXACT = new Set([
   '/contact',
   '/plans',
   '/referral-program',
+  '/canada',
   '/login',
   '/signup',
   '/auth-re-password',
@@ -44,10 +46,13 @@ function isPublicPath(pathname: string): boolean {
   if (pathname.startsWith('/verify-email')) return true
   if (pathname.startsWith('/referral-program')) return true
   if (pathname.startsWith('/why-choose-us')) return true
+  if (pathname.startsWith('/what-is-staking')) return true
+  if (pathname.startsWith('/what-is-mining')) return true
   if (pathname.startsWith('/plans')) return true
   if (pathname.startsWith('/faq')) return true
   if (pathname.startsWith('/contact')) return true
   if (pathname.startsWith('/about')) return true
+  if (pathname.startsWith('/canada')) return true
   return false
 }
 

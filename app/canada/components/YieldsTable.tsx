@@ -1,4 +1,27 @@
-'use client'\n\nimport { useState } from 'react'\nimport Image from 'next/image'\nimport { ChevronRight, Info } from 'lucide-react'\nimport { yields, CTA_HREF } from '../data'\nimport Link from 'next/link'\n\nconst CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'\n\nfunction TokenLogo({ symbol, name }: { symbol: string; name: string }) {\n  return (\n    <div className=\"h-9 w-9 rounded-full overflow-hidden flex-shrink-0 shadow-md bg-white/10\" aria-hidden=\"true\">\n      <Image\n        src={`${CDN}/${symbol}.svg`}\n        alt={name}\n        width={36}\n        height={36}\n        className=\"h-9 w-9\"\n        unoptimized\n      />\n    </div>\n  )\n}
+'use client'
+
+import { useState } from 'react'
+import Image from 'next/image'
+import { ChevronRight, Info } from 'lucide-react'
+import { yields, CTA_HREF } from '../data'
+import Link from 'next/link'
+
+const CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'
+
+function TokenLogo({ symbol, name }: { symbol: string; name: string }) {
+  return (
+    <div className=\"h-9 w-9 rounded-full overflow-hidden flex-shrink-0 shadow-md bg-white/10\" aria-hidden=\"true\">
+      <Image
+        src={`${CDN}/${symbol}.svg`}
+        alt={name}
+        width={36}
+        height={36}
+        className=\"h-9 w-9\"
+        unoptimized
+      />
+    </div>
+  )
+}
 
 export function YieldsTable() {
   const [activeRow, setActiveRow] = useState<string | null>(null)

@@ -1,15 +1,9 @@
-import { CheckCircle2, XCircle, ExternalLink } from 'lucide-react'
+import { CheckCircle2, ExternalLink } from 'lucide-react'
 
 const ourPlatformItems = [
   'No disposition on deposit',
   'No disposition on staking',
   'Only rewards taxed as income',
-]
-
-const unregisteredItems = [
-  'Deposits may trigger disposition',
-  'Staking may trigger disposition',
-  'Tax treatment unclear',
 ]
 
 export function TaxAdvantage() {
@@ -61,7 +55,7 @@ export function TaxAdvantage() {
           </div>
 
           {/* Right: comparison cards */}
-          <div className="grid sm:grid-cols-2 gap-4" aria-label="Tax treatment comparison">
+          <div aria-label="Tax treatment">
             {/* Our platform */}
             <div className="rounded-2xl border border-[#00C896]/30 bg-[#00C896]/5 p-6">
               <div className="flex items-center gap-2 mb-5">
@@ -75,24 +69,6 @@ export function TaxAdvantage() {
                   <li key={item} className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-[#00C896] flex-shrink-0 mt-0.5" aria-hidden="true" />
                     <span className="text-white/80 text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Unregistered platforms */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="h-8 w-8 rounded-full bg-gray-500/20 flex items-center justify-center">
-                  <XCircle className="h-4 w-4 text-gray-400" aria-hidden="true" />
-                </div>
-                <h3 className="font-bold text-white/60 text-sm">On unregistered platforms</h3>
-              </div>
-              <ul className="space-y-3" role="list">
-                {unregisteredItems.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <XCircle className="h-4 w-4 text-gray-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-white/40 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>

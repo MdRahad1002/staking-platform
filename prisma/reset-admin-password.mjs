@@ -1,5 +1,5 @@
 /**
- * Reset admin password — run once then delete.
+ * Reset admin password. Run once then delete.
  * Usage:  node prisma/reset-admin-password.mjs
  *
  * Set NEW_PASSWORD below before running.

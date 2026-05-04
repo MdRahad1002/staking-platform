@@ -7,7 +7,7 @@ const steps = [
     number: '01',
     icon: UserCheck,
     headline: 'Sign up & verify',
-    body: 'Quick KYC, takes about 5 minutes. Canadian ID accepted. Government-issued photo ID and a selfie — that\'s it.',
+    body: 'Quick KYC, takes about 5 minutes. Canadian ID accepted. Government-issued photo ID and a selfie. That\'s it.',
   },
   {
     number: '02',

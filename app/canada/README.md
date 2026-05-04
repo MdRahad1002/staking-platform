@@ -1,4 +1,4 @@
-# /canada — Canadian Staking Landing Page
+# /canada: Canadian Staking Landing Page
 
 High-converting landing page targeting Canadian crypto stakers. Lives at `/canada` and serves as the destination for all Canadian marketing traffic (SEO, KOL links, Reddit, referrals).
 
@@ -15,7 +15,7 @@ Open `app/canada/data.ts` and replace the following constants:
 | `FINTRAC_MSB_NUMBER` | Your FINTRAC MSB registration number | fintrac-canafe.gc.ca |
 | `AUDITOR_NAME` | Name of your proof-of-reserves auditor | Internal |
 | `TOTAL_STAKED_CAD` | Dollar figure staked by Canadian users (e.g., "$12M+") | Dashboard / analytics |
-| `SUPPORT_EMAIL` | Already set to `info@stakeonix.com` — update if different | — |
+| `SUPPORT_EMAIL` | Already set to `info@stakeonix.com`. Update if different | n/a |
 
 ---
 
@@ -42,7 +42,7 @@ Update `apy` and `apyValue` as network conditions change. Consider connecting th
 
 ## How to update FAQ answers
 
-FAQ content is in `app/canada/data.ts` under `faqItems`. Each item is `{ question, answer }`. Add, remove, or reorder freely — the accordion in `FAQ.tsx` renders them dynamically.
+FAQ content is in `app/canada/data.ts` under `faqItems`. Each item is `{ question, answer }`. Add, remove, or reorder freely. The accordion in `FAQ.tsx` renders them dynamically.
 
 ---
 
@@ -72,7 +72,7 @@ function useCTAHref(base: string) {
 
 ## Design system
 
-- **Accent color:** `#00C896` (emerald) — used for all CTAs, active states, token APY values
+- **Accent color:** `#00C896` (emerald): used for all CTAs, active states, token APY values
 - **Primary background (dark sections):** `#0A1628` (deep navy)
 - **Light sections:** `#FFFFFF` and `#F9FAFB`
 - **Footer background:** `#060E1C`

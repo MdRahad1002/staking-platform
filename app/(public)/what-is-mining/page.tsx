@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       'Understand crypto mining in simple terms, see real mining farms, and learn whether mining or staking is better for you in 2026.',
     url: `${APP_URL}/what-is-mining`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Mining? Plain English Guide — StakeOnix' }],
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Mining? Plain English Guide | StakeOnix' }],
   },
 }
 

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       'Understand how proof-of-stake networks work, how staking rewards are generated, and the risks to know before you start. Plain English, no jargon.',
     url: `${APP_URL}/what-is-staking`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Staking? A plain English explanation — StakeOnix' }],
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Staking? A plain English explanation | StakeOnix' }],
   },
 }
 

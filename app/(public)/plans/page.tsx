@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: 'StakeOnix Staking Plans | Up to 4.5% Daily | StakeOnix',
     description: 'Start with just $200. 9 plans designed to grow with you from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
     url: `${APP_URL}/plans`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Staking Plans — Variable yield from $200' }],
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Staking Plans: Variable yield from $200' }],
   },
 }
 

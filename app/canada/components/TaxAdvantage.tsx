@@ -33,7 +33,7 @@ export function TaxAdvantage() {
 
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Left — body copy */}
+          {/* Left: body copy */}
           <div>
             <p className="text-white/70 text-lg leading-relaxed mb-6">
               Under CRA&apos;s January 2025 guidance, depositing and staking crypto on a CSA-registered
@@ -60,7 +60,7 @@ export function TaxAdvantage() {
             </a>
           </div>
 
-          {/* Right — comparison cards */}
+          {/* Right: comparison cards */}
           <div className="grid sm:grid-cols-2 gap-4" aria-label="Tax treatment comparison">
             {/* Our platform */}
             <div className="rounded-2xl border border-[#00C896]/30 bg-[#00C896]/5 p-6">

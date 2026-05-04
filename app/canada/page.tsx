@@ -99,7 +99,7 @@ export default function CanadaPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
-      {/* Page layout — self-contained, does not use the (public) group layout */}
+      {/* Page layout: self-contained, does not use the (public) group layout */}
       <div className="min-h-screen">
         <CanadaNav />
         <main id="main-content">

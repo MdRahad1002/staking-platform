@@ -1,4 +1,4 @@
-// ─── Canada Landing Page — All Content Data ──────────────────────────────────
+// Canada Landing Page: All Content Data
 // Update yields, FAQ answers, and comparison data here without touching components.
 
 // ── Placeholders ─────────────────────────────────────────────────────────────

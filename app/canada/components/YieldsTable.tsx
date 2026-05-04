@@ -28,7 +28,7 @@ export function YieldsTable() {
   const [updatedAt, setUpdatedAt] = useState('')
 
   useEffect(() => {
-    // Show a timestamp that feels live — anchored to the last round hour
+    // Show a timestamp that feels live, anchored to the last round hour
     const now = new Date()
     now.setMinutes(0, 0, 0)
     setUpdatedAt(now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }))

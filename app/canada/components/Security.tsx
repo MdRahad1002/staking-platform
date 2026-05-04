@@ -21,7 +21,7 @@ export function Security() {
             Built like a Canadian financial institution should be
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Regulatory compliance isn&apos;t a checkbox for us — it&apos;s the foundation.
+            Regulatory compliance isn&apos;t a checkbox for us. It&apos;s the foundation.
           </p>
         </div>
 

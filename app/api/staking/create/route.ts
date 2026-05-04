@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     const plan = await prisma.stakingPlan.findUnique({ where: { id: planId, isActive: true } })
     if (!plan) return NextResponse.json({ error: 'Plan not found.' }, { status: 404 })
 
-    // Starter Trial is a one-time plan — reject if user already used it
+    // Starter Trial is a one-time plan; reject if user already used it
     if (plan.name === 'Starter Trial') {
       const alreadyUsed = await prisma.stake.findFirst({
         where: { userId: session.user.id, planId: plan.id },

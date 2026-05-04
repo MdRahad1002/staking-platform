@@ -61,7 +61,7 @@ export function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 lg:pt-36 lg:pb-28">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — copy */}
+          {/* Left: copy */}
           <div>
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 rounded-full border border-[#00C896]/30 bg-[#00C896]/10 px-4 py-1.5 mb-6">
@@ -121,7 +121,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right — live APY tickers */}
+          {/* Right: live APY tickers */}
           <div aria-label="Live staking yields">
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 lg:p-8">
               <div className="flex items-center justify-between mb-6">

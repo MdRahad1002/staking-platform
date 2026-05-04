@@ -74,10 +74,11 @@ export async function POST(req: NextRequest) {
           })
         }
 
-        // Credit user balance with all missed profits at once
+        // Credit user balance with all missed profits at once,
+        // and return principal when the stake is completed
         await tx.user.update({
           where: { id: stake.userId },
-          data: { balance: { increment: totalProfit } },
+          data: { balance: { increment: isLastPayment ? parseFloat((totalProfit + stake.amount).toFixed(2)) : totalProfit } },
         })
 
         // Transaction ledger entry
@@ -93,6 +94,20 @@ export async function POST(req: NextRequest) {
             referenceId: stake.id,
           },
         })
+
+        // Record principal return as a separate ledger entry on completion
+        if (isLastPayment) {
+          await tx.transaction.create({
+            data: {
+              userId: stake.userId,
+              type: 'STAKING_RETURN',
+              amount: stake.amount,
+              status: 'COMPLETED',
+              description: `Principal returned from ${stake.plan.name}`,
+              referenceId: stake.id,
+            },
+          })
+        }
 
         // Notify on completion only
         if (isLastPayment) {

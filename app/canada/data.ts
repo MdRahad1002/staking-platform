@@ -136,7 +136,7 @@ export const faqItems: FAQItem[] = [
   {
     question: 'Do I pay tax when I deposit or stake?',
     answer:
-      "Under CRA's January 2025 guidance, depositing crypto onto a CSA-registered platform generally does not trigger a taxable disposition. The act of staking itself also generally does not constitute a disposition. You are taxed on staking rewards as income at the time they are received. Consult a Canadian tax professional for advice specific to your situation — read our full CRA guide for more detail.",
+      "Under CRA's January 2025 guidance, depositing crypto onto a CSA-registered platform generally does not trigger a taxable disposition. The act of staking itself also generally does not constitute a disposition. You are taxed on staking rewards as income at the time they are received. Consult a Canadian tax professional for advice specific to your situation. Read our full CRA guide for more detail.",
   },
   {
     question: 'Can I deposit Canadian dollars directly?',
@@ -151,17 +151,17 @@ export const faqItems: FAQItem[] = [
   {
     question: 'Are my assets insured?',
     answer:
-      "Crypto assets held with StakeOnix are not CDIC-insured — CDIC coverage applies only to eligible Canadian dollar deposits at member institutions. However, we segregate all client crypto from company assets as required by Canadian regulators, hold 80%+ in regulated cold custody, and publish weekly proof-of-reserves attestations. We are transparent about what we can and cannot guarantee.",
+      "Crypto assets held with StakeOnix are not CDIC-insured. CDIC coverage applies only to eligible Canadian dollar deposits at member institutions. However, we segregate all client crypto from company assets as required by Canadian regulators, hold 80%+ in regulated cold custody, and publish weekly proof-of-reserves attestations. We are transparent about what we can and cannot guarantee.",
   },
   {
     question: "What's the minimum to start staking?",
     answer:
-      'Minimums vary by chain: 0.01 ETH for Ethereum, 0.1 SOL for Solana, 1 ADA for Cardano, and 1 DOT for Polkadot. There is no platform minimum — you can start with whatever amount you hold. CAD deposit minimums apply and are shown during the deposit flow.',
+      'Minimums vary by chain: 0.01 ETH for Ethereum, 0.1 SOL for Solana, 1 ADA for Cardano, and 1 DOT for Polkadot. There is no platform minimum; you can start with whatever amount you hold. CAD deposit minimums apply and are shown during the deposit flow.',
   },
   {
     question: 'How are you different from Coinbase or Wealthsimple Crypto?',
     answer:
-      'Coinbase is a US-registered exchange — it does not hold CSA registration, and its Canadian staking products operate under different regulatory conditions. Wealthsimple Crypto does not currently offer native chain staking. StakeOnix is purpose-built for Canadian stakers: CAD deposits via Interac, CSA registration, segregated client assets, and proof of reserves — all in one place.',
+      'Coinbase is a US-registered exchange; it does not hold CSA registration, and its Canadian staking products operate under different regulatory conditions. Wealthsimple Crypto does not currently offer native chain staking. StakeOnix is purpose-built for Canadian stakers: CAD deposits via Interac, CSA registration, segregated client assets, and proof of reserves, all in one place.',
   },
   {
     question: 'What chains do you support?',
@@ -171,12 +171,12 @@ export const faqItems: FAQItem[] = [
   {
     question: 'How are staking rewards calculated?',
     answer:
-      'Staking rewards are calculated based on the underlying network\'s reward rate at the time of staking, minus a platform fee (shown transparently before you confirm). Rewards accrue daily and are visible in your dashboard. APYs shown on this page are updated every 24 hours and reflect current network conditions — they are estimates, not guarantees.',
+      'Staking rewards are calculated based on the underlying network\'s reward rate at the time of staking, minus a platform fee (shown transparently before you confirm). Rewards accrue daily and are visible in your dashboard. APYs shown on this page are updated every 24 hours and reflect current network conditions; they are estimates, not guarantees.',
   },
   {
     question: 'What is slashing and am I exposed to it?',
     answer:
-      'Slashing is a penalty mechanism built into proof-of-stake networks that reduces a validator\'s stake for protocol violations (e.g., double-signing). StakeOnix uses professionally operated, institutional-grade validators with automated slashing protection. Your exposure to slashing risk is minimal — but it is not zero, and we disclose this honestly. We have never experienced a slashing event on behalf of clients.',
+      'Slashing is a penalty mechanism built into proof-of-stake networks that reduces a validator\'s stake for protocol violations (e.g., double-signing). StakeOnix uses professionally operated, institutional-grade validators with automated slashing protection. Your exposure to slashing risk is minimal, but it is not zero, and we disclose this honestly. We have never experienced a slashing event on behalf of clients.',
   },
 ]
 

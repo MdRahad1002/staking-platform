@@ -39,11 +39,11 @@ export function TaxAdvantage() {
               Under CRA&apos;s January 2025 guidance, depositing and staking crypto on a CSA-registered
               platform like ours generally does{' '}
               <strong className="text-white font-semibold">not trigger a taxable disposition</strong>.
-              You&apos;re only taxed on staking rewards as income — not on the act of staking itself.
+              You&apos;re only taxed on staking rewards as income, not on the act of staking itself.
             </p>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
               Most offshore platforms can&apos;t offer this clarity. Because they operate outside CSA
-              oversight, the CRA&apos;s guidance on registered platforms doesn&apos;t apply — leaving
+              oversight, the CRA&apos;s guidance on registered platforms doesn&apos;t apply, leaving
               Canadian users with uncertain tax exposure every time they stake.
             </p>
             <p className="text-white/70 text-base leading-relaxed mb-8">

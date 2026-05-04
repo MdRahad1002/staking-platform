@@ -15,7 +15,7 @@ export function ComparisonTable() {
             How staking compares to GICs and HISAs
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-            Canadians compare obsessively — so we built the comparison for you.
+            Canadians compare obsessively, so we built the comparison for you.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export function ComparisonTable() {
           <p className="text-sm text-amber-800">
             <strong>Honest disclaimer:</strong> Crypto staking is not CDIC-insured and carries market
             risk, network risk, and slashing risk. Yields shown are estimates and not guaranteed.
-            StakeOnix segregates client assets and publishes weekly proof of reserves — but staking is
+            StakeOnix segregates client assets and publishes weekly proof of reserves, but staking is
             not equivalent to a GIC or HISA. Only stake what you&apos;re comfortable holding long-term.
           </p>
         </div>

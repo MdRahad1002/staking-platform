@@ -3,7 +3,6 @@ import { LogoIcon } from '@/components/shared/Logo'
 import {
   COMPANY_NAME,
   COMPANY_LEGAL_NAME,
-  CSA_REGISTRATION_TYPE,
   CSA_DECISION_URL,
   FINTRAC_MSB_NUMBER,
   SUPPORT_EMAIL,
@@ -120,14 +119,6 @@ export function CanadaFooter() {
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/30">
             <span>{COMPANY_LEGAL_NAME}</span>
             <span>FINTRAC: {FINTRAC_MSB_NUMBER}</span>
-            <a
-              href={CSA_DECISION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#00C896] transition-colors underline-offset-2 hover:underline"
-            >
-              CSA Registration: {CSA_REGISTRATION_TYPE}
-            </a>
             <span>© {year} {COMPANY_NAME}. All rights reserved.</span>
           </div>
 

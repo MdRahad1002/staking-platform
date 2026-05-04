@@ -10,13 +10,13 @@ const CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/
 
 function TokenLogo({ symbol, name }: { symbol: string; name: string }) {
   return (
-    <div className=\"h-9 w-9 rounded-full overflow-hidden flex-shrink-0 shadow-md bg-white/10\" aria-hidden=\"true\">
+    <div className='h-9 w-9 rounded-full overflow-hidden flex-shrink-0 shadow-md bg-white/10' aria-hidden='true'>
       <Image
         src={`${CDN}/${symbol}.svg`}
         alt={name}
         width={36}
         height={36}
-        className=\"h-9 w-9\"
+        className='h-9 w-9'
         unoptimized
       />
     </div>

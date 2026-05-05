@@ -1,40 +1,65 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, TrendingUp, Clock, ShieldCheck } from 'lucide-react'
 import { CTA_HREF, COMPANY_NAME } from '../data'
 
 export function FinalCTA() {
   return (
-    <section className="py-20 lg:py-28 bg-[#00C896]" aria-labelledby="final-cta-heading">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-20 lg:py-28 bg-[#0A1628] relative overflow-hidden" aria-labelledby="final-cta-heading">
+      {/* Glow */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#00C896]/10 blur-[100px]" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+        {/* Eyebrow */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#00C896]/30 bg-[#00C896]/10 px-4 py-1.5 mb-6">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#00C896] animate-pulse" aria-hidden="true" />
+          <span className="text-[#00C896] text-xs font-semibold tracking-widest uppercase">Spots are limited</span>
+        </div>
+
         <h2
           id="final-cta-heading"
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-5"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4"
         >
-          Start earning on your crypto today
+          Every day you wait is a day you&apos;re not earning.
         </h2>
-        <p className="text-white/80 text-xl mb-10 max-w-xl mx-auto">
-          Join thousands of Canadians staking with a regulated platform.
+        <p className="text-white/60 text-xl mb-10 max-w-2xl mx-auto">
+          6,200+ Canadians are earning daily. Start with{' '}
+          <span className="text-[#00C896] font-bold">$200 USD</span>{' '}
+          and collect rewards every 24 hours.
         </p>
+
+        {/* Earnings proof row */}
+        <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-10">
+          {[
+            { icon: TrendingUp, label: 'Up to 16.5% APY', sub: 'on DOT staking' },
+            { icon: Clock, label: 'Daily payouts', sub: 'every 24 hours' },
+            { icon: ShieldCheck, label: 'FINTRAC registered', sub: 'Canada regulated' },
+          ].map(({ icon: Icon, label, sub }) => (
+            <div key={label} className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-4 text-center">
+              <Icon className="h-5 w-5 text-[#00C896] mx-auto mb-2" aria-hidden="true" />
+              <p className="text-white text-sm font-bold leading-snug">{label}</p>
+              <p className="text-white/40 text-xs mt-0.5">{sub}</p>
+            </div>
+          ))}
+        </div>
 
         <Link
           href={CTA_HREF}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-gray-50 text-[#00C896] font-bold text-lg px-10 py-5 transition-all duration-200 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#00C896]"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-bold text-xl px-12 py-5 transition-all duration-200 hover:shadow-2xl hover:shadow-[#00C896]/30 shadow-xl shadow-[#00C896]/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#00C896]/50"
         >
-          Create your account
+          Create My Free Account
           <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </Link>
 
-        <p className="mt-4 text-white/70 text-sm">Average signup time: 5 minutes</p>
+        <p className="mt-4 text-white/40 text-sm">Takes 5 minutes &bull; No fees to sign up &bull; Start earning today</p>
 
-        <p className="mt-6 text-white/50 text-xs max-w-lg mx-auto">
+        <p className="mt-8 text-white/25 text-xs max-w-lg mx-auto">
           By signing up you agree to our{' '}
-          <a href="/terms" className="underline hover:text-white/70 transition-colors">
-            Terms of Service
-          </a>{' '}
+          <a href="/terms" className="underline hover:text-white/50 transition-colors">Terms of Service</a>{' '}
           and acknowledge our{' '}
-          <a href="/risk-disclosure" className="underline hover:text-white/70 transition-colors">
-            Risk Disclosure
-          </a>
+          <a href="/risk-disclosure" className="underline hover:text-white/50 transition-colors">Risk Disclosure</a>
           . {COMPANY_NAME} is not a bank. Crypto assets are not CDIC-insured.
         </p>
       </div>

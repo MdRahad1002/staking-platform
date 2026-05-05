@@ -72,6 +72,15 @@ const nextConfig = {
       },
     ]
   },
+  // /favicon.ico → /icon (the Next.js generated PNG) so Google can fetch the favicon
+  async rewrites() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/icon',
+      },
+    ]
+  },
   async headers() {
     return [
       {

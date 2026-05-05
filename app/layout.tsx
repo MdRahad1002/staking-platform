@@ -90,10 +90,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '96x96', type: 'image/png' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/icon', sizes: '96x96', type: 'image/png' },
     ],
-    shortcut: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: [{ url: '/favicon.ico' }],
     apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
   },
   verification: {

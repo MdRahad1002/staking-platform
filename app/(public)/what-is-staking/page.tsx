@@ -29,14 +29,14 @@ import { Button } from '@/components/ui/button'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
+  title: 'What Is Crypto Staking? Simple 2026 Beginner Guide | StakeOnix',
   description:
-    'Learn how crypto staking works in plain English. Understand proof-of-stake networks, how rewards are generated, the risks involved, and how StakeOnix makes staking accessible on 170+ assets.',
+    'What is staking in crypto? Learn how it works in simple terms — how rewards are earned, the risks, and how to start. Free guide. No jargon. Updated 2026.',
   alternates: { canonical: `${APP_URL}/what-is-staking` },
   openGraph: {
-    title: 'What Is Crypto Staking? Plain English Guide | StakeOnix',
+    title: 'What Is Crypto Staking? Simple 2026 Beginner Guide | StakeOnix',
     description:
-      'Understand how proof-of-stake networks work, how staking rewards are generated, and the risks to know before you start. Plain English, no jargon.',
+      'Understand crypto staking explained simply: how proof-of-stake works, how rewards are generated, risks to know, and how to start — all in plain English. Updated 2026.',
     url: `${APP_URL}/what-is-staking`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Staking? A plain English explanation | StakeOnix' }],
   },

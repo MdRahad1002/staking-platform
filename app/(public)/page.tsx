@@ -6,30 +6,85 @@ import Link from 'next/link'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'StakeOnix | Professional Crypto Staking Platform',
+  title: { absolute: 'Best Crypto Staking Platform | FCA Authorised, FINTRAC Registered | StakeOnix' },
   description:
-    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ assets with institutional-grade security and transparent daily rewards.',
+    'Earn daily rewards staking Bitcoin, Ethereum, USDT, Solana & 170+ cryptos. StakeOnix is FCA-authorised (UK) and FINTRAC-registered (Canada). Bank-grade security. Free to join. Staking rewards are variable and not guaranteed.',
+  keywords: [
+    'crypto staking platform',
+    'best crypto staking platform',
+    'regulated crypto staking',
+    'earn crypto passive income',
+    'bitcoin staking',
+    'ethereum staking',
+    'USDT staking',
+    'crypto staking UK',
+    'crypto staking Canada',
+    'FCA regulated crypto platform',
+    'FINTRAC registered crypto',
+    'daily crypto rewards',
+    'passive income cryptocurrency',
+    'cryptocurrency staking 2025',
+    'proof of stake rewards',
+    'crypto yield platform',
+    'staking rewards platform',
+    'StakeOnix',
+  ],
   alternates: { canonical: APP_URL },
   openGraph: {
-    title: 'StakeOnix | Professional Crypto Staking Platform',
-    description: 'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake BTC, ETH, USDT and 170+ assets with institutional-grade security. Regulated in Canada and the UK.',
+    title: 'Best Crypto Staking Platform | Earn Daily Rewards – StakeOnix',
+    description:
+      'FCA-authorised, FINTRAC-registered crypto staking platform. Earn daily rewards on Bitcoin, Ethereum, USDT & 170+ digital assets. Institutional-grade security. Free to join. Staking rewards are variable.',
     url: APP_URL,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Crypto Staking Platform' }],
+    type: 'website',
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix – Best Regulated Crypto Staking Platform' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Best Crypto Staking Platform | FCA Authorised – StakeOnix',
+    description:
+      'Earn daily crypto rewards on BTC, ETH, USDT & 170+ assets. FCA-authorised UK, FINTRAC Canada. Free to join.',
+    images: [`${APP_URL}/opengraph-image`],
   },
 }
 
 const homepageSchema = {
   '@context': 'https://schema.org',
   '@type': 'FinancialService',
+  '@id': `${APP_URL}/#financialservice`,
   name: 'StakeOnix',
+  legalName: 'ONIX HOLDINGS LIMITED',
   url: APP_URL,
-  description: 'Regulated cryptocurrency staking platform offering institutional-grade staking on Bitcoin, Ethereum, USDT, Solana and 170+ digital assets. FCA Authorised. FINTRAC Registered.',
-  serviceType: 'Cryptocurrency Staking',
-  areaServed: 'Worldwide',
-  currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL',
-  priceRange: '$200+',
+  logo: `${APP_URL}/apple-icon`,
+  image: `${APP_URL}/opengraph-image`,
+  description:
+    'FCA-authorised, FINTRAC-registered cryptocurrency staking platform. Earn daily passive income on Bitcoin, Ethereum, USDT, Solana and 170+ digital assets with institutional-grade security, AES-256 encryption and cold wallet storage.',
+  serviceType: [
+    'Cryptocurrency Staking',
+    'Digital Asset Management',
+    'Proof-of-Stake Validation',
+    'Passive Income Investment',
+  ],
+  areaServed: [
+    { '@type': 'Country', name: 'United Kingdom' },
+    { '@type': 'Country', name: 'Canada' },
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'Country', name: 'Australia' },
+    { '@type': 'Country', name: 'Germany' },
+    { '@type': 'Country', name: 'France' },
+    'Worldwide',
+  ],
+  currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL, ADA, DOT, AVAX, ATOM, MATIC, LINK',
+  priceRange: 'From $200 USD',
   telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
   email: 'info@stakeonix.com',
+  sameAs: [
+    'https://x.com/StakeOnix',
+    'https://twitter.com/StakeOnix',
+    'https://www.instagram.com/stakeonix',
+    'https://www.facebook.com/share/1D3Cw9AjJ3/',
+    'https://www.tiktok.com/@stakeonix',
+    'https://t.me/StakeOnix',
+  ],
   address: [
     {
       '@type': 'PostalAddress',
@@ -48,6 +103,43 @@ const homepageSchema = {
       addressCountry: 'GB',
     },
   ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Regulatory Authorisation',
+      name: 'FCA Authorisation',
+      description: 'Authorised by the Financial Conduct Authority (FCA) of the United Kingdom. Reference number: 820033.',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Financial Conduct Authority (FCA)',
+        url: 'https://www.fca.org.uk',
+      },
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Regulatory Registration',
+      name: 'FINTRAC Registration',
+      description: 'Registered with the Financial Transactions and Reports Analysis Centre of Canada (FINTRAC). Business Number: 820033090.',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'FINTRAC',
+        url: 'https://www.fintrac-canafe.gc.ca',
+      },
+    },
+  ],
+  offers: {
+    '@type': 'Offer',
+    name: 'Cryptocurrency Staking Plans',
+    description:
+      'Multiple staking plans for Bitcoin, Ethereum, USDT and 170+ digital assets. Earn daily rewards with flexible terms. Minimum $200 USD.',
+    url: `${APP_URL}/plans`,
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: 200,
+      priceCurrency: 'USD',
+    },
+  },
 }
 
 const faqHomepageSchema = {
@@ -59,7 +151,15 @@ const faqHomepageSchema = {
       name: 'What is crypto staking?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Crypto staking is the process of locking up cryptocurrency assets to earn rewards. StakeOnix pools staking resources and distributes daily rewards to investors.',
+        text: 'Crypto staking is the process of participating in a proof-of-stake blockchain network by locking up cryptocurrency to help validate transactions. In return, stakers earn rewards from the network. StakeOnix pools staking resources across institutional-grade nodes and distributes daily rewards to investors proportionally.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the best crypto staking platform in 2025?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'StakeOnix is one of the leading regulated crypto staking platforms in 2025, offering staking on 170+ digital assets including Bitcoin, Ethereum, USDT and Solana. Key differentiators include FCA authorisation (UK), FINTRAC registration (Canada), institutional-grade security, and transparent daily reward distributions.',
       },
     },
     {
@@ -67,15 +167,39 @@ const faqHomepageSchema = {
       name: 'How much can I earn with StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Staking rewards depend on the assets staked, plan chosen, and prevailing network conditions. Returns are variable and not guaranteed. Refer to individual plan terms for details.',
+        text: 'Staking yields vary by asset and network conditions. Indicative annual yields include Ethereum (ETH) at ~9% APY, Solana (SOL) at ~12% APY, Polkadot (DOT) at ~16.5% APY, Avalanche (AVAX) at ~14% APY, and Cosmos (ATOM) at up to ~21.5% APY. Returns are variable and not guaranteed. Past performance is not indicative of future results.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is StakeOnix safe?',
+      name: 'Is StakeOnix regulated?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'StakeOnix employs SSL encryption, two-factor authentication, withdrawal PIN protection, and cold storage for the majority of user funds.',
+        text: 'Yes. StakeOnix (trading name of ONIX HOLDINGS LIMITED) is authorised by the Financial Conduct Authority (FCA) in the United Kingdom and registered with FINTRAC (Financial Transactions and Reports Analysis Centre of Canada) as a Money Services Business. These regulatory frameworks require us to maintain high standards of financial conduct, anti-money-laundering controls and client asset protection.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is crypto staking safe on StakeOnix?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'StakeOnix employs multiple security layers: SSL/TLS encryption for all data in transit, AES-256 encryption for data at rest, two-factor authentication (2FA) on all accounts, withdrawal PIN protection, and cold wallet storage for the majority of user funds. As with all cryptocurrency activities, staking carries market risk and staking rewards are not guaranteed.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the minimum deposit to start staking on StakeOnix?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The minimum investment to start staking on StakeOnix is $200 USD (or equivalent in supported cryptocurrencies). Different staking plans are available with varying terms, yield rates and minimum requirements. Visit our Plans page for full details.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I withdraw my staked crypto at any time?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Withdrawal terms depend on the staking plan you choose. Flexible plans allow withdrawals at any time, while fixed-term plans may have lock-up periods in exchange for higher yield rates. Full details are available on the Plans page before you commit.',
       },
     },
     {
@@ -83,8 +207,112 @@ const faqHomepageSchema = {
       name: 'Which cryptocurrencies can I stake on StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'StakeOnix supports Bitcoin (BTC), Ethereum (ETH), USDT, USDC, Litecoin (LTC), Tron (TRX), BNB, and Solana (SOL).',
+        text: 'StakeOnix supports staking on 170+ digital assets including Bitcoin (BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC), Litecoin (LTC), Tron (TRX), BNB, Solana (SOL), Cardano (ADA), Polkadot (DOT), Avalanche (AVAX), Cosmos (ATOM), Polygon (MATIC), and Chainlink (LINK).',
       },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the difference between crypto staking and crypto mining?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Crypto mining uses energy-intensive hardware (Proof-of-Work) to validate transactions on networks like Bitcoin. Crypto staking involves locking up cryptocurrency on Proof-of-Stake networks (like Ethereum, Solana, Cardano) to help validate transactions. Staking requires no specialist hardware and is far more energy-efficient. StakeOnix focuses exclusively on Proof-of-Stake staking.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does StakeOnix operate in Canada?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. StakeOnix is registered with FINTRAC (Financial Transactions and Reports Analysis Centre of Canada) as a Money Services Business and operates from offices in Toronto, Ontario (130 King St W, ON M5X 2A2). Canadian residents can fully access all staking services and plans.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does StakeOnix operate in the United Kingdom?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. StakeOnix is authorised by the Financial Conduct Authority (FCA) and operates from offices in Altrincham, Cheshire, UK (Ashley Road, WA14 2DT). UK residents have full access to all staking plans and services under FCA regulatory oversight.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I start staking cryptocurrency on StakeOnix?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Getting started takes 4 simple steps: (1) Create a free account at stakeonix.com — under 2 minutes. (2) Deposit cryptocurrency to your StakeOnix wallet using any supported asset. (3) Choose a staking plan from the Plans page that matches your investment goals. (4) Start earning daily staking rewards, automatically credited to your account.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does StakeOnix offer a referral programme?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. StakeOnix operates a referral programme that rewards you for inviting friends and family to the platform. When someone you refer starts staking, you earn a referral commission. Visit the Referral Program page for current commission rates and terms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is FCA authorisation and why does it matter for crypto staking?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "FCA (Financial Conduct Authority) authorisation means StakeOnix has been approved and is supervised by the UK's primary financial regulator. This requires meeting strict standards around financial conduct, anti-money-laundering (AML) and client asset protection. For users, this means dealing with a regulated platform subject to ongoing oversight — significantly different from unregulated crypto platforms.",
+      },
+    },
+  ],
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'StakeOnix – Crypto Staking Platform',
+      item: APP_URL,
+    },
+  ],
+}
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How to Start Staking Cryptocurrency on StakeOnix',
+  description:
+    'Step-by-step guide to earning passive income through crypto staking on StakeOnix, the FCA-authorised, FINTRAC-registered staking platform.',
+  totalTime: 'PT10M',
+  supply: [
+    { '@type': 'HowToSupply', name: 'Cryptocurrency (minimum $200 USD equivalent)' },
+    { '@type': 'HowToSupply', name: 'Email address' },
+  ],
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Create Your Free Account',
+      text: 'Sign up at stakeonix.com in under 2 minutes. Provide your email address and create a secure password. No fees to register.',
+      url: `${APP_URL}/signup`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Deposit Cryptocurrency',
+      text: 'Fund your StakeOnix wallet by depositing any supported cryptocurrency — Bitcoin, Ethereum, USDT and 170+ more. Minimum $200 USD.',
+      url: `${APP_URL}/deposit`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Choose a Staking Plan',
+      text: 'Browse available staking plans with different yield rates, terms and minimum thresholds. Select the plan that fits your investment goals.',
+      url: `${APP_URL}/plans`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Earn Daily Staking Rewards',
+      text: 'Once active, staking rewards are distributed daily to your account. Monitor earnings from the dashboard. Returns are variable and not guaranteed.',
+      url: `${APP_URL}/dashboard`,
     },
   ],
 }
@@ -94,6 +322,8 @@ function HomePageSchemas() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqHomepageSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
     </>
   )
 }

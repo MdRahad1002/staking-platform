@@ -78,5 +78,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.20,
     },
+    {
+      url: `${APP_URL}/canada`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.90,
+    },
+    {
+      url: `${APP_URL}/app-info`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
   ]
 }

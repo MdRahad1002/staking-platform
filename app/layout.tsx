@@ -23,6 +23,24 @@ export const metadata: Metadata = {
   publisher: 'StakeOnix',
   category: 'Finance',
   classification: 'Cryptocurrency Staking Platform',
+  keywords: [
+    'crypto staking platform',
+    'best crypto staking platform',
+    'regulated crypto staking',
+    'bitcoin staking',
+    'ethereum staking',
+    'USDT staking',
+    'earn crypto passive income',
+    'crypto staking UK',
+    'crypto staking Canada',
+    'FCA regulated crypto',
+    'FINTRAC crypto platform',
+    'daily crypto rewards',
+    'passive income cryptocurrency',
+    'proof of stake rewards',
+    'cryptocurrency staking 2025',
+    'StakeOnix',
+  ],
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -62,6 +80,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: APP_URL,
+    languages: {
+      'en': APP_URL,
+      'en-US': APP_URL,
+      'en-GB': APP_URL,
+      'en-CA': APP_URL,
+      'x-default': APP_URL,
+    },
   },
   icons: {
     icon: [
@@ -178,9 +203,19 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${APP_URL}/#website`,
   name: 'StakeOnix',
   url: APP_URL,
-  description: 'Professional crypto staking platform. Earn daily passive income on 10+ cryptocurrencies.',
+  description: 'FCA-authorised, FINTRAC-registered professional cryptocurrency staking platform. Earn daily passive income on Bitcoin, Ethereum, USDT and 170+ digital assets.',
+  inLanguage: 'en',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${APP_URL}/faq?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 }
 
 export default function RootLayout({

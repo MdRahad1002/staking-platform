@@ -183,7 +183,7 @@ export function Hero() {
                 href={CTA_HREF}
                 className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-bold text-sm py-3.5 transition-all duration-200 hover:shadow-lg hover:shadow-[#00C896]/25 shadow-md shadow-[#00C896]/20"
               >
-                Open Account — Free
+                Open Account: Free
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <p className="mt-3 text-center text-white/30 text-xs">

@@ -97,8 +97,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
-    // google: 'YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN',
-    // yandex: 'YOUR_YANDEX_TOKEN',
+    google: 'WYMwajWSY3vZOCZNwciGoW6-oM3pNMSMpaaflqIL7SE',
     other: {
       'msvalidate.01': '2D9BDEB489BB2ADD2471AAE0F2C43EE9',
     },

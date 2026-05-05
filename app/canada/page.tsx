@@ -13,6 +13,7 @@ import { StickyMobileCTA } from './components/StickyMobileCTA'
 import { CanadaStats } from './components/CanadaStats'
 import { CADCalculator } from './components/CADCalculator'
 import { CanadaComments } from './components/CanadaComments'
+import { TrustStatement } from './components/TrustStatement'
 import {
   COMPANY_NAME,
   APP_URL,
@@ -114,6 +115,7 @@ export default function CanadaPage() {
           <HowItWorks />
           <Security />
           <FAQ />
+          <TrustStatement />
           <CanadaComments />
           <FinalCTA />
         </main>

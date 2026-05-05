@@ -29,16 +29,26 @@ import { Button } from '@/components/ui/button'
 const APP_URL = 'https://www.stakeonix.com'
 
 export const metadata: Metadata = {
-  title: 'What Is Crypto Staking? Simple 2026 Beginner Guide | StakeOnix',
+  title: 'What Is Staking in Crypto? Explained Simply (2026 Guide) | StakeOnix',
   description:
-    'What is staking in crypto? Learn how it works in simple terms — how rewards are earned, the risks, and how to start. Free guide. No jargon. Updated 2026.',
+    'What is staking in crypto? In 60 seconds: you lock crypto, the blockchain pays you for helping validate transactions, you earn daily rewards. FCA-regulated platform. Free to join.',
   alternates: { canonical: `${APP_URL}/what-is-staking` },
+  keywords: [
+    'what is staking in crypto',
+    'what is staking in cryptocurrency',
+    'crypto staking explained simply',
+    'how does crypto staking work',
+    'what is restaking in crypto',
+    'how to start staking crypto',
+    'proof of stake explained',
+    'crypto staking 2026',
+  ],
   openGraph: {
-    title: 'What Is Crypto Staking? Simple 2026 Beginner Guide | StakeOnix',
+    title: 'What Is Staking in Crypto? Explained Simply (2026) | StakeOnix',
     description:
-      'Understand crypto staking explained simply: how proof-of-stake works, how rewards are generated, risks to know, and how to start — all in plain English. Updated 2026.',
+      'What is staking in crypto? Lock crypto → blockchain pays you for validating transactions → earn daily rewards. Plain English, no jargon. Updated 2026.',
     url: `${APP_URL}/what-is-staking`,
-    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Staking? A plain English explanation | StakeOnix' }],
+    images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Staking in Crypto? Plain English Guide | StakeOnix' }],
   },
 }
 

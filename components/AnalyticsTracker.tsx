@@ -52,6 +52,9 @@ export function AnalyticsTracker() {
     sessionId.current = getSessionId()
   }, [])
 
+  // Never track admin pages
+  if (pathname.startsWith('/admin')) return null
+
   // Track page views and duration
   useEffect(() => {
     if (!sessionId.current) return

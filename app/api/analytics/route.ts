@@ -12,6 +12,19 @@ function getIp(req: NextRequest): string {
   )
 }
 
+// Vercel adds these headers automatically on all edge requests
+function getCountry(req: NextRequest): string | undefined {
+  return req.headers.get('x-vercel-ip-country') ?? undefined
+}
+
+function getCity(req: NextRequest): string | undefined {
+  const region = req.headers.get('x-vercel-ip-country-region')
+  const city = req.headers.get('x-vercel-ip-city')
+  if (city) return decodeURIComponent(city)
+  if (region) return region
+  return undefined
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -36,6 +49,8 @@ export async function POST(req: NextRequest) {
           page: sanitise(page, 500)!,
           referrer: sanitise(referrer, 500),
           userAgent: ua?.slice(0, 500),
+          country: getCountry(req),
+          city: getCity(req),
           duration: typeof duration === 'number' ? Math.min(duration, 86400) : undefined,
         },
       })

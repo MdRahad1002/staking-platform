@@ -61,6 +61,17 @@ const nextConfig = {
       allowedOrigins: [APP_DOMAIN, `www.${APP_DOMAIN}`, 'localhost:3000'],
     },
   },
+  // Force non-www → www so Google always sees a clean 301 to the canonical domain
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'stakeonix.com' }],
+        destination: 'https://www.stakeonix.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

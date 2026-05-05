@@ -476,3 +476,46 @@ model SavedWallet {
 
   @@index([userId])
 }
+
+// ─────────────────────────────────────────────
+//  Visitor Analytics
+// ─────────────────────────────────────────────
+
+model PageView {
+  id          String   @id @default(uuid())
+  sessionId   String
+  ip          String?
+  page        String
+  referrer    String?
+  userAgent   String?
+  country     String?
+  city        String?
+  duration    Int?     // seconds spent on page, sent on exit
+  createdAt   DateTime @default(now())
+
+  clicks      ClickEvent[]
+
+  @@index([sessionId])
+  @@index([page])
+  @@index([ip])
+  @@index([createdAt])
+}
+
+model ClickEvent {
+  id          String   @id @default(uuid())
+  sessionId   String
+  pageViewId  String?
+  ip          String?
+  page        String
+  element     String   // tag + text or aria-label, e.g. "button:Create Free Account"
+  href        String?  // if anchor
+  x           Int?
+  y           Int?
+  createdAt   DateTime @default(now())
+
+  pageView    PageView? @relation(fields: [pageViewId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([page])
+  @@index([createdAt])
+}

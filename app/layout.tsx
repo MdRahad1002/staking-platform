@@ -4,6 +4,7 @@ import './globals.css'
 import { Providers } from '@/components/providers'
 import { Toaster } from 'sonner'
 import { Analytics } from '@vercel/analytics/next'
+import { AnalyticsTracker } from '@/components/AnalyticsTracker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -209,6 +210,7 @@ export default function RootLayout({
             closeButton
           />
         </Providers>
+        <AnalyticsTracker />
         <Analytics />
       </body>
     </html>

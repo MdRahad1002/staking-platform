@@ -7,7 +7,7 @@ import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard, Users, TrendingUp, Wallet, ArrowUpFromLine, ArrowDownToLine,
   MessageSquare, Globe, Settings, Bell, Mail, FileText, Shield, ShieldCheck, LogOut,
-  Menu, X, ChevronRight, History, CreditCard, Ticket, UserCheck
+  Menu, X, ChevronRight, History, CreditCard, Ticket, UserCheck, BarChart2
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -32,6 +32,7 @@ const navItems = [
   { href: '/admin/ip-blocklist', label: 'IP Blocklist', icon: Shield },
   { href: '/admin/run-staking-cron', label: 'Run Staking Cron', icon: TrendingUp },
   { href: '/admin/referral-nudge', label: 'Referral Nudge Emails', icon: UserCheck },
+  { href: '/admin/analytics', label: 'Visitor Analytics', icon: BarChart2 },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 

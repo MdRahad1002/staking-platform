@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next'
+﻿import { MetadataRoute } from 'next'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()

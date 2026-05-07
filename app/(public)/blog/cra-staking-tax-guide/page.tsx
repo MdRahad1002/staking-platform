@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   AlertTriangle,
@@ -15,7 +15,7 @@ import {
   ArrowRight,
 } from 'lucide-react'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Canadian Crypto Staking Tax Guide 2025: CRA Rules Explained | StakeOnix',

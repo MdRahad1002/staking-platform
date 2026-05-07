@@ -1,4 +1,4 @@
-// Canada Landing Page: All Content Data
+﻿// Canada Landing Page: All Content Data
 // Update yields, FAQ answers, and comparison data here without touching components.
 
 // ── Placeholders ─────────────────────────────────────────────────────────────
@@ -9,7 +9,7 @@ export const CSA_DECISION_URL = '{{CSA_DECISION_URL}}'
 export const FINTRAC_MSB_NUMBER = 'BN: 820033090 · Registry ID: 1782217'
 export const AUDITOR_NAME = 'Internal'
 export const TOTAL_STAKED_CAD = '170+'
-export const SUPPORT_EMAIL = 'info@stakeonix.com'
+export const SUPPORT_EMAIL = 'info@stakeonix.ca'
 export const WHATSAPP_NUMBER = '+1 (613) 366-4391'
 export const WHATSAPP_HREF = 'https://wa.me/16133664391'
 export const PHONE_NUMBER = '+1 (613) 366-4391'
@@ -17,7 +17,7 @@ export const PHONE_HREF = 'tel:+16133664391'
 export const INSTAGRAM_URL = 'https://www.instagram.com/stakeonix'
 export const FACEBOOK_URL = 'https://www.facebook.com/share/1D3Cw9AjJ3/'
 export const TIKTOK_URL = 'https://www.tiktok.com/@stakeonix'
-export const APP_URL = 'https://www.stakeonix.com'
+export const APP_URL = 'https://www.stakeonix.ca'
 
 // ── Social proof stats ──────────────────────────────────────────────────────────────────────────────
 interface StatItem { value: string; label: string }

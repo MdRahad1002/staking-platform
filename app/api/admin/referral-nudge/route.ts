@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+﻿import { NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { prisma } from '@/lib/db'
 import { sendReferralNudgeEmail } from '@/lib/mail'
@@ -7,7 +7,7 @@ export async function POST() {
   try {
     await requireAdmin()
 
-    const appUrl = (process.env.NEXTAUTH_URL || 'https://www.stakeonix.com').replace(/\/$/, '')
+    const appUrl = (process.env.NEXTAUTH_URL || 'https://www.stakeonix.ca').replace(/\/$/, '')
 
     const commissionSetting = await prisma.siteSetting.findUnique({
       where: { key: 'referral_bonus_percent' },

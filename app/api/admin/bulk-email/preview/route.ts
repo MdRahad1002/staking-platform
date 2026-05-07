@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
 import { sendEmail, getBulkEmailTemplate } from '@/lib/mail'
 import { getServerSession } from 'next-auth'
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   if (!recipientEmail)
     return NextResponse.json({ error: 'Could not determine recipient email.' }, { status: 400 })
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const unsubscribeUrl = `${appUrl}/api/unsubscribe?preview=1`
 
   await sendEmail({

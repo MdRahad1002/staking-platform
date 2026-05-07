@@ -1,6 +1,6 @@
 ﻿import { Metadata } from 'next'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions - Crypto Staking Help | StakeOnix',

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -12,7 +12,7 @@ const contactInfo = [
   {
     icon: <Mail className="h-5 w-5" />,
     label: 'Email',
-    value: 'info@stakeonix.com',
+    value: 'info@stakeonix.ca',
   },
   {
     icon: <Phone className="h-5 w-5" />,

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { sendReferralNudgeEmail } from '@/lib/mail'
 
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const appUrl = (process.env.NEXTAUTH_URL || 'https://www.stakeonix.com').replace(/\/$/, '')
+    const appUrl = (process.env.NEXTAUTH_URL || 'https://www.stakeonix.ca').replace(/\/$/, '')
 
     // Fetch commission rate setting
     const commissionSetting = await prisma.siteSetting.findUnique({

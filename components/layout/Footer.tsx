@@ -71,9 +71,9 @@ export function Footer() {
               Staking rewards are variable and not guaranteed.
             </p>
             <div className="space-y-2 mb-5">
-              <a href="mailto:info@stakeonix.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <a href="mailto:info@stakeonix.ca" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                 <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-                <span>info@stakeonix.com</span>
+                <span>info@stakeonix.ca</span>
               </a>
               <a href="tel:+16133664391" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                 <Phone className="h-4 w-4 text-primary flex-shrink-0" />
@@ -151,7 +151,7 @@ export function Footer() {
                 </svg>
               </a>
               {/* Email */}
-              <a href="mailto:info@stakeonix.com" aria-label="Email"
+              <a href="mailto:info@stakeonix.ca" aria-label="Email"
                 className="p-2.5 rounded-xl text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/15 transition-all">
                 <Mail className="h-4 w-4" />
               </a>

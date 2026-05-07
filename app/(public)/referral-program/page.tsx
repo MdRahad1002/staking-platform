@@ -1,7 +1,7 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import ReferralProgramClient from './ReferralProgramClient'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Earn Up to 8% Commission by Referring Friends | StakeOnix Referral Program',

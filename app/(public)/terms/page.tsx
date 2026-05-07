@@ -3,7 +3,7 @@
 export const metadata: Metadata = {
   title: 'Terms of Service | StakeOnix',
   description: 'Read the StakeOnix Terms of Service governing your use of the crypto staking platform, including rules, responsibilities, and disclaimers.',
-  alternates: { canonical: 'https://www.stakeonix.com/terms' },
+  alternates: { canonical: 'https://www.stakeonix.ca/terms' },
 }
 
 export default function TermsPage() {
@@ -54,7 +54,7 @@ export default function TermsPage() {
             },
             {
               title: '9. Contact',
-              content: `Questions about the Terms of Service should be sent to: info@stakeonix.com
+              content: `Questions about the Terms of Service should be sent to: info@stakeonix.ca
               
               ONIX HOLDINGS LIMITED (Canada Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
@@ -65,7 +65,7 @@ export default function TermsPage() {
               Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
               Phone: +44 (0) 56 0384 6173
 
-              Email: info@stakeonix.com`,
+              Email: info@stakeonix.ca`,
             },
           ].map((section) => (
             <div key={section.title}>

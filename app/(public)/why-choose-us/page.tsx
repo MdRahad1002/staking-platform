@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import {
@@ -23,7 +23,7 @@ import {
   Wallet,
 } from 'lucide-react'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',

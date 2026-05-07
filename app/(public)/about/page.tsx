@@ -1,7 +1,7 @@
 ﻿import { Metadata } from 'next'
 import { Shield, Target, Users, TrendingUp, Mail, Phone, MapPin } from 'lucide-react'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
@@ -26,7 +26,7 @@ const organizationSchema = {
   foundingDate: '2020',
   numberOfEmployees: { '@type': 'QuantitativeValue', value: 50 },
   legalName: 'ONIX HOLDINGS LIMITED',
-  email: 'info@stakeonix.com',
+  email: 'info@stakeonix.ca',
   telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
   address: [
     {
@@ -51,7 +51,7 @@ const organizationSchema = {
       '@type': 'ContactPoint',
       telephone: '+1-613-366-4391',
       contactType: 'customer support',
-      email: 'info@stakeonix.com',
+      email: 'info@stakeonix.ca',
       availableLanguage: 'English',
       areaServed: 'CA',
     },
@@ -176,7 +176,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-1">Email</p>
-                <a href="mailto:info@stakeonix.com" className="text-sm font-medium hover:text-primary transition-colors">info@stakeonix.com</a>
+                <a href="mailto:info@stakeonix.ca" className="text-sm font-medium hover:text-primary transition-colors">info@stakeonix.ca</a>
               </div>
             </div>
             <div className="flex items-start gap-3">

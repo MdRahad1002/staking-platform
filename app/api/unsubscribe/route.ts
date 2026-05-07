@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const uid = searchParams.get('uid')
   const isPreview = searchParams.get('preview') === '1'
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
 
   if (isPreview) {
     return new NextResponse(

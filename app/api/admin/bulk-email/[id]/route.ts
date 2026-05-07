@@ -1,20 +1,37 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 import { requireAdmin } from '@/lib/auth-helpers'
-import { prisma } from '@/lib/db'
+import { sendEmail, getBulkEmailTemplate } from '@/lib/mail'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 
-// ── GET  /api/admin/bulk-email/[id]  ───────────────────────────────────
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+// ── POST  /api/admin/bulk-email/preview  ───────────────────────────────
+// Sends a test copy of the email to the currently logged-in admin
+export async function POST(req: NextRequest) {
   await requireAdmin()
-  const { id } = await params
-  const campaign = await prisma.bulkEmail.findUnique({ where: { id } })
-  if (!campaign) return NextResponse.json({ error: 'Not found.' }, { status: 404 })
-  return NextResponse.json({ campaign })
-}
 
-// ── DELETE  /api/admin/bulk-email/[id]  ────────────────────────────────
-export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  await requireAdmin()
-  const { id } = await params
-  await prisma.bulkEmail.delete({ where: { id } })
-  return NextResponse.json({ success: true })
+  const { subject, content, testEmail, rawHtml } = await req.json()
+  if (!subject?.trim() || !content?.trim())
+    return NextResponse.json({ error: 'Subject and content are required.' }, { status: 400 })
+
+  // Use provided testEmail, otherwise fall back to admin's own session email
+  let recipientEmail: string | undefined = testEmail?.trim()
+  if (!recipientEmail) {
+    const session = await getServerSession(authOptions)
+    recipientEmail = session?.user?.email ?? undefined
+  }
+  if (!recipientEmail)
+    return NextResponse.json({ error: 'Could not determine recipient email.' }, { status: 400 })
+
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
+  const unsubscribeUrl = `${appUrl}/api/unsubscribe?preview=1`
+
+  await sendEmail({
+    to: recipientEmail,
+    subject: `[TEST] ${subject}`,
+    html: rawHtml
+      ? content.replace(/\{\{firstName\}\}/g, 'Admin').replace(/\{\{unsubscribeUrl\}\}/g, unsubscribeUrl)
+      : getBulkEmailTemplate('Admin', subject, content, unsubscribeUrl),
+  })
+
+  return NextResponse.json({ success: true, sentTo: recipientEmail })
 }

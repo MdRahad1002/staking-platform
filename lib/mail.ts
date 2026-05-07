@@ -11,13 +11,13 @@ function getResend(): Resend {
   return _resend
 }
 
-const FROM_ADDRESS = () => process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.com>'
+const FROM_ADDRESS = () => process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.ca>'
 
 // ─────────────────────────────────────────────
 //  Shared design-system layout wrapper
 // ─────────────────────────────────────────────
 function layout(content: string, previewText = ''): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const year   = new Date().getFullYear()
   return `<!DOCTYPE html>
 <html lang="en">
@@ -102,7 +102,7 @@ function layout(content: string, previewText = ''): string {
         </div>
         <div class="footer-address">
           StakeOnix &middot; 130 King St W, Toronto, ON M5X 2A2, Canada<br/>
-          <a href="mailto:info@stakeonix.com" style="color:#374151;">info@stakeonix.com</a> &middot; +1 (613) 366-4391
+          <a href="mailto:info@stakeonix.ca" style="color:#374151;">info@stakeonix.ca</a> &middot; +1 (613) 366-4391
         </div>
         <div style="font-size:12px;color:#374151;margin-top:10px;">&copy; ${year} StakeOnix. All rights reserved.</div>
       </div>
@@ -158,7 +158,7 @@ export function getBulkEmailTemplate(
   bodyHtml: string,
   unsubscribeUrl: string
 ): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const year = new Date().getFullYear()
   return `<!DOCTYPE html>
 <html lang="en">
@@ -238,7 +238,7 @@ export async function sendEmail({ to, subject, html, text }: EmailOptions): Prom
 }
 
 export function getWelcomeEmailTemplate(name: string, _email: string): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   return layout(`
     <div class="card-header">
       <div class="icon-circle icon-gold">🎉</div>
@@ -286,7 +286,7 @@ export function getPasswordResetEmailTemplate(name: string, resetLink: string): 
 }
 
 export function getDepositConfirmedEmailTemplate(name: string, amount: string, currency: string): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   return layout(`
     <div class="card-header">
       <div class="icon-circle icon-green">✅</div>
@@ -307,7 +307,7 @@ export function getDepositConfirmedEmailTemplate(name: string, amount: string, c
       </div>
       <a href="${appUrl}/plans" class="cta-btn cta-btn-green">Choose a Staking Plan →</a>
       <div class="security-note">
-        <strong>📌 Note:</strong> If you did not initiate this deposit, contact support immediately at <a href="mailto:info@stakeonix.com" style="color:#60a5fa;">info@stakeonix.com</a>.
+        <strong>📌 Note:</strong> If you did not initiate this deposit, contact support immediately at <a href="mailto:info@stakeonix.ca" style="color:#60a5fa;">info@stakeonix.ca</a>.
       </div>
     </div>
   `, `Your ${amount} ${currency} deposit is confirmed and ready to earn.`)
@@ -323,7 +323,7 @@ export async function sendWelcomeEmail(email: string, name: string): Promise<voi
 
 export function getVerificationEmailTemplate(name: string, verifyUrl: string): string {
   const firstName = name.split('@')[0].split(' ')[0]
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   return layout(`
     <div class="card-header">
       <div class="icon-circle icon-gold">🚀</div>
@@ -392,7 +392,7 @@ export function getReferralNudgeEmailTemplate(
   referralLink: string,
   unsubscribeUrl: string
 ): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const year = new Date().getFullYear()
   const firstName = referrerName.includes('@') ? referrerName.split('@')[0] : referrerName.split(' ')[0]
 
@@ -505,7 +505,7 @@ export async function sendReferralNudgeEmail(
   commissionRate: number,
   referralLink: string
 ): Promise<void> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const unsubUrl = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=referral`
   await sendEmail({
     to: email,
@@ -518,7 +518,7 @@ export async function sendReferralNudgeEmail(
 //  First-deposit nudge - sent ~8 min after email verification
 // ─────────────────────────────────────────────
 export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const year = new Date().getFullYear()
 
   return `<!DOCTYPE html>
@@ -727,7 +727,7 @@ export function getFirstDepositNudgeEmailTemplate(firstName: string): string {
  */
 export async function sendFirstDepositNudgeEmail(email: string, name: string): Promise<void> {
   const firstName = name.includes('@') ? name.split('@')[0] : name.split(' ')[0]
-  const appUrl  = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl  = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const key     = (process.env.RESEND_API_KEY || '').trim()
   if (!key) return
 
@@ -744,7 +744,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.com>',
+        from: process.env.EMAIL_FROM || 'StakeOnix <noreply@stakeonix.ca>',
         to: email,
         subject,
         html,
@@ -771,7 +771,7 @@ export async function sendFirstDepositNudgeEmail(email: string, name: string): P
 //  users who still have zero deposits after 3+ days
 // ─────────────────────────────────────────────
 export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUrl: string): string {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const year   = new Date().getFullYear()
 
   return `<!DOCTYPE html>
@@ -979,7 +979,7 @@ export function getDepositFollowUpEmailTemplate(firstName: string, unsubscribeUr
 }
 
 export async function sendDepositFollowUpEmail(email: string, name: string): Promise<void> {
-  const appUrl    = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl    = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const firstName = name.includes('@') ? name.split('@')[0] : name.split(' ')[0]
   const unsubUrl  = `${appUrl}/api/unsubscribe?email=${encodeURIComponent(email)}&type=activation`
   await sendEmail({
@@ -1001,8 +1001,8 @@ export async function sendContactEmail({
   subject: string
   message: string
 }): Promise<void> {
-  const adminEmail = process.env.ADMIN_EMAIL || 'info@stakeonix.com'
-  const appUrl     = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const adminEmail = process.env.ADMIN_EMAIL || 'info@stakeonix.ca'
+  const appUrl     = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const refId      = Date.now().toString(36).toUpperCase()
 
   const userHtml = layout(`
@@ -1069,7 +1069,7 @@ export function getWithdrawalStatusEmailTemplate(
       <p class="greeting">Hi <strong>${name}</strong>,</p>
       <p class="body-text">Your withdrawal of <strong style="color:#e2e8f0;">${amount} ${currency}</strong> has been <strong style="color:${status === 'approved' ? '#10b981' : '#ef4444'}">${status}</strong>.</p>
       ${reason ? `<div class="highlight-box highlight-box-red"><p style="color:#fca5a5;font-size:13px;font-weight:600;margin:0 0 4px;">Reason</p><p style="color:#f87171;font-size:14px;margin:0;">${reason}</p></div>` : ''}
-      <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'}/withdraw" class="cta-btn ${status === 'approved' ? 'cta-btn-green' : ''}">View Withdrawal History</a>
+      <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'}/withdraw" class="cta-btn ${status === 'approved' ? 'cta-btn-green' : ''}">View Withdrawal History</a>
     </div>
   `, `Your ${amount} ${currency} withdrawal has been ${status}.`)
 }
@@ -1083,7 +1083,7 @@ export async function sendWithdrawalEmail({
   name: string; email: string; amount: number; currency: string
   walletAddress: string; txHash?: string | null; estimatedArrival?: string
 }): Promise<void> {
-  const appUrl      = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl      = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const shortWallet = `${walletAddress.slice(0, 10)}...${walletAddress.slice(-6)}`
   const html = layout(`
     <div class="card-header">
@@ -1106,7 +1106,7 @@ export async function sendWithdrawalEmail({
       </div>
       <a href="${appUrl}/withdraw" class="cta-btn" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;">View Transaction History</a>
       <div class="security-note">
-        <strong>🔒 Not you?</strong> Contact us immediately at <a href="mailto:info@stakeonix.com" style="color:#60a5fa;">info@stakeonix.com</a> - transactions cannot be reversed once confirmed on-chain.
+        <strong>🔒 Not you?</strong> Contact us immediately at <a href="mailto:info@stakeonix.ca" style="color:#60a5fa;">info@stakeonix.ca</a> - transactions cannot be reversed once confirmed on-chain.
       </div>
     </div>
   `, `Your ${amount} ${currency} withdrawal is on its way.`)
@@ -1127,7 +1127,7 @@ export async function sendKycStatusEmail({
   status: 'approved' | 'rejected' | 'pending_review'
   rejectionReason?: string
 }): Promise<void> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const cfg = {
     approved:       { icon: '✅', iconClass: 'icon-green',  title: 'Identity Verified',      subtitle: 'Your account is fully unlocked'   },
     rejected:       { icon: '❌', iconClass: 'icon-red',    title: 'Verification Incomplete', subtitle: 'Action required to continue'      },
@@ -1185,7 +1185,7 @@ export async function sendDailyRewardEmail({
   name: string; email: string; rewardAmount: number; currency: string
   totalEarned: number; planName: string; daysRemaining: number; nextPayout: string
 }): Promise<void> {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   const today  = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   const html   = layout(`
     <div class="card-header">

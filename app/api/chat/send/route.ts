@@ -177,7 +177,7 @@ async function escalateToHuman(userId: string) {
     select: { firstName: true, lastName: true, email: true },
   })
   const userName = user ? `${user.firstName} ${user.lastName}`.trim() : 'A user'
-  const chatLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'}/admin/chat`
+  const chatLink = `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'}/admin/chat`
 
   // Notify every admin and support staff member in-app
   const staff = await prisma.user.findMany({

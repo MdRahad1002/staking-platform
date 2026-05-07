@@ -3,7 +3,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: { absolute: 'Best Crypto Staking Platform | FCA Authorised, FINTRAC Registered | StakeOnix' },
@@ -76,7 +76,7 @@ const homepageSchema = {
   currenciesAccepted: 'BTC, ETH, USDT, USDC, LTC, TRX, BNB, SOL, ADA, DOT, AVAX, ATOM, MATIC, LINK',
   priceRange: 'From $200 USD',
   telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
-  email: 'info@stakeonix.com',
+  email: 'info@stakeonix.ca',
   sameAs: [
     'https://x.com/StakeOnix',
     'https://twitter.com/StakeOnix',
@@ -239,7 +239,7 @@ const faqHomepageSchema = {
       name: 'How do I start staking cryptocurrency on StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Getting started takes 4 simple steps: (1) Create a free account at stakeonix.com — under 2 minutes. (2) Deposit cryptocurrency to your StakeOnix wallet using any supported asset. (3) Choose a staking plan from the Plans page that matches your investment goals. (4) Start earning daily staking rewards, automatically credited to your account.',
+        text: 'Getting started takes 4 simple steps: (1) Create a free account at stakeonix.ca — under 2 minutes. (2) Deposit cryptocurrency to your StakeOnix wallet using any supported asset. (3) Choose a staking plan from the Plans page that matches your investment goals. (4) Start earning daily staking rewards, automatically credited to your account.',
       },
     },
     {
@@ -290,7 +290,7 @@ const howToSchema = {
       '@type': 'HowToStep',
       position: 1,
       name: 'Create Your Free Account',
-      text: 'Sign up at stakeonix.com in under 2 minutes. Provide your email address and create a secure password. No fees to register.',
+      text: 'Sign up at stakeonix.ca in under 2 minutes. Provide your email address and create a secure password. No fees to register.',
       url: `${APP_URL}/signup`,
     },
     {
@@ -883,14 +883,14 @@ export default async function HomePage() {
               <div className="relative rounded-2xl overflow-hidden">
                 <img
                   src="/sponsors/shell-stakeonix.jpg"
-                  alt="Shell V-Power StakeOnix.com partnership"
+                  alt="Shell V-Power stakeonix.ca partnership"
                   className="w-full h-auto rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover"
                 />
               </div>
               <div className="mt-4 flex items-center gap-3">
                 <img src="/logos/shell.com.png" alt="Shell logo" className="h-8 w-8 object-contain" />
                 <p className="text-sm text-muted-foreground">
-                  <span className="text-white font-semibold">Shell V-Power</span> StakeOnix.com prominently displayed across Shell forecourt signage in partnership campaign.
+                  <span className="text-white font-semibold">Shell V-Power</span> stakeonix.ca prominently displayed across Shell forecourt signage in partnership campaign.
                 </p>
               </div>
             </div>
@@ -902,14 +902,14 @@ export default async function HomePage() {
               <div className="relative rounded-2xl overflow-hidden">
                 <img
                   src="/sponsors/bloomberg-stakeonix.jpg"
-                  alt="Bloomberg News StakeOnix.com coverage"
+                  alt="Bloomberg News stakeonix.ca coverage"
                   className="w-full h-auto rounded-2xl group-hover:scale-105 transition-transform duration-700 object-cover"
                 />
               </div>
               <div className="mt-4 flex items-center gap-3">
                 <img src="/logos/bloomberg.com.png" alt="Bloomberg logo" className="h-8 w-8 object-contain" />
                 <p className="text-sm text-muted-foreground">
-                  <span className="text-white font-semibold">Bloomberg News</span> StakeOnix.com featured in Bloomberg broadcast segment on emerging crypto staking platforms.
+                  <span className="text-white font-semibold">Bloomberg News</span> stakeonix.ca featured in Bloomberg broadcast segment on emerging crypto staking platforms.
                 </p>
               </div>
             </div>

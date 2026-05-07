@@ -3,7 +3,7 @@
 export const metadata: Metadata = {
   title: 'Privacy Policy | StakeOnix',
   description: 'Read the StakeOnix Privacy Policy to understand how we collect, use, and protect your personal information on our crypto staking platform.',
-  alternates: { canonical: 'https://www.stakeonix.com/policy' },
+  alternates: { canonical: 'https://www.stakeonix.ca/policy' },
 }
 
 export default function PolicyPage() {
@@ -53,7 +53,7 @@ export default function PolicyPage() {
               title: '5. Cookies',
               content: `We use cookies and similar tracking technologies to operate the platform, keep your account secure, remember your preferences, and understand how you use our services.
 
-For full details on the types of cookies we use, how long they last, and how to control or delete them, please read our dedicated Cookie Policy at www.stakeonix.com/cookies.
+For full details on the types of cookies we use, how long they last, and how to control or delete them, please read our dedicated Cookie Policy at www.stakeonix.ca/cookies.
 
 Strictly necessary cookies (login session, CSRF protection) are required for the platform to work. You can opt out of non-essential cookies via your browser settings without affecting your ability to use StakeOnix.`,
             },
@@ -68,7 +68,7 @@ Strictly necessary cookies (login session, CSRF protection) are required for the
             },
             {
               title: '7. Contact Us',
-              content: `If you have any questions about this Privacy Policy, please contact us at: info@stakeonix.com
+              content: `If you have any questions about this Privacy Policy, please contact us at: info@stakeonix.ca
               
               ONIX HOLDINGS LIMITED (Canada Head Office)
               130 King St W, Toronto, ON M5X 2A2, Canada
@@ -79,7 +79,7 @@ Strictly necessary cookies (login session, CSRF protection) are required for the
               Ashley Road, Altrincham, Cheshire, WA14 2DT, United Kingdom
               Phone: +44 (0) 56 0384 6173
 
-              Email: info@stakeonix.com`,
+              Email: info@stakeonix.ca`,
             },
           ].map((section) => (
             <div key={section.title}>

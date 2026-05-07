@@ -1,4 +1,4 @@
-import { ImageResponse } from 'next/og'
+﻿import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 export const alt = 'StakeOnix - Earn Passive Income on Crypto'
@@ -108,7 +108,7 @@ export default function Image() {
             letterSpacing: '0.05em',
           }}
         >
-          www.stakeonix.com
+          www.stakeonix.ca
         </div>
       </div>
     ),

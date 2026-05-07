@@ -1,4 +1,4 @@
-import { Hero } from './components/Hero'
+﻿import { Hero } from './components/Hero'
 import { TrustBar } from './components/TrustBar'
 import { YieldsTable } from './components/YieldsTable'
 import { TaxAdvantage } from './components/TaxAdvantage'
@@ -74,7 +74,7 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'Customer Support',
-    email: 'info@stakeonix.com',
+    email: 'info@stakeonix.ca',
     availableLanguage: ['English', 'French'],
     areaServed: 'CA',
   },

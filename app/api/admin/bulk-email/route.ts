@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     data: { subject, content, target: target || 'all', status: 'sending' },
   })
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.com'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
 
   // Build email payloads
   const emails = users.map((u) => {

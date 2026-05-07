@@ -32,7 +32,7 @@ interface Campaign {
 }
 
 // ─── Email templates ──────────────────────────────────────────────────────────
-const APP_URL = typeof window !== 'undefined' ? window.location.origin : 'https://www.stakeonix.com'
+const APP_URL = typeof window !== 'undefined' ? window.location.origin : 'https://www.stakeonix.ca'
 
 const TEMPLATES: { id: string; label: string; subject: string; body: string; rawHtml?: boolean }[] = [
   {
@@ -149,7 +149,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
         </tr>
         <tr>
           <td align="center" style="padding:0 48px 12px;">
-            <a href="https://www.stakeonix.com/deposit" style="display:block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#04080f;font-size:18px;font-weight:900;text-decoration:none;padding:18px 52px;border-radius:14px;letter-spacing:0.2px;text-align:center;box-shadow:0 10px 40px rgba(0,212,170,0.35);">🚀 &nbsp;Deposit Now &amp; Claim My Bonus</a>
+            <a href="https://www.stakeonix.ca/deposit" style="display:block;background:linear-gradient(135deg,#00d4aa,#00b4d8);color:#04080f;font-size:18px;font-weight:900;text-decoration:none;padding:18px 52px;border-radius:14px;letter-spacing:0.2px;text-align:center;box-shadow:0 10px 40px rgba(0,212,170,0.35);">🚀 &nbsp;Deposit Now &amp; Claim My Bonus</a>
           </td>
         </tr>
         <tr>
@@ -159,7 +159,7 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
         </tr>
         <tr>
           <td align="center" style="padding:0 48px 36px;">
-            <a href="https://www.stakeonix.com/plan" style="display:inline-block;background:transparent;color:#00b4d8;font-size:14px;font-weight:700;text-decoration:none;padding:12px 36px;border-radius:10px;letter-spacing:0.2px;border:1px solid rgba(0,180,216,0.35);">Browse All Plans First →</a>
+            <a href="https://www.stakeonix.ca/plan" style="display:inline-block;background:transparent;color:#00b4d8;font-size:14px;font-weight:700;text-decoration:none;padding:12px 36px;border-radius:10px;letter-spacing:0.2px;border:1px solid rgba(0,180,216,0.35);">Browse All Plans First →</a>
           </td>
         </tr>
         <tr>
@@ -174,8 +174,8 @@ const TEMPLATES: { id: string; label: string; subject: string; body: string; raw
         </tr>
         <tr>
           <td align="center" style="background:rgba(0,0,0,0.2);padding:20px 48px 24px;border-top:1px solid rgba(255,255,255,0.05);">
-            <p style="margin:0 0 8px;font-size:13px;color:#4a6a8a;line-height:1.6;">You're receiving this because you have an account on <a href="https://www.stakeonix.com" style="color:#00d4aa;text-decoration:none;">StakeOnix</a>.</p>
-            <p style="margin:0;font-size:12px;color:#2a3a4a;">© 2026 StakeOnix &nbsp;·&nbsp; <a href="{{unsubscribeUrl}}" style="color:#2a3a4a;text-decoration:underline;">Unsubscribe</a> &nbsp;·&nbsp; <a href="https://www.stakeonix.com/policy" style="color:#2a3a4a;text-decoration:underline;">Privacy Policy</a></p>
+            <p style="margin:0 0 8px;font-size:13px;color:#4a6a8a;line-height:1.6;">You're receiving this because you have an account on <a href="https://www.stakeonix.ca" style="color:#00d4aa;text-decoration:none;">StakeOnix</a>.</p>
+            <p style="margin:0;font-size:12px;color:#2a3a4a;">© 2026 StakeOnix &nbsp;·&nbsp; <a href="{{unsubscribeUrl}}" style="color:#2a3a4a;text-decoration:underline;">Unsubscribe</a> &nbsp;·&nbsp; <a href="https://www.stakeonix.ca/policy" style="color:#2a3a4a;text-decoration:underline;">Privacy Policy</a></p>
           </td>
         </tr>
         <tr><td style="height:5px;background:linear-gradient(90deg,#00d4aa,#00b4d8,#7b61ff,#ff4e00);"></td></tr>

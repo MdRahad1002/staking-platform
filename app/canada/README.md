@@ -1,4 +1,4 @@
-# /canada: Canadian Staking Landing Page
+﻿# /canada: Canadian Staking Landing Page
 
 High-converting landing page targeting Canadian crypto stakers. Lives at `/canada` and serves as the destination for all Canadian marketing traffic (SEO, KOL links, Reddit, referrals).
 
@@ -15,7 +15,7 @@ Open `app/canada/data.ts` and replace the following constants:
 | `FINTRAC_MSB_NUMBER` | Your FINTRAC MSB registration number | fintrac-canafe.gc.ca |
 | `AUDITOR_NAME` | Name of your proof-of-reserves auditor | Internal |
 | `TOTAL_STAKED_CAD` | Dollar figure staked by Canadian users (e.g., "$12M+") | Dashboard / analytics |
-| `SUPPORT_EMAIL` | Already set to `info@stakeonix.com`. Update if different | n/a |
+| `SUPPORT_EMAIL` | Already set to `info@stakeonix.ca`. Update if different | n/a |
 
 ---
 
@@ -59,7 +59,7 @@ import { useSearchParams } from 'next/navigation'
 function useCTAHref(base: string) {
   const params = useSearchParams()
   const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
-  const url = new URL(base, 'https://www.stakeonix.com')
+  const url = new URL(base, 'https://www.stakeonix.ca')
   utmKeys.forEach((k) => {
     const v = params.get(k)
     if (v) url.searchParams.set(k, v)

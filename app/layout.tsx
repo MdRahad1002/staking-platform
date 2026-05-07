@@ -8,7 +8,7 @@ import { AnalyticsTracker } from '@/components/AnalyticsTracker'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -125,7 +125,7 @@ const organizationSchema = {
       telephone: '+1-613-366-4391',
       contactType: 'customer support',
       areaServed: 'CA',
-      email: 'info@stakeonix.com',
+      email: 'info@stakeonix.ca',
       availableLanguage: 'English',
     },
     {

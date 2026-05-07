@@ -5,7 +5,7 @@ import { PlansClient } from './PlansClient'
 import { TrendingUp, Users, Shield, Zap } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Crypto Yield Plans Start With $200, Earn Daily | StakeOnix',

@@ -1,7 +1,7 @@
-import { Metadata } from 'next'
+﻿import { Metadata } from 'next'
 import { ContactForm } from './ContactForm'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Contact StakeOnix - Get Help & Support | StakeOnix',
@@ -26,7 +26,7 @@ const contactPageSchema = {
     '@type': 'Organization',
     name: 'StakeOnix',
     url: APP_URL,
-    email: 'info@stakeonix.com',
+    email: 'info@stakeonix.ca',
     telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
     address: [
       {

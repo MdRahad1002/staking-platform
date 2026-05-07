@@ -2,7 +2,7 @@
 
 const APP_DOMAIN = process.env.NEXTAUTH_URL
   ? new URL(process.env.NEXTAUTH_URL).hostname
-  : 'stakeonix.com'
+  : 'stakeonix.ca'
 
 // ── Content-Security-Policy ───────────────────────────────────────────────────
 // Adjust 'script-src' / 'connect-src' if you add third-party scripts later.
@@ -66,8 +66,8 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'stakeonix.com' }],
-        destination: 'https://www.stakeonix.com/:path*',
+        has: [{ type: 'host', value: 'stakeonix.ca' }],
+        destination: 'https://www.stakeonix.ca/:path*',
         permanent: true,
       },
     ]

@@ -26,7 +26,7 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'What Is Staking in Crypto? Explained Simply (2026 Guide) | StakeOnix',

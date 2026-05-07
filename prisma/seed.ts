@@ -248,9 +248,9 @@ async function main() {
   // ─── Site settings ─────────────────────────────────────────────────────────
   const settings = [
     { key: 'site_name', value: 'StakeOnix' },
-    { key: 'site_url', value: 'https://www.stakeonix.com' },
+    { key: 'site_url', value: 'https://www.stakeonix.ca' },
     { key: 'site_description', value: 'World-class crypto yield platform earn daily returns on your crypto with StakeOnix' },
-    { key: 'support_email', value: 'support@stakeonix.com' },
+    { key: 'support_email', value: 'support@stakeonix.ca' },
     { key: 'support_phone', value: '' },
     { key: 'min_deposit', value: '200' },
     { key: 'min_withdrawal', value: '20' },

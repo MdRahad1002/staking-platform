@@ -1,6 +1,6 @@
 ﻿import { Metadata } from 'next'
 
-const APP_URL = 'https://www.stakeonix.com'
+const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
   title: 'Contact StakeOnix - 24/7 Crypto Staking Support',
@@ -24,7 +24,7 @@ const localBusinessSchema = {
   name: 'StakeOnix',
   url: APP_URL,
   telephone: ['+1-613-366-4391', '+44-056-0384-6173'],
-  email: 'info@stakeonix.com',
+  email: 'info@stakeonix.ca',
   address: [
     {
       '@type': 'PostalAddress',
@@ -49,7 +49,7 @@ const localBusinessSchema = {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       telephone: '+1-613-366-4391',
-      email: 'info@stakeonix.com',
+      email: 'info@stakeonix.ca',
       availableLanguage: 'English',
       areaServed: 'CA',
       hoursAvailable: {

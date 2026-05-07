@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Cookie Policy | StakeOnix',
   description:
     'Read the StakeOnix Cookie Policy to understand how we use cookies and similar tracking technologies to operate and improve our crypto staking platform.',
-  alternates: { canonical: 'https://www.stakeonix.com/cookies' },
+  alternates: { canonical: 'https://www.stakeonix.ca/cookies' },
 }
 
 const sections = [
@@ -90,7 +90,7 @@ We encourage you to review this page periodically to stay informed about our use
     title: '8. Contact Us',
     content: `If you have any questions about our use of cookies or this Cookie Policy, please contact us:
 
-Email: info@stakeonix.com
+Email: info@stakeonix.ca
 
 Canada (Head Office)
 ONIX HOLDINGS LIMITED
@@ -119,7 +119,7 @@ export default function CookiesPage() {
           <div className="mt-4 p-4 rounded-xl bg-cyan-500/5 border border-cyan-500/20">
             <p className="text-sm text-muted-foreground">
               This Cookie Policy explains how ONIX HOLDINGS LIMITED (Canada) and ONIX HOLDINGS LIMITED (Company No. 03449482, registered in England &amp; Wales) (together, &quot;StakeOnix&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) use cookies and similar technologies
-              when you visit <Link href="/" className="text-cyan-400 hover:underline">www.stakeonix.com</Link>.
+              when you visit <Link href="/" className="text-cyan-400 hover:underline">www.stakeonix.ca</Link>.
               It should be read alongside our{' '}
               <Link href="/policy" className="text-cyan-400 hover:underline">Privacy Policy</Link> and{' '}
               <Link href="/terms" className="text-cyan-400 hover:underline">Terms of Service</Link>.

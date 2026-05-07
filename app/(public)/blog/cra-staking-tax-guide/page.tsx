@@ -18,14 +18,14 @@ import {
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Canadian Crypto Staking Tax Guide 2025: CRA Rules Explained | StakeOnix',
+  title: 'How Is Crypto Taxed in Canada? CRA Staking Tax Guide 2026 | StakeOnix',
   description:
-    "Canada's most complete guide to crypto staking taxes. Covers the CRA's January 2025 guidance on dispositions, how staking rewards are taxed as income, capital gains rules, record-keeping requirements, and TFSA/RRSP eligibility.",
+    "How is crypto staking taxed in Canada? Canada's most complete CRA guide: how staking rewards are taxed as income, capital gains rules, T1 reporting, TFSA/RRSP eligibility, and common mistakes to avoid. Updated 2026.",
   alternates: { canonical: `${APP_URL}/blog/cra-staking-tax-guide` },
   openGraph: {
-    title: 'Canadian Crypto Staking Tax Guide 2025 | StakeOnix',
+    title: 'How Is Crypto Taxed in Canada? CRA Staking Tax Guide 2026 | StakeOnix',
     description:
-      "Understand exactly how the CRA taxes crypto staking rewards in Canada. Covers the January 2025 guidance, income vs capital gains, T1 reporting, and common mistakes to avoid.",
+      "How does the CRA tax crypto staking rewards in Canada? Covers income vs capital gains, T1 reporting, TFSA eligibility, and the most common crypto tax mistakes Canadians make.",
     url: `${APP_URL}/blog/cra-staking-tax-guide`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'Canadian Crypto Staking Tax Guide 2025 | StakeOnix' }],
   },

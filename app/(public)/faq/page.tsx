@@ -4,13 +4,13 @@ import FaqClient from './FaqClient'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions | StakeOnix',
+  title: 'Crypto Staking FAQ: How It Works, Rewards & Safety | StakeOnix',
   description:
-    'Answers to common questions about StakeOnix: how staking works, how rewards are calculated, deposit and withdrawal processes, security measures, and our referral programme.',
+    'Is crypto staking safe? How are staking rewards calculated? How do deposits and withdrawals work? Full answers from an FCA-authorised, FINTRAC-registered staking platform.',
   alternates: { canonical: `${APP_URL}/faq` },
   openGraph: {
-    title: 'Frequently Asked Questions | StakeOnix',
-    description: 'How does staking work? How are rewards calculated? How do withdrawals work? Full answers from an FCA-authorised, FINTRAC-registered staking platform.',
+    title: 'Crypto Staking FAQ: How It Works, Is It Safe & More | StakeOnix',
+    description: 'Is crypto staking safe? How do rewards work? How do withdrawals work? All your crypto staking questions answered by an FCA-authorised, FINTRAC-registered platform.',
     url: `${APP_URL}/faq`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix FAQ' }],
   },

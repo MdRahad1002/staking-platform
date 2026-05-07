@@ -90,5 +90,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.75,
     },
+    {
+      url: `${APP_URL}/blog/cra-staking-tax-guide`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.80,
+    },
   ]
 }

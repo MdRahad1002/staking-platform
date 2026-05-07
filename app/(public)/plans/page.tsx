@@ -8,13 +8,13 @@ export const dynamic = 'force-dynamic'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Crypto Yield Plans Start With $200, Earn Daily | StakeOnix',
+  title: 'Crypto Staking Plans | How to Invest in Crypto from $200 | StakeOnix',
   description:
-    'Join StakeOnix and start earning daily crypto returns from just $200. Nine yield plans ranging from the 7-day Starter Trial to the 90-day Sovereign institutional tier. Staking rewards are variable and not guaranteed.',
+    'Choose a crypto staking plan and start earning daily passive income from just $200. Nine plans from the 7-day Starter Trial to the 90-day Sovereign tier. Best way to invest in crypto. Staking rewards are variable.',
   alternates: { canonical: `${APP_URL}/plans` },
   openGraph: {
-    title: 'StakeOnix Staking Plans | Up to 4.5% Daily | StakeOnix',
-    description: 'Start with just $200. 9 plans designed to grow with you from a 7-day Starter Trial to 90-day Sovereign tier. Daily payouts, zero experience needed.',
+    title: 'Crypto Investment Plans | Daily Payouts from $200 | StakeOnix',
+    description: 'Invest in crypto from just $200. 9 staking plans with daily payouts – no experience needed. Best crypto staking rates in 2026 on a regulated platform.',
     url: `${APP_URL}/plans`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'StakeOnix Staking Plans: Variable yield from $200' }],
   },

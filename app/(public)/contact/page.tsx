@@ -4,9 +4,9 @@ import { ContactForm } from './ContactForm'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Contact StakeOnix - Get Help & Support | StakeOnix',
+  title: 'Contact StakeOnix | Crypto Staking Support | Canada & UK',
   description:
-    'Reach the StakeOnix team by email, phone, or contact form. Support available for deposits, withdrawals, staking plans, and account questions. Canada and UK offices.',
+    'Contact the StakeOnix support team for help with crypto staking, deposits, withdrawals, or your account. Canada (Toronto) and UK (Altrincham) offices. Fast response guaranteed.',
   alternates: { canonical: `${APP_URL}/contact` },
   openGraph: {
     title: 'Contact StakeOnix - We Are Here to Help',

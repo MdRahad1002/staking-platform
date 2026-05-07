@@ -26,13 +26,13 @@ import {
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
+  title: 'Best Regulated Crypto Staking Platform | Why Choose StakeOnix',
   description:
-    'StakeOnix is FCA-authorised and FINTRAC-registered. Bank-grade security, transparent operations, 170+ assets, and full regulatory compliance. See exactly what makes us different.',
+    'Looking for the safest, best regulated crypto staking platform? StakeOnix is FCA-authorised and FINTRAC-registered with bank-grade security, 170+ assets, and transparent daily payouts.',
   alternates: { canonical: `${APP_URL}/why-choose-us` },
   openGraph: {
-    title: 'Why Choose StakeOnix? | FCA-Authorised Crypto Staking',
-    description: 'FCA-authorised, FINTRAC-registered staking platform. Bank-grade security, transparent operations, 170+ supported assets. See exactly what makes us different.',
+    title: 'Best Regulated Crypto Platform | Why Choose StakeOnix',
+    description: 'Why is StakeOnix the best crypto staking platform? FCA-authorised, FINTRAC-registered, bank-grade security, 170+ assets, daily payouts. Compare us vs the rest.',
     url: `${APP_URL}/why-choose-us`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'Why Choose StakeOnix: FCA-authorised crypto staking platform' }],
   },

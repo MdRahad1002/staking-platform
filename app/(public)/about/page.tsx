@@ -4,9 +4,9 @@ import { Shield, Target, Users, TrendingUp, Mail, Phone, MapPin } from 'lucide-r
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',
+  title: 'About StakeOnix | Regulated Crypto Investment Platform Canada & UK',
   description:
-    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform operated by ONIX HOLDINGS LIMITED. Learn about our mission, regulatory credentials, and how we make professional crypto staking accessible.',
+    'StakeOnix is operated by ONIX HOLDINGS LIMITED, FCA-authorised in the UK and FINTRAC-registered in Canada. Learn how we make crypto staking and cryptocurrency investment safe and accessible for everyone.',
   alternates: { canonical: `${APP_URL}/about` },
   openGraph: {
     title: 'About StakeOnix | FCA-Authorised Crypto Staking Platform',

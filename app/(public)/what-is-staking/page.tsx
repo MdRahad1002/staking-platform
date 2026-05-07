@@ -29,24 +29,31 @@ import { Button } from '@/components/ui/button'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'What Is Staking in Crypto? Explained Simply (2026 Guide) | StakeOnix',
+  title: 'What Is Crypto Staking & How Does It Work? (2026 Guide) | StakeOnix',
   description:
-    'What is staking in crypto? In 60 seconds: you lock crypto, the blockchain pays you for helping validate transactions, you earn daily rewards. FCA-regulated platform. Free to join.',
+    'What is crypto staking? Simple explanation: lock your crypto → blockchain pays you for validating transactions → earn daily rewards. Beginner-friendly guide. Start staking free today.',
   alternates: { canonical: `${APP_URL}/what-is-staking` },
   keywords: [
+    'what is crypto staking',
     'what is staking in crypto',
     'what is staking in cryptocurrency',
-    'crypto staking explained simply',
     'how does crypto staking work',
-    'what is restaking in crypto',
+    'how to stake crypto',
     'how to start staking crypto',
+    'crypto staking explained for beginners',
+    'how to earn passive income with crypto',
+    'what is proof of stake',
     'proof of stake explained',
+    'crypto staking rewards explained',
+    'is crypto staking worth it',
+    'how much can you earn staking crypto',
     'crypto staking 2026',
+    'what is restaking in crypto',
   ],
   openGraph: {
-    title: 'What Is Staking in Crypto? Explained Simply (2026) | StakeOnix',
+    title: 'What Is Crypto Staking & How Does It Work? 2026 Guide | StakeOnix',
     description:
-      'What is staking in crypto? Lock crypto → blockchain pays you for validating transactions → earn daily rewards. Plain English, no jargon. Updated 2026.',
+      'What is crypto staking? Lock crypto → earn daily rewards from the blockchain. Plain English guide, no jargon. Learn how to start staking crypto today. Updated 2026.',
     url: `${APP_URL}/what-is-staking`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Staking in Crypto? Plain English Guide | StakeOnix' }],
   },

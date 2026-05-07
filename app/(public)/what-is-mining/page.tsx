@@ -24,14 +24,14 @@ import { Button } from '@/components/ui/button'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'What Is Crypto Mining? Plain English Explanation | StakeOnix',
+  title: 'What Is Crypto Mining? How It Works vs Staking (2026) | StakeOnix',
   description:
-    'What is crypto mining? Learn how it works with simple real-life comparisons, see inside massive mining farms, and discover why staking is the smarter, cheaper alternative for everyday investors.',
+    'What is crypto mining and how does it work? Simple explanation with real examples. Learn the difference between crypto mining vs staking – and which earns more passive income for everyday investors.',
   alternates: { canonical: `${APP_URL}/what-is-mining` },
   openGraph: {
-    title: 'What Is Crypto Mining? Plain English Guide + Mining vs Staking',
+    title: 'What Is Crypto Mining? Mining vs Staking Explained (2026) | StakeOnix',
     description:
-      'Understand crypto mining in simple terms, see real mining farms, and learn whether mining or staking is better for you in 2026.',
+      'How does crypto mining work? Compare mining vs staking and find out which earns more passive income in 2026. Simple guide, no technical experience needed.',
     url: `${APP_URL}/what-is-mining`,
     images: [{ url: `${APP_URL}/opengraph-image`, width: 1200, height: 630, alt: 'What Is Crypto Mining? Plain English Guide | StakeOnix' }],
   },

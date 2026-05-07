@@ -4,9 +4,9 @@ import ReferralProgramClient from './ReferralProgramClient'
 const APP_URL = 'https://www.stakeonix.ca'
 
 export const metadata: Metadata = {
-  title: 'Earn Up to 8% Commission by Referring Friends | StakeOnix Referral Program',
+  title: 'Earn Crypto by Referring Friends | Up to 8% Commission | StakeOnix',
   description:
-    'Invite friends to StakeOnix and earn 5–8% commission on everything they earn, plus 2% on their referrals. Daily automatic payouts, no cap. Your friends get a $10 welcome bonus.',
+    'Earn crypto passively by sharing your referral link. Get 5–8% commission on everything your referrals earn, plus 2% from their referrals. Daily payouts, no cap. The easiest way to earn crypto online.',
   alternates: { canonical: `${APP_URL}/referral-program` },
   openGraph: {
     title: 'Earn Up to 8% Commission Referring Friends | StakeOnix',

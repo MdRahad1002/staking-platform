@@ -13,41 +13,76 @@ const APP_URL = 'https://www.stakeonix.ca'
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: 'StakeOnix – Professional Crypto Staking Platform | Earn Daily Passive Income',
+    default: 'StakeOnix – Crypto Staking Platform | Earn Daily Passive Income',
     template: '%s | StakeOnix',
   },
   description:
-    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ digital assets with institutional-grade security. Staking rewards are variable and not guaranteed.',
+    'StakeOnix is an FCA-authorised, FINTRAC-registered crypto staking platform. Learn how to stake crypto and earn daily passive income on Bitcoin, Ethereum, USDT and 170+ digital assets. Free to join.',
   authors: [{ name: 'StakeOnix', url: APP_URL }],
   creator: 'StakeOnix',
   publisher: 'StakeOnix',
   category: 'Finance',
   classification: 'Cryptocurrency Staking Platform',
   keywords: [
+    // High-volume informational intent
+    'how to invest in cryptocurrency',
+    'how to stake crypto',
+    'what is crypto staking',
+    'how to earn passive income with crypto',
+    'how does crypto staking work',
+    'how to invest in bitcoin',
+    'how to invest in ethereum',
+    'crypto investment for beginners',
+    'is crypto staking safe',
+    'best way to earn crypto',
+    // Platform / product intent
     'crypto staking platform',
     'best crypto staking platform',
-    'regulated crypto staking',
+    'best crypto investment platform',
+    'regulated crypto staking platform',
+    'crypto staking platform Canada',
+    'crypto yield platform',
+    'crypto interest account',
+    'daily crypto rewards',
+    // Asset-specific
     'bitcoin staking',
     'ethereum staking',
     'USDT staking',
+    'solana staking',
+    'stake BTC',
+    'stake ETH',
+    // Passive income
     'earn crypto passive income',
+    'passive income cryptocurrency',
+    'crypto passive income 2026',
+    'earn daily crypto rewards',
+    // Regulatory trust signals
+    'FCA regulated crypto',
+    'FCA authorised crypto platform',
+    'FINTRAC registered crypto',
+    'regulated crypto platform UK',
+    'regulated crypto platform Canada',
+    // Geo
     'crypto staking UK',
     'crypto staking Canada',
-    'FCA regulated crypto',
-    'FINTRAC crypto platform',
-    'daily crypto rewards',
-    'passive income cryptocurrency',
+    'best crypto platform Canada',
+    'best crypto platform UK',
+    // Comparison intent
+    'best crypto staking rates 2026',
+    'crypto staking vs savings account',
+    'top crypto staking platforms 2026',
     'proof of stake rewards',
-    'cryptocurrency staking 2025',
+    'cryptocurrency staking 2026',
+    // Brand
     'StakeOnix',
   ],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: APP_URL,
-    title: 'StakeOnix – Professional Crypto Staking Platform | Earn Daily Passive Income',
+    title: 'StakeOnix – Crypto Staking Platform | Earn Daily Passive Income',
     description:
-      'FCA-authorised, FINTRAC-registered crypto staking platform. Stake Bitcoin, Ethereum, USDT and 170+ digital assets with institutional-grade security and full regulatory compliance. Staking rewards are variable.',
+      'Learn how to stake crypto and earn daily passive income. FCA-authorised, FINTRAC-registered platform. Stake Bitcoin, Ethereum, USDT and 170+ assets. Free to join.',
     siteName: 'StakeOnix',
     images: [
       {
@@ -60,9 +95,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'StakeOnix – FCA-Authorised Crypto Staking Platform',
+    title: 'StakeOnix – How to Stake Crypto & Earn Daily Rewards',
     description:
-      'Stake Bitcoin, Ethereum, USDT and 170+ digital assets on a regulated platform. FCA authorised in the UK. FINTRAC registered in Canada. Staking rewards are variable and not guaranteed.',
+      'How to stake crypto in 3 steps. Earn daily passive income on BTC, ETH, USDT & 170+ assets. FCA-authorised UK, FINTRAC Canada. Free to join.',
     images: [`${APP_URL}/opengraph-image`],
     creator: '@StakeOnix',
     site: '@StakeOnix',
@@ -98,7 +133,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
-    google: 'WYMwajWSY3vZOCZNwciGoW6-oM3pNMSMpaaflqIL7SE',
+    google: 'REPLACE_WITH_NEW_SEARCH_CONSOLE_CODE',
     other: {
       'msvalidate.01': '2D9BDEB489BB2ADD2471AAE0F2C43EE9',
     },

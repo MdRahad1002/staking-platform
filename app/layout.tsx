@@ -133,7 +133,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
-    google: 'REPLACE_WITH_NEW_SEARCH_CONSOLE_CODE',
+    google: 'AcDBONrkSsQ5_pjS0bOmNC15NE_B6vEls7U3CKfbzJ4',
     other: {
       'msvalidate.01': '2D9BDEB489BB2ADD2471AAE0F2C43EE9',
     },

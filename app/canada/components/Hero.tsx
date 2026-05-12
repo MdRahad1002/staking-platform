@@ -87,7 +87,7 @@ export function Hero() {
               className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.1] tracking-tight mb-4"
             >
               Before You Stake Crypto,{' '}
-              <span className="text-blue-400 md:bg-transparent md:border-0 md:px-0 md:py-0 bg-blue-900 border-2 border-black px-2 py-0.5 rounded">Understand Your Options</span>
+              <span className="text-blue-400 md:bg-transparent md:px-0 md:py-0 bg-blue-900 px-2 py-0.5 rounded">Understand Your Options</span>
             </h1>
 
             {/* Subheadline */}

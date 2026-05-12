@@ -25,6 +25,16 @@ export function Security() {
           </p>
         </div>
 
+        {/* Dashboard visual — staking comparison platform on laptop */}
+        <div className="rounded-2xl overflow-hidden mb-14 max-w-4xl mx-auto">
+          <img
+            src="/section-5.png"
+            alt="Stakeonix staking comparison dashboard — transparent APY rates, risk levels and lock periods on a laptop"
+            className="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+
         {/* 4-item grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10" role="list">
           {securityItems.map((item) => {

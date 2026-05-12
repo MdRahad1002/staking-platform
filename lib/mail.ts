@@ -25,10 +25,11 @@ function layout(content: string, previewText = ''): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StakeOnix</title>
+</head>
+<body style="margin:0;padding:0;background:#0a0e1a;font-family:Arial,sans-serif;color:#e2e8f0;">
+  ${previewText ? `<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;color:#0a0e1a;">${previewText}&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;</div>` : ''}
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     *{box-sizing:border-box;margin:0;padding:0}
-    body{background:#0a0e1a;font-family:'Inter',Arial,sans-serif;color:#e2e8f0;-webkit-font-smoothing:antialiased}
     a{color:inherit;text-decoration:none}
     .wrapper{background:#0a0e1a;padding:40px 16px}
     .container{max-width:600px;margin:0 auto}
@@ -86,9 +87,6 @@ function layout(content: string, previewText = ''): string {
     .footer-address{font-size:12px;color:#374151;line-height:1.7;margin-top:8px}
     @media(max-width:480px){.card-body{padding:24px 20px}.card-header{padding:28px 20px 24px}.info-grid{grid-template-columns:1fr}.amount-large{font-size:32px}}
   </style>
-</head>
-<body>
-  ${previewText ? `<div style="display:none;max-height:0;overflow:hidden;color:#0a0e1a;">${previewText}&nbsp;&#8203;&nbsp;&#8203;&nbsp;&#8203;</div>` : ''}
   <div class="wrapper">
     <div class="container">
       <div class="header"><div class="logo"><span class="logo-dot"></span>StakeOnix</div></div>

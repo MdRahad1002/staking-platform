@@ -1160,8 +1160,8 @@ export default async function HomePage() {
                 We walk you through every step. Start with as little as $200. No technical knowledge needed.
                 The platform handles the infrastructure. You just choose your plan.
               </p>
-              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group-hover:gap-2 transition-all">
-                Start with our Flexible plan <ChevronRight className="h-3.5 w-3.5" />
+              <Link href="/what-is-staking" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                See how staking works <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
             <div className="glass-card p-7 hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-300 group flex flex-col" data-reveal data-delay="150">
@@ -1173,8 +1173,8 @@ export default async function HomePage() {
                 Your assets are sitting idle in a wallet right now. Staking lets them participate in network
                 rewards without selling. You keep ownership. You earn rewards.
               </p>
-              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-green-400 hover:text-green-300 flex items-center gap-1 group-hover:gap-2 transition-all">
-                Put your portfolio to work <ChevronRight className="h-3.5 w-3.5" />
+              <Link href="/plans" className="text-xs font-semibold text-green-400 hover:text-green-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                Compare plan options <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
             <div className="glass-card p-7 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300 group flex flex-col" data-reveal data-delay="300">
@@ -1186,8 +1186,8 @@ export default async function HomePage() {
                 Regulated infrastructure, full auditability, 170+ assets, institutional-grade terms.
                 Compare us properly. FCA authorised in the UK, FINTRAC registered in Canada.
               </p>
-              <Link href={session ? '/dashboard' : '/signup'} className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 group-hover:gap-2 transition-all">
-                Explore our Elite tier <ChevronRight className="h-3.5 w-3.5" />
+              <Link href="/plans" className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1 group-hover:gap-2 transition-all">
+                View institutional options <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
           </div>
@@ -1525,6 +1525,164 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* HUMAN TRUST — Real people, real support */}
+      <section className="py-20 relative border-t border-white/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Real people behind this</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Three reasons Canadians feel comfortable here</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              Not a faceless platform. Real advisors. Real compliance. Real clarity before you commit.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
+            {[
+              {
+                initial: 'S',
+                role: 'Staking Advisor',
+                gradient: 'from-cyan-500 to-blue-600',
+                reason: 'We explain things simply.',
+                body: 'Staking feels complicated from the outside. Our advisors break it down clearly — no jargon, no pressure. You ask questions, we answer honestly.',
+                detail: 'Average response under 4 hours',
+              },
+              {
+                initial: 'C',
+                role: 'Compliance Team',
+                gradient: 'from-emerald-500 to-green-600',
+                reason: 'Everything is on record.',
+                body: 'FCA authorised in the UK. FINTRAC registered in Canada. Every transaction is logged, every regulation followed. Our credentials are public and verifiable.',
+                detail: 'KYC & AML verified on every account',
+              },
+              {
+                initial: 'A',
+                role: 'Account Support',
+                gradient: 'from-purple-500 to-violet-600',
+                reason: 'You are never alone in this.',
+                body: 'Whether you are choosing a plan, making a deposit, or have questions about withdrawals — support is available by phone, email and live chat.',
+                detail: 'Available Mon–Sat',
+              },
+            ].map((card) => (
+              <div key={card.role} className="glass-card p-8 hover:border-white/20 transition-all duration-300 hover:bg-white/5 flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${card.gradient} flex items-center justify-center text-2xl font-black text-white flex-shrink-0 shadow-lg`}>
+                    {card.initial}
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-base leading-snug">{card.reason}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{card.role}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">{card.body}</p>
+                <div className="flex items-center gap-2 text-xs text-cyan-400 border-t border-white/5 pt-4">
+                  <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
+                  {card.detail}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Support strip */}
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="flex -space-x-3">
+                {[
+                  { initials: 'SC', gradient: 'from-cyan-500 to-blue-600' },
+                  { initials: 'AM', gradient: 'from-emerald-500 to-green-600' },
+                  { initials: 'KL', gradient: 'from-purple-500 to-violet-600' },
+                ].map((av) => (
+                  <div key={av.initials} className={`w-10 h-10 rounded-full border-2 border-background flex items-center justify-center text-xs font-bold text-white bg-gradient-to-br ${av.gradient}`}>
+                    {av.initials}
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm">Talk to a real person</p>
+                <p className="text-xs text-muted-foreground">Our team responds in under 4 hours on business days</p>
+              </div>
+            </div>
+            <Link href="/contact">
+              <Button variant="outline" size="sm" className="gap-2 rounded-xl border-white/15 hover:border-cyan-500/40 hover:bg-cyan-500/5 whitespace-nowrap">
+                Contact Support <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT HAPPENS AFTER YOU SIGN UP */}
+      <section className="py-20 relative border-t border-white/5">
+        <div className="absolute inset-0 hero-grid opacity-[0.06]" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Your journey</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">What happens after you sign up</h2>
+            <p className="text-muted-foreground max-w-md mx-auto">
+              No surprises. Here is exactly what you will see and do, step by step.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              {
+                step: '1',
+                icon: <BadgeCheck className="h-6 w-6" />,
+                label: 'Verify your identity',
+                desc: 'Upload a government ID and confirm your email. Most verifications complete within minutes. Required for all regulated Canadian platforms.',
+                color: 'from-cyan-500/20 to-blue-600/20',
+                iconColor: 'text-cyan-400',
+                borderHover: 'hover:border-cyan-500/30',
+                preview: ['Email confirmed ✓', 'ID verified ✓', 'Account active ✓'],
+                previewColor: 'text-cyan-400/80',
+              },
+              {
+                step: '2',
+                icon: <BarChart2 className="h-6 w-6" />,
+                label: 'See your dashboard',
+                desc: 'Your dashboard shows current plan options, estimated yield ranges, lock periods, and risk levels. Review everything before committing a single dollar.',
+                color: 'from-emerald-500/20 to-green-600/20',
+                iconColor: 'text-emerald-400',
+                borderHover: 'hover:border-emerald-500/30',
+                preview: ['ETH · ~9% est. APR', 'SOL · ~12% est. APR', 'ADA · ~8.5% est. APR'],
+                previewColor: 'text-emerald-400/80',
+              },
+              {
+                step: '3',
+                icon: <CheckCircle2 className="h-6 w-6" />,
+                label: 'Choose and activate',
+                desc: 'Select a plan that fits your goals. Review the terms, lock period, and risk level. Activate when ready — or ask support first. No pressure.',
+                color: 'from-purple-500/20 to-violet-600/20',
+                iconColor: 'text-purple-400',
+                borderHover: 'hover:border-purple-500/30',
+                preview: ['Plan selected ✓', 'Terms reviewed ✓', 'Stake active ✓'],
+                previewColor: 'text-purple-400/80',
+              },
+            ].map((item) => (
+              <div key={item.step} className={`glass-card p-7 ${item.borderHover} transition-all duration-300 hover:bg-white/5 flex flex-col`}>
+                <div className="flex items-center justify-between mb-5">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} border border-white/10 ${item.iconColor}`}>
+                    {item.icon}
+                  </div>
+                  <span className="text-5xl font-black text-white/5">{item.step}</span>
+                </div>
+                <h3 className="font-bold text-base text-white mb-2">{item.label}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5">{item.desc}</p>
+                {/* Mini UI preview strip */}
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 space-y-1.5">
+                  {item.preview.map((line) => (
+                    <p key={line} className={`text-[11px] font-mono ${item.previewColor}`}>{line}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-xs text-muted-foreground mt-8">
+            Staking rewards are variable and not guaranteed. Crypto assets can go down as well as up.
+          </p>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section className="py-24 relative">
         <div className="glow-blob w-[700px] h-[350px] bg-cyan-500/[0.08] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -1541,11 +1699,10 @@ export default async function HomePage() {
               </div>
               <h2 className="text-4xl md:text-6xl font-black mb-5 leading-tight">
                 Curious what your<br />
-                <span className="gradient-text">crypto could earn?</span>
+                <span className="gradient-text">options look like?</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                The only way to see current yield estimates is to create a free account.
-                Two minutes. No credit card. No commitment. Just numbers.
+                Create a free account and see current plan options, yield estimates, and risk levels for your portfolio — before you commit to anything.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>
@@ -1554,7 +1711,7 @@ export default async function HomePage() {
                     className="gap-2 font-bold text-base px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105"
                   >
                     <ArrowRight className="h-5 w-5" />
-                    {session ? 'View Dashboard' : 'See My Estimated Yields'}
+                    {session ? 'View Dashboard' : 'Check My Staking Options'}
                   </Button>
                 </Link>
                 <Link href="/plans">

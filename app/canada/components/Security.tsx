@@ -25,11 +25,11 @@ export function Security() {
           </p>
         </div>
 
-        {/* Dashboard visual — staking comparison platform on laptop */}
+        {/* Human support + security visual */}
         <div className="rounded-2xl overflow-hidden mb-14 max-w-4xl mx-auto">
           <img
-            src="/section-5.png"
-            alt="Stakeonix staking comparison dashboard — transparent APY rates, risk levels and lock periods on a laptop"
+            src="/section-6.png"
+            alt="Stakeonix Canadian support agent at laptop — Bank-level security, KYC/AML compliant, Canadian support"
             className="w-full h-auto"
             loading="lazy"
           />

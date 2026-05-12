@@ -14,7 +14,8 @@ import { TrendingUp, Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users, BarChar
 import { toast } from 'sonner'
 
 const COUNTRY_CODES = [
-  { code: '+1',   flag: '🇺🇸', name: 'US/CA' },
+  { code: '+1',   flag: '�🇦', name: 'Canada' },
+  { code: '+1',   flag: '🇺🇸', name: 'USA' },
   { code: '+44',  flag: '🇬🇧', name: 'UK' },
   { code: '+61',  flag: '🇦🇺', name: 'AU' },
   { code: '+49',  flag: '🇩🇪', name: 'DE' },
@@ -65,8 +66,8 @@ const highlights = [
   },
   {
     icon: <Shield className="h-5 w-5 text-blue-400" />,
-    title: 'Non-Custodial Option',
-    desc: 'You stay in control - withdraw anytime, no lockups.',
+    title: 'FINTRAC Registered',
+    desc: 'Compliant with Canadian anti-money laundering regulations.',
   },
 ]
 
@@ -419,7 +420,7 @@ export default function SignupPage() {
           <div className="grid grid-cols-2 gap-3">
             {[
               { value: '480K+', label: 'Active stakers' },
-              { value: 'FCA', label: 'Authorised' },
+              { value: 'FINTRAC', label: 'Registered' },
               { value: '4.8/5', label: 'User rating' },
               { value: '170+', label: 'Assets' },
             ].map((s) => (

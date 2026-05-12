@@ -382,7 +382,7 @@ const features = [
   {
     icon: <Zap className="h-6 w-6" />,
     title: 'Instant Activation',
-    description: 'Start earning immediately. Your stake activates instantly with no waiting period.',
+    description: 'Once your account is verified and a plan selected, eligible staking options can be activated through your dashboard.',
     color: 'from-yellow-500/20 to-orange-500/20',
     iconColor: 'text-yellow-400',
   },
@@ -394,9 +394,9 @@ const features = [
     iconColor: 'text-purple-400',
   },
   {
-    icon: <Users className="h-6 w-6" />,
-    title: 'Referral Programme',
-    description: 'Earn 5-8% tiered commissions on direct referrals and 2% on second-tier referrals. Build a network and earn on every level.',
+    icon: <Shield className="h-6 w-6" />,
+    title: 'Clear Risk Disclosure',
+    description: 'Staking rewards are variable and not guaranteed. We clearly show risk levels, lock periods, and estimated ranges before you commit.',
     color: 'from-pink-500/20 to-rose-500/20',
     iconColor: 'text-pink-400',
   },
@@ -516,16 +516,13 @@ export default async function HomePage() {
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
-                Your crypto<br />
-                <span className="gradient-text">shouldn&apos;t sit still.</span><br />
-                <span className="text-white/75 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">The regulated way to make it work.</span>
+                Before You Stake Crypto,{' '}
+                <span className="gradient-text">Compare Your Options.</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                Blockchain networks pay rewards to participants who help validate transactions.
-                That happens every day, whether you participate or not. StakeOnix is an
-                FCA-authorised platform that connects your assets to those networks.
-                Create a free account to see what your portfolio could earn.
+                StakeOnix helps Canadians review staking plans, risk considerations, supported assets,
+                and account requirements before choosing a staking option.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
@@ -535,7 +532,7 @@ export default async function HomePage() {
                     className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
                   >
                     <ArrowRight className="h-5 w-5" />
-                    {session ? 'Go to Dashboard' : 'Discover My Rates'}
+                    {session ? 'Go to Dashboard' : 'Check My Staking Options'}
                   </Button>
                 </Link>
                 <Link href="/what-is-staking" className="w-full sm:w-auto">
@@ -545,14 +542,14 @@ export default async function HomePage() {
                     className="w-full sm:w-auto gap-2 font-semibold text-base px-8 py-4 border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 rounded-2xl transition-all duration-300"
                   >
                     <Eye className="h-5 w-5" />
-                    What is Staking?
+                    How Staking Works
                   </Button>
                 </Link>
               </div>
 
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
-                  KYC required &bull; Returns variable, not guaranteed &bull; Rates visible to registered members
+                  Staking rewards are variable and not guaranteed. Crypto assets can go down as well as up.
                 </p>
               )}
 
@@ -1292,7 +1289,7 @@ export default async function HomePage() {
                 <Link href="/signup">
                   <Button size="lg" className="gap-2 rounded-xl w-full sm:w-auto">
                     <ArrowRight className="h-4 w-4" />
-                    Create Account
+                    Check My Staking Options
                   </Button>
                 </Link>
               </div>

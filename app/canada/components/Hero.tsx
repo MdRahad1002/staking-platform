@@ -32,18 +32,28 @@ export function Hero() {
       style={{ minHeight: 'calc(100vh - 4rem)' }}
       aria-labelledby="hero-headline"
     >
-      {/* Hero background image */}
+      {/* Hero background image — mobile: portrait photo (no zoom), desktop: wide photo */}
       <div className="absolute inset-0">
+        {/* Mobile only */}
+        <Image
+          src="/hero-mobile.png"
+          alt=""
+          fill
+          priority
+          className="object-contain object-top md:hidden"
+        />
+        {/* Desktop only */}
         <Image
           src="/hero-background.png"
           alt=""
           fill
           priority
-          className="object-cover object-center"
+          className="hidden md:block object-cover object-center"
         />
       </div>
-      {/* Dark overlay — left heavy for text, fades right */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/90 via-[#060d1a]/65 to-[#060d1a]/40" />
+      {/* Dark overlay — mobile: bottom-heavy so text over top is readable; desktop: left-heavy */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#060d1a]/20 via-[#060d1a]/50 to-[#060d1a]/90 md:hidden" />
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#060d1a]/90 via-[#060d1a]/65 to-[#060d1a]/40" />
       {/* Soft grid */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
@@ -63,16 +73,6 @@ export function Hero() {
 
           {/* LEFT: Copy */}
           <div>
-            {/* Mobile hero image — full width, no crop, hidden on desktop */}
-            <div className="block md:hidden w-full mb-6 rounded-2xl overflow-hidden">
-              <img
-                src="/hero-mobile.png"
-                alt="Man reviewing staking portfolio on laptop and phone"
-                className="w-full h-auto"
-                loading="eager"
-              />
-            </div>
-
             {/* Eyebrow — clean, no long registry number on mobile */}
             <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 mb-5 backdrop-blur-sm">
               <ShieldCheck className="h-3.5 w-3.5 text-white/80 flex-shrink-0" aria-hidden="true" />

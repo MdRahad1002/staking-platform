@@ -68,6 +68,16 @@ export function PathSelector() {
           Choose the path that best matches your current crypto experience.
         </p>
 
+        {/* Visual — three persona cards with real photos */}
+        <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg mb-12">
+          <img
+            src="/section-3.png"
+            alt="Three types of crypto users — Beginner, Crypto Holder, and Active User — each with a tailored staking path"
+            className="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+
         {/* Three path cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {paths.map(({ icon: Icon, title, description, cta, href, border, iconBg, iconColor, ctaBg, featured }) => (

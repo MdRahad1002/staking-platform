@@ -28,7 +28,7 @@ export function CanadaNav() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
-          : 'bg-transparent'
+          : 'bg-white/80 backdrop-blur-sm border-b border-slate-100'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,14 +39,11 @@ export function CanadaNav() {
             <span
               className={cn(
                 'font-extrabold text-lg tracking-tight transition-colors leading-none',
-                scrolled ? 'text-[#0A1628]' : 'text-white'
+                'text-[#0A1628]'
               )}
             >
-              <span className={scrolled ? 'text-gray-500 font-bold' : 'text-white/70 font-bold'}>Stake</span>
-              <span className={scrolled
-                ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent'
-                : 'bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent'
-              }>onix</span>
+              <span className="text-gray-500 font-bold">Stake</span>
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">onix</span>
             </span>
           </Link>
 
@@ -64,7 +61,7 @@ export function CanadaNav() {
                 href={href}
                 className={cn(
                   'text-sm font-medium transition-colors hover:text-[#00C896]',
-                  scrolled ? 'text-gray-600' : 'text-white/80'
+                  'text-gray-600'
                 )}
               >
                 {label}
@@ -77,8 +74,7 @@ export function CanadaNav() {
             <Link
               href="/login"
               className={cn(
-                'text-sm font-medium transition-colors hover:text-[#00C896]',
-                scrolled ? 'text-gray-600' : 'text-white/80'
+                'text-sm font-medium transition-colors hover:text-[#00C896] text-gray-600'
               )}
             >
               Sign In
@@ -96,7 +92,7 @@ export function CanadaNav() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn(
               'md:hidden p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00C896]',
-              scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/10'
+              'text-gray-700 hover:bg-gray-100'
             )}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}

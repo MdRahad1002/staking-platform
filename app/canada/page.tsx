@@ -2,11 +2,14 @@
 
 // ── Above-fold: eager (blocking) ─────────────────────────────────────────────
 import { Hero } from './components/Hero'
-import { TrustBar } from './components/TrustBar'
 import { CanadaNav } from './components/CanadaNav'
 import { StickyMobileCTA } from './components/StickyMobileCTA'
+import { ProblemSection } from './components/ProblemSection'
+import { PathSelector } from './components/PathSelector'
+import { ValueProp } from './components/ValueProp'
 
 // ── Below-fold: lazy (non-blocking) ─────────────────────────────────────────
+const TrustBar       = dynamic(() => import('./components/TrustBar').then(m => ({ default: m.TrustBar })), { ssr: true })
 const CanadaStats    = dynamic(() => import('./components/CanadaStats').then(m => ({ default: m.CanadaStats })), { ssr: true })
 const YieldsTable    = dynamic(() => import('./components/YieldsTable').then(m => ({ default: m.YieldsTable })), { ssr: true })
 const CADCalculator  = dynamic(() => import('./components/CADCalculator').then(m => ({ default: m.CADCalculator })), { ssr: true })
@@ -110,7 +113,13 @@ export default function CanadaPage() {
       <div className="min-h-screen">
         <CanadaNav />
         <main id="main-content">
+          {/* ── New top-of-funnel flow ───────────────────────────────────── */}
           <Hero />
+          <ProblemSection />
+          <PathSelector />
+          <ValueProp />
+
+          {/* ── Detail / proof sections ──────────────────────────────────── */}
           <TrustBar />
           <CanadaStats />
           <YieldsTable />

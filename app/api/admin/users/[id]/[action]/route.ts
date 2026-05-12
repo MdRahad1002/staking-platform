@@ -48,6 +48,27 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         return NextResponse.json({ message: `Role changed to ${role}.` })
       }
 
+      case 'delete': {
+        if (user.role === 'ADMIN') return NextResponse.json({ error: 'Cannot delete an admin account.' }, { status: 403 })
+        // Delete in dependency order (children before parents)
+        await prisma.ticketMessage.deleteMany({ where: { userId } })
+        await prisma.ticket.deleteMany({ where: { userId } })
+        await prisma.stakePayment.deleteMany({ where: { stake: { userId } } })
+        await prisma.stake.deleteMany({ where: { userId } })
+        await prisma.referralEarning.deleteMany({ where: { OR: [{ userId }, { fromUserId: userId }] } })
+        await prisma.transaction.deleteMany({ where: { userId } })
+        await prisma.deposit.deleteMany({ where: { userId } })
+        await prisma.withdrawal.deleteMany({ where: { userId } })
+        await prisma.notification.deleteMany({ where: { userId } })
+        await prisma.chatMessage.deleteMany({ where: { userId } })
+        await prisma.loginHistory.deleteMany({ where: { userId } })
+        await prisma.apiKey.deleteMany({ where: { userId } })
+        await prisma.savedWallet.deleteMany({ where: { userId } })
+        await prisma.kycSubmission.deleteMany({ where: { userId } })
+        await prisma.user.delete({ where: { id: userId } })
+        return NextResponse.json({ message: 'User deleted.' })
+      }
+
       default:
         return NextResponse.json({ error: 'Unknown action.' }, { status: 400 })
     }

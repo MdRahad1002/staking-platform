@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { formatCurrency } from '@/lib/utils'
-import { BadgeDollarSign, Ban, CheckCircle, UserCog } from 'lucide-react'
+import { BadgeDollarSign, Ban, CheckCircle, UserCog, Trash2 } from 'lucide-react'
 
 interface Props {
   user: { id: string; isActive: boolean; bannedAt: string | null; balance: number; role?: string }
@@ -21,6 +21,7 @@ export default function AdminUserActions({ user }: Props) {
   const [loading, setLoading] = useState('')
   const [roleDialogOpen, setRoleDialogOpen] = useState(false)
   const [selectedRole, setSelectedRole] = useState(user.role ?? 'USER')
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
 
   const doAction = async (action: string, extra?: object) => {
     setLoading(action)
@@ -119,8 +120,45 @@ export default function AdminUserActions({ user }: Props) {
             <UserCog className="h-3.5 w-3.5" />
             Change Role
           </Button>
+
+          <Button
+            size="sm"
+            variant="destructive"
+            className="w-full gap-1.5 h-8 text-xs mt-1"
+            onClick={() => setDeleteDialogOpen(true)}
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            Delete User
+          </Button>
         </div>
       </CardContent>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="text-red-400">Delete User?</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground py-2">
+            This will permanently delete the user and all their data (transactions, deposits, stakes, tickets, etc.). This action <strong>cannot be undone</strong>.
+          </p>
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+            <Button
+              variant="destructive"
+              loading={loading === 'delete'}
+              onClick={async () => {
+                await doAction('delete')
+                setDeleteDialogOpen(false)
+                router.push('/admin/users')
+              }}
+            >
+              <Trash2 className="h-3.5 w-3.5 mr-1" />
+              Delete Permanently
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Role Dialog */}
       <Dialog open={roleDialogOpen} onOpenChange={setRoleDialogOpen}>

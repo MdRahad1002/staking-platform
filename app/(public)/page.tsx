@@ -505,7 +505,7 @@ export default async function HomePage() {
           style={{ backgroundImage: "url('/hero-background.png')", backgroundPosition: 'right center' }}
         />
         {/* Dark overlay — heavier on the left so text stays readable, fades to transparent on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/55 to-background/10" />
         {/* Subtle grid on top */}
         <div className="absolute inset-0 hero-grid opacity-10" />
 

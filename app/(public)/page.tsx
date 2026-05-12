@@ -499,11 +499,15 @@ export default async function HomePage() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 hero-grid opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-blue-950/30" />
-        <div className="glow-blob w-[600px] h-[600px] bg-cyan-500/15 top-[-100px] left-[-100px]" />
-        <div className="glow-blob w-[500px] h-[500px] bg-blue-600/10 bottom-0 right-[-50px]" />
-        <div className="glow-blob w-[300px] h-[300px] bg-purple-600/10 top-1/2 left-1/2" />
+        {/* Hero background photo — right-aligned so the person sits on the right, copy on left */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero-background.png')", backgroundPosition: 'right center' }}
+        />
+        {/* Dark overlay — heavier on the left so text stays readable, fades to transparent on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/30" />
+        {/* Subtle grid on top */}
+        <div className="absolute inset-0 hero-grid opacity-10" />
 
         <div className="container relative mx-auto px-4 py-14 sm:py-20 lg:py-0">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">

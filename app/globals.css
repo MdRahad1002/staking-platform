@@ -308,3 +308,62 @@
   pointer-events: none;
   mix-blend-mode: screen;
 }
+
+/* ─── Scroll-reveal ─────────────────────────────────────────────────────────
+   Elements marked with [data-reveal] start invisible + shifted.
+   RevealObserver adds .reveal-visible when they enter the viewport.
+   An optional data-delay="300" (ms) staggers the animation.
+────────────────────────────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity   0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+[data-reveal="left"]  { transform: translateX(-32px); }
+[data-reveal="right"] { transform: translateX(32px);  }
+[data-reveal="scale"] { transform: scale(0.93) translateY(14px); }
+[data-reveal].reveal-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── Mobile scroll momentum & containment ───────────────────────────────────
+   - -webkit-overflow-scrolling: touch  → kinetic (inertia) scrolling on iOS
+   - overscroll-behavior: contain       → prevents scroll chaining to parent
+────────────────────────────────────────────────────────────────────────────── */
+.overflow-x-auto,
+.overflow-y-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ─── Better mobile tap feedback ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .glass-card {
+    /* Slightly faster transitions on mobile so interactions feel snappier */
+    transition-duration: 150ms;
+  }
+  /* Remove hover scale on mobile - it's triggered by tap and looks wrong */
+  .md\:hover\:scale-\[1\.02\]:hover {
+    transform: none;
+  }
+}
+
+/* ─── Scroll-margin so anchor-linked sections clear the sticky navbar ──────── */
+section[id] {
+  scroll-margin-top: 80px;
+}

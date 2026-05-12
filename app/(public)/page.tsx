@@ -711,7 +711,7 @@ export default async function HomePage() {
         <div className="container relative mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
             {stats.map((stat, i) => (
-              <div key={stat.label} className="text-center group relative">
+              <div key={stat.label} className="text-center group relative" data-reveal data-delay={i * 110}>
                 {i < stats.length - 1 && (
                   <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-10 bg-white/5" />
                 )}
@@ -768,8 +768,8 @@ export default async function HomePage() {
                 title: 'You receive your share',
                 desc: 'StakeOnix manages the technical infrastructure (nodes, uptime, compounding) and credits your share of rewards to your account based on your chosen plan.',
               },
-            ].map((item) => (
-              <div key={item.step} className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group">
+            ].map((item, i) => (
+              <div key={item.step} className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group" data-reveal data-delay={i * 130}>
                 <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.color} ${item.iconColor} mb-5 group-hover:scale-110 transition-transform duration-300`}>
                   {item.icon}
                 </div>
@@ -936,6 +936,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {/* live rates grid — data-reveal stagger injected per-item */}
             {[
               { symbol: 'eth',   name: 'Ethereum',    apr: 9.0,  badge: null },
               { symbol: 'btc',   name: 'Bitcoin',     apr: 7.0,  badge: null },
@@ -949,10 +950,12 @@ export default async function HomePage() {
               { symbol: 'algo',  name: 'Algorand',    apr: 10.0, badge: null },
               { symbol: 'xtz',   name: 'Tezos',       apr: 9.5,  badge: null },
               { symbol: 'trx',   name: 'TRON',        apr: 10.5, badge: null },
-            ].map((coin) => (
+            ].map((coin, i) => (
               <div
                 key={coin.symbol}
                 className="glass-card p-5 flex items-center gap-4 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group relative overflow-hidden"
+                data-reveal
+                data-delay={i * 45}
               >
                 {coin.badge && (
                   <span className="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-2 py-0.5 rounded-full">
@@ -1083,10 +1086,12 @@ export default async function HomePage() {
                 badge: 'Top Tier',
                 features: ['Maximum network yields', 'Institutional-grade terms', 'Custom staking strategy', 'VIP support access'],
               },
-            ].map((plan) => (
+            ].map((plan, i) => (
               <div
                 key={plan.tier}
                 className={`relative rounded-2xl border ${plan.border} bg-card hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col overflow-hidden`}
+                data-reveal
+                data-delay={i * 100}
               >
                 {plan.badge && (
                   <div className="absolute top-3 right-3">
@@ -1149,7 +1154,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group flex flex-col">
+            <div className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 group flex flex-col" data-reveal>
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 mb-5 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="h-6 w-6" />
               </div>
@@ -1162,7 +1167,7 @@ export default async function HomePage() {
                 Start with our Flexible plan <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-            <div className="glass-card p-7 hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-300 group flex flex-col">
+            <div className="glass-card p-7 hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-300 group flex flex-col" data-reveal data-delay="150">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 text-green-400 mb-5 group-hover:scale-110 transition-transform duration-300">
                 <RefreshCw className="h-6 w-6" />
               </div>
@@ -1175,7 +1180,7 @@ export default async function HomePage() {
                 Put your portfolio to work <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-            <div className="glass-card p-7 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300 group flex flex-col">
+            <div className="glass-card p-7 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all duration-300 group flex flex-col" data-reveal data-delay="300">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/20 to-violet-600/20 text-purple-400 mb-5 group-hover:scale-110 transition-transform duration-300">
                 <BarChart3 className="h-6 w-6" />
               </div>
@@ -1206,7 +1211,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             <div className="hidden lg:block absolute top-11 left-[calc(12.5%+28px)] right-[calc(12.5%+28px)] h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
             {howItWorks.map((item, i) => (
-              <div key={item.step} className="relative group">
+              <div key={item.step} className="relative group" data-reveal data-delay={i * 120}>
                 <div className="glass-card p-7 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-500 h-full">
                   <div className="flex items-center justify-between mb-5">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/20 text-cyan-400 group-hover:from-cyan-500/30 group-hover:to-blue-600/30 transition-all">
@@ -1382,8 +1387,8 @@ export default async function HomePage() {
                 title: 'Live Support, Always',
                 desc: 'Real humans, not bots. Our support team is available 24/7 via live chat and Telegram. Typical response time under 5 minutes.',
               },
-            ].map((item) => (
-              <div key={item.title} className="glass-card p-7 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 group cursor-default flex gap-5 items-start">
+            ].map((item, i) => (
+              <div key={item.title} className="glass-card p-7 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 group cursor-default flex gap-5 items-start" data-reveal data-delay={i * 80}>
                 <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${item.color} group-hover:scale-110 transition-transform duration-300`}>
                   {item.icon}
                 </div>
@@ -1410,8 +1415,8 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((feature) => (
-              <div key={feature.title} className="glass-card p-7 hover:border-white/20 hover:bg-white/5 transition-all duration-300 group cursor-default">
+            {features.map((feature, i) => (
+              <div key={feature.title} className="glass-card p-7 hover:border-white/20 hover:bg-white/5 transition-all duration-300 group cursor-default" data-reveal data-delay={i * 80}>
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} ${feature.iconColor} mb-5 group-hover:scale-110 transition-transform duration-300`}>
                   {feature.icon}
                 </div>
@@ -1498,8 +1503,8 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-                  <div key={t.name} className="glass-card p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/5 flex flex-col">
+            {testimonials.map((t, i) => (
+                  <div key={t.name} className="glass-card p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/5 flex flex-col" data-reveal data-delay={i * 150}>
                 <div className="flex gap-1 mb-4">
                   {[...Array(t.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />

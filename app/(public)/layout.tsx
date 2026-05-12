@@ -2,6 +2,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { PageLoader } from '@/components/layout/PageLoader'
 import { StickySignupCTA } from '@/components/layout/StickySignupCTA'
+import { RevealObserver } from '@/components/RevealObserver'
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,6 +12,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <main className="flex-1">{children}</main>
       <Footer />
       <StickySignupCTA />
+      <RevealObserver />
     </div>
   )
 }

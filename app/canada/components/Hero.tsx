@@ -40,7 +40,7 @@ export function Hero() {
           alt=""
           fill
           priority
-          className="object-contain object-top md:hidden"
+          className="object-cover object-top md:hidden"
         />
         {/* Desktop only */}
         <Image

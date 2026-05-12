@@ -356,7 +356,7 @@ export function getVerificationEmailTemplate(name: string, verifyUrl: string): s
 
 export async function sendVerificationEmail(email: string, name: string, token: string): Promise<void> {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-  const verifyUrl = `${appUrl}/verify-email?token=${token}`
+  const verifyUrl = `${appUrl}/api/auth/verify-email?token=${token}`
   await sendEmail({
     to: email,
     subject: 'Welcome to StakeOnix - Please Verify Your Email',

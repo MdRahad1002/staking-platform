@@ -36,8 +36,16 @@ function VerifyEmailContent() {
   const params  = useSearchParams()
   const router  = useRouter()
 
+  const token   = params.get('token')
   const success = params.get('success')
   const error   = params.get('error')
+
+  // If a token is present, redirect to the API route to process it
+  useEffect(() => {
+    if (token) {
+      router.replace(`/api/auth/verify-email?token=${token}`)
+    }
+  }, [token, router])
 
   // Auto-redirect countdown after success
   const [countdown, setCountdown] = useState(5)
@@ -158,8 +166,17 @@ function VerifyEmailContent() {
           </>
         )}
 
+        {/* Token present - redirecting to API */}
+        {token && (
+          <>
+            <div className="flex justify-center">{ICONS.loading}</div>
+            <h1 className="text-2xl font-bold text-white">Verifying…</h1>
+            <p className="text-gray-400">Please wait while we verify your email.</p>
+          </>
+        )}
+
         {/* Fallback - no params (direct visit) */}
-        {!success && !error && (
+        {!success && !error && !token && (
           <>
             <div className="flex justify-center">{ICONS.loading}</div>
             <h1 className="text-2xl font-bold text-white">Verify Your Email</h1>

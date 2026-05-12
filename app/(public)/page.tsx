@@ -510,8 +510,8 @@ export default async function HomePage() {
             className="object-cover object-right"
           />
         </div>
-        {/* Dark overlay — heavier on the left so text stays readable, fades to transparent on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/55 to-background/10" />
+        {/* Dark overlay — left half readable, right side shows the photo */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/90 via-[#060d1a]/60 to-transparent" />
         {/* Subtle grid on top */}
         <div className="absolute inset-0 hero-grid opacity-10" />
 

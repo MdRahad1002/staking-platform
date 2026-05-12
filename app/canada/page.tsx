@@ -18,10 +18,12 @@ const ComparisonTable= dynamic(() => import('./components/ComparisonTable').then
 const HowItWorks     = dynamic(() => import('./components/HowItWorks').then(m => ({ default: m.HowItWorks })), { ssr: true })
 const Security       = dynamic(() => import('./components/Security').then(m => ({ default: m.Security })), { ssr: true })
 const TrustStatement = dynamic(() => import('./components/TrustStatement').then(m => ({ default: m.TrustStatement })), { ssr: true })
-const CanadaComments = dynamic(() => import('./components/CanadaComments').then(m => ({ default: m.CanadaComments })), { ssr: false })
 const FAQ            = dynamic(() => import('./components/FAQ').then(m => ({ default: m.FAQ })), { ssr: true })
 const FinalCTA       = dynamic(() => import('./components/FinalCTA').then(m => ({ default: m.FinalCTA })), { ssr: true })
 const CanadaFooter   = dynamic(() => import('./components/Footer').then(m => ({ default: m.CanadaFooter })), { ssr: true })
+
+// CanadaComments uses ssr:false — must live in a Client Component wrapper
+import { CanadaCommentsClient } from './components/CanadaCommentsClient'
 import {
   COMPANY_NAME,
   APP_URL,
@@ -130,7 +132,7 @@ export default function CanadaPage() {
           <Security />
           <FAQ />
           <TrustStatement />
-          <CanadaComments />
+          <CanadaCommentsClient />
           <FinalCTA />
         </main>
         <CanadaFooter />

@@ -11,17 +11,25 @@ const WHATSAPP_URL = 'https://wa.me/16133664391?text=Hi%2C%20I%27d%20like%20to%2
 export function StickySignupCTA() {
   const [visible, setVisible] = useState(false)
   const [waDismissed, setWaDismissed] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setWaDismissed(!!localStorage.getItem(WA_STORAGE_KEY))
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile, { passive: true })
     const dismissed = localStorage.getItem(STORAGE_KEY)
-    if (dismissed) return
-
-    function onScroll() {
-      if (window.scrollY > 400) setVisible(true)
+    if (!dismissed) {
+      function onScroll() {
+        if (window.scrollY > 400) setVisible(true)
+      }
+      window.addEventListener('scroll', onScroll, { passive: true })
+      return () => {
+        window.removeEventListener('scroll', onScroll)
+        window.removeEventListener('resize', checkMobile)
+      }
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   function dismiss() {
@@ -74,8 +82,8 @@ export function StickySignupCTA() {
         </div>
       )}
 
-      {/* Signup CTA - shown after scroll */}
-      {visible && (
+      {/* Signup CTA - shown after scroll; on mobile only shows once WhatsApp widget is dismissed */}
+      {visible && (!isMobile || waDismissed) && (
         <div className="fixed bottom-0 left-0 right-0 z-50 md:bottom-6 md:left-auto md:right-6 md:w-[360px] animate-in slide-in-from-bottom duration-300">
           <div className="bg-[#0a0f1e] border border-cyan-500/30 shadow-2xl shadow-cyan-500/10 md:rounded-2xl overflow-hidden">
             <div className="h-0.5 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />

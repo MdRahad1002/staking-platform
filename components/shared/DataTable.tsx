@@ -72,6 +72,7 @@ export function DataTable<T extends Record<string, any>>({
       )}
 
       <div className="rounded-xl border border-border overflow-hidden">
+        <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/30">
@@ -115,6 +116,7 @@ export function DataTable<T extends Record<string, any>>({
             )}
           </TableBody>
         </Table>
+        </div>
       </div>
 
       {totalPages > 1 && (

@@ -158,7 +158,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Links - 3-col on mobile, dissolves into parent 5-col grid on md */}
+          <div className="grid grid-cols-3 gap-4 md:contents">
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="font-semibold text-sm mb-4 text-white/80">{category}</h3>
@@ -176,6 +177,7 @@ export function Footer() {
               </ul>
             </div>
           ))}
+          </div>
         </div>
 
         {/* Bottom bar */}

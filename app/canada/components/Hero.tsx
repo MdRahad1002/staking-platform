@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   ArrowRight,
   BookOpen,
@@ -27,11 +28,23 @@ const riskStyle: Record<string, string> = {
 export function Hero() {
   return (
     <section
-      className="relative flex flex-col justify-center overflow-hidden bg-white"
+      className="relative flex flex-col justify-center overflow-hidden"
       style={{ minHeight: 'calc(100vh - 4rem)' }}
       aria-labelledby="hero-headline"
     >
-      {/* Soft blobs hidden on mobile to save GPU */}
+      {/* Hero background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/hero-background.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+        />
+      </div>
+      {/* Dark overlay — left heavy for text, fades right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/90 via-[#060d1a]/65 to-[#060d1a]/40" />
+      {/* Soft grid */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <svg className="absolute inset-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -51,9 +64,9 @@ export function Hero() {
           {/* LEFT: Copy */}
           <div>
             {/* Eyebrow — clean, no long registry number on mobile */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 mb-5">
-              <ShieldCheck className="h-3.5 w-3.5 text-blue-600 flex-shrink-0" aria-hidden="true" />
-              <span className="text-blue-700 text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 mb-5 backdrop-blur-sm">
+              <ShieldCheck className="h-3.5 w-3.5 text-white/80 flex-shrink-0" aria-hidden="true" />
+              <span className="text-white text-xs font-semibold">
                 FINTRAC Registered
               </span>
             </div>
@@ -61,14 +74,14 @@ export function Hero() {
             {/* H1 */}
             <h1
               id="hero-headline"
-              className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-[#0A1628] leading-[1.1] tracking-tight mb-4"
+              className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.1] tracking-tight mb-4"
             >
               Before You Stake Crypto,{' '}
-              <span className="text-blue-600">Understand Your Options</span>
+              <span className="text-blue-400">Understand Your Options</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-lg text-slate-900 leading-relaxed mb-7 max-w-xl">
+            <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-7 max-w-xl">
               Stakeonix helps Canadians understand staking, compare available options, and see whether it fits their crypto goals before taking the next step.
             </p>
 
@@ -83,7 +96,7 @@ export function Hero() {
               </Link>
               <a
                 href="#how-it-works"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white hover:border-blue-300 hover:bg-blue-50 text-slate-700 font-semibold text-base px-6 py-4 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 text-white font-semibold text-base px-6 py-4 transition-all duration-200 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
               >
                 <BookOpen className="h-4 w-4 text-blue-500 flex-shrink-0" aria-hidden="true" />
                 Learn How Staking Works
@@ -91,14 +104,14 @@ export function Hero() {
             </div>
 
             {/* Trust line */}
-            <p className="text-slate-900 text-sm mb-2 flex items-start gap-2">
+            <p className="text-white/90 text-sm mb-2 flex items-start gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
               No hype. No guaranteed rewards. Just clarity before you decide.
             </p>
 
             {/* Risk disclaimer */}
-            <p className="text-slate-700 text-xs leading-relaxed max-w-md">
-              <strong className="text-slate-900">Risk disclosure:</strong>{' '}
+            <p className="text-white/70 text-xs leading-relaxed max-w-md">
+              <strong className="text-white/90">Risk disclosure:</strong>{' '}
               Staking involves risk. Rewards are not guaranteed and may change over time.
             </p>
           </div>

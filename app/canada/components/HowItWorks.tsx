@@ -40,6 +40,16 @@ export function HowItWorks() {
           </p>
         </div>
 
+        {/* Visual — 4-step process diagram */}
+        <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-lg mb-12">
+          <img
+            src="/section-4.png"
+            alt="Start Staking in 4 Simple Steps: Create Account, Verify Profile, Choose Staking Option, Track Progress"
+            className="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+
         {/* Steps grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12" role="list">
           {steps.map((step, idx) => {

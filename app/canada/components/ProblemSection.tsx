@@ -71,6 +71,16 @@ export function ProblemSection() {
           </p>
         </div>
 
+        {/* Visual — problem vs solution image */}
+        <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-lg mb-12">
+          <img
+            src="/section-2.png"
+            alt="Too much information vs Make confident decisions — how Stakeonix helps Canadians evaluate staking clearly"
+            className="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+
         {/* Four check cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-10">
           {checkCards.map(({ icon: Icon, title, question, iconStyle, cardBg, iconBg }) => (

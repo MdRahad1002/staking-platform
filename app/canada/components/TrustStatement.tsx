@@ -72,7 +72,7 @@ export function TrustStatement() {
           <h3 className="text-white text-2xl sm:text-3xl font-bold mb-3">
             Still have questions? Talk to a real person.
           </h3>
-          <p className="text-white/60 text-base mb-8 max-w-xl mx-auto">
+          <p className="text-white/85 text-base mb-8 max-w-xl mx-auto">
             Our team is available by phone, WhatsApp, email and live chat. Reach out any way you prefer and we will walk you through everything, no pressure.
           </p>
 
@@ -100,7 +100,7 @@ export function TrustStatement() {
               </svg>
               <div className="text-left">
                 <p className="text-white font-semibold text-sm">WhatsApp / Call</p>
-                <p className="text-white/50 text-xs">{PHONE_NUMBER}</p>
+                <p className="text-white/75 text-xs">{PHONE_NUMBER}</p>
               </div>
             </a>
             <a
@@ -110,7 +110,7 @@ export function TrustStatement() {
               <MessageCircle className="h-5 w-5 text-[#00C896] flex-shrink-0" aria-hidden="true" />
               <div className="text-left">
                 <p className="text-white font-semibold text-sm">Email us</p>
-                <p className="text-white/50 text-xs">{SUPPORT_EMAIL}</p>
+                <p className="text-white/75 text-xs">{SUPPORT_EMAIL}</p>
               </div>
             </a>
             <a
@@ -122,7 +122,7 @@ export function TrustStatement() {
               </svg>
               <div className="text-left">
                 <p className="text-white font-semibold text-sm">Call us</p>
-                <p className="text-white/50 text-xs">{PHONE_NUMBER}</p>
+                <p className="text-white/75 text-xs">{PHONE_NUMBER}</p>
               </div>
             </a>
           </div>

@@ -29,18 +29,18 @@ export function TaxAdvantage() {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Left: body copy */}
           <div>
-            <p className="text-white/70 text-lg leading-relaxed mb-6">
+            <p className="text-white/90 text-lg leading-relaxed mb-6">
               Under CRA&apos;s January 2025 guidance, depositing and staking crypto on a CSA-registered
               platform like ours generally does{' '}
               <strong className="text-white font-semibold">not trigger a taxable disposition</strong>.
               You&apos;re only taxed on staking rewards as income, not on the act of staking itself.
             </p>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
+            <p className="text-white/90 text-lg leading-relaxed mb-8">
               Most offshore platforms can&apos;t offer this clarity. Because they operate outside CSA
               oversight, the CRA&apos;s guidance on registered platforms doesn&apos;t apply, leaving
               Canadian users with uncertain tax exposure every time they stake.
             </p>
-            <p className="text-white/70 text-base leading-relaxed mb-8">
+            <p className="text-white/90 text-base leading-relaxed mb-8">
               This is particularly significant for Canadians holding crypto in non-registered accounts:
               every unnecessary disposition is a taxable event that erodes your real returns.
             </p>
@@ -68,7 +68,7 @@ export function TaxAdvantage() {
                 {ourPlatformItems.map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-[#00C896] flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <span className="text-white/80 text-sm">{item}</span>
+                    <span className="text-white/90 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -77,7 +77,7 @@ export function TaxAdvantage() {
         </div>
 
         {/* Disclaimer */}
-        <p className="mt-10 text-center text-white/30 text-sm max-w-2xl mx-auto">
+        <p className="mt-10 text-center text-white/60 text-sm max-w-2xl mx-auto">
           Not tax advice. Individual circumstances vary. Consult a qualified Canadian tax professional
           before making staking decisions.{' '}
           <a href="/blog/cra-staking-tax-guide" className="underline hover:text-white/50 transition-colors">

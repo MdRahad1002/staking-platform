@@ -20,7 +20,7 @@ export function Security() {
           >
             Built like a Canadian financial institution should be
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/85 text-lg max-w-2xl mx-auto">
             Regulatory compliance isn&apos;t a checkbox for us. It&apos;s the foundation.
           </p>
         </div>
@@ -39,7 +39,7 @@ export function Security() {
                   <Icon className="h-5 w-5 text-[#00C896]" aria-hidden="true" />
                 </div>
                 <h3 className="font-bold text-white text-base mb-2">{item.headline}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{item.body}</p>
+                <p className="text-white/80 text-sm leading-relaxed">{item.body}</p>
               </div>
             )
           })}

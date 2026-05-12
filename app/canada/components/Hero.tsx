@@ -27,7 +27,7 @@ const riskStyle: Record<string, string> = {
 export function Hero() {
   return (
     <section
-      className="relative flex flex-col justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
+      className="relative flex flex-col justify-center overflow-hidden bg-white"
       style={{ minHeight: 'calc(100vh - 4rem)' }}
       aria-labelledby="hero-headline"
     >
@@ -68,7 +68,7 @@ export function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-lg text-slate-800 leading-relaxed mb-7 max-w-xl">
+            <p className="text-base sm:text-lg text-slate-900 leading-relaxed mb-7 max-w-xl">
               Stakeonix helps Canadians understand staking, compare available options, and see whether it fits their crypto goals before taking the next step.
             </p>
 
@@ -91,14 +91,14 @@ export function Hero() {
             </div>
 
             {/* Trust line */}
-            <p className="text-slate-700 text-sm mb-2 flex items-start gap-2">
+            <p className="text-slate-900 text-sm mb-2 flex items-start gap-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
               No hype. No guaranteed rewards. Just clarity before you decide.
             </p>
 
             {/* Risk disclaimer */}
-            <p className="text-slate-600 text-xs leading-relaxed max-w-md">
-              <strong className="text-slate-700">Risk disclosure:</strong>{' '}
+            <p className="text-slate-700 text-xs leading-relaxed max-w-md">
+              <strong className="text-slate-900">Risk disclosure:</strong>{' '}
               Staking involves risk. Rewards are not guaranteed and may change over time.
             </p>
           </div>

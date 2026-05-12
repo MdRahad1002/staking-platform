@@ -1,11 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { COMPANY_NAME, CTA_HREF } from '../data'
 import { LogoIcon } from '@/components/shared/Logo'
+
+const NAV_LINKS = [
+  { href: '#path',         label: 'Get Started' },
+  { href: '#yields',       label: 'Live Yields' },
+  { href: '#how-it-works', label: 'How It Works' },
+  { href: '#tax',          label: 'Tax Advantage' },
+  { href: '#faq',          label: 'FAQ' },
+]
 
 export function CanadaNav() {
   const [scrolled, setScrolled] = useState(false)
@@ -21,6 +28,27 @@ export function CanadaNav() {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
+
+  // Smooth-scroll to anchor, accounting for the fixed nav height
+  const scrollTo = useCallback((href: string) => {
+    if (!href.startsWith('#')) return
+    const el = document.querySelector(href)
+    if (!el) return
+    const navHeight = 64
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight
+    window.scrollTo({ top, behavior: 'smooth' })
+  }, [])
+
+  const handleAnchorClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (href.startsWith('#')) {
+        e.preventDefault()
+        scrollTo(href)
+        setMobileOpen(false)
+      }
+    },
+    [scrollTo]
+  )
 
   return (
     <header
@@ -48,21 +76,13 @@ export function CanadaNav() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6" aria-label="Canada page navigation">
-            {[
-              { href: '#yields', label: 'Live Yields' },
-              { href: '#tax', label: 'Tax Advantage' },
-              { href: '#how-it-works', label: 'How It Works' },
-              { href: '#security', label: 'Security' },
-              { href: '#faq', label: 'FAQ' },
-            ].map(({ href, label }) => (
+          <nav className="hidden md:flex items-center gap-5" aria-label="Canada page navigation">
+            {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className={cn(
-                  'text-sm font-medium transition-colors hover:text-[#00C896]',
-                  'text-gray-600'
-                )}
+                onClick={(e) => handleAnchorClick(e, href)}
+                className="text-sm font-medium text-gray-600 hover:text-[#0A1628] transition-colors"
               >
                 {label}
               </a>
@@ -102,22 +122,16 @@ export function CanadaNav() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-height overlay */}
       {mobileOpen && (
         <div className="md:hidden bg-white border-b border-gray-100 shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation">
-            {[
-              { href: '#yields', label: 'Live Yields' },
-              { href: '#tax', label: 'Tax Advantage' },
-              { href: '#how-it-works', label: 'How It Works' },
-              { href: '#security', label: 'Security' },
-              { href: '#faq', label: 'FAQ' },
-            ].map(({ href, label }) => (
+            {NAV_LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm font-medium text-gray-700 hover:text-[#00C896] py-2.5 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={(e) => handleAnchorClick(e, href)}
+                className="text-sm font-medium text-gray-700 hover:text-[#0A1628] py-3 px-3 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 {label}
               </a>
@@ -125,17 +139,17 @@ export function CanadaNav() {
             <div className="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-2">
               <Link
                 href="/login"
-                className="text-sm font-medium text-gray-600 py-2.5 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+                className="text-sm font-medium text-gray-600 py-3 px-3 rounded-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign In
               </Link>
               <Link
                 href={CTA_HREF}
-                className="inline-flex items-center justify-center rounded-lg bg-[#00C896] hover:bg-[#00b386] text-white text-sm font-semibold px-5 py-3 transition-colors"
+                className="inline-flex items-center justify-center rounded-xl bg-[#0A1628] hover:bg-[#142035] text-white text-sm font-bold px-5 py-3.5 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Start Staking
+                Check My Staking Options
               </Link>
             </div>
           </nav>

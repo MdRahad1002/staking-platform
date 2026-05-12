@@ -42,7 +42,7 @@ const pillars = [
 
 export function ValueProp() {
   return (
-    <section className="py-20 lg:py-28 bg-white" aria-labelledby="value-headline">
+    <section className="py-16 lg:py-28 bg-white" aria-labelledby="value-headline">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Eyebrow */}
@@ -68,7 +68,7 @@ export function ValueProp() {
         </p>
 
         {/* 5 pillars — 2 + 3 layout */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mb-12">
           {pillars.map(({ icon: Icon, title, description, iconColor, iconBg }) => (
             <div
               key={title}

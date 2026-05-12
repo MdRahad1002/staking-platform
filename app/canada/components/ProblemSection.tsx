@@ -37,7 +37,7 @@ const checkCards = [
 
 export function ProblemSection() {
   return (
-    <section className="py-20 lg:py-28 bg-white" aria-labelledby="problem-headline">
+    <section className="py-16 lg:py-28 bg-white" aria-labelledby="problem-headline">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Eyebrow */}
@@ -72,17 +72,17 @@ export function ProblemSection() {
         </div>
 
         {/* Four check cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-10">
           {checkCards.map(({ icon: Icon, title, question, iconStyle, cardBg, iconBg }) => (
             <div
               key={title}
-              className={`rounded-2xl border p-6 ${cardBg} transition-all duration-200 hover:shadow-md`}
+              className={`rounded-2xl border p-4 sm:p-6 ${cardBg} transition-all duration-200 hover:shadow-md`}
             >
-              <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl mb-4 ${iconBg}`}>
-                <Icon className={`h-5 w-5 ${iconStyle}`} aria-hidden="true" />
+              <div className={`inline-flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl mb-3 ${iconBg}`}>
+                <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${iconStyle}`} aria-hidden="true" />
               </div>
-              <h3 className="text-base font-bold text-[#0A1628] mb-2">{title}</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">{question}</p>
+              <h3 className="text-sm sm:text-base font-bold text-[#0A1628] mb-1.5">{title}</h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{question}</p>
             </div>
           ))}
         </div>

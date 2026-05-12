@@ -45,7 +45,7 @@ export function PathSelector() {
   return (
     <section
       id="path"
-      className="py-20 lg:py-28 bg-slate-50"
+      className="py-16 lg:py-28 bg-slate-50"
       aria-labelledby="path-headline"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,14 +69,14 @@ export function PathSelector() {
         </p>
 
         {/* Three path cards */}
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {paths.map(({ icon: Icon, title, description, cta, href, border, iconBg, iconColor, ctaBg, featured }) => (
             <div
               key={title}
-              className={`relative bg-white rounded-2xl border-2 ${border} p-7 flex flex-col transition-all duration-200 shadow-sm hover:shadow-lg`}
+              className={`relative bg-white rounded-2xl border-2 ${border} p-6 flex flex-col transition-all duration-200 shadow-sm hover:shadow-lg`}
             >
               {featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
                   <span className="inline-block rounded-full bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 shadow">
                     Most Common
                   </span>

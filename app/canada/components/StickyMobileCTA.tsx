@@ -35,11 +35,11 @@ export function StickyMobileCTA() {
       <div className="bg-white border-t border-gray-200 shadow-2xl px-4 py-3 flex items-center gap-3">
         <Link
           href={CTA_HREF}
-          className="flex-1 inline-flex flex-col items-center justify-center rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-bold py-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00C896] focus-visible:ring-offset-2 shadow-lg shadow-[#00C896]/25"
+          className="flex-1 inline-flex flex-col items-center justify-center rounded-xl bg-[#0A1628] hover:bg-[#142035] text-white font-bold py-3.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A1628] focus-visible:ring-offset-2 shadow-lg"
           tabIndex={visible ? 0 : -1}
         >
-          <span className="text-base leading-tight">Create Free Account</span>
-          <span className="text-[11px] font-normal opacity-80">Min $200 &bull; Earn daily &bull; Withdraw anytime</span>
+          <span className="text-base leading-tight">Check My Staking Options</span>
+          <span className="text-[11px] font-normal opacity-70">Free. No obligation.</span>
         </Link>
         <button
           onClick={() => setDismissed(true)}

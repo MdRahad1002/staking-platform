@@ -2,7 +2,6 @@
 
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const APP_URL = 'https://www.stakeonix.ca'
 
@@ -500,19 +499,7 @@ export default async function HomePage() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden">
-        {/* Hero background photo — right-aligned so the person sits on the right, copy on left */}
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-background.png"
-            alt=""
-            fill
-            priority
-            className="object-cover object-right"
-          />
-        </div>
-        {/* Dark overlay — left half readable, right side shows the photo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060d1a]/90 via-[#060d1a]/60 to-transparent" />
-        {/* Subtle grid on top */}
+        {/* Subtle grid background */}
         <div className="absolute inset-0 hero-grid opacity-10" />
 
         <div className="container relative mx-auto px-4 py-14 sm:py-20 lg:py-0">

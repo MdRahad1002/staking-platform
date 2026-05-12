@@ -63,6 +63,16 @@ export function Hero() {
 
           {/* LEFT: Copy */}
           <div>
+            {/* Mobile hero image — full width, no crop, hidden on desktop */}
+            <div className="block md:hidden w-full mb-6 rounded-2xl overflow-hidden">
+              <img
+                src="/hero-mobile.png"
+                alt="Man reviewing staking portfolio on laptop and phone"
+                className="w-full h-auto"
+                loading="eager"
+              />
+            </div>
+
             {/* Eyebrow — clean, no long registry number on mobile */}
             <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 mb-5 backdrop-blur-sm">
               <ShieldCheck className="h-3.5 w-3.5 text-white/80 flex-shrink-0" aria-hidden="true" />

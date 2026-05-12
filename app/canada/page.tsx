@@ -1,19 +1,24 @@
-﻿import { Hero } from './components/Hero'
+﻿import dynamic from 'next/dynamic'
+
+// ── Above-fold: eager (blocking) ─────────────────────────────────────────────
+import { Hero } from './components/Hero'
 import { TrustBar } from './components/TrustBar'
-import { YieldsTable } from './components/YieldsTable'
-import { TaxAdvantage } from './components/TaxAdvantage'
-import { ComparisonTable } from './components/ComparisonTable'
-import { HowItWorks } from './components/HowItWorks'
-import { Security } from './components/Security'
-import { FAQ } from './components/FAQ'
-import { FinalCTA } from './components/FinalCTA'
-import { CanadaFooter } from './components/Footer'
 import { CanadaNav } from './components/CanadaNav'
 import { StickyMobileCTA } from './components/StickyMobileCTA'
-import { CanadaStats } from './components/CanadaStats'
-import { CADCalculator } from './components/CADCalculator'
-import { CanadaComments } from './components/CanadaComments'
-import { TrustStatement } from './components/TrustStatement'
+
+// ── Below-fold: lazy (non-blocking) ─────────────────────────────────────────
+const CanadaStats    = dynamic(() => import('./components/CanadaStats').then(m => ({ default: m.CanadaStats })), { ssr: true })
+const YieldsTable    = dynamic(() => import('./components/YieldsTable').then(m => ({ default: m.YieldsTable })), { ssr: true })
+const CADCalculator  = dynamic(() => import('./components/CADCalculator').then(m => ({ default: m.CADCalculator })), { ssr: true })
+const TaxAdvantage   = dynamic(() => import('./components/TaxAdvantage').then(m => ({ default: m.TaxAdvantage })), { ssr: true })
+const ComparisonTable= dynamic(() => import('./components/ComparisonTable').then(m => ({ default: m.ComparisonTable })), { ssr: true })
+const HowItWorks     = dynamic(() => import('./components/HowItWorks').then(m => ({ default: m.HowItWorks })), { ssr: true })
+const Security       = dynamic(() => import('./components/Security').then(m => ({ default: m.Security })), { ssr: true })
+const TrustStatement = dynamic(() => import('./components/TrustStatement').then(m => ({ default: m.TrustStatement })), { ssr: true })
+const CanadaComments = dynamic(() => import('./components/CanadaComments').then(m => ({ default: m.CanadaComments })), { ssr: false })
+const FAQ            = dynamic(() => import('./components/FAQ').then(m => ({ default: m.FAQ })), { ssr: true })
+const FinalCTA       = dynamic(() => import('./components/FinalCTA').then(m => ({ default: m.FinalCTA })), { ssr: true })
+const CanadaFooter   = dynamic(() => import('./components/Footer').then(m => ({ default: m.CanadaFooter })), { ssr: true })
 import {
   COMPANY_NAME,
   APP_URL,

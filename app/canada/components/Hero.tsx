@@ -1,10 +1,7 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Coins, TrendingUp, Users, Clock } from 'lucide-react'
 import { CTA_HREF, yields } from '../data'
-import { LogoIcon } from '@/components/shared/Logo'
 
 const trustBadges = [
   { label: 'FINTRAC Registered', icon: ShieldCheck, href: 'https://www.fintrac-canafe.gc.ca/re-en' },
@@ -14,7 +11,7 @@ const trustBadges = [
 
 const CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'
 
-function TokenLogo({ symbol, color }: { symbol: string; color: string }) {
+function TokenLogo({ symbol, priority = false }: { symbol: string; priority?: boolean }) {
   return (
     <div
       className="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden bg-white/10"
@@ -26,6 +23,8 @@ function TokenLogo({ symbol, color }: { symbol: string; color: string }) {
         width={32}
         height={32}
         className="h-8 w-8"
+        priority={priority}
+        loading={priority ? undefined : 'lazy'}
         unoptimized
       />
     </div>
@@ -38,9 +37,9 @@ export function Hero() {
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#0A1628]"
       aria-labelledby="hero-headline"
     >
-      {/* Background mesh gradient */}
+      {/* Background mesh gradient — hidden on mobile to save GPU */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none hidden md:block"
         aria-hidden="true"
       >
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[#00C896]/5 blur-[120px]" />
@@ -155,7 +154,7 @@ export function Hero() {
               </div>
 
               <div className="space-y-3">
-                {yields.map((y) => {
+                {yields.map((y, idx) => {
                   const daily = ((y.apyValue / 100) / 365 * 200).toFixed(2)
                   return (
                     <div
@@ -163,7 +162,7 @@ export function Hero() {
                       className="flex items-center justify-between rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-[#00C896]/30 hover:bg-[#00C896]/5 transition-all duration-200 px-4 py-3.5"
                     >
                       <div className="flex items-center gap-3">
-                        <TokenLogo symbol={y.logoSymbol} color={y.color} />
+                        <TokenLogo symbol={y.logoSymbol} priority={idx === 0} />
                         <div>
                           <p className="text-white font-semibold text-sm">{y.token}</p>
                           <p className="text-white/40 text-xs">~${daily}/day on $200</p>

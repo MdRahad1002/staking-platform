@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { COMPANY_NAME, CTA_HREF } from '../data'
 import { LogoIcon } from '@/components/shared/Logo'
+import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
   { href: '#path',         label: 'Get Started' },

@@ -44,16 +44,16 @@ export function CADCalculator() {
         {/* Header */}
         <div className="text-center mb-10">
           <span className="inline-block rounded-full bg-[#00C896]/10 text-[#00C896] text-xs font-semibold uppercase tracking-widest px-3 py-1 mb-4">
-            Yield Calculator
+            Reward Estimator
           </span>
           <h2
             id="calc-heading"
             className="text-3xl sm:text-4xl font-bold text-[#0A1628] tracking-tight mb-3"
           >
-            How much could you earn?
+            Estimate Possible Staking Rewards
           </h2>
           <p className="text-gray-500 text-lg">
-            Enter your CAD amount and pick an asset to see your estimated staking income.
+            Use this tool to understand how staking estimates may work. Actual rewards are variable and not guaranteed.
           </p>
         </div>
 
@@ -154,13 +154,13 @@ export function CADCalculator() {
               </div>
             </div>
             <p className="text-white/30 text-xs text-center mb-5">
-              Estimates based on {row.apy} APY on {row.network}. Not a guarantee. Yields fluctuate with network conditions.
+              This is an estimate only. Rewards may change based on asset, network conditions, plan terms, and market risk. Not a guarantee.
             </p>
             <Link
               href={CTA_HREF}
               className="flex items-center justify-center w-full rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-semibold py-3.5 transition-all hover:shadow-lg hover:shadow-[#00C896]/25"
             >
-              Start earning ${fmt(annualCAD)} / year
+              View My Staking Options
             </Link>
           </div>
         </div>

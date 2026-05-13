@@ -87,12 +87,13 @@ export function Hero() {
               className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.1] tracking-tight mb-4"
             >
               Before You Stake Crypto,{' '}
-              <span className="text-blue-400 md:bg-transparent md:px-0 md:py-0 bg-blue-900 px-2 py-0.5 rounded">Understand Your Options</span>
+              <span className="text-blue-400 md:bg-transparent md:px-0 md:py-0 bg-blue-900 px-2 py-0.5 rounded">Understand What Fits You</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-7 max-w-xl">
-              Stakeonix helps Canadians understand staking, compare available options, and see whether it fits their crypto goals before taking the next step.
+              Most people focus only on rewards. But the real decision is different: which asset, which lock period, what risk level, and whether staking fits your situation.<br className="hidden sm:block" /><br className="hidden sm:block" />
+              StakeOnix helps Canadians review their staking options clearly before taking the next step.
             </p>
 
             {/* CTAs — full width on mobile */}
@@ -101,7 +102,7 @@ export function Hero() {
                 href={CTA_HREF}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A1628] hover:bg-[#142035] text-white font-bold text-base px-7 py-4 transition-all duration-200 shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A1628] focus-visible:ring-offset-2"
               >
-                Check My Staking Options
+                Start My Staking Review
                 <ArrowRight className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
               </Link>
               <a
@@ -122,7 +123,7 @@ export function Hero() {
             {/* Risk disclaimer */}
             <p className="text-white/70 text-xs leading-relaxed max-w-md">
               <strong className="text-white/90">Risk disclosure:</strong>{' '}
-              Staking involves risk. Rewards are not guaranteed and may change over time.
+              Staking involves risk. Rewards are variable and not guaranteed.
             </p>
           </div>
 

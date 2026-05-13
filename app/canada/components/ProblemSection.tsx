@@ -56,20 +56,34 @@ export function ProblemSection() {
         </h2>
 
         {/* Copy block */}
-        <div className="max-w-2xl mx-auto text-center mb-14 space-y-4">
+        <div className="max-w-2xl mx-auto text-center mb-10 space-y-4">
           <p className="text-lg text-slate-700 font-medium leading-relaxed">
-            Most people focus only on rewards.
+            They focus on the reward percentage first.
           </p>
           <p className="text-slate-500 leading-relaxed">
-            But staking is not just about numbers. Before using any staking platform, you need to understand how rewards are generated, whether your crypto is locked, what risks apply, and whether the structure fits your situation.
-          </p>
-          <p className="text-slate-500 leading-relaxed">
-            That is where most people rush.
-          </p>
-          <p className="text-[#0A1628] font-semibold">
-            Stakeonix helps you slow down, compare clearly, and make a more informed decision.
+            But before staking, the smarter questions are:
           </p>
         </div>
+
+        {/* 5 smarter questions */}
+        <ul className="max-w-xl mx-auto mb-10 space-y-3">
+          {[
+            'What asset are you using?',
+            'How long is it locked?',
+            'How are rewards generated?',
+            'What risks apply?',
+            'Does it actually fit your goal?',
+          ].map((q) => (
+            <li key={q} className="flex items-start gap-3 bg-slate-50 border border-slate-100 rounded-xl px-5 py-3.5">
+              <span className="mt-0.5 h-5 w-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 text-xs font-bold">✓</span>
+              <span className="text-slate-700 font-medium">{q}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="text-center text-[#0A1628] font-semibold mb-14 max-w-xl mx-auto">
+          That is what StakeOnix helps you review before you make a decision.
+        </p>
 
         {/* Visual — problem vs solution image */}
         <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-lg mb-12">

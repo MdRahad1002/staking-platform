@@ -1,25 +1,31 @@
 import Link from 'next/link'
-import { UserCheck, Banknote, TrendingUp } from 'lucide-react'
+import { UserCheck, Search, BarChart3, Activity } from 'lucide-react'
 import { CTA_HREF } from '../data'
 
 const steps = [
   {
     number: '01',
     icon: UserCheck,
-    headline: 'Sign up & verify',
-    body: 'Quick KYC, takes about 5 minutes. Canadian ID accepted. Government-issued photo ID and a selfie. That\'s it.',
+    headline: 'Create your account',
+    body: 'Quick sign-up and KYC verification. Takes about 5 minutes. Canadian government-issued photo ID accepted.',
   },
   {
     number: '02',
-    icon: Banknote,
-    headline: 'Deposit CAD or crypto',
-    body: 'Interac e-Transfer, domestic wire transfer, or send crypto directly from any self-custody wallet. CAD is converted at the mid-market rate.',
+    icon: Search,
+    headline: 'Verify your profile',
+    body: 'Complete your identity verification so we can match you with options that fit your situation and comply with FINTRAC requirements.',
   },
   {
     number: '03',
-    icon: TrendingUp,
-    headline: 'Stake and earn',
-    body: 'Choose a chain, stake any amount above the minimum, and watch rewards accrue daily in your dashboard. Unstake any time.',
+    icon: BarChart3,
+    headline: 'Compare staking options',
+    body: 'Review available assets, lock periods, estimated reward rates, and risk levels side by side — before committing to anything.',
+  },
+  {
+    number: '04',
+    icon: Activity,
+    headline: 'Track your progress',
+    body: 'Once you decide to proceed, monitor your staking activity, estimated rewards, and account status from your dashboard.',
   },
 ]
 
@@ -33,10 +39,10 @@ export function HowItWorks() {
             id="how-heading"
             className="text-3xl sm:text-4xl font-bold text-[#0A1628] tracking-tight mb-4"
           >
-            Start earning in three steps
+            How StakeOnix Works
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            From signup to staking rewards in under 10 minutes.
+            A clear four-step process — from creating your account to reviewing your options.
           </p>
         </div>
 
@@ -51,7 +57,7 @@ export function HowItWorks() {
         </div>
 
         {/* Steps grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12" role="list">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12" role="list">
           {steps.map((step, idx) => {
             const Icon = step.icon
             return (
@@ -93,7 +99,7 @@ export function HowItWorks() {
             href={CTA_HREF}
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-semibold text-base px-8 py-4 transition-all duration-200 hover:shadow-lg hover:shadow-[#00C896]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00C896] focus-visible:ring-offset-2"
           >
-            Start Staking →
+            Start My Staking Review →
           </Link>
         </div>
       </div>

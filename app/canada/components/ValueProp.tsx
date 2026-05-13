@@ -1,42 +1,39 @@
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Coins, TrendingUp, Lock, AlertTriangle } from 'lucide-react'
+import { ArrowRight, Wallet, Target, AlertTriangle, Clock } from 'lucide-react'
 import { CTA_HREF } from '../data'
 
 const pillars = [
   {
-    icon: BookOpen,
-    title: 'What staking is',
-    description: 'Understand the basic process in simple language.',
+    icon: Wallet,
+    title: 'Your Current Crypto Position',
+    description: 'Are you already holding crypto or starting from scratch?',
     iconColor: 'text-blue-600',
     iconBg: 'bg-blue-50',
+    border: 'border-blue-100',
   },
   {
-    icon: Coins,
-    title: 'Which assets can be staked',
-    description: 'See how different crypto assets may have different staking structures.',
+    icon: Target,
+    title: 'Your Goal',
+    description: 'Are you learning, comparing options, or preparing to start?',
     iconColor: 'text-indigo-600',
     iconBg: 'bg-indigo-50',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Reward logic',
-    description: 'Learn how staking rewards may be generated and why they can change.',
-    iconColor: 'text-emerald-600',
-    iconBg: 'bg-emerald-50',
-  },
-  {
-    icon: Lock,
-    title: 'Lock periods and access',
-    description: 'Understand whether your crypto may be locked and what that means.',
-    iconColor: 'text-amber-600',
-    iconBg: 'bg-amber-50',
+    border: 'border-indigo-100',
   },
   {
     icon: AlertTriangle,
-    title: 'Risk considerations',
-    description: 'Review the risks before deciding whether staking fits your situation.',
-    iconColor: 'text-red-500',
-    iconBg: 'bg-red-50',
+    title: 'Your Risk Comfort',
+    description: 'Do you understand that rewards are variable and not guaranteed?',
+    iconColor: 'text-amber-600',
+    iconBg: 'bg-amber-50',
+    border: 'border-amber-100',
+  },
+  {
+    icon: Clock,
+    title: 'Your Time Horizon',
+    description: 'Are you thinking short-term, long-term, or both?',
+    iconColor: 'text-emerald-600',
+    iconBg: 'bg-emerald-50',
+    border: 'border-emerald-100',
   },
 ]
 
@@ -48,7 +45,7 @@ export function ValueProp() {
         {/* Eyebrow */}
         <div className="text-center mb-5">
           <span className="inline-block rounded-full bg-slate-100 text-slate-600 text-xs font-semibold uppercase tracking-widest px-3 py-1">
-            What we do
+            What we review
           </span>
         </div>
 
@@ -57,22 +54,22 @@ export function ValueProp() {
           id="value-headline"
           className="text-3xl sm:text-4xl font-bold text-[#0A1628] text-center tracking-tight mb-4"
         >
-          What Stakeonix Helps You Understand
+          What We Review Before You Stake
         </h2>
 
         <p className="text-center text-slate-500 text-lg mb-3 max-w-2xl mx-auto">
-          Stakeonix is designed to make staking clearer for Canadians who want to learn before taking action.
+          Staking is not one decision. It depends on your current crypto position, your goals, your risk comfort, and your time horizon.
         </p>
         <p className="text-center text-slate-400 mb-14 max-w-xl mx-auto">
-          Instead of pushing you to start immediately, we help you understand the key points that matter.
+          StakeOnix helps you look at the key points first.
         </p>
 
-        {/* 5 pillars — 2 + 3 layout */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mb-12">
-          {pillars.map(({ icon: Icon, title, description, iconColor, iconBg }) => (
+        {/* 4 review pillars */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-12">
+          {pillars.map(({ icon: Icon, title, description, iconColor, iconBg, border }) => (
             <div
               key={title}
-              className="rounded-2xl border border-slate-100 bg-slate-50 hover:bg-white hover:border-slate-200 hover:shadow-md transition-all duration-200 p-6 group"
+              className={`rounded-2xl border ${border} bg-slate-50 hover:bg-white hover:shadow-md transition-all duration-200 p-6 group`}
             >
               <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl mb-4 ${iconBg} group-hover:scale-110 transition-transform duration-200`}>
                 <Icon className={`h-5 w-5 ${iconColor}`} aria-hidden="true" />

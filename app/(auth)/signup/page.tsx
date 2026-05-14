@@ -14,7 +14,7 @@ import { TrendingUp, Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users, BarChar
 import { toast } from 'sonner'
 
 const COUNTRY_CODES = [
-  { code: '+1',   flag: '�🇦', name: 'Canada' },
+  { code: '+1',   flag: '🇨🇦', name: 'Canada' },
   { code: '+1',   flag: '🇺🇸', name: 'USA' },
   { code: '+44',  flag: '🇬🇧', name: 'UK' },
   { code: '+61',  flag: '🇦🇺', name: 'AU' },

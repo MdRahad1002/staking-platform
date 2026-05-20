@@ -24,8 +24,8 @@ interface StatItem { value: string; label: string }
 export const canadaStats: StatItem[] = [
   { value: '6,200+', label: 'Canadian accounts' },
   { value: '$48M+', label: 'CAD equivalent staked' },
-  { value: '11.6%', label: 'Avg portfolio APY' },
-  { value: '99.97%', label: 'Platform uptime' },
+  { value: 'Up to 16.5%', label: 'Annual staking yield' },
+  { value: '3× more', label: 'vs. avg 1-yr GIC' },
 ]
 
 // ── CTA href ─────────────────────────────────────────────────────────────────
@@ -239,8 +239,8 @@ export const securityItems: SecurityItem[] = [
 // ── Trust bar items ───────────────────────────────────────────────────────────
 export const trustBarItems = [
   { label: 'FINTRAC Registered · BN 820033090', href: 'https://www.fintrac-canafe.gc.ca/re-en', external: true },
+  { label: '⚡ BTC at $106,000 CAD — all-time high', href: '#yields' },
+  { label: 'BoC Rate Decision · June 10', href: '#problem' },
   { label: '95% Funds in Cold Storage', href: '#security' },
-  { label: 'Full Transaction Transparency', href: '#security' },
   { label: 'Interac & Wire Deposits', href: '#how-it-works' },
-  { label: `${TOTAL_STAKED_CAD} Supported Assets`, href: '#yields' },
 ]

@@ -5,6 +5,9 @@ import { yields, CTA_HREF } from '../data'
 import Link from 'next/link'
 import Image from 'next/image'
 
+// Best 1-yr GIC rate on the market (Apr 2025 average)
+const GIC_APY = 3.9
+
 const CDN = 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color'
 
 const PRESETS = [1000, 5000, 10000, 25000, 50000]
@@ -23,9 +26,17 @@ export function CADCalculator() {
     [selectedNetwork]
   )
 
-  const annualCAD = (cadAmount * row.apyValue) / 100
-  const monthlyCAD = annualCAD / 12
-  const dailyCAD = annualCAD / 365
+  const annualCAD   = (cadAmount * row.apyValue) / 100
+  const monthlyCAD  = annualCAD / 12
+  const dailyCAD    = annualCAD / 365
+
+  // What you'd earn in a GIC
+  const gicAnnual   = (cadAmount * GIC_APY) / 100
+  const gicDaily    = gicAnnual / 365
+
+  // Opportunity cost (what you LOSE by staying in GIC)
+  const lostAnnual  = Math.max(0, annualCAD - gicAnnual)
+  const lostDaily   = Math.max(0, dailyCAD - gicDaily)
 
   function handleInput(raw: string) {
     const numeric = raw.replace(/[^0-9]/g, '')
@@ -43,17 +54,17 @@ export function CADCalculator() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="inline-block rounded-full bg-[#00C896]/10 text-[#00C896] text-xs font-semibold uppercase tracking-widest px-3 py-1 mb-4">
-            Reward Estimator
+          <span className="inline-block rounded-full bg-red-100 text-red-600 text-xs font-semibold uppercase tracking-widest px-3 py-1 mb-4">
+            Daily Opportunity Cost
           </span>
           <h2
             id="calc-heading"
             className="text-3xl sm:text-4xl font-bold text-[#0A1628] tracking-tight mb-3"
           >
-            Estimate Possible Staking Rewards
+            How Much Is Your GIC Costing You?{' '}<span className="text-red-500">Every Single Day.</span>
           </h2>
           <p className="text-gray-500 text-lg">
-            Use this tool to understand how staking estimates may work. Actual rewards are variable and not guaranteed.
+            Enter your amount and see the gap between a GIC and staking — live, in dollars, per day.
           </p>
         </div>
 
@@ -139,28 +150,43 @@ export function CADCalculator() {
 
           {/* Results */}
           <div className="bg-gradient-to-r from-[#0A1628] to-[#0d2040] px-6 sm:px-8 py-7">
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center">
-                <p className="text-white/50 text-xs font-medium mb-1">Daily</p>
-                <p className="text-white font-bold text-xl tabular-nums">${fmt(dailyCAD)}</p>
+
+            {/* Side-by-side comparison */}
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              {/* GIC column */}
+              <div className="rounded-xl bg-white/5 border border-white/10 p-4 text-center">
+                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-2">Best 1-yr GIC</p>
+                <p className="text-white/50 text-xs mb-0.5">{GIC_APY}% / year</p>
+                <p className="text-white font-bold text-xl tabular-nums mb-0.5">${fmt(gicDaily)}<span className="text-xs font-normal text-white/40">/day</span></p>
+                <p className="text-white/30 text-xs">${fmt(gicAnnual, 0)}/yr</p>
               </div>
-              <div className="text-center border-x border-white/10">
-                <p className="text-white/50 text-xs font-medium mb-1">Monthly</p>
-                <p className="text-white font-bold text-xl tabular-nums">${fmt(monthlyCAD)}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-[#00C896] text-xs font-semibold mb-1">Annual</p>
-                <p className="text-[#00C896] font-extrabold text-2xl tabular-nums">${fmt(annualCAD)}</p>
+
+              {/* Staking column */}
+              <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-center relative overflow-hidden">
+                <p className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest mb-2">Staking ({row.network})</p>
+                <p className="text-emerald-400/70 text-xs mb-0.5">{row.apy} / year</p>
+                <p className="text-emerald-400 font-bold text-xl tabular-nums mb-0.5">${fmt(dailyCAD)}<span className="text-xs font-normal text-emerald-400/60">/day</span></p>
+                <p className="text-emerald-400/60 text-xs">${fmt(annualCAD, 0)}/yr</p>
               </div>
             </div>
-            <p className="text-white/30 text-xs text-center mb-5">
-              This is an estimate only. Rewards may change based on asset, network conditions, plan terms, and market risk. Not a guarantee.
+
+            {/* Opportunity cost callout */}
+            {lostAnnual > 0 && (
+              <div className="rounded-xl bg-red-500/10 border border-red-500/30 px-5 py-4 mb-5 text-center">
+                <p className="text-red-400 text-xs font-bold uppercase tracking-widest mb-1">You leave behind every day you wait</p>
+                <p className="text-red-400 font-black text-3xl tabular-nums">${fmt(lostDaily)}</p>
+                <p className="text-red-400/60 text-xs mt-1">${fmt(lostAnnual, 0)} per year in missed rewards</p>
+              </div>
+            )}
+
+            <p className="text-white/25 text-xs text-center mb-5">
+              Staking rewards are estimates only. Actual returns vary. GIC rate based on best posted rate, Apr 2025.
             </p>
             <Link
               href={CTA_HREF}
-              className="flex items-center justify-center w-full rounded-xl bg-[#00C896] hover:bg-[#00b386] text-white font-semibold py-3.5 transition-all hover:shadow-lg hover:shadow-[#00C896]/25"
+              className="flex items-center justify-center w-full rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-3.5 transition-all hover:shadow-lg hover:shadow-emerald-500/25"
             >
-              View My Staking Options
+              Stop Losing — Start Staking Free →
             </Link>
           </div>
         </div>

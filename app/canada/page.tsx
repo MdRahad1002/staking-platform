@@ -4,6 +4,8 @@
 import { Hero } from './components/Hero'
 import { CanadaNav } from './components/CanadaNav'
 import { StickyMobileCTA } from './components/StickyMobileCTA'
+import { CountdownTimer } from './components/CountdownTimer'
+import { LiveFeed } from './components/LiveFeed'
 import { ProblemSection } from './components/ProblemSection'
 import { PathSelector } from './components/PathSelector'
 import { ValueProp } from './components/ValueProp'
@@ -115,8 +117,17 @@ export default function CanadaPage() {
       <div className="min-h-screen">
         <CanadaNav />
         <main id="main-content">
-          {/* ── New top-of-funnel flow ───────────────────────────────────── */}
+          {/* ── Urgency bar: real countdown to BoC rate decision ─────────── */}
+          <CountdownTimer />
+
+          {/* ── Above fold ───────────────────────────────────────────────── */}
           <Hero />
+
+          {/* ── Live social proof feed ───────────────────────────────────── */}
+          <div className="bg-[#0A1628] border-b border-white/10 px-4 py-3 flex justify-center">
+            <LiveFeed />
+          </div>
+
           <ProblemSection />
           <PathSelector />
           <ValueProp />

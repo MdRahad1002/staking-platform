@@ -751,9 +751,16 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                     </thead>
                     <tbody>
                       {positions.map((pos) => {
-                        const price = positionPrices[pos.symbol] ?? (symbol === pos.symbol ? (livePrice ?? 0) : 0)
+                        // Prefer real-time WebSocket price for the currently selected symbol;
+                        // fall back to 5-second REST poll for other symbols
+                        const price =
+                          (symbol === pos.symbol && livePrice)
+                            ? livePrice
+                            : (positionPrices[pos.symbol] ?? (symbol === pos.symbol ? (livePrice ?? 0) : 0))
                         const pnl = price ? calcPnl(pos, price) : 0
                         const pnlPct = pos.margin > 0 ? (pnl / pos.margin) * 100 : 0
+                        // Show 4 decimal places for sub-cent PnL so it visibly updates
+                        const pnlStr = Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)
                         const liq = calcLiqPrice(pos)
                         const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
                         return (
@@ -795,10 +802,10 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                 pnl >= 0 ? 'text-green-400' : 'text-red-400'
                               )}
                             >
-                              {pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}{' '}
+                              {pnl >= 0 ? '+' : ''}${pnlStr}{' '}
                               <span className="text-zinc-500 font-normal">
                                 ({pnlPct >= 0 ? '+' : ''}
-                                {pnlPct.toFixed(1)}%)
+                                {pnlPct.toFixed(2)}%)
                               </span>
                             </td>
                             <td className="py-2.5 text-right text-red-400/70">

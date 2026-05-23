@@ -30,6 +30,7 @@ const PUBLIC_PREFIXES = [
   '/api/crypto-prices',
   '/api/contact',
   '/api/unsubscribe',
+  '/api/trading/market', // public Binance market data, no auth needed
   // NOTE: /api/test-email is intentionally NOT public guarded by CRON_SECRET
   '/_next',
   '/favicon',

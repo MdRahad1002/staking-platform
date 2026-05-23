@@ -218,7 +218,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       await Promise.all(
         symbols.map(async (sym) => {
           try {
-            const res = await fetch(`/api/trading/market?type=price&symbol=${sym}`)
+            // Fetch directly from Binance client-side to avoid Vercel IP rate-limiting
+            const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${sym}`)
             if (!res.ok) return
             const data = await res.json()
             results[sym] = parseFloat(data.price)
@@ -257,6 +258,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
           stopPrice: stopPrice ? parseFloat(stopPrice) : undefined,
           stopLoss: stopLoss ? parseFloat(stopLoss) : undefined,
           takeProfit: takeProfit ? parseFloat(takeProfit) : undefined,
+          // Send live WebSocket price as fallback if server-side Binance fetch is rate-limited
+          clientPrice: livePrice ?? undefined,
         }),
       })
       const data = await res.json()

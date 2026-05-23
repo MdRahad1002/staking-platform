@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
       stopPrice,
       stopLoss,
       takeProfit,
+      clientPrice, // live price sent from the client (WebSocket)
     } = body
 
     // Validate required fields
@@ -63,10 +64,19 @@ export async function POST(req: NextRequest) {
 
     const sym = String(symbol).toUpperCase()
 
-    // Fetch current price for market orders
+    // Fetch current price for market orders, fall back to client-provided price if server is rate-limited
     let filledPrice: number | null = null
     if (type === 'MARKET') {
-      filledPrice = await getBinancePrice(sym)
+      try {
+        filledPrice = await getBinancePrice(sym)
+      } catch {
+        const cp = clientPrice ? parseFloat(String(clientPrice)) : NaN
+        if (!isNaN(cp) && cp > 0) {
+          filledPrice = cp
+        } else {
+          return NextResponse.json({ error: 'Unable to fetch market price. Please try again.' }, { status: 502 })
+        }
+      }
     }
 
     const status = type === 'MARKET' ? 'FILLED' : 'PENDING'

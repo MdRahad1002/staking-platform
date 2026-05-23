@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import Image from 'next/image'
 import {
   ArrowRight,
@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 import { CTA_HREF } from '../data'
 
-// ── GIC vs Staking comparison data ───────────────────────────────────────────
+// â”€â”€ GIC vs Staking comparison data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const comparison = [
   { label: 'Big Bank HISA',   rate: '2.0%',  color: 'text-red-500',     bar: 'w-[12%]',  bg: 'bg-red-200' },
   { label: '1-Year GIC',      rate: '3.8%',  color: 'text-orange-500',  bar: 'w-[23%]',  bg: 'bg-orange-200' },
@@ -18,11 +18,11 @@ const comparison = [
   { label: 'StakeOnix (DOT)', rate: '16.5%', color: 'text-emerald-600', bar: 'w-full',   bg: 'bg-emerald-500' },
 ]
 
-// ── Breaking news items ───────────────────────────────────────────────────────
+// â”€â”€ Breaking news items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const news = [
-  { text: 'Tether buys SoftBank\'s $679M Bitcoin stake — Bloomberg, May 20' },
-  { text: 'Bitcoin crosses $106,000 CAD — new all-time high in Canadian dollars' },
-  { text: 'Bank of Canada inflation below forecast — rate cut expected June 10' },
+  { text: 'Tether buys SoftBank\'s $679M Bitcoin stake â€” Bloomberg, May 20' },
+  { text: 'Bitcoin crosses $106,000 CAD â€” new all-time high in Canadian dollars' },
+  { text: 'Bank of Canada inflation below forecast â€” rate cut expected June 10' },
 ]
 
 export function Hero() {
@@ -57,7 +57,7 @@ export function Hero() {
             <div className="flex gap-12 animate-ticker whitespace-nowrap">
               {[...news, ...news].map((n, i) => (
                 <span key={i} className="text-white/70 text-xs font-medium flex-shrink-0">
-                  <span className="text-amber-400 mr-2">▶</span>{n.text}
+                  <span className="text-amber-400 mr-2">â–¶</span>{n.text}
                 </span>
               ))}
             </div>
@@ -73,7 +73,7 @@ export function Hero() {
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 mb-5 backdrop-blur-sm">
               <ShieldCheck className="h-3.5 w-3.5 text-white/80 flex-shrink-0" aria-hidden="true" />
-              <span className="text-white text-xs font-semibold">FINTRAC Registered · Canadian Company</span>
+              <span className="text-white text-xs font-semibold">FINTRAC Registered Â· Canadian Company</span>
             </div>
 
             {/* H1 */}
@@ -90,10 +90,10 @@ export function Hero() {
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg text-white/85 leading-relaxed mb-3 max-w-xl">
-              Bitcoin just crossed <strong className="text-amber-400">$106,000 CAD</strong>. Tether bought a $679M Bitcoin stake today. The Bank of Canada is expected to cut rates June 10 — making your GIC even less competitive.
+              Bitcoin just crossed <strong className="text-amber-400">$106,000 CAD</strong>. Tether bought a $679M Bitcoin stake today. The Bank of Canada is expected to cut rates June 10 â€” making your GIC even less competitive.
             </p>
             <p className="text-base sm:text-lg text-white/85 leading-relaxed mb-7 max-w-xl">
-              While your bank pays 3.5%, Canadians on StakeOnix are earning up to <strong className="text-emerald-400">16.5% APY</strong> — daily, with no long lock-ins.
+              While your bank pays 3.5%, Canadians on StakeOnix are earning up to <strong className="text-emerald-400">16.5% APY</strong> â€” daily, with no long lock-ins.
             </p>
 
             {/* CTAs */}
@@ -103,7 +103,7 @@ export function Hero() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-base px-7 py-4 transition-all duration-200 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
               >
                 <Zap className="h-4 w-4" />
-                Start Earning — Free Account
+                Start Earning â€” Free Account
                 <ArrowRight className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
               </Link>
               <a
@@ -119,7 +119,7 @@ export function Hero() {
             <div className="flex flex-col gap-2">
               <p className="text-white/90 text-sm flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-                No lock-in required · Daily rewards · Setup in 2 minutes
+                No lock-in required Â· Daily rewards Â· Setup in 2 minutes
               </p>
               <p className="text-white/50 text-xs leading-relaxed max-w-md">
                 Risk disclosure: Staking involves risk. Rewards are variable and not guaranteed. Not financial advice.
@@ -179,7 +179,7 @@ export function Hero() {
               <div className="flex items-start gap-2.5 rounded-xl bg-white/5 border border-white/10 px-4 py-3">
                 <Newspaper className="h-3.5 w-3.5 text-amber-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <p className="text-[11px] text-white/60 leading-relaxed">
-                  <span className="text-amber-400 font-semibold">Bloomberg today:</span> Tether buys SoftBank&apos;s $679M Bitcoin stake — institutional confidence at an all-time high.
+                  <span className="text-amber-400 font-semibold">Bloomberg today:</span> Tether buys SoftBank&apos;s $679M Bitcoin stake â€” institutional confidence at an all-time high.
                 </p>
               </div>
             </div>
@@ -189,149 +189,7 @@ export function Hero() {
               <ShieldCheck className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-[10px] text-slate-400 leading-none">FINTRAC Registered</p>
-                <p className="text-xs font-semibold text-[#0A1628] leading-tight">MSB · Canada</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-            <h1
-              id="hero-headline"
-              className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.1] tracking-tight mb-4"
-            >
-              Before You Stake Crypto,{' '}
-              <span className="text-blue-400 md:bg-transparent md:px-0 md:py-0 bg-blue-900 px-2 py-0.5 rounded">Understand What Fits You</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-7 max-w-xl">
-              Most people focus only on rewards. But the real decision is different: which asset, which lock period, what risk level, and whether staking fits your situation.<br className="hidden sm:block" /><br className="hidden sm:block" />
-              StakeOnix helps Canadians review their staking options clearly before taking the next step.
-            </p>
-
-            {/* CTAs — full width on mobile */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center mb-6">
-              <Link
-                href={CTA_HREF}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#0A1628] hover:bg-[#142035] text-white font-bold text-base px-7 py-4 transition-all duration-200 shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A1628] focus-visible:ring-offset-2"
-              >
-                Start My Staking Review
-                <ArrowRight className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-              </Link>
-              <a
-                href="#how-it-works"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 text-white font-semibold text-base px-6 py-4 transition-all duration-200 backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-              >
-                <BookOpen className="h-4 w-4 text-blue-500 flex-shrink-0" aria-hidden="true" />
-                Learn How Staking Works
-              </a>
-            </div>
-
-            {/* Trust line */}
-            <p className="text-white/90 text-sm mb-2 flex items-start gap-2">
-              <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-              No hype. No guaranteed rewards. Just clarity before you decide.
-            </p>
-
-            {/* Risk disclaimer */}
-            <p className="text-white/70 text-xs leading-relaxed max-w-md">
-              <strong className="text-white/90">Risk disclosure:</strong>{' '}
-              Staking involves risk. Rewards are variable and not guaranteed.
-            </p>
-          </div>
-
-          {/* RIGHT: Clean mock dashboard */}
-          <div aria-label="Staking options overview" className="relative">
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-5 sm:p-6 lg:p-7">
-
-              {/* Card header */}
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-widest mb-0.5">Stakeonix</p>
-                  <h2 className="text-sm sm:text-base font-bold text-[#0A1628]">Your Staking Options</h2>
-                </div>
-                <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 font-semibold bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-                  Live
-                </span>
-              </div>
-
-              {/* Column headers */}
-              <div className="grid grid-cols-3 text-[10px] font-semibold uppercase tracking-wider text-slate-400 mb-2 px-1">
-                <span>Asset</span>
-                <span className="text-center">Risk</span>
-                <span className="text-right">Lock Period</span>
-              </div>
-
-              {/* Asset rows — show all 4 on desktop, 3 on mobile */}
-              <div className="space-y-2 mb-4">
-                {dashboardOptions.map((opt, i) => (
-                  <div
-                    key={opt.asset}
-                    className={`grid grid-cols-3 items-center rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-100 hover:border-blue-200 transition-colors px-3 py-2.5 ${i === 3 ? 'hidden sm:grid' : ''}`}
-                  >
-                    {/* Asset name */}
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="h-6 w-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0"
-                        style={{ backgroundColor: opt.color }}
-                        aria-hidden="true"
-                      >
-                        {opt.asset[0]}
-                      </div>
-                      <span className="font-semibold text-sm text-[#0A1628]">{opt.asset}</span>
-                    </div>
-
-                    {/* Risk badge */}
-                    <div className="text-center">
-                      <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full ${riskStyle[opt.risk]}`}>
-                        {opt.risk}
-                      </span>
-                    </div>
-
-                    {/* Lock period */}
-                    <div className="flex items-center justify-end gap-1">
-                      <Lock className="h-3 w-3 text-slate-400 flex-shrink-0" aria-hidden="true" />
-                      <span className="text-[11px] text-slate-500 font-medium">{opt.lockPeriod}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Action buttons */}
-              <div className="grid grid-cols-3 gap-2 mb-4">
-                {[
-                  { label: 'Learn',   href: '#how-it-works', icon: BookOpen,      style: 'text-blue-600 bg-blue-50 border-blue-100 hover:bg-blue-100' },
-                  { label: 'Compare', href: '#yields',        icon: TrendingUp,    style: 'text-indigo-600 bg-indigo-50 border-indigo-100 hover:bg-indigo-100' },
-                  { label: 'Decide',  href: CTA_HREF,         icon: CheckCircle2,  style: 'text-emerald-600 bg-emerald-50 border-emerald-100 hover:bg-emerald-100' },
-                ].map(({ label, href, icon: Icon, style }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    className={`flex flex-col items-center gap-1 rounded-xl border py-2 text-xs font-semibold transition-colors ${style}`}
-                  >
-                    <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                    {label}
-                  </a>
-                ))}
-              </div>
-
-              {/* Bottom disclaimer */}
-              <p className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1">
-                <AlertTriangle className="h-3 w-3 text-amber-400 flex-shrink-0" aria-hidden="true" />
-                Staking involves risk. Not financial advice.
-              </p>
-            </div>
-
-            {/* Floating trust badge — desktop only */}
-            <div className="absolute -bottom-4 -left-4 hidden lg:flex items-center gap-2 bg-white rounded-xl border border-slate-200 shadow-md px-4 py-2.5">
-              <ShieldCheck className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-[10px] text-slate-400 leading-none">FINTRAC Registered</p>
-                <p className="text-xs font-semibold text-[#0A1628] leading-tight">MSB · Canada</p>
+                <p className="text-xs font-semibold text-[#0A1628] leading-tight">MSB Â· Canada</p>
               </div>
             </div>
           </div>

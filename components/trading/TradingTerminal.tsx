@@ -626,7 +626,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               ))}
             </div>
 
-            {/* Leverage picker */
+            {/* Leverage picker */}
             {tradeType === 'LEVERAGE' && (
               <div>
                 <Label className="text-xs text-zinc-400 mb-1 block">

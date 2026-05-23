@@ -16,7 +16,7 @@ const CSP = [
   // Next.js runtime + any analytics you add
   "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
   // WebSockets for Next.js HMR in dev, API calls, and Resend CDN
-  `connect-src 'self' https://api.resend.com https://api.nowpayments.io https://api.westwallet.io wss:`,
+  `connect-src 'self' https://api.resend.com https://api.nowpayments.io https://api.westwallet.io https://api.binance.com wss://stream.binance.com wss:`,
   "frame-src 'none'",
   "object-src 'none'",
   "base-uri 'self'",

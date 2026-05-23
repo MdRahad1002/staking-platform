@@ -36,7 +36,7 @@ const PUBLIC_PREFIXES = [
   '/uploads',
 ]
 
-const PUBLIC_EXTENSIONS = /\.(png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot|xml|txt)$/i
+const PUBLIC_EXTENSIONS = /\.(png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot|xml|txt|webmanifest)$/i
 
 function isPublicPath(pathname: string): boolean {
   if (PUBLIC_EXACT.has(pathname)) return true

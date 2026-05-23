@@ -118,11 +118,11 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — above bottom nav on mobile */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/30 transition-all hover:scale-110 hover:shadow-xl"
+          className="fixed bottom-[5.5rem] right-4 md:bottom-6 md:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/30 transition-all hover:scale-110 hover:shadow-xl active:scale-95"
         >
           <MessageSquare className="h-6 w-6 text-white" />
           {unreadCount > 0 && (
@@ -133,12 +133,14 @@ export function ChatWidget() {
         </button>
       )}
 
-      {/* Chat window */}
+      {/* Chat window — responsive: nearly full-width above bottom nav on mobile */}
       {isOpen && (
         <div
           className={cn(
-            'fixed bottom-6 right-6 z-50 w-80 rounded-2xl border border-border bg-background shadow-2xl flex flex-col transition-all duration-300',
-            isMinimized ? 'h-14' : 'h-[480px]'
+            'fixed z-50 flex flex-col border border-border/60 bg-background/95 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden',
+            'bottom-[5.5rem] left-3 right-3 rounded-2xl',
+            'md:bottom-6 md:left-auto md:right-6 md:w-80',
+            isMinimized ? 'h-14' : 'h-[min(500px,calc(100dvh-8rem))] md:h-[480px]'
           )}
         >
           {/* Header */}

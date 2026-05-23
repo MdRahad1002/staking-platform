@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RefreshCw, Activity, X } from 'lucide-react'
+import { RefreshCw, Activity, X, Edit2, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const PriceChart = dynamic(() => import('./PriceChart'), { ssr: false })
@@ -136,6 +136,12 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
 
   // Mobile view tab
   const [mobileView, setMobileView] = useState<'chart' | 'order' | 'positions'>('chart')
+
+  // Inline SL/TP editing
+  const [editingPosId, setEditingPosId] = useState<string | null>(null)
+  const [editSl, setEditSl] = useState('')
+  const [editTp, setEditTp] = useState('')
+  const [adjusting, setAdjusting] = useState(false)
 
   // ── Ticker ──────────────────────────────────────────────────────────────
 
@@ -267,6 +273,32 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       toast.error('Network error, please try again')
     } finally {
       setPlacing(false)
+    }
+  }
+
+  // ── Adjust SL/TP ────────────────────────────────────────────────────────
+
+  const handleAdjust = async (positionId: string) => {
+    setAdjusting(true)
+    try {
+      const res = await fetch('/api/trading/adjust', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          positionId,
+          stopLoss: editSl !== '' ? parseFloat(editSl) : null,
+          takeProfit: editTp !== '' ? parseFloat(editTp) : null,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) { toast.error(data.error || 'Failed to update'); return }
+      toast.success('SL / TP updated')
+      setEditingPosId(null)
+      fetchPositions()
+    } catch {
+      toast.error('Network error')
+    } finally {
+      setAdjusting(false)
     }
   }
 
@@ -489,6 +521,13 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               ))}
             </div>
 
+            {/* Leverage warning */}
+            {tradeType === 'LEVERAGE' && (
+              <div className="text-xs text-amber-400/80 bg-amber-500/10 border border-amber-500/20 rounded px-2 py-1.5">
+                Leverage trading is <span className="font-semibold">user vs platform</span>. Positions are auto-liquidated when price hits the liquidation price.
+              </div>
+            )}
+
             {/* Leverage picker */}
             {tradeType === 'LEVERAGE' && (
               <div>
@@ -701,6 +740,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                         <th className="pb-2 text-right font-normal">Current</th>
                         <th className="pb-2 text-right font-normal">Unrealized PnL</th>
                         <th className="pb-2 text-right font-normal">Liq. Price</th>
+                        <th className="pb-2 text-right font-normal">SL</th>
+                        <th className="pb-2 text-right font-normal">TP</th>
                         <th className="pb-2 text-right font-normal"></th>
                       </tr>
                     </thead>
@@ -761,16 +802,90 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                 ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
                                 : '—'}
                             </td>
+                            {/* SL */}
                             <td className="py-2.5 text-right">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleClose(pos.id)}
-                                disabled={closingId === pos.id}
-                                className="h-6 px-2 text-xs border-zinc-700 hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-400"
-                              >
-                                {closingId === pos.id ? '…' : <X className="h-3 w-3" />}
-                              </Button>
+                              {editingPosId === pos.id ? (
+                                <Input
+                                  type="number"
+                                  value={editSl}
+                                  onChange={(e) => setEditSl(e.target.value)}
+                                  placeholder="—"
+                                  className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
+                                />
+                              ) : (
+                                <span className="text-zinc-500">
+                                  {pos.stopLoss
+                                    ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+                                    : '—'}
+                                </span>
+                              )}
+                            </td>
+                            {/* TP */}
+                            <td className="py-2.5 text-right">
+                              {editingPosId === pos.id ? (
+                                <Input
+                                  type="number"
+                                  value={editTp}
+                                  onChange={(e) => setEditTp(e.target.value)}
+                                  placeholder="—"
+                                  className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
+                                />
+                              ) : (
+                                <span className="text-zinc-500">
+                                  {pos.takeProfit
+                                    ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+                                    : '—'}
+                                </span>
+                              )}
+                            </td>
+                            {/* Actions */}
+                            <td className="py-2.5 text-right">
+                              <div className="flex items-center justify-end gap-1">
+                                {editingPosId === pos.id ? (
+                                  <>
+                                    <Button
+                                      size="sm"
+                                      onClick={() => handleAdjust(pos.id)}
+                                      disabled={adjusting}
+                                      className="h-6 px-2 text-xs bg-blue-600 hover:bg-blue-700 text-white border-0"
+                                    >
+                                      {adjusting ? '…' : <Check className="h-3 w-3" />}
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      onClick={() => setEditingPosId(null)}
+                                      className="h-6 px-2 text-xs text-zinc-400 hover:text-zinc-200"
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </Button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => {
+                                        setEditingPosId(pos.id)
+                                        setEditSl(pos.stopLoss?.toString() ?? '')
+                                        setEditTp(pos.takeProfit?.toString() ?? '')
+                                      }}
+                                      className="h-6 px-2 text-xs border-zinc-700 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400"
+                                    >
+                                      <Edit2 className="h-3 w-3" />
+                                    </Button>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => handleClose(pos.id)}
+                                      disabled={closingId === pos.id}
+                                      className="h-6 px-2 text-xs border-zinc-700 hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-400"
+                                    >
+                                      {closingId === pos.id ? '…' : <X className="h-3 w-3" />}
+                                    </Button>
+                                  </>
+                                )}
+                              </div>
                             </td>
                           </tr>
                         )

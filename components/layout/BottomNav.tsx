@@ -30,8 +30,7 @@ export function BottomNav({ onMenuOpen }: BottomNavProps) {
 
   return (
     <nav
-      className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border"
-      style={{ background: 'hsl(225, 58%, 7%)' }}
+      className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-border/50 bg-background/80 backdrop-blur-xl"
     >
       {/* Safe area inset for devices with home indicator */}
       <div className="flex h-16 pb-[env(safe-area-inset-bottom)]">

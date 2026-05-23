@@ -66,6 +66,13 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="flex h-[100dvh] overflow-hidden bg-background">
+      {/* ── Ambient background glows (fixed, don't scroll) ── */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+        <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-blue-600/[0.06] blur-[160px] translate-x-1/3 -translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-violet-600/[0.06] blur-[140px] -translate-x-1/4 translate-y-1/4" />
+        <div className="dot-grid absolute inset-0 opacity-100" />
+      </div>
+
       {/* Mobile backdrop overlay */}
       {mobileOpen && (
         <div
@@ -78,7 +85,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Sidebar - desktop: inline flow, mobile: fixed drawer */}
       <div
         className={cn(
-          'fixed inset-y-0 left-0 z-40 md:relative md:z-auto md:translate-x-0 transition-transform duration-300 ease-in-out',
+          'fixed inset-y-0 left-0 z-40 md:relative md:z-10 md:translate-x-0 transition-transform duration-300 ease-in-out',
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -86,9 +93,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
 
       {/* Main content */}
-      <div className="flex flex-1 flex-col overflow-hidden min-w-0">
-        {/* Header */}
-        <header className="flex h-14 md:h-16 items-center justify-between border-b border-border px-4 md:px-6 flex-shrink-0">
+      <div className="flex flex-1 flex-col overflow-hidden min-w-0 relative z-10">
+        {/* Header — glass effect */}
+        <header className="flex h-14 md:h-16 items-center justify-between border-b border-border/40 bg-background/70 backdrop-blur-xl px-4 md:px-6 flex-shrink-0 sticky top-0 z-20">
           <div className="flex items-center gap-3">
             {/* Mobile: logo mark */}
             <Link href="/dashboard" className="md:hidden flex items-center gap-2 mr-1">
@@ -148,7 +155,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page content — extra bottom padding on mobile for BottomNav */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-24 md:pb-6">
           {children}
         </main>
       </div>

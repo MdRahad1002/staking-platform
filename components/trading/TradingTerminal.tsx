@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RefreshCw, Activity, X, Edit2, Check } from 'lucide-react'
+import { RefreshCw, Activity, X, Edit2, Check, TrendingUp, Zap, BarChart2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const PriceChart = dynamic(() => import('./PriceChart'), { ssr: false })
@@ -445,7 +445,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
   // ── Render ──────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-4">
       {/* ── Header / Ticker bar ─────────────────────────────────────── */}
       <Card className="border-zinc-800 bg-zinc-900">
         <CardContent className="py-2.5 px-3 sm:px-4">
@@ -465,7 +465,13 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                 </SelectContent>
               </Select>
 
-              <div className="flex items-baseline gap-1.5 min-w-0 flex-1">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                {livePrice && (
+                  <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-400" />
+                  </span>
+                )}
                 <span
                   className={cn(
                     'text-base sm:text-2xl font-bold font-mono truncate',
@@ -523,23 +529,24 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       </Card>
 
       {/* Mobile tab switcher (hidden on lg+) */}
-      <div className="flex lg:hidden rounded-xl bg-zinc-800/60 p-1 gap-1">
+      <div className="flex lg:hidden rounded-xl bg-zinc-900 border border-zinc-800 p-1 gap-1">
         {([
-          { id: 'chart', label: 'Chart' },
-          { id: 'order', label: 'Order' },
-          { id: 'positions', label: positions.length > 0 ? `Positions (${positions.length})` : 'Positions' },
-        ] as const).map(({ id, label }) => (
+          { id: 'chart' as const, label: 'Chart', Icon: TrendingUp },
+          { id: 'order' as const, label: 'Order', Icon: Zap },
+          { id: 'positions' as const, label: positions.length > 0 ? `Pos (${positions.length})` : 'Positions', Icon: BarChart2 },
+        ]).map(({ id, label, Icon }) => (
           <button
             key={id}
             onClick={() => setMobileView(id)}
             className={cn(
-              'flex-1 py-2 text-xs font-semibold rounded-lg transition-all',
+              'flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg transition-all',
               mobileView === id
-                ? 'bg-zinc-700 text-white shadow-sm'
+                ? 'bg-cyan-500/15 text-cyan-400 shadow-sm'
                 : 'text-zinc-500 hover:text-zinc-300'
             )}
           >
-            {label}
+            <Icon className="h-3.5 w-3.5 flex-shrink-0" />
+            <span>{label}</span>
           </button>
         ))}
       </div>
@@ -566,7 +573,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                 </button>
               ))}
             </div>
-            <div className="h-[280px] sm:h-[340px] lg:h-[400px]">
+            <div className="h-[320px] sm:h-[360px] lg:h-[420px]">
               <PriceChart symbol={symbol} interval={chartInterval} />
             </div>
           </CardContent>
@@ -669,7 +676,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                   placeholder="0.00"
                   value={amountUsd}
                   onChange={(e) => setAmountUsd(e.target.value)}
-                  className="h-8 text-xs bg-zinc-800 border-zinc-700 pr-12 text-zinc-200"
+                  className="h-10 text-sm bg-zinc-800 border-zinc-700 pr-12 text-zinc-200"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500">
                   USD
@@ -680,7 +687,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                   <button
                     key={pct}
                     onClick={() => setAmountUsd(((balance * pct) / 100).toFixed(2))}
-                    className="flex-1 py-0.5 text-xs text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded hover:border-zinc-500 transition-colors"
+                    className="flex-1 py-1.5 text-xs text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded-lg hover:border-zinc-500 transition-colors"
                   >
                     {pct === 100 ? 'MAX' : `${pct}%`}
                   </button>
@@ -771,7 +778,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               onClick={handlePlaceOrder}
               disabled={placing || !amountUsd || parseFloat(amountUsd) < 10}
               className={cn(
-                'w-full font-bold text-sm py-2',
+                'w-full font-bold text-base h-12',
+
                 side === 'BUY' || side === 'LONG'
                   ? 'bg-green-500 hover:bg-green-600 text-white disabled:bg-green-900'
                   : 'bg-red-500 hover:bg-red-600 text-white disabled:bg-red-900'
@@ -816,252 +824,370 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
             </TabsList>
 
             {/* Open Positions */}
-            <TabsContent value="positions" className="mt-0 p-4">
+            <TabsContent value="positions" className="mt-0">
               {positions.length === 0 ? (
-                <p className="text-center text-zinc-500 text-sm py-6">No open positions</p>
+                <p className="text-center text-zinc-500 text-sm py-10">No open positions</p>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs min-w-[700px]">
-                    <thead>
-                      <tr className="text-zinc-500 border-b border-zinc-800">
-                        <th className="pb-2 text-left font-normal">Symbol</th>
-                        <th className="pb-2 text-left font-normal">Side</th>
-                        <th className="pb-2 text-right font-normal">Margin</th>
-                        <th className="pb-2 text-right font-normal">Entry Price</th>
-                        <th className="pb-2 text-right font-normal">Current</th>
-                        <th className="pb-2 text-right font-normal">Unrealized PnL</th>
-                        <th className="pb-2 text-right font-normal">Liq. Price</th>
-                        <th className="pb-2 text-right font-normal">SL</th>
-                        <th className="pb-2 text-right font-normal">TP</th>
-                        <th className="pb-2 text-right font-normal"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {positions.map((pos) => {
-                        // Prefer real-time WebSocket price for the currently selected symbol;
-                        // fall back to 5-second REST poll for other symbols
-                        const price =
-                          (symbol === pos.symbol && livePrice)
-                            ? livePrice
-                            : (positionPrices[pos.symbol] ?? (symbol === pos.symbol ? (livePrice ?? 0) : 0))
-                        const pnl = price ? calcPnl(pos, price) : 0
-                        const pnlPct = pos.margin > 0 ? (pnl / pos.margin) * 100 : 0
-                        // Show 4 decimal places for sub-cent PnL so it visibly updates
-                        const pnlStr = Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)
-                        const liq = calcLiqPrice(pos)
-                        const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
-                        return (
-                          <tr
-                            key={pos.id}
-                            className="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors"
-                          >
-                            <td className="py-2.5 font-medium text-zinc-200">
-                              {pos.symbol.replace('USDT', '/USDT')}
-                            </td>
-                            <td className="py-2.5">
+                <>
+                  {/* ── Mobile cards (hidden on lg+) ──────────────────────── */}
+                  <div className="lg:hidden space-y-2.5 p-3">
+                    {positions.map((pos) => {
+                      const price =
+                        (symbol === pos.symbol && livePrice)
+                          ? livePrice
+                          : (positionPrices[pos.symbol] ?? (symbol === pos.symbol ? (livePrice ?? 0) : 0))
+                      const pnl = price ? calcPnl(pos, price) : 0
+                      const pnlPct = pos.margin > 0 ? (pnl / pos.margin) * 100 : 0
+                      const pnlStr = Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)
+                      const liq = calcLiqPrice(pos)
+                      const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
+                      const isEditing = editingPosId === pos.id
+                      return (
+                        <div
+                          key={pos.id}
+                          className="rounded-2xl border border-zinc-700/50 bg-zinc-800/40 p-4 space-y-3"
+                        >
+                          {/* Header row */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-sm text-zinc-100">
+                                {pos.symbol.replace('USDT', '/USDT')}
+                              </span>
                               <Badge
                                 variant="outline"
                                 className={cn(
-                                  'text-xs',
-                                  isLong
-                                    ? 'text-green-400 border-green-400/30'
-                                    : 'text-red-400 border-red-400/30'
+                                  'text-[10px] px-1.5 py-0',
+                                  isLong ? 'text-green-400 border-green-400/30' : 'text-red-400 border-red-400/30'
                                 )}
                               >
                                 {pos.side === 'SPOT_BUY' ? 'SPOT' : pos.side}
                                 {pos.leverage > 1 && ` ${pos.leverage}x`}
                               </Badge>
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              ${pos.margin.toFixed(2)}
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              ${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              {price
-                                ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                                : '—'}
-                            </td>
-                            <td
-                              className={cn(
-                                'py-2.5 text-right font-medium',
-                                pnl >= 0 ? 'text-green-400' : 'text-red-400'
+                            </div>
+                            <div className="flex gap-1.5">
+                              {isEditing ? (
+                                <>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => handleAdjust(pos.id)}
+                                    disabled={adjusting}
+                                    className="h-8 px-3 text-xs bg-blue-600 hover:bg-blue-700 text-white border-0 rounded-xl"
+                                  >
+                                    {adjusting ? '…' : <><Check className="h-3 w-3 mr-1" />Save</>}
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    onClick={() => setEditingPosId(null)}
+                                    className="h-8 w-8 p-0 text-zinc-400 hover:text-zinc-200 rounded-xl"
+                                  >
+                                    <X className="h-3.5 w-3.5" />
+                                  </Button>
+                                </>
+                              ) : (
+                                <>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => {
+                                      setEditingPosId(pos.id)
+                                      setEditSl(pos.stopLoss?.toString() ?? '')
+                                      setEditTp(pos.takeProfit?.toString() ?? '')
+                                    }}
+                                    className="h-8 px-3 text-xs border-zinc-700 hover:bg-blue-500/10 hover:border-blue-500/50 text-zinc-400 hover:text-blue-400 rounded-xl"
+                                  >
+                                    <Edit2 className="h-3 w-3 mr-1" />SL/TP
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => handleClose(pos.id)}
+                                    disabled={closingId === pos.id}
+                                    className="h-8 px-3 text-xs bg-red-500/15 border border-red-500/30 text-red-400 hover:bg-red-500/25 rounded-xl"
+                                  >
+                                    {closingId === pos.id ? '…' : 'Close'}
+                                  </Button>
+                                </>
                               )}
+                            </div>
+                          </div>
+
+                          {/* PnL — prominent */}
+                          <div className={cn('font-bold font-mono leading-none', pnl >= 0 ? 'text-green-400' : 'text-red-400')}>
+                            <span className="text-2xl">{pnl >= 0 ? '+' : ''}${pnlStr}</span>
+                            <span className="text-xs ml-2 opacity-60">
+                              ({pnlPct >= 0 ? '+' : ''}{pnlPct.toFixed(2)}%)
+                            </span>
+                          </div>
+
+                          {/* Stats grid */}
+                          <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] pt-2.5 border-t border-zinc-700/40">
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Entry</span>
+                              <span className="text-zinc-300 font-mono">${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Current</span>
+                              <span className="text-zinc-300 font-mono">{price ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : '—'}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Margin</span>
+                              <span className="text-zinc-300">${pos.margin.toFixed(2)}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Liq.</span>
+                              <span className="text-red-400/70">{liq ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                            </div>
+                            {isEditing ? (
+                              <>
+                                <div>
+                                  <p className="text-zinc-500 mb-1">Stop Loss</p>
+                                  <Input
+                                    type="number"
+                                    value={editSl}
+                                    onChange={(e) => setEditSl(e.target.value)}
+                                    placeholder="—"
+                                    className="h-8 text-xs bg-zinc-700 border-zinc-600 text-zinc-200"
+                                  />
+                                </div>
+                                <div>
+                                  <p className="text-zinc-500 mb-1">Take Profit</p>
+                                  <Input
+                                    type="number"
+                                    value={editTp}
+                                    onChange={(e) => setEditTp(e.target.value)}
+                                    placeholder="—"
+                                    className="h-8 text-xs bg-zinc-700 border-zinc-600 text-zinc-200"
+                                  />
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="flex justify-between">
+                                  <span className="text-zinc-500">Stop Loss</span>
+                                  <span className="text-zinc-400">{pos.stopLoss ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-zinc-500">Take Profit</span>
+                                  <span className="text-zinc-400">{pos.takeProfit ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* ── Desktop table (lg+) ───────────────────────────────── */}
+                  <div className="hidden lg:block overflow-x-auto p-4">
+                    <table className="w-full text-xs min-w-[700px]">
+                      <thead>
+                        <tr className="text-zinc-500 border-b border-zinc-800">
+                          <th className="pb-2 text-left font-normal">Symbol</th>
+                          <th className="pb-2 text-left font-normal">Side</th>
+                          <th className="pb-2 text-right font-normal">Margin</th>
+                          <th className="pb-2 text-right font-normal">Entry Price</th>
+                          <th className="pb-2 text-right font-normal">Current</th>
+                          <th className="pb-2 text-right font-normal">Unrealized PnL</th>
+                          <th className="pb-2 text-right font-normal">Liq. Price</th>
+                          <th className="pb-2 text-right font-normal">SL</th>
+                          <th className="pb-2 text-right font-normal">TP</th>
+                          <th className="pb-2 text-right font-normal"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {positions.map((pos) => {
+                          const price =
+                            (symbol === pos.symbol && livePrice)
+                              ? livePrice
+                              : (positionPrices[pos.symbol] ?? (symbol === pos.symbol ? (livePrice ?? 0) : 0))
+                          const pnl = price ? calcPnl(pos, price) : 0
+                          const pnlPct = pos.margin > 0 ? (pnl / pos.margin) * 100 : 0
+                          const pnlStr = Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)
+                          const liq = calcLiqPrice(pos)
+                          const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
+                          return (
+                            <tr
+                              key={pos.id}
+                              className="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors"
                             >
-                              {pnl >= 0 ? '+' : ''}${pnlStr}{' '}
-                              <span className="text-zinc-500 font-normal">
-                                ({pnlPct >= 0 ? '+' : ''}
-                                {pnlPct.toFixed(2)}%)
-                              </span>
-                            </td>
-                            <td className="py-2.5 text-right text-red-400/70">
-                              {liq
-                                ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                : '—'}
-                            </td>
-                            {/* SL */}
-                            <td className="py-2.5 text-right">
-                              {editingPosId === pos.id ? (
-                                <Input
-                                  type="number"
-                                  value={editSl}
-                                  onChange={(e) => setEditSl(e.target.value)}
-                                  placeholder="—"
-                                  className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
-                                />
-                              ) : (
-                                <span className="text-zinc-500">
-                                  {pos.stopLoss
-                                    ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                    : '—'}
-                                </span>
-                              )}
-                            </td>
-                            {/* TP */}
-                            <td className="py-2.5 text-right">
-                              {editingPosId === pos.id ? (
-                                <Input
-                                  type="number"
-                                  value={editTp}
-                                  onChange={(e) => setEditTp(e.target.value)}
-                                  placeholder="—"
-                                  className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
-                                />
-                              ) : (
-                                <span className="text-zinc-500">
-                                  {pos.takeProfit
-                                    ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                    : '—'}
-                                </span>
-                              )}
-                            </td>
-                            {/* Actions */}
-                            <td className="py-2.5 text-right">
-                              <div className="flex items-center justify-end gap-1">
-                                {editingPosId === pos.id ? (
-                                  <>
-                                    <Button
-                                      size="sm"
-                                      onClick={() => handleAdjust(pos.id)}
-                                      disabled={adjusting}
-                                      className="h-6 px-2 text-xs bg-blue-600 hover:bg-blue-700 text-white border-0"
-                                    >
-                                      {adjusting ? '…' : <Check className="h-3 w-3" />}
-                                    </Button>
-                                    <Button
-                                      size="sm"
-                                      variant="ghost"
-                                      onClick={() => setEditingPosId(null)}
-                                      className="h-6 px-2 text-xs text-zinc-400 hover:text-zinc-200"
-                                    >
-                                      <X className="h-3 w-3" />
-                                    </Button>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      onClick={() => {
-                                        setEditingPosId(pos.id)
-                                        setEditSl(pos.stopLoss?.toString() ?? '')
-                                        setEditTp(pos.takeProfit?.toString() ?? '')
-                                      }}
-                                      className="h-6 px-2 text-xs border-zinc-700 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400"
-                                    >
-                                      <Edit2 className="h-3 w-3" />
-                                    </Button>
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      onClick={() => handleClose(pos.id)}
-                                      disabled={closingId === pos.id}
-                                      className="h-6 px-2 text-xs border-zinc-700 hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-400"
-                                    >
-                                      {closingId === pos.id ? '…' : <X className="h-3 w-3" />}
-                                    </Button>
-                                  </>
+                              <td className="py-2.5 font-medium text-zinc-200">
+                                {pos.symbol.replace('USDT', '/USDT')}
+                              </td>
+                              <td className="py-2.5">
+                                <Badge
+                                  variant="outline"
+                                  className={cn(
+                                    'text-xs',
+                                    isLong
+                                      ? 'text-green-400 border-green-400/30'
+                                      : 'text-red-400 border-red-400/30'
+                                  )}
+                                >
+                                  {pos.side === 'SPOT_BUY' ? 'SPOT' : pos.side}
+                                  {pos.leverage > 1 && ` ${pos.leverage}x`}
+                                </Badge>
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                ${pos.margin.toFixed(2)}
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                ${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                {price
+                                  ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
+                                  : '—'}
+                              </td>
+                              <td
+                                className={cn(
+                                  'py-2.5 text-right font-medium',
+                                  pnl >= 0 ? 'text-green-400' : 'text-red-400'
                                 )}
-                              </div>
-                            </td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                              >
+                                {pnl >= 0 ? '+' : ''}${pnlStr}{' '}
+                                <span className="text-zinc-500 font-normal">
+                                  ({pnlPct >= 0 ? '+' : ''}
+                                  {pnlPct.toFixed(2)}%)
+                                </span>
+                              </td>
+                              <td className="py-2.5 text-right text-red-400/70">
+                                {liq
+                                  ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+                                  : '—'}
+                              </td>
+                              {/* SL */}
+                              <td className="py-2.5 text-right">
+                                {editingPosId === pos.id ? (
+                                  <Input
+                                    type="number"
+                                    value={editSl}
+                                    onChange={(e) => setEditSl(e.target.value)}
+                                    placeholder="—"
+                                    className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
+                                  />
+                                ) : (
+                                  <span className="text-zinc-500">
+                                    {pos.stopLoss
+                                      ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+                                      : '—'}
+                                  </span>
+                                )}
+                              </td>
+                              {/* TP */}
+                              <td className="py-2.5 text-right">
+                                {editingPosId === pos.id ? (
+                                  <Input
+                                    type="number"
+                                    value={editTp}
+                                    onChange={(e) => setEditTp(e.target.value)}
+                                    placeholder="—"
+                                    className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
+                                  />
+                                ) : (
+                                  <span className="text-zinc-500">
+                                    {pos.takeProfit
+                                      ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
+                                      : '—'}
+                                  </span>
+                                )}
+                              </td>
+                              {/* Actions */}
+                              <td className="py-2.5 text-right">
+                                <div className="flex items-center justify-end gap-1">
+                                  {editingPosId === pos.id ? (
+                                    <>
+                                      <Button
+                                        size="sm"
+                                        onClick={() => handleAdjust(pos.id)}
+                                        disabled={adjusting}
+                                        className="h-6 px-2 text-xs bg-blue-600 hover:bg-blue-700 text-white border-0"
+                                      >
+                                        {adjusting ? '…' : <Check className="h-3 w-3" />}
+                                      </Button>
+                                      <Button
+                                        size="sm"
+                                        variant="ghost"
+                                        onClick={() => setEditingPosId(null)}
+                                        className="h-6 px-2 text-xs text-zinc-400 hover:text-zinc-200"
+                                      >
+                                        <X className="h-3 w-3" />
+                                      </Button>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => {
+                                          setEditingPosId(pos.id)
+                                          setEditSl(pos.stopLoss?.toString() ?? '')
+                                          setEditTp(pos.takeProfit?.toString() ?? '')
+                                        }}
+                                        className="h-6 px-2 text-xs border-zinc-700 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400"
+                                      >
+                                        <Edit2 className="h-3 w-3" />
+                                      </Button>
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => handleClose(pos.id)}
+                                        disabled={closingId === pos.id}
+                                        className="h-6 px-2 text-xs border-zinc-700 hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-400"
+                                      >
+                                        {closingId === pos.id ? '…' : <X className="h-3 w-3" />}
+                                      </Button>
+                                    </>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
               )}
             </TabsContent>
 
             {/* Trade History */}
-            <TabsContent value="history" className="mt-0 p-4">
+            <TabsContent value="history" className="mt-0">
               {history.length === 0 ? (
-                <p className="text-center text-zinc-500 text-sm py-6">No closed trades yet</p>
+                <p className="text-center text-zinc-500 text-sm py-10">No closed trades yet</p>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs min-w-[700px]">
-                    <thead>
-                      <tr className="text-zinc-500 border-b border-zinc-800">
-                        <th className="pb-2 text-left font-normal">Symbol</th>
-                        <th className="pb-2 text-left font-normal">Side</th>
-                        <th className="pb-2 text-right font-normal">Margin</th>
-                        <th className="pb-2 text-right font-normal">Entry</th>
-                        <th className="pb-2 text-right font-normal">Close</th>
-                        <th className="pb-2 text-right font-normal">Realized PnL</th>
-                        <th className="pb-2 text-right font-normal">Status</th>
-                        <th className="pb-2 text-right font-normal">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {history.map((pos) => {
-                        const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
-                        return (
-                          <tr
-                            key={pos.id}
-                            className="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors"
-                          >
-                            <td className="py-2.5 font-medium text-zinc-200">
-                              {pos.symbol.replace('USDT', '/USDT')}
-                            </td>
-                            <td className="py-2.5">
+                <>
+                  {/* ── Mobile cards (hidden on lg+) ──────────────────────── */}
+                  <div className="lg:hidden space-y-2.5 p-3">
+                    {history.map((pos) => {
+                      const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
+                      return (
+                        <div
+                          key={pos.id}
+                          className="rounded-2xl border border-zinc-700/50 bg-zinc-800/40 p-4 space-y-2.5"
+                        >
+                          {/* Header */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-sm text-zinc-100">
+                                {pos.symbol.replace('USDT', '/USDT')}
+                              </span>
                               <Badge
                                 variant="outline"
                                 className={cn(
-                                  'text-xs',
-                                  isLong
-                                    ? 'text-green-400 border-green-400/30'
-                                    : 'text-red-400 border-red-400/30'
+                                  'text-[10px] px-1.5 py-0',
+                                  isLong ? 'text-green-400 border-green-400/30' : 'text-red-400 border-red-400/30'
                                 )}
                               >
                                 {pos.side === 'SPOT_BUY' ? 'SPOT' : pos.side}
                                 {pos.leverage > 1 && ` ${pos.leverage}x`}
                               </Badge>
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              ${pos.margin.toFixed(2)}
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              ${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-300">
-                              {pos.closePrice
-                                ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                                : '—'}
-                            </td>
-                            <td
-                              className={cn(
-                                'py-2.5 text-right font-medium',
-                                pos.realizedPnl >= 0 ? 'text-green-400' : 'text-red-400'
-                              )}
-                            >
-                              {pos.realizedPnl >= 0 ? '+' : ''}${pos.realizedPnl.toFixed(2)}
-                            </td>
-                            <td className="py-2.5 text-right">
+                            </div>
+                            <div className="flex items-center gap-2">
                               <Badge
                                 variant="outline"
                                 className={cn(
-                                  'text-xs',
+                                  'text-[10px] px-1.5',
                                   pos.status === 'LIQUIDATED'
                                     ? 'text-red-400 border-red-400/30'
                                     : 'text-zinc-400 border-zinc-600'
@@ -1069,18 +1195,125 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               >
                                 {pos.status}
                               </Badge>
-                            </td>
-                            <td className="py-2.5 text-right text-zinc-500">
-                              {pos.closedAt
-                                ? new Date(pos.closedAt).toLocaleDateString()
-                                : '—'}
-                            </td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                              <span className="text-[11px] text-zinc-500">
+                                {pos.closedAt ? new Date(pos.closedAt).toLocaleDateString() : '—'}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Realized PnL */}
+                          <div className={cn('font-bold font-mono', pos.realizedPnl >= 0 ? 'text-green-400' : 'text-red-400')}>
+                            <span className="text-xl">
+                              {pos.realizedPnl >= 0 ? '+' : ''}${pos.realizedPnl.toFixed(2)}
+                            </span>
+                          </div>
+
+                          {/* Stats */}
+                          <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] pt-2.5 border-t border-zinc-700/40">
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Entry</span>
+                              <span className="text-zinc-300 font-mono">${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Close</span>
+                              <span className="text-zinc-300 font-mono">
+                                {pos.closePrice ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : '—'}
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-500">Margin</span>
+                              <span className="text-zinc-300">${pos.margin.toFixed(2)}</span>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* ── Desktop table (lg+) ───────────────────────────────── */}
+                  <div className="hidden lg:block overflow-x-auto p-4">
+                    <table className="w-full text-xs min-w-[700px]">
+                      <thead>
+                        <tr className="text-zinc-500 border-b border-zinc-800">
+                          <th className="pb-2 text-left font-normal">Symbol</th>
+                          <th className="pb-2 text-left font-normal">Side</th>
+                          <th className="pb-2 text-right font-normal">Margin</th>
+                          <th className="pb-2 text-right font-normal">Entry</th>
+                          <th className="pb-2 text-right font-normal">Close</th>
+                          <th className="pb-2 text-right font-normal">Realized PnL</th>
+                          <th className="pb-2 text-right font-normal">Status</th>
+                          <th className="pb-2 text-right font-normal">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {history.map((pos) => {
+                          const isLong = pos.side === 'LONG' || pos.side === 'SPOT_BUY'
+                          return (
+                            <tr
+                              key={pos.id}
+                              className="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors"
+                            >
+                              <td className="py-2.5 font-medium text-zinc-200">
+                                {pos.symbol.replace('USDT', '/USDT')}
+                              </td>
+                              <td className="py-2.5">
+                                <Badge
+                                  variant="outline"
+                                  className={cn(
+                                    'text-xs',
+                                    isLong
+                                      ? 'text-green-400 border-green-400/30'
+                                      : 'text-red-400 border-red-400/30'
+                                  )}
+                                >
+                                  {pos.side === 'SPOT_BUY' ? 'SPOT' : pos.side}
+                                  {pos.leverage > 1 && ` ${pos.leverage}x`}
+                                </Badge>
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                ${pos.margin.toFixed(2)}
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                ${pos.entryPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-300">
+                                {pos.closePrice
+                                  ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
+                                  : '—'}
+                              </td>
+                              <td
+                                className={cn(
+                                  'py-2.5 text-right font-medium',
+                                  pos.realizedPnl >= 0 ? 'text-green-400' : 'text-red-400'
+                                )}
+                              >
+                                {pos.realizedPnl >= 0 ? '+' : ''}${pos.realizedPnl.toFixed(2)}
+                              </td>
+                              <td className="py-2.5 text-right">
+                                <Badge
+                                  variant="outline"
+                                  className={cn(
+                                    'text-xs',
+                                    pos.status === 'LIQUIDATED'
+                                      ? 'text-red-400 border-red-400/30'
+                                      : 'text-zinc-400 border-zinc-600'
+                                  )}
+                                >
+                                  {pos.status}
+                                </Badge>
+                              </td>
+                              <td className="py-2.5 text-right text-zinc-500">
+                                {pos.closedAt
+                                  ? new Date(pos.closedAt).toLocaleDateString()
+                                  : '—'}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
               )}
             </TabsContent>
           </Tabs>

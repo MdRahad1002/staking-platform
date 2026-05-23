@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { Sidebar } from './Sidebar'
+import { BottomNav } from './BottomNav'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Bell, Menu, ChevronRight } from 'lucide-react'
@@ -81,25 +82,44 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
-        <Sidebar
-          collapsed={collapsed}
-          onClose={() => setMobileOpen(false)}
-        />
+        <Sidebar collapsed={collapsed} onClose={() => setMobileOpen(false)} />
       </div>
 
       {/* Main content */}
       <div className="flex flex-1 flex-col overflow-hidden min-w-0">
         {/* Header */}
-        <header className="flex h-16 items-center justify-between border-b border-border px-4 md:px-6 flex-shrink-0">
+        <header className="flex h-14 md:h-16 items-center justify-between border-b border-border px-4 md:px-6 flex-shrink-0">
           <div className="flex items-center gap-3">
+            {/* Mobile: logo mark */}
+            <Link href="/dashboard" className="md:hidden flex items-center gap-2 mr-1">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 flex-shrink-0">
+                <defs>
+                  <linearGradient id="bnl" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#2563EB" />
+                    <stop offset="100%" stopColor="#7C3AED" />
+                  </linearGradient>
+                </defs>
+                <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" fill="url(#bnl)" />
+                <rect x="12" y="10" width="13" height="5" rx="1.5" fill="white" />
+                <rect x="12" y="10" width="5" height="10" rx="1.5" fill="white" />
+                <rect x="12" y="17.5" width="16" height="5" rx="1.5" fill="white" />
+                <rect x="23" y="20" width="5" height="10" rx="1.5" fill="white" />
+                <rect x="15" y="25" width="13" height="5" rx="1.5" fill="white" />
+              </svg>
+              <span className="font-extrabold tracking-tight text-sm leading-none">
+                <span className="text-muted-foreground">Stake</span>
+                <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">onix</span>
+              </span>
+            </Link>
+
+            {/* Desktop: hamburger + breadcrumbs */}
             <button
               onClick={handleMenuClick}
-              className="p-2 rounded-lg hover:bg-secondary transition-colors"
+              className="hidden md:flex p-2 rounded-lg hover:bg-secondary transition-colors"
               aria-label="Toggle menu"
             >
               <Menu className="h-5 w-5" />
             </button>
-            {/* Breadcrumb - desktop only */}
             <nav className="hidden md:flex items-center gap-1 text-sm text-muted-foreground">
               {breadcrumbs.map((crumb, i) => (
                 <span key={i} className="flex items-center gap-1">
@@ -110,16 +130,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 </span>
               ))}
             </nav>
-            {/* Page title - mobile only */}
-            <span className="md:hidden text-sm font-semibold text-foreground capitalize">
-              {breadcrumbs[breadcrumbs.length - 1] || 'Dashboard'}
-            </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Link href="/notify">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="relative h-9 w-9">
+                <Bell className="h-4.5 w-4.5" />
               </Button>
             </Link>
             <Link href="/settings">
@@ -131,9 +147,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </header>
 
-        {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+        {/* Page content — extra bottom padding on mobile for BottomNav */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6">
+          {children}
+        </main>
       </div>
+
+      {/* Mobile bottom navigation */}
+      <BottomNav onMenuOpen={() => setMobileOpen(true)} />
     </div>
   )
 }

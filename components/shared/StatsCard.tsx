@@ -25,17 +25,17 @@ export function StatsCard({
 
   return (
     <div className={cn('stat-card', className)}>
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-sm text-muted-foreground mb-1">{title}</p>
-          <p className={cn('text-2xl font-bold tracking-tight', valueClassName)}>{value}</p>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="text-xs text-muted-foreground mb-1 truncate">{title}</p>
+          <p className={cn('text-lg sm:text-2xl font-bold tracking-tight truncate', valueClassName)}>{value}</p>
 
           {change !== undefined && (
-            <div className="flex items-center gap-1 mt-2">
+            <div className="flex items-center gap-1 mt-1.5">
               {isPositive ? (
-                <TrendingUp className="h-3.5 w-3.5 text-green-500" />
+                <TrendingUp className="h-3 w-3 text-green-500 flex-shrink-0" />
               ) : (
-                <TrendingDown className="h-3.5 w-3.5 text-red-500" />
+                <TrendingDown className="h-3 w-3 text-red-500 flex-shrink-0" />
               )}
               <span
                 className={cn(
@@ -47,14 +47,14 @@ export function StatsCard({
                 {change.toFixed(1)}%
               </span>
               {changeLabel && (
-                <span className="text-xs text-muted-foreground">{changeLabel}</span>
+                <span className="text-xs text-muted-foreground hidden sm:inline">{changeLabel}</span>
               )}
             </div>
           )}
         </div>
 
         {icon && (
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <div className="flex h-9 w-9 sm:h-12 sm:w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
             {icon}
           </div>
         )}

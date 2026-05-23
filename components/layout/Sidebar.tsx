@@ -24,6 +24,7 @@ import {
   Wallet,
   X,
   ShieldCheck,
+  CandlestickChart,
 } from 'lucide-react'
 
 interface SidebarLink {
@@ -37,6 +38,7 @@ const userLinks: SidebarLink[] = [
   { href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },
   { href: '/deposit', label: 'Deposit', icon: <ArrowDownToLine className="h-4 w-4" /> },
   { href: '/withdraw', label: 'Withdraw', icon: <ArrowUpFromLine className="h-4 w-4" /> },
+  { href: '/trade', label: 'Trade', icon: <CandlestickChart className="h-4 w-4" /> },
   { href: '/plans', label: 'Staking Plans', icon: <TrendingUp className="h-4 w-4" /> },
   { href: '/orders', label: 'My Stakes', icon: <List className="h-4 w-4" /> },
   { href: '/referrals', label: 'Referrals', icon: <Users className="h-4 w-4" /> },

@@ -17,6 +17,7 @@ import {
   ArrowRight,
   Zap,
   Rocket,
+  CandlestickChart,
 } from 'lucide-react'
 import { IdleBurnCounter, CompoundProjection } from '@/components/dashboard/DashboardNudges'
 
@@ -120,29 +121,53 @@ export default async function DashboardPage() {
   const name = data.user?.firstName || session.user.name?.split(' ')[0] || 'User'
 
   return (
-    <div className="space-y-6">
-      {/* Welcome header */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold">Welcome back, {name}! 👋</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            Here&#39;s what&#39;s happening with your portfolio today.
-          </p>
+    <div className="space-y-4 md:space-y-6">
+      {/* ── Hero Balance Card (mobile-first) ── */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-700 via-indigo-700 to-violet-800 p-5 text-white shadow-lg">
+        {/* decorative circle */}
+        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5" />
+        <div className="absolute -right-4 -bottom-8 h-28 w-28 rounded-full bg-white/5" />
+        <p className="text-xs font-medium text-blue-100/70 mb-1 uppercase tracking-wide">Total Portfolio</p>
+        <p className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          {formatCurrency((data.user?.balance || 0) + data.totalStaked)}
+        </p>
+        <div className="flex gap-6">
+          <div>
+            <p className="text-[11px] text-blue-100/60 uppercase tracking-wide">Liquid</p>
+            <p className="text-base font-semibold">{formatCurrency(data.user?.balance || 0)}</p>
+          </div>
+          <div className="w-px bg-white/20" />
+          <div>
+            <p className="text-[11px] text-blue-100/60 uppercase tracking-wide">Staked</p>
+            <p className="text-base font-semibold">{formatCurrency(data.totalStaked)}</p>
+          </div>
+          <div className="w-px bg-white/20" />
+          <div>
+            <p className="text-[11px] text-blue-100/60 uppercase tracking-wide">Earned</p>
+            <p className="text-base font-semibold text-green-300">{formatCurrency(data.totalEarned)}</p>
+          </div>
         </div>
-        <div className="flex gap-2 flex-wrap">
-          <Link href="/deposit">
-            <Button variant="gradient" size="sm" className="gap-2">
-              <ArrowDownToLine className="h-4 w-4" />
-              Deposit
-            </Button>
+      </div>
+
+      {/* ── Quick Actions ── */}
+      <div className="grid grid-cols-4 gap-2">
+        {[
+          { label: 'Deposit', href: '/deposit', Icon: ArrowDownToLine, color: 'text-blue-400', bg: 'bg-blue-500/10' },
+          { label: 'Withdraw', href: '/withdraw', Icon: ArrowUpFromLine, color: 'text-orange-400', bg: 'bg-orange-500/10' },
+          { label: 'Trade', href: '/trade', Icon: CandlestickChart, color: 'text-green-400', bg: 'bg-green-500/10' },
+          { label: 'Stake', href: '/plans', Icon: TrendingUp, color: 'text-violet-400', bg: 'bg-violet-500/10' },
+        ].map(({ label, href, Icon, color, bg }) => (
+          <Link
+            key={href}
+            href={href}
+            className="flex flex-col items-center gap-2 p-3 rounded-xl bg-secondary/40 hover:bg-secondary/60 active:scale-95 transition-all"
+          >
+            <div className={`flex h-11 w-11 items-center justify-center rounded-full ${bg}`}>
+              <Icon className={`h-5 w-5 ${color}`} />
+            </div>
+            <span className="text-[11px] font-medium text-muted-foreground">{label}</span>
           </Link>
-          <Link href="/plan/stake">
-            <Button variant="secondary" size="sm" className="gap-2">
-              <TrendingUp className="h-4 w-4" />
-              Stake
-            </Button>
-          </Link>
-        </div>
+        ))}
       </div>
 
       {/* ── Idle Burn Counter (client) ── */}
@@ -222,8 +247,8 @@ export default async function DashboardPage() {
         />
       )}
 
-      {/* Stats cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Stats cards — 2 cols on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <StatsCard
           title="Total Balance"
           value={formatCurrency(data.user?.balance || 0)}

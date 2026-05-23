@@ -62,6 +62,8 @@ model User {
   savedWallets          SavedWallet[]
   kyc                   KycSubmission?
   domain            Domain?           @relation(fields: [domainId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tradeOrders       TradeOrder[]
+  tradePositions    TradePosition[]
 
   @@index([role])
   @@index([domainId])
@@ -518,4 +520,62 @@ model ClickEvent {
   @@index([sessionId])
   @@index([page])
   @@index([createdAt])
+}
+
+// ─────────────────────────────────────────────
+//  Trading
+// ─────────────────────────────────────────────
+
+model TradeOrder {
+  id          String    @id @default(uuid())
+  userId      String
+  symbol      String
+  side        String    // BUY | SELL | LONG | SHORT
+  type        String    // MARKET | LIMIT | STOP_LIMIT
+  tradeType   String    // SPOT | LEVERAGE
+  leverage    Int       @default(1)
+  amountUsd   Float
+  price       Float?
+  stopPrice   Float?
+  stopLoss    Float?
+  takeProfit  Float?
+  filledPrice Float?
+  filledAt    DateTime?
+  status      String    @default("PENDING") // PENDING | FILLED | CANCELLED
+  positionId  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User           @relation(fields: [userId], references: [id])
+  position    TradePosition? @relation(fields: [positionId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([symbol])
+}
+
+model TradePosition {
+  id          String    @id @default(uuid())
+  userId      String
+  symbol      String
+  side        String    // LONG | SHORT | SPOT_BUY
+  leverage    Int       @default(1)
+  entryPrice  Float
+  quantity    Float
+  margin      Float
+  stopLoss    Float?
+  takeProfit  Float?
+  realizedPnl Float     @default(0)
+  status      String    @default("OPEN") // OPEN | CLOSED | LIQUIDATED
+  closedAt    DateTime?
+  closePrice  Float?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  orders      TradeOrder[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([symbol])
 }

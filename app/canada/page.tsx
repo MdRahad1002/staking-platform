@@ -6,6 +6,8 @@ import { CanadaNav } from './components/CanadaNav'
 import { StickyMobileCTA } from './components/StickyMobileCTA'
 import { CountdownTimer } from './components/CountdownTimer'
 import { LiveFeed } from './components/LiveFeed'
+import { ExitIntent } from './components/ExitIntent'
+import { LossTicker } from './components/LossTicker'
 import { ProblemSection } from './components/ProblemSection'
 import { PathSelector } from './components/PathSelector'
 import { ValueProp } from './components/ValueProp'
@@ -119,7 +121,8 @@ export default function CanadaPage() {
         <main id="main-content">
           {/* ── Urgency bar: real countdown to BoC rate decision ─────────── */}
           <CountdownTimer />
-
+          {/* ── Real-time opportunity cost ticker ────────────────────────── */}
+          <LossTicker />
           {/* ── Above fold ───────────────────────────────────────────────── */}
           <Hero />
 
@@ -148,6 +151,7 @@ export default function CanadaPage() {
         </main>
         <CanadaFooter />
         <StickyMobileCTA />
+        <ExitIntent />
       </div>
     </>
   )

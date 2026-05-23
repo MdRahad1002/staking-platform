@@ -224,6 +224,13 @@
 .animate-ticker { animation: ticker-scroll 30s linear infinite; }
 .animate-ticker:hover { animation-play-state: paused; }
 
+/* Loss ticker scan line */
+@keyframes scan {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(800%); }
+}
+.animate-scan { animation: scan 3s linear infinite; }
+
 /* Fade in up */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(30px); }

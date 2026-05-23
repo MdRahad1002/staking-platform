@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RefreshCw, Activity, X, Edit2, Check, TrendingUp, Zap, BarChart2 } from 'lucide-react'
+import { RefreshCw, Activity, X, Edit2, Check, LineChart, Layers, Wallet } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const PriceChart = dynamic(() => import('./PriceChart'), { ssr: false })
@@ -46,6 +46,19 @@ const CHART_INTERVALS = [
 ]
 
 const LEVERAGES = [1, 2, 3, 5, 10, 20, 25, 50, 75, 100]
+
+const COIN_LOGOS: Record<string, string> = {
+  BTCUSDT:   'https://assets.coingecko.com/coins/images/1/small/bitcoin.png',
+  ETHUSDT:   'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+  BNBUSDT:   'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png',
+  SOLUSDT:   'https://assets.coingecko.com/coins/images/4128/small/solana.png',
+  XRPUSDT:   'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png',
+  ADAUSDT:   'https://assets.coingecko.com/coins/images/975/small/cardano.png',
+  AVAXUSDT:  'https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png',
+  DOTUSDT:   'https://assets.coingecko.com/coins/images/12171/small/polkadot.png',
+  MATICUSDT: 'https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png',
+  LINKUSDT:  'https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png',
+}
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -450,8 +463,17 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       <Card className="border-zinc-800 bg-zinc-900">
         <CardContent className="py-2.5 px-3 sm:px-4">
           <div className="flex flex-col gap-1">
-            {/* Row 1: symbol selector · price · % change · refresh */}
+            {/* Row 1: coin logo · symbol selector · price · % change · refresh */}
             <div className="flex items-center gap-2">
+              {/* Coin logo */}
+              <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8">
+                <img
+                  src={COIN_LOGOS[symbol] ?? ''}
+                  alt={baseAsset}
+                  className="w-full h-full rounded-full ring-1 ring-white/10 bg-zinc-800 object-cover"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
+              </div>
               <Select value={symbol} onValueChange={(v) => { setSymbol(v); setLivePrice(null) }}>
                 <SelectTrigger className="w-28 sm:w-36 bg-zinc-800 border-zinc-700 font-semibold text-white h-8">
                   <SelectValue />
@@ -529,32 +551,40 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       </Card>
 
       {/* Mobile tab switcher (hidden on lg+) */}
-      <div className="flex lg:hidden rounded-xl bg-zinc-900 border border-zinc-800 p-1 gap-1">
+      <div className="flex lg:hidden rounded-2xl bg-zinc-900 border border-zinc-800/80 p-1.5 gap-1 shadow-xl shadow-black/30">
         {([
-          { id: 'chart' as const, label: 'Chart', Icon: TrendingUp },
-          { id: 'order' as const, label: 'Order', Icon: Zap },
-          { id: 'positions' as const, label: positions.length > 0 ? `Pos (${positions.length})` : 'Positions', Icon: BarChart2 },
+          { id: 'chart' as const, label: 'Chart', Icon: LineChart },
+          { id: 'order' as const, label: 'Order', Icon: Layers },
+          { id: 'positions' as const, label: positions.length > 0 ? `Pos (${positions.length})` : 'Positions', Icon: Wallet },
         ]).map(({ id, label, Icon }) => (
           <button
             key={id}
             onClick={() => setMobileView(id)}
             className={cn(
-              'flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold rounded-lg transition-all',
-              mobileView === id
-                ? 'bg-cyan-500/15 text-cyan-400 shadow-sm'
-                : 'text-zinc-500 hover:text-zinc-300'
+              'flex-1 flex flex-col items-center justify-center gap-1.5 py-2.5 rounded-xl transition-all duration-200',
+              mobileView === id ? 'bg-amber-500/10' : 'hover:bg-zinc-800/50'
             )}
           >
-            <Icon className="h-3.5 w-3.5 flex-shrink-0" />
-            <span>{label}</span>
+            <span className={cn(
+              'flex items-center justify-center w-9 h-9 rounded-2xl transition-all duration-200',
+              mobileView === id ? 'bg-amber-500/20' : 'bg-zinc-800/80'
+            )}>
+              <Icon className={cn('h-4 w-4', mobileView === id ? 'text-amber-400' : 'text-zinc-400')} />
+            </span>
+            <span className={cn(
+              'text-[10px] font-bold tracking-wider uppercase',
+              mobileView === id ? 'text-amber-400' : 'text-zinc-500'
+            )}>
+              {label}
+            </span>
           </button>
         ))}
       </div>
 
       {/* ── Chart + Order Form ──────────────────────────────────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_310px] gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_310px] gap-4">
         {/* Chart */}
-        <Card className={cn('border-zinc-800 bg-zinc-900 overflow-hidden', mobileView !== 'chart' && 'hidden lg:block')}>
+        <Card className={cn('border-zinc-800/80 bg-zinc-900 overflow-hidden shadow-xl shadow-black/20', mobileView !== 'chart' && 'hidden lg:block')}>
           <CardContent className="p-0">
             {/* Interval selector */}
             <div className="flex items-center gap-1 px-3 pt-3 pb-2 border-b border-zinc-800 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -563,9 +593,9 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                   key={i.value}
                   onClick={() => setChartInterval(i.value)}
                   className={cn(
-                    'px-2.5 py-1 text-xs rounded font-medium transition-colors whitespace-nowrap flex-shrink-0',
+                    'px-3 py-1.5 text-xs rounded-lg font-semibold transition-all duration-150 whitespace-nowrap flex-shrink-0',
                     chartInterval === i.value
-                      ? 'bg-zinc-700 text-white'
+                      ? 'bg-amber-500/15 text-amber-400'
                       : 'text-zinc-500 hover:text-zinc-300'
                   )}
                 >
@@ -580,15 +610,18 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
         </Card>
 
         {/* Order Form */}
-        <Card className={cn('border-zinc-800 bg-zinc-900', mobileView !== 'order' && 'hidden lg:block')}>
+        <Card className={cn('border-zinc-800/80 bg-zinc-900 shadow-xl shadow-black/20', mobileView !== 'order' && 'hidden lg:block')}>
           <CardHeader className="pb-2 pt-4 px-4">
-            <CardTitle className="text-sm text-zinc-300 flex items-center gap-2">
-              <Activity className="h-4 w-4" /> Place Order
+            <CardTitle className="text-sm font-semibold text-zinc-200 flex items-center gap-2">
+              <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-amber-500/15">
+                <Activity className="h-3.5 w-3.5 text-amber-400" />
+              </span>
+              Place Order
             </CardTitle>
           </CardHeader>
           <CardContent className="px-4 pb-4 space-y-3">
             {/* Trade type toggle */}
-            <div className="grid grid-cols-2 gap-1 p-1 bg-zinc-800 rounded-lg">
+            <div className="grid grid-cols-2 gap-1 p-1 bg-zinc-800/60 rounded-xl border border-zinc-700/40">
               {(['SPOT', 'LEVERAGE'] as const).map((t) => (
                 <button
                   key={t}
@@ -597,8 +630,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                     setSide(t === 'SPOT' ? 'BUY' : 'LONG')
                   }}
                   className={cn(
-                    'py-1.5 text-xs font-medium rounded-md transition-colors',
-                    tradeType === t ? 'bg-zinc-600 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                    'py-1.5 text-xs font-semibold rounded-lg transition-all duration-200',
+                    tradeType === t ? 'bg-amber-500/15 text-amber-400 shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
                   )}
                 >
                   {t === 'SPOT' ? 'Spot' : 'Leverage'}
@@ -607,18 +640,18 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
             </div>
 
             {/* Side */}
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-2 gap-1.5">
               {(tradeType === 'SPOT' ? ['BUY', 'SELL'] : ['LONG', 'SHORT']).map((s) => (
                 <button
                   key={s}
                   onClick={() => setSide(s as typeof side)}
                   className={cn(
-                    'py-2 text-xs font-bold rounded-md border transition-colors',
+                    'py-2.5 text-xs font-bold rounded-xl transition-all duration-200',
                     side === s
                       ? s === 'BUY' || s === 'LONG'
-                        ? 'bg-green-500 border-green-500 text-white'
-                        : 'bg-red-500 border-red-500 text-white'
-                      : 'border-zinc-700 text-zinc-400 hover:border-zinc-500'
+                        ? 'bg-gradient-to-b from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/25'
+                        : 'bg-gradient-to-b from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25'
+                      : 'border border-zinc-700/50 bg-zinc-800/40 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700/40'
                   )}
                 >
                   {s}
@@ -638,10 +671,10 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                       key={l}
                       onClick={() => setLeverage(l)}
                       className={cn(
-                        'px-2 py-0.5 text-xs rounded border transition-colors',
+                        'px-2.5 py-1 text-xs rounded-lg border transition-all duration-150',
                         leverage === l
-                          ? 'bg-amber-500 border-amber-500 text-black font-bold'
-                          : 'border-zinc-700 text-zinc-400 hover:border-zinc-500'
+                          ? 'bg-amber-500 border-amber-500 text-black font-bold shadow-md shadow-amber-500/30'
+                          : 'border-zinc-700/50 bg-zinc-800/40 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300'
                       )}
                     >
                       {l}x
@@ -778,11 +811,10 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               onClick={handlePlaceOrder}
               disabled={placing || !amountUsd || parseFloat(amountUsd) < 10}
               className={cn(
-                'w-full font-bold text-base h-12',
-
+                'w-full font-bold text-base h-12 rounded-xl border-0 transition-all duration-200',
                 side === 'BUY' || side === 'LONG'
-                  ? 'bg-green-500 hover:bg-green-600 text-white disabled:bg-green-900'
-                  : 'bg-red-500 hover:bg-red-600 text-white disabled:bg-red-900'
+                  ? 'bg-gradient-to-b from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 disabled:opacity-50 disabled:shadow-none'
+                  : 'bg-gradient-to-b from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 hover:shadow-red-500/40 disabled:opacity-50 disabled:shadow-none'
               )}
             >
               {placing
@@ -796,16 +828,16 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                 : `Open Short ${effectiveLev}x`}
             </Button>
 
-            <p className="text-xs text-zinc-500 text-center">
-              Available:{' '}
-              <span className="text-zinc-300 font-medium">${balance.toFixed(2)}</span>
-            </p>
+            <div className="flex items-center justify-between px-1">
+              <span className="text-xs text-zinc-500">Available balance</span>
+              <span className="text-sm font-semibold text-amber-400">${balance.toFixed(2)}</span>
+            </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Positions & History */}
-      <Card className={cn('border-zinc-800 bg-zinc-900', mobileView !== 'positions' && 'hidden lg:block')}>
+        <Card className={cn('border-zinc-800/80 bg-zinc-900 shadow-xl shadow-black/20', mobileView !== 'positions' && 'hidden lg:block')}>
         <CardContent className="p-0">
           <Tabs defaultValue="positions">
             <TabsList className="w-full rounded-none border-b border-zinc-800 bg-transparent h-10 justify-start px-2">
@@ -845,7 +877,12 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                       return (
                         <div
                           key={pos.id}
-                          className="rounded-2xl border border-zinc-700/50 bg-zinc-800/40 p-4 space-y-3"
+                          className={cn(
+                            'rounded-2xl border p-4 space-y-3',
+                            isLong
+                              ? 'border-emerald-700/25 bg-gradient-to-br from-emerald-900/20 via-zinc-800/50 to-zinc-800/40'
+                              : 'border-red-700/25 bg-gradient-to-br from-red-900/20 via-zinc-800/50 to-zinc-800/40'
+                          )}
                         >
                           {/* Header row */}
                           <div className="flex items-center justify-between">
@@ -912,9 +949,12 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                           </div>
 
                           {/* PnL — prominent */}
-                          <div className={cn('font-bold font-mono leading-none', pnl >= 0 ? 'text-green-400' : 'text-red-400')}>
-                            <span className="text-2xl">{pnl >= 0 ? '+' : ''}${pnlStr}</span>
-                            <span className="text-xs ml-2 opacity-60">
+                          <div className={cn(
+                            'self-start inline-flex items-baseline gap-1.5 rounded-xl px-3 py-2 font-bold font-mono',
+                            pnl >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'
+                          )}>
+                            <span className="text-2xl leading-none">{pnl >= 0 ? '+' : ''}${pnlStr}</span>
+                            <span className="text-xs opacity-60 font-medium">
                               ({pnlPct >= 0 ? '+' : ''}{pnlPct.toFixed(2)}%)
                             </span>
                           </div>
@@ -1202,7 +1242,10 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                           </div>
 
                           {/* Realized PnL */}
-                          <div className={cn('font-bold font-mono', pos.realizedPnl >= 0 ? 'text-green-400' : 'text-red-400')}>
+                          <div className={cn(
+                            'self-start inline-flex items-center rounded-xl px-3 py-1.5 font-bold font-mono',
+                            pos.realizedPnl >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'
+                          )}>
                             <span className="text-xl">
                               {pos.realizedPnl >= 0 ? '+' : ''}${pos.realizedPnl.toFixed(2)}
                             </span>

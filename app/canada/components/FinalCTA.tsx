@@ -68,9 +68,6 @@ export function FinalCTA() {
     </section>
   )
 }
-
-
-export function FinalCTA() {
   return (
     <section className="py-20 lg:py-28 bg-[#0A1628] relative overflow-hidden" aria-labelledby="final-cta-heading">
       {/* Glow */}

@@ -198,10 +198,6 @@ export function Hero() {
     </section>
   )
 }
-              </span>
-            </div>
-
-            {/* H1 */}
             <h1
               id="hero-headline"
               className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-white leading-[1.1] tracking-tight mb-4"

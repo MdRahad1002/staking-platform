@@ -135,9 +135,6 @@ export function ProblemSection() {
     </section>
   )
 }
-
-
-export function ProblemSection() {
   return (
     <section className="py-16 lg:py-28 bg-white" aria-labelledby="problem-headline">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

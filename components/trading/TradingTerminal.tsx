@@ -377,7 +377,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       const data = await res.json()
       if (!res.ok) { toast.error(data.error || 'Failed to close position'); return }
       const pnl: number = data.pnl
-      const prefix = triggerReason ? `${triggerReason} — ` : ''
+      const prefix = triggerReason ? `${triggerReason}: ` : ''
       toast.success(`${prefix}Position closed | PnL: ${pnl >= 0 ? '+' : ''}$${Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)}`)
       setBalance((b) => b + data.returnAmount)
       fetchPositions()
@@ -480,7 +480,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                 >
                   {currentPrice
                     ? `$${currentPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                    : '—'}
+                    : ''}
                 </span>
                 {ticker && (
                   <Badge
@@ -630,7 +630,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
             {tradeType === 'LEVERAGE' && (
               <div>
                 <Label className="text-xs text-zinc-400 mb-1 block">
-                  Leverage — <span className="text-amber-400 font-bold">{leverage}x</span>
+                  Leverage: <span className="text-amber-400 font-bold">{leverage}x</span>
                 </Label>
                 <div className="flex flex-wrap gap-1">
                   {LEVERAGES.map((l) => (
@@ -927,7 +927,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                             </div>
                             <div className="flex justify-between">
                               <span className="text-zinc-500">Current</span>
-                              <span className="text-zinc-300 font-mono">{price ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : '—'}</span>
+                              <span className="text-zinc-300 font-mono">{price ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : ''}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-zinc-500">Margin</span>
@@ -935,7 +935,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                             </div>
                             <div className="flex justify-between">
                               <span className="text-zinc-500">Liq.</span>
-                              <span className="text-red-400/70">{liq ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                              <span className="text-red-400/70">{liq ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : ''}</span>
                             </div>
                             {isEditing ? (
                               <>
@@ -945,7 +945,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                     type="number"
                                     value={editSl}
                                     onChange={(e) => setEditSl(e.target.value)}
-                                    placeholder="—"
+                                    placeholder="0.00"
                                     className="h-8 text-xs bg-zinc-700 border-zinc-600 text-zinc-200"
                                   />
                                 </div>
@@ -955,7 +955,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                     type="number"
                                     value={editTp}
                                     onChange={(e) => setEditTp(e.target.value)}
-                                    placeholder="—"
+                                    placeholder="0.00"
                                     className="h-8 text-xs bg-zinc-700 border-zinc-600 text-zinc-200"
                                   />
                                 </div>
@@ -964,11 +964,11 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               <>
                                 <div className="flex justify-between">
                                   <span className="text-zinc-500">Stop Loss</span>
-                                  <span className="text-zinc-400">{pos.stopLoss ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                                  <span className="text-zinc-400">{pos.stopLoss ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : ''}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-zinc-500">Take Profit</span>
-                                  <span className="text-zinc-400">{pos.takeProfit ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : '—'}</span>
+                                  <span className="text-zinc-400">{pos.takeProfit ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}` : ''}</span>
                                 </div>
                               </>
                             )}
@@ -1037,7 +1037,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               <td className="py-2.5 text-right text-zinc-300">
                                 {price
                                   ? `$${price.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                                  : '—'}
+                                  : ''}
                               </td>
                               <td
                                 className={cn(
@@ -1054,7 +1054,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               <td className="py-2.5 text-right text-red-400/70">
                                 {liq
                                   ? `$${liq.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                  : '—'}
+                                  : ''}
                               </td>
                               {/* SL */}
                               <td className="py-2.5 text-right">
@@ -1063,14 +1063,14 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                     type="number"
                                     value={editSl}
                                     onChange={(e) => setEditSl(e.target.value)}
-                                    placeholder="—"
+                                    placeholder="0.00"
                                     className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
                                   />
                                 ) : (
                                   <span className="text-zinc-500">
                                     {pos.stopLoss
                                       ? `$${pos.stopLoss.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                      : '—'}
+                                      : ''}
                                   </span>
                                 )}
                               </td>
@@ -1081,14 +1081,14 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                     type="number"
                                     value={editTp}
                                     onChange={(e) => setEditTp(e.target.value)}
-                                    placeholder="—"
+                                    placeholder="0.00"
                                     className="h-6 w-20 text-xs bg-zinc-700 border-zinc-600 text-zinc-200 px-1"
                                   />
                                 ) : (
                                   <span className="text-zinc-500">
                                     {pos.takeProfit
                                       ? `$${pos.takeProfit.toLocaleString('en-US', { maximumFractionDigits: 2 })}`
-                                      : '—'}
+                                      : ''}
                                   </span>
                                 )}
                               </td>
@@ -1196,7 +1196,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                                 {pos.status}
                               </Badge>
                               <span className="text-[11px] text-zinc-500">
-                                {pos.closedAt ? new Date(pos.closedAt).toLocaleDateString() : '—'}
+                                {pos.closedAt ? new Date(pos.closedAt).toLocaleDateString() : ''}
                               </span>
                             </div>
                           </div>
@@ -1217,7 +1217,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                             <div className="flex justify-between">
                               <span className="text-zinc-500">Close</span>
                               <span className="text-zinc-300 font-mono">
-                                {pos.closePrice ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : '—'}
+                                {pos.closePrice ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}` : ''}
                               </span>
                             </div>
                             <div className="flex justify-between">
@@ -1279,7 +1279,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               <td className="py-2.5 text-right text-zinc-300">
                                 {pos.closePrice
                                   ? `$${pos.closePrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                                  : '—'}
+                                  : ''}
                               </td>
                               <td
                                 className={cn(
@@ -1305,7 +1305,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                               <td className="py-2.5 text-right text-zinc-500">
                                 {pos.closedAt
                                   ? new Date(pos.closedAt).toLocaleDateString()
-                                  : '—'}
+                                  : ''}
                               </td>
                             </tr>
                           )

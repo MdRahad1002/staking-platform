@@ -448,74 +448,76 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
     <div className="flex flex-col gap-3">
       {/* ── Header / Ticker bar ─────────────────────────────────────── */}
       <Card className="border-zinc-800 bg-zinc-900">
-        <CardContent className="py-3 px-3 sm:px-4">
-          {/* Row 1: symbol + price + change */}
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Select value={symbol} onValueChange={(v) => { setSymbol(v); setLivePrice(null) }}>
-              <SelectTrigger className="w-32 sm:w-36 bg-zinc-800 border-zinc-700 font-semibold text-white h-8 sm:h-10">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-zinc-900 border-zinc-700">
-                {SYMBOLS.map((s) => (
-                  <SelectItem key={s.value} value={s.value} className="text-zinc-200">
-                    {s.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <CardContent className="py-2.5 px-3 sm:px-4">
+          <div className="flex flex-col gap-1">
+            {/* Row 1: symbol selector · price · % change · refresh */}
+            <div className="flex items-center gap-2">
+              <Select value={symbol} onValueChange={(v) => { setSymbol(v); setLivePrice(null) }}>
+                <SelectTrigger className="w-28 sm:w-36 bg-zinc-800 border-zinc-700 font-semibold text-white h-8">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-zinc-900 border-zinc-700">
+                  {SYMBOLS.map((s) => (
+                    <SelectItem key={s.value} value={s.value} className="text-zinc-200">
+                      {s.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-            <div className="flex items-baseline gap-2">
-              <span
-                className={cn(
-                  'text-xl sm:text-2xl font-bold font-mono',
-                  isPositive ? 'text-green-400' : 'text-red-400'
-                )}
-              >
-                {currentPrice
-                  ? `$${currentPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
-                  : '—'}
-              </span>
-              {ticker && (
-                <Badge
-                  variant="outline"
+              <div className="flex items-baseline gap-1.5 min-w-0 flex-1">
+                <span
                   className={cn(
-                    'text-xs',
-                    isPositive
-                      ? 'text-green-400 border-green-400/30'
-                      : 'text-red-400 border-red-400/30'
+                    'text-base sm:text-2xl font-bold font-mono truncate',
+                    isPositive ? 'text-green-400' : 'text-red-400'
                   )}
                 >
-                  {isPositive ? '+' : ''}
-                  {ticker.changePercent.toFixed(2)}%
-                </Badge>
-              )}
+                  {currentPrice
+                    ? `$${currentPrice.toLocaleString('en-US', { maximumFractionDigits: 4 })}`
+                    : '—'}
+                </span>
+                {ticker && (
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      'text-xs flex-shrink-0',
+                      isPositive
+                        ? 'text-green-400 border-green-400/30'
+                        : 'text-red-400 border-red-400/30'
+                    )}
+                  >
+                    {isPositive ? '+' : ''}{ticker.changePercent.toFixed(2)}%
+                  </Badge>
+                )}
+              </div>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={fetchTicker}
+                className="flex-shrink-0 text-zinc-500 hover:text-zinc-300 h-7 w-7 p-0"
+              >
+                <RefreshCw className="h-3 w-3" />
+              </Button>
             </div>
 
+            {/* Row 2: H / L / Vol / Δ — horizontally scrollable */}
             {ticker && (
-              <div className="flex gap-4 mt-2 text-xs text-zinc-400 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="flex gap-3 text-[11px] text-zinc-500 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <span className="whitespace-nowrap flex-shrink-0">
-                  H: <span className="text-zinc-200">${ticker.high.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
+                  H: <span className="text-zinc-300">${ticker.high.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
                 </span>
                 <span className="whitespace-nowrap flex-shrink-0">
-                  L: <span className="text-zinc-200">${ticker.low.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
+                  L: <span className="text-zinc-300">${ticker.low.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
                 </span>
                 <span className="whitespace-nowrap flex-shrink-0">
-                  Vol: <span className="text-zinc-200">{ticker.volume.toLocaleString('en-US', { maximumFractionDigits: 0 })} {baseAsset}</span>
+                  Vol: <span className="text-zinc-300">{ticker.volume.toLocaleString('en-US', { maximumFractionDigits: 0 })} {baseAsset}</span>
                 </span>
                 <span className="whitespace-nowrap flex-shrink-0">
-                  Δ: <span className={isPositive ? 'text-green-400' : 'text-red-400'}>{isPositive ? '+' : ''}${ticker.change.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
+                  24h: <span className={isPositive ? 'text-green-400' : 'text-red-400'}>{isPositive ? '+' : ''}${ticker.change.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
                 </span>
               </div>
             )}
-
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={fetchTicker}
-              className="ml-auto text-zinc-500 hover:text-zinc-300 h-8 w-8 p-0"
-            >
-              <RefreshCw className="h-3.5 w-3.5" />
-            </Button>
           </div>
         </CardContent>
       </Card>
@@ -617,14 +619,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               ))}
             </div>
 
-            {/* Leverage warning */}
-            {tradeType === 'LEVERAGE' && (
-              <div className="text-xs text-amber-400/80 bg-amber-500/10 border border-amber-500/20 rounded px-2 py-1.5">
-                Leverage trading is <span className="font-semibold">user vs platform</span>. Positions are auto-liquidated when price hits the liquidation price.
-              </div>
-            )}
-
-            {/* Leverage picker */}
+            {/* Leverage picker */
             {tradeType === 'LEVERAGE' && (
               <div>
                 <Label className="text-xs text-zinc-400 mb-1 block">

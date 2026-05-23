@@ -19,7 +19,7 @@ export default function PriceChart({ symbol, interval }: PriceChartProps) {
     let cancelled = false
 
     const init = async () => {
-      const { createChart, ColorType, CrosshairMode } = await import('lightweight-charts')
+      const { createChart, ColorType, CrosshairMode, CandlestickSeries } = await import('lightweight-charts')
 
       if (cancelled) return
 
@@ -56,7 +56,7 @@ export default function PriceChart({ symbol, interval }: PriceChartProps) {
 
       chartRef.current = chart
 
-      const candleSeries = chart.addCandlestickSeries({
+      const candleSeries = chart.addSeries(CandlestickSeries, {
         upColor: '#22c55e',
         downColor: '#ef4444',
         borderUpColor: '#22c55e',

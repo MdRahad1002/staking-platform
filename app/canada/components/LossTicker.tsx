@@ -67,9 +67,43 @@ export function LossTicker() {
           href={CTA_HREF}
           className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs px-4 py-2 transition-all shadow-md shadow-emerald-500/20 whitespace-nowrap"
         >
-          Stop Losing → Start Now
+          Stop Losing &rarr; Start Now
         </Link>
       </div>
+    </div>
+  )
+}
+
+/* ── Compact inline badge — embed this inside the Hero ───────────────────── */
+export function LossTickerBadge() {
+  const startRef = useRef(Date.now())
+  const [lost, setLost] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const secs = (Date.now() - startRef.current) / 1000
+      setLost(secs * PER_SECOND)
+    }, 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  if (lost === 0) return null
+
+  return (
+    <div
+      className="inline-flex items-center gap-2.5 rounded-xl bg-red-950/50 border border-red-800/30 px-4 py-2.5 backdrop-blur-sm"
+      role="status"
+      aria-live="polite"
+    >
+      <span className="relative flex h-2 w-2 flex-shrink-0">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+      </span>
+      <p className="text-sm text-white/55">
+        Since you landed:{' '}
+        <span className="text-red-400 font-bold tabular-nums">${lost.toFixed(4)} CAD</span>
+        <span className="text-white/25 text-xs"> missed (vs GIC, on $10K)</span>
+      </p>
     </div>
   )
 }

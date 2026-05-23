@@ -66,14 +66,15 @@ export default function PriceChart({ symbol, interval }: PriceChartProps) {
       })
       seriesRef.current = candleSeries
 
-      // Fetch historical klines
+      // Fetch historical klines directly from Binance (public API, CORS-enabled, no proxy needed)
       try {
         const res = await fetch(
-          `/api/trading/market?type=klines&symbol=${symbol}&interval=${interval}&limit=500`
+          `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=500`,
+          { cache: 'no-store' }
         )
-        if (res.ok) {
+        if (res.ok && !cancelled) {
           const raw = await res.json()
-          if (Array.isArray(raw) && !cancelled) {
+          if (Array.isArray(raw) && raw.length > 0 && !cancelled) {
             const bars = raw.map((k: any[]) => ({
               time: Math.floor(k[0] / 1000) as any,
               open: parseFloat(k[1]),

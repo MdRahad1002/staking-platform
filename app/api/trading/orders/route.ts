@@ -64,7 +64,8 @@ export async function POST(req: NextRequest) {
 
     const sym = String(symbol).toUpperCase()
 
-    // Fetch current price for market orders, fall back to client-provided price if server is rate-limited
+    // Fetch current price for market orders BEFORE the DB transaction (external HTTP call)
+    // Fall back to client-provided live price if server is rate-limited by Binance
     let filledPrice: number | null = null
     if (type === 'MARKET') {
       try {
@@ -86,62 +87,67 @@ export async function POST(req: NextRequest) {
     const effectivePrice = filledPrice ?? (price ? parseFloat(price) : null)
     const effectiveLev = tradeType === 'LEVERAGE' ? lev : 1
     const quantity = effectivePrice ? (amt * effectiveLev) / effectivePrice : 0
+    const positionSide = tradeType === 'SPOT' ? 'SPOT_BUY' : side // LONG | SHORT | SPOT_BUY
 
-    // Deduct margin from user balance
-    await prisma.user.update({
-      where: { id: userId },
-      data: { balance: { decrement: amt } },
-    })
+    // All DB writes in a single atomic transaction — if any step fails, balance decrement is rolled back
+    const { order, position } = await prisma.$transaction(async (tx) => {
+      // 1. Deduct margin from user balance
+      await tx.user.update({
+        where: { id: userId },
+        data: { balance: { decrement: amt } },
+      })
 
-    // Create position for filled market orders
-    let position = null
-    if (type === 'MARKET' && filledPrice) {
-      const positionSide = tradeType === 'SPOT' ? 'SPOT_BUY' : side // LONG | SHORT | SPOT_BUY
-      position = await prisma.tradePosition.create({
+      // 2. Create position for filled market orders
+      let position = null
+      if (type === 'MARKET' && filledPrice) {
+        position = await tx.tradePosition.create({
+          data: {
+            userId,
+            symbol: sym,
+            side: positionSide,
+            leverage: effectiveLev,
+            entryPrice: filledPrice,
+            quantity,
+            margin: amt,
+            stopLoss: stopLoss ? parseFloat(stopLoss) : null,
+            takeProfit: takeProfit ? parseFloat(takeProfit) : null,
+          },
+        })
+      }
+
+      // 3. Create order record
+      const order = await tx.tradeOrder.create({
         data: {
           userId,
           symbol: sym,
-          side: positionSide,
+          side,
+          type,
+          tradeType,
           leverage: effectiveLev,
-          entryPrice: filledPrice,
-          quantity,
-          margin: amt,
+          amountUsd: amt,
+          price: price ? parseFloat(price) : null,
+          stopPrice: stopPrice ? parseFloat(stopPrice) : null,
           stopLoss: stopLoss ? parseFloat(stopLoss) : null,
           takeProfit: takeProfit ? parseFloat(takeProfit) : null,
+          filledPrice,
+          filledAt,
+          status,
+          positionId: position?.id ?? null,
         },
       })
-    }
 
-    // Create order record
-    const order = await prisma.tradeOrder.create({
-      data: {
-        userId,
-        symbol: sym,
-        side,
-        type,
-        tradeType,
-        leverage: effectiveLev,
-        amountUsd: amt,
-        price: price ? parseFloat(price) : null,
-        stopPrice: stopPrice ? parseFloat(stopPrice) : null,
-        stopLoss: stopLoss ? parseFloat(stopLoss) : null,
-        takeProfit: takeProfit ? parseFloat(takeProfit) : null,
-        filledPrice,
-        filledAt,
-        status,
-        positionId: position?.id ?? null,
-      },
-    })
+      // 4. Log transaction
+      await tx.transaction.create({
+        data: {
+          userId,
+          type: 'TRADE_OPEN',
+          amount: -amt,
+          description: `Opened ${tradeType} ${side} on ${sym}${effectiveLev > 1 ? ` (${effectiveLev}x)` : ''}`,
+          referenceId: order.id,
+        },
+      })
 
-    // Log transaction
-    await prisma.transaction.create({
-      data: {
-        userId,
-        type: 'TRADE_OPEN',
-        amount: -amt,
-        description: `Opened ${tradeType} ${side} on ${sym}${effectiveLev > 1 ? ` (${effectiveLev}x)` : ''}`,
-        referenceId: order.id,
-      },
+      return { order, position }
     })
 
     return NextResponse.json({ order, position })

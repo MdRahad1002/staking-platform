@@ -20,7 +20,7 @@ function calculatePnl(side: string, entryPrice: number, currentPrice: number, qu
 export async function POST(req: NextRequest) {
   try {
     const session = await requireAuth()
-    const { positionId } = await req.json()
+    const { positionId, clientPrice } = await req.json()
 
     if (!positionId || typeof positionId !== 'string') {
       return NextResponse.json({ error: 'Position ID required' }, { status: 400 })
@@ -35,7 +35,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Position is already closed' }, { status: 400 })
     }
 
-    const closePrice = await getBinancePrice(position.symbol)
+    // Fetch close price; fall back to live client price if Binance rate-limits server-side
+    let closePrice: number
+    try {
+      closePrice = await getBinancePrice(position.symbol)
+    } catch {
+      const cp = clientPrice ? parseFloat(String(clientPrice)) : NaN
+      if (!isNaN(cp) && cp > 0) {
+        closePrice = cp
+      } else {
+        return NextResponse.json({ error: 'Unable to fetch market price. Please try again.' }, { status: 502 })
+      }
+    }
     const pnl = calculatePnl(position.side, position.entryPrice, closePrice, position.quantity)
 
     // Margin returned: clamp to 0 (no going below zero)

@@ -314,7 +314,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       const res = await fetch('/api/trading/close', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ positionId }),
+        body: JSON.stringify({ positionId, clientPrice: livePrice ?? undefined }),
       })
       const data = await res.json()
       if (!res.ok) { toast.error(data.error || 'Failed to close position'); return }

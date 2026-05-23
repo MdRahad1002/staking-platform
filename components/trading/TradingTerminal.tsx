@@ -147,7 +147,8 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
 
   const fetchTicker = useCallback(async () => {
     try {
-      const res = await fetch(`/api/trading/market?type=ticker&symbol=${symbol}`)
+      // Fetch directly from Binance to avoid Vercel server-side rate-limiting
+      const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`)
       if (!res.ok) return
       const data = await res.json()
       if (data.lastPrice) {

@@ -17,20 +17,15 @@ function calcPnl(side: string, entryPrice: number, closePrice: number, quantity:
 
 async function getBinancePrices(symbols: string[]): Promise<Record<string, number>> {
   try {
-    const results = await Promise.allSettled(
-      symbols.map(async (sym) => {
-        const res = await fetch(
-          `https://api.binance.com/api/v3/ticker/price?symbol=${sym}`,
-          { cache: 'no-store' }
-        )
-        const data = await res.json()
-        return { sym, price: parseFloat(data.price) }
-      })
-    )
+    // Single bulk request avoids per-symbol rate-limiting on Vercel IPs
+    const res = await fetch('https://api.binance.com/api/v3/ticker/price', { cache: 'no-store' })
+    if (!res.ok) return {}
+    const allPrices: Array<{ symbol: string; price: string }> = await res.json()
+    const symbolSet = new Set(symbols)
     const map: Record<string, number> = {}
-    for (const r of results) {
-      if (r.status === 'fulfilled' && !isNaN(r.value.price)) {
-        map[r.value.sym] = r.value.price
+    for (const item of allPrices) {
+      if (symbolSet.has(item.symbol)) {
+        map[item.symbol] = parseFloat(item.price)
       }
     }
     return map

@@ -143,6 +143,9 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
   const [editTp, setEditTp] = useState('')
   const [adjusting, setAdjusting] = useState(false)
 
+  // Track which positions have already been auto-closed by SL/TP to avoid duplicate requests
+  const slTpTriggeredRef = useRef<Set<string>>(new Set())
+
   // ── Ticker ──────────────────────────────────────────────────────────────
 
   const fetchTicker = useCallback(async () => {
@@ -283,6 +286,38 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
   // ── Adjust SL/TP ────────────────────────────────────────────────────────
 
   const handleAdjust = async (positionId: string) => {
+    const pos = positions.find((p) => p.id === positionId)
+    const currentP = pos
+      ? (positionPrices[pos.symbol] ?? (pos.symbol === symbol ? livePrice : null))
+      : null
+
+    // Validate SL/TP direction relative to current price
+    if (currentP && pos) {
+      const isLong = pos.side === 'SPOT_BUY' || pos.side === 'LONG'
+      if (editSl !== '') {
+        const sl = parseFloat(editSl)
+        if (isLong && sl >= currentP) {
+          toast.error('Stop Loss must be below current price for a BUY/LONG position')
+          return
+        }
+        if (!isLong && sl <= currentP) {
+          toast.error('Stop Loss must be above current price for a SELL/SHORT position')
+          return
+        }
+      }
+      if (editTp !== '') {
+        const tp = parseFloat(editTp)
+        if (isLong && tp <= currentP) {
+          toast.error('Take Profit must be above current price for a BUY/LONG position')
+          return
+        }
+        if (!isLong && tp >= currentP) {
+          toast.error('Take Profit must be below current price for a SELL/SHORT position')
+          return
+        }
+      }
+    }
+
     setAdjusting(true)
     try {
       const res = await fetch('/api/trading/adjust', {
@@ -292,6 +327,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
           positionId,
           stopLoss: editSl !== '' ? parseFloat(editSl) : null,
           takeProfit: editTp !== '' ? parseFloat(editTp) : null,
+          currentPrice: currentP,
         }),
       })
       const data = await res.json()
@@ -308,18 +344,41 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
 
   // ── Close position ──────────────────────────────────────────────────────
 
-  const handleClose = async (positionId: string) => {
+  const handleClose = async (positionId: string, triggerReason?: string) => {
+    const pos = positions.find((p) => p.id === positionId)
+
+    // Resolve best available client-side price for this specific position's symbol
+    let clientPrice: number | undefined =
+      pos
+        ? (positionPrices[pos.symbol] ?? (pos.symbol === symbol ? (livePrice ?? undefined) : undefined))
+        : undefined
+
+    // If no cached price yet, fetch directly from Binance (client IPs are not rate-limited)
+    if (!clientPrice && pos) {
+      try {
+        const res = await fetch(
+          `https://api.binance.com/api/v3/ticker/price?symbol=${pos.symbol}`
+        )
+        const data = await res.json()
+        const p = parseFloat(data.price)
+        if (!isNaN(p) && p > 0) clientPrice = p
+      } catch {
+        // continue — server will try its own fetch
+      }
+    }
+
     setClosingId(positionId)
     try {
       const res = await fetch('/api/trading/close', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ positionId, clientPrice: livePrice ?? undefined }),
+        body: JSON.stringify({ positionId, clientPrice }),
       })
       const data = await res.json()
       if (!res.ok) { toast.error(data.error || 'Failed to close position'); return }
       const pnl: number = data.pnl
-      toast.success(`Position closed — PnL: ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`)
+      const prefix = triggerReason ? `${triggerReason} — ` : ''
+      toast.success(`${prefix}Position closed | PnL: ${pnl >= 0 ? '+' : ''}$${Math.abs(pnl) < 0.01 ? pnl.toFixed(4) : pnl.toFixed(2)}`)
       setBalance((b) => b + data.returnAmount)
       fetchPositions()
     } catch {
@@ -328,6 +387,39 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
       setClosingId(null)
     }
   }
+
+  // ── Client-side SL/TP auto-trigger ─────────────────────────────────────
+  // The cron runs every minute; this catches SL/TP in real-time from WebSocket prices
+
+  useEffect(() => {
+    for (const pos of positions) {
+      if (slTpTriggeredRef.current.has(pos.id)) continue
+
+      const price =
+        positionPrices[pos.symbol] ??
+        (pos.symbol === symbol ? livePrice : null)
+      if (!price) continue
+
+      const isLong = pos.side === 'SPOT_BUY' || pos.side === 'LONG'
+      let triggered = false
+      let reason = ''
+
+      if (pos.stopLoss !== null && isFinite(pos.stopLoss as number)) {
+        const slHit = isLong ? price <= (pos.stopLoss as number) : price >= (pos.stopLoss as number)
+        if (slHit) { triggered = true; reason = 'Stop Loss hit' }
+      }
+      if (!triggered && pos.takeProfit !== null && isFinite(pos.takeProfit as number)) {
+        const tpHit = isLong ? price >= (pos.takeProfit as number) : price <= (pos.takeProfit as number)
+        if (tpHit) { triggered = true; reason = 'Take Profit hit' }
+      }
+
+      if (triggered) {
+        slTpTriggeredRef.current.add(pos.id)
+        handleClose(pos.id, reason)
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [positionPrices, livePrice, positions])
 
   // ── Derived values ──────────────────────────────────────────────────────
 

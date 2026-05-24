@@ -18,7 +18,7 @@ const TIERS = [
   { name: 'Bronze',   min: 0,  target: 5,   commission: '5%', color: 'text-amber-600',  bg: 'bg-amber-600/10 border-amber-600/30',  icon: '🥉', perk: 'Referral badge · 5% L1 + 2% L2 commission' },
   { name: 'Silver',   min: 5,  target: 10,  commission: '6%', color: 'text-slate-300',  bg: 'bg-slate-400/10 border-slate-400/30',  icon: '🥈', perk: 'Leaderboard entry · 6% L1 + 2% L2 · Priority support' },
   { name: 'Gold',     min: 10, target: 25,  commission: '7%', color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/30', icon: '🥇', perk: 'VIP support · 7% L1 + 2% L2 · Monthly cash prize eligibility' },
-  { name: 'Platinum', min: 25, target: 999, commission: '8%', color: 'text-cyan-400',   bg: 'bg-cyan-400/10 border-cyan-400/30',   icon: '💎', perk: 'Ambassador badge · 8% L1 + 2% L2 · Exclusive perks + bonuses' },
+  { name: 'Platinum', min: 25, target: 999, commission: '8%', color: 'text-violet-300',   bg: 'bg-violet-300/10 border-violet-300/20',   icon: '💎', perk: 'Ambassador badge · 8% L1 + 2% L2 · Exclusive perks + bonuses' },
 ]
 
 function getTier(count: number) {
@@ -139,7 +139,7 @@ export default async function ReferralsPage() {
           {/* Progress bar */}
           <div className="w-full bg-secondary rounded-full h-2.5 overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-primary to-cyan-400 rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-primary to-amber-400 rounded-full transition-all duration-500"
               style={{ width: `${tierProgress}%` }}
             />
           </div>

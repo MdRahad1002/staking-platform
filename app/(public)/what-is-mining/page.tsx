@@ -97,7 +97,7 @@ export default function WhatIsMiningPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/what-is-staking">
-              <Button size="lg" className="gap-2 rounded-xl text-base px-8 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 border-0">
+              <Button size="lg" className="gap-2 rounded-xl text-base px-8 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 border-0">
                 <TrendingUp className="h-4 w-4" />
                 Learn About Staking Instead
               </Button>
@@ -232,8 +232,8 @@ export default function WhatIsMiningPage() {
                 icon: '🔁',
                 title: 'The race starts again immediately',
                 desc: 'A new block is targeted every 10 minutes. The network automatically adjusts the difficulty of the puzzle every 2,016 blocks to keep that 10-minute window consistent even if more miners join or leave.',
-                color: 'border-blue-500/20 bg-blue-500/5',
-                numColor: 'from-blue-500 to-cyan-500',
+                color: 'border-amber-500/20 bg-amber-500/5',
+                numColor: 'from-amber-500 to-amber-400',
               },
             ].map((item) => (
               <div key={item.step} className={`glass-card p-6 rounded-2xl border ${item.color} flex gap-5`}>

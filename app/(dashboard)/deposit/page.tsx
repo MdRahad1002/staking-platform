@@ -410,7 +410,7 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
       <div className={`flex items-center gap-2 rounded-lg p-3 text-sm font-medium ${
         isDone ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
         isFailed ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-        'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+        'bg-amber-500/10 text-amber-400 border border-amber-500/20'
       }`}>
         {isDone ? <CheckCircle2 className="h-4 w-4 flex-shrink-0" /> :
          isFailed ? <XCircle className="h-4 w-4 flex-shrink-0" /> :

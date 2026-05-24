@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const PLANS = [
   { label: 'Starter',  dailyRoi: 1.0,  color: 'from-blue-500/20 to-blue-600/20',    border: 'border-blue-500/40',    activeBg: 'bg-blue-500/20 border-blue-500/50 text-blue-300',   inactiveBg: 'bg-white/[0.03] border-white/10 text-muted-foreground', glow: 'bg-blue-500'    },
-  { label: 'Growth',   dailyRoi: 2.0,  color: 'from-cyan-500/20 to-cyan-600/20',     border: 'border-cyan-500/40',    activeBg: 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300',   inactiveBg: 'bg-white/[0.03] border-white/10 text-muted-foreground', glow: 'bg-cyan-500'    },
+  { label: 'Growth',   dailyRoi: 2.0,  color: 'from-amber-500/20 to-amber-600/20',     border: 'border-amber-500/40',    activeBg: 'bg-amber-500/20 border-amber-500/50 text-amber-300',   inactiveBg: 'bg-white/[0.03] border-white/10 text-muted-foreground', glow: 'bg-amber-500'    },
   { label: 'Premium',  dailyRoi: 3.0,  color: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-500/40',  activeBg: 'bg-purple-500/20 border-purple-500/50 text-purple-300', inactiveBg: 'bg-white/[0.03] border-white/10 text-muted-foreground', glow: 'bg-purple-500' },
   { label: 'Elite',    dailyRoi: 5.0,  color: 'from-orange-500/20 to-pink-500/20',   border: 'border-orange-500/40',  activeBg: 'bg-orange-500/20 border-orange-500/50 text-orange-300', inactiveBg: 'bg-white/[0.03] border-white/10 text-muted-foreground', glow: 'bg-orange-500' },
 ]
@@ -56,7 +56,7 @@ export default function ProfitCalculator() {
   return (
     <section className="py-20 relative border-t border-white/5 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-950/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-950/10 to-transparent pointer-events-none" />
       <div className="absolute inset-0 hero-grid opacity-[0.06]" />
       <div
         className={`absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${plan.glow}`}
@@ -65,7 +65,7 @@ export default function ProfitCalculator() {
       <div className="container relative mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Profit Calculator</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-2">Profit Calculator</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-3">
             See Your <span className="gradient-text">Earnings</span> in Real-Time
           </h2>
@@ -118,7 +118,7 @@ export default function ProfitCalculator() {
                       className="w-full h-2 rounded-full appearance-none cursor-pointer"
                       style={{
                         background: `linear-gradient(to right, var(--tw-gradient-stops))`,
-                        backgroundImage: `linear-gradient(to right, #06b6d4 0%, #06b6d4 ${sliderPct}%, rgba(255,255,255,0.1) ${sliderPct}%, rgba(255,255,255,0.1) 100%)`,
+                        backgroundImage: `linear-gradient(to right, #f59e0b 0%, #f59e0b ${sliderPct}%, rgba(255,255,255,0.1) ${sliderPct}%, rgba(255,255,255,0.1) 100%)`,
                       }}
                     />
                   </div>
@@ -137,7 +137,7 @@ export default function ProfitCalculator() {
                         onClick={() => setAmount(v)}
                         className={`px-3 py-1 rounded-lg text-xs border transition-all duration-150 ${
                           amount === v
-                            ? 'bg-cyan-500/20 border-cyan-500/40 text-cyan-300'
+                            ? 'bg-amber-500/20 border-amber-500/40 text-amber-300'
                             : 'bg-white/[0.03] border-white/10 text-muted-foreground hover:border-white/20 hover:text-foreground'
                         }`}
                       >
@@ -157,7 +157,7 @@ export default function ProfitCalculator() {
                         onClick={() => setDurationIdx(i)}
                         className={`py-2 rounded-xl border text-xs font-semibold transition-all duration-200 focus:outline-none ${
                           i === durationIdx
-                            ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300'
+                            ? 'bg-amber-500/20 border-amber-500/50 text-amber-300'
                             : 'bg-white/[0.03] border-white/10 text-muted-foreground hover:border-white/20 hover:text-foreground'
                         }`}
                       >
@@ -175,7 +175,7 @@ export default function ProfitCalculator() {
               <div className="p-7 flex flex-col gap-5 justify-between">
 
                 {/* Top summary row */}
-                <div className="rounded-2xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 p-5 text-center">
+                <div className="rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/10 border border-amber-500/20 p-5 text-center">
                   <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Total Profit After {duration.days} Days</p>
                   <p className="text-4xl md:text-5xl font-black text-white mt-1">{fmtFull(calc.total)}</p>
                   <div className="inline-flex items-center gap-1 mt-2 bg-green-500/10 border border-green-500/20 rounded-full px-3 py-1">
@@ -189,7 +189,7 @@ export default function ProfitCalculator() {
                   {[
                     { Icon: Zap,         label: 'Daily Profit',   value: fmtFull(calc.daily),   color: 'text-yellow-400',  bg: 'bg-yellow-500/10 border-yellow-500/20' },
                     { Icon: Calendar,    label: 'Weekly Profit',  value: fmtFull(calc.weekly),  color: 'text-purple-400',  bg: 'bg-purple-500/10 border-purple-500/20' },
-                    { Icon: TrendingUp,  label: 'Monthly Profit', value: fmtFull(calc.monthly), color: 'text-cyan-400',    bg: 'bg-cyan-500/10 border-cyan-500/20' },
+                    { Icon: TrendingUp,  label: 'Monthly Profit', value: fmtFull(calc.monthly), color: 'text-amber-400',    bg: 'bg-amber-500/10 border-amber-500/20' },
                     { Icon: DollarSign,  label: 'Total Return',   value: fmtFull(calc.back),    color: 'text-green-400',   bg: 'bg-green-500/10 border-green-500/20' },
                   ].map(({ Icon, label, value, color, bg }) => (
                     <div key={label} className={`rounded-xl border p-3.5 ${bg}`}>
@@ -210,7 +210,7 @@ export default function ProfitCalculator() {
                   </div>
                   <div className="h-2.5 rounded-full bg-white/[0.07] overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-green-400 transition-all duration-500"
+                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-green-400 transition-all duration-500"
                       style={{ width: `${Math.min((calc.total / calc.back) * 100, 100).toFixed(1)}%` }}
                     />
                   </div>
@@ -223,7 +223,7 @@ export default function ProfitCalculator() {
                 <Link href="/signup" className="block">
                   <Button
                     size="lg"
-                    className="w-full gap-2 font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 border-0 rounded-xl text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full gap-2 font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 border-0 rounded-xl text-white shadow-lg shadow-amber-500/20 transition-all duration-300 hover:scale-[1.02]"
                   >
                     <Calculator className="h-4 w-4" />
                     Start Earning {fmtFull(calc.daily)}/Day
@@ -248,20 +248,20 @@ export default function ProfitCalculator() {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: #06b6d4;
+          background: #f59e0b;
           border: 3px solid #0e1628;
-          box-shadow: 0 0 0 3px rgba(6,182,212,0.25);
+          box-shadow: 0 0 0 3px rgba(245,158,11,0.25);
           cursor: pointer;
           transition: box-shadow 0.2s;
         }
         input[type='range']::-webkit-slider-thumb:hover {
-          box-shadow: 0 0 0 6px rgba(6,182,212,0.2);
+          box-shadow: 0 0 0 6px rgba(245,158,11,0.2);
         }
         input[type='range']::-moz-range-thumb {
           width: 20px;
           height: 20px;
           border-radius: 50%;
-          background: #06b6d4;
+          background: #f59e0b;
           border: 3px solid #0e1628;
           cursor: pointer;
         }

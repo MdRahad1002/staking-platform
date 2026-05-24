@@ -34,7 +34,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/5 bg-background relative overflow-hidden">
       {/* Subtle top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-96 bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-96 bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
 
       {/* Trust badges strip */}
       <div className="border-b border-white/5 bg-white/[0.02]">

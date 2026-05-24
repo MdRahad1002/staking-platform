@@ -150,15 +150,15 @@ export default async function DashboardPage() {
           }}
         />
         {/* Glow orbs */}
-        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-blue-500/20 blur-[90px]" />
+        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-amber-500/20 blur-[90px]" />
         <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-violet-600/15 blur-[70px]" />
-        <div className="absolute top-1/2 right-1/3 h-40 w-40 rounded-full bg-cyan-400/10 blur-[50px]" />
+        <div className="absolute top-1/2 right-1/3 h-40 w-40 rounded-full bg-amber-500/10 blur-[50px]" />
 
         <div className="relative z-10 p-5 sm:p-7">
           {/* Top row */}
           <div className="flex items-start justify-between mb-4">
             <div>
-              <p className="text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-blue-200/50 mb-1.5">
+              <p className="text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-amber-200/70 mb-1.5">
                 Total Portfolio Value
               </p>
               <p className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-none font-mono">
@@ -173,7 +173,7 @@ export default async function DashboardPage() {
                   <span className="text-green-400 text-sm font-bold">
                     +{formatCurrency(data.totalDailyEarning)}/day
                   </span>
-                  <span className="text-[11px] text-blue-200/40 hidden sm:inline">earning rate</span>
+                  <span className="text-[11px] text-amber-200/40 hidden sm:inline">earning rate</span>
                 </div>
               )}
             </div>
@@ -193,7 +193,7 @@ export default async function DashboardPage() {
               <div className="h-1.5 rounded-full bg-white/10 overflow-hidden flex mb-2">
                 {data.totalStaked > 0 && (
                   <div
-                    className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all"
+                    className="h-full bg-gradient-to-r from-amber-500 to-amber-600 transition-all"
                     style={{ width: `${Math.min(100, stakedPct)}%` }}
                   />
                 )}
@@ -203,7 +203,7 @@ export default async function DashboardPage() {
               </div>
               <div className="flex gap-4 text-[10px] text-blue-200/40">
                 <span className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 inline-block" />
+                  <span className="h-1.5 w-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 inline-block" />
                   Staked {stakedPct.toFixed(0)}%
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -218,12 +218,12 @@ export default async function DashboardPage() {
           <div className="grid grid-cols-4 gap-2 sm:gap-4 pt-4 border-t border-white/10">
             {[
               { label: 'Liquid', value: formatCurrency(data.user?.balance || 0), color: 'text-violet-300' },
-              { label: 'Staked', value: formatCurrency(data.totalStaked), color: 'text-cyan-300' },
+              { label: 'Staked', value: formatCurrency(data.totalStaked), color: 'text-amber-300' },
               { label: 'Earned', value: formatCurrency(data.totalEarned), color: 'text-green-400' },
               { label: 'Stakes', value: `${data.activeStakes.length} active`, color: 'text-amber-300' },
             ].map(({ label, value, color }) => (
               <div key={label}>
-                <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-blue-200/40 mb-0.5">{label}</p>
+                <p className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-amber-200/40 mb-0.5">{label}</p>
                 <p className={`text-[11px] sm:text-sm font-bold ${color} leading-tight`}>{value}</p>
               </div>
             ))}
@@ -236,7 +236,7 @@ export default async function DashboardPage() {
       ══════════════════════════════════════════ */}
       <div className="grid grid-cols-4 gap-2 sm:gap-3">
         {[
-          { label: 'Deposit', href: '/deposit', Icon: ArrowDownToLine, from: 'from-blue-500', to: 'to-cyan-400', shadow: 'shadow-blue-500/30' },
+          { label: 'Deposit', href: '/deposit', Icon: ArrowDownToLine, from: 'from-amber-500', to: 'to-amber-400', shadow: 'shadow-amber-500/30' },
           { label: 'Withdraw', href: '/withdraw', Icon: ArrowUpFromLine, from: 'from-orange-500', to: 'to-amber-400', shadow: 'shadow-orange-500/30' },
           { label: 'Trade', href: '/trade', Icon: CandlestickChart, from: 'from-green-500', to: 'to-emerald-400', shadow: 'shadow-green-500/30' },
           { label: 'Stake', href: '/plans', Icon: TrendingUp, from: 'from-violet-500', to: 'to-purple-400', shadow: 'shadow-violet-500/30' },
@@ -351,8 +351,8 @@ export default async function DashboardPage() {
           {/* Stats row */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { label: 'Balance', value: formatCurrency(data.user?.balance || 0), Icon: Wallet, color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
-              { label: 'Total Staked', value: formatCurrency(data.totalStaked), Icon: Shield, color: 'text-cyan-400', bg: 'bg-cyan-500/10', border: 'border-cyan-500/20' },
+              { label: 'Balance', value: formatCurrency(data.user?.balance || 0), Icon: Wallet, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
+              { label: 'Total Staked', value: formatCurrency(data.totalStaked), Icon: Shield, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20' },
               { label: 'Total Earned', value: formatCurrency(data.totalEarned), Icon: CircleDollarSign, color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
               { label: 'Active Stakes', value: data.activeStakes.length.toString(), Icon: BarChart3, color: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20' },
             ].map(({ label, value, Icon, color, bg, border }) => (
@@ -373,12 +373,12 @@ export default async function DashboardPage() {
           <div className="rounded-2xl border border-border/50 bg-card/60 overflow-hidden">
             <div className="flex items-center justify-between px-5 py-4 border-b border-border/40">
               <div className="flex items-center gap-2">
-                <div className="flex h-5 w-5 items-center justify-center rounded-md bg-cyan-500/15">
-                  <TrendingUp className="h-3 w-3 text-cyan-400" />
+                <div className="flex h-5 w-5 items-center justify-center rounded-md bg-amber-500/15">
+                  <TrendingUp className="h-3 w-3 text-amber-400" />
                 </div>
                 <h2 className="text-sm font-bold">Active Stakes</h2>
                 {data.activeStakes.length > 0 && (
-                  <Badge variant="outline" className="text-[10px] text-cyan-400 border-cyan-400/30">{data.activeStakes.length}</Badge>
+                  <Badge variant="outline" className="text-[10px] text-amber-400 border-amber-400/30">{data.activeStakes.length}</Badge>
                 )}
               </div>
               <Link href="/orders">
@@ -433,13 +433,13 @@ export default async function DashboardPage() {
                         <div className="space-y-1">
                           <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
                             <div
-                              className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all"
+                              className="h-full bg-gradient-to-r from-amber-500 to-amber-600 rounded-full transition-all"
                               style={{ width: `${progress}%` }}
                             />
                           </div>
                           <div className="flex justify-between text-[10px] text-muted-foreground">
                             <span>{formatDate(stake.startDate)}</span>
-                            <span className="text-cyan-400 font-medium">{progress.toFixed(0)}%</span>
+                            <span className="text-amber-400 font-medium">{progress.toFixed(0)}%</span>
                             <span>{formatDate(stake.endDate)}</span>
                           </div>
                         </div>
@@ -554,8 +554,8 @@ export default async function DashboardPage() {
                     {data.deposits.map((dep) => (
                       <div key={dep.id} className="flex items-center justify-between py-2 border-b border-border/30 last:border-0">
                         <div className="flex items-center gap-2.5">
-                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500/10 flex-shrink-0">
-                            <ArrowDownToLine className="h-3.5 w-3.5 text-blue-400" />
+                          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-500/10 flex-shrink-0">
+                            <ArrowDownToLine className="h-3.5 w-3.5 text-amber-400" />
                           </div>
                           <div>
                             <p className="text-xs font-semibold">{dep.amount} {dep.currency.symbol}</p>

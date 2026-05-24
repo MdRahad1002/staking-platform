@@ -28,7 +28,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 const colorMap: Record<string, string> = {
   SYSTEM:     'text-muted-foreground',
-  INFO:       'text-blue-400',
+  INFO:       'text-amber-400',
   SUCCESS:    'text-green-400',
   WARNING:    'text-yellow-400',
   DEPOSIT:    'text-primary',

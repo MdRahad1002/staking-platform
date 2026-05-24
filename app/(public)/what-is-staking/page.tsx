@@ -96,12 +96,12 @@ export default function WhatIsStakingPage() {
 
       {/* ── HERO: The Problem ─────────────────────────────────────────────────── */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 via-background to-cyan-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 via-background to-amber-950/20" />
         <div className="absolute inset-0 hero-grid opacity-[0.04]" />
-        <div className="glow-blob w-[700px] h-[500px] bg-cyan-500/10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/4" />
+        <div className="glow-blob w-[700px] h-[500px] bg-amber-500/10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/4" />
 
         <div className="container relative mx-auto px-4 text-center">
-          <span className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
             <HelpCircle className="h-3.5 w-3.5" />
             Plain English Guide
           </span>
@@ -177,8 +177,8 @@ export default function WhatIsStakingPage() {
                 realValue: 'Rewards credited per plan schedule',
                 note: 'Returns are variable and not guaranteed. Sign in to view current plan rates. Past performance is not indicative of future results.',
                 bad: false,
-                color: 'border-cyan-500/30 bg-cyan-500/8',
-                iconColor: 'text-cyan-400',
+                color: 'border-amber-500/30 bg-amber-500/8',
+                iconColor: 'text-amber-400',
               },
             ].map((item) => (
               <div key={item.label} className={`glass-card p-6 rounded-2xl border ${item.color}`}>
@@ -218,7 +218,7 @@ export default function WhatIsStakingPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Explained Simply</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Explained Simply</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">So What <em>Exactly</em> Is Staking?</h2>
           </div>
 
@@ -244,7 +244,7 @@ export default function WhatIsStakingPage() {
                 icon: <Coins className="h-6 w-6" />,
                 title: 'Deposit your crypto',
                 desc: 'Send BTC, ETH, USDT or 50+ other assets into your StakeOnix wallet. Minimum $200.',
-                color: 'text-cyan-400 bg-cyan-500/10',
+                color: 'text-amber-400 bg-amber-500/10',
               },
               {
                 step: '02',
@@ -269,7 +269,7 @@ export default function WhatIsStakingPage() {
               },
             ].map((s) => (
               <div key={s.step} className="glass-card p-6 flex flex-col items-center text-center relative">
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-white text-xs font-bold shadow-lg shadow-amber-500/30">
                   {s.step}
                 </div>
                 <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${s.color} mb-4 mt-3`}>
@@ -305,7 +305,7 @@ export default function WhatIsStakingPage() {
               {
                 num: '01',
                 icon: <Percent className="h-6 w-6" />,
-                color: 'text-cyan-400 bg-cyan-500/10',
+                color: 'text-amber-400 bg-amber-500/10',
                 title: 'Network rewards exist whether you participate or not',
                 body: 'Proof-of-stake blockchains issue rewards to validators every day. That mechanism runs 24/7 regardless of whether any individual participates. Staking is the mechanism for participating. The question is not whether those rewards exist - they do. The question is whether you are positioned to receive a share of them.',
                 proof: 'Ethereum, Solana, Cosmos and 170+ other PoS networks all issue staking rewards',
@@ -359,7 +359,7 @@ export default function WhatIsStakingPage() {
                   <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.body}</p>
                   <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 flex-shrink-0" />
                     {item.proof}
                   </div>
                 </div>
@@ -389,18 +389,18 @@ export default function WhatIsStakingPage() {
               { plan: 'Booster Plan', min: 500, max: 999, days: 14, daily: 1.8, total: 25.2, arrow: 'Reinvest your $221 + add $279. $500 → $626 in 14 days.', tier: 'Level 2', tierColor: 'text-blue-400' },
               { plan: 'Growth Yield', min: 1000, max: 2499, days: 21, daily: 2.2, total: 46.2, arrow: '$626 reinvested + top up to $1,000. First $1,000+ payday at maturity.', tier: 'Level 3', tierColor: 'text-blue-400' },
               { plan: 'Momentum', min: 2500, max: 4999, days: 30, daily: 2.6, total: 78, arrow: '$1,462 compounds into $2,500+. Monthly income becomes life-changing.', tier: 'Level 4', tierColor: 'text-purple-400' },
-              { plan: 'Professional', min: 5000, max: 9999, days: 30, daily: 3.0, total: 90, arrow: '$5,000 → $9,500 in one month. The plan chosen by 60%+ of repeat investors.', tier: 'Level 5 ⭐', tierColor: 'text-cyan-400' },
+              { plan: 'Professional', min: 5000, max: 9999, days: 30, daily: 3.0, total: 90, arrow: '$5,000 → $9,500 in one month. The plan chosen by 60%+ of repeat investors.', tier: 'Level 5 ⭐', tierColor: 'text-amber-400' },
               { plan: 'Advanced Vault', min: 10000, max: 24999, days: 45, daily: 3.3, total: 148.5, arrow: '$10,000 → $24,850 in 45 days. Loyalty ROI boost on renewal.', tier: 'Level 6', tierColor: 'text-yellow-400' },
               { plan: 'Sovereign', min: 100000, max: null, days: 90, daily: 4.5, total: 405, arrow: 'Institutional-grade. Personal fund manager. $100K+ dedicated suite.', tier: 'Institutional', tierColor: 'text-amber-400' },
             ].map((row, i) => (
               <div key={row.plan} className="flex gap-4 items-start">
                 <div className="flex flex-col items-center">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 text-cyan-400 text-xs font-bold flex-shrink-0">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-400 text-xs font-bold flex-shrink-0">
                     {i + 1}
                   </div>
-                  {i < 6 && <div className="w-px h-4 bg-cyan-500/20 mt-1" />}
+                  {i < 6 && <div className="w-px h-4 bg-amber-500/20 mt-1" />}
                 </div>
-                <div className="glass-card p-5 flex-1 mb-0 hover:border-cyan-500/20 transition-colors">
+                <div className="glass-card p-5 flex-1 mb-0 hover:border-amber-500/20 transition-colors">
                   <div className="flex flex-wrap items-center gap-3 mb-2">
                     <span className="font-bold text-white">{row.plan}</span>
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-white/5 border border-white/10 ${row.tierColor}`}>{row.tier}</span>
@@ -414,7 +414,7 @@ export default function WhatIsStakingPage() {
             ))}
           </div>
 
-          <div className="mt-8 glass-card p-6 border border-cyan-500/20 bg-cyan-500/5 text-center">
+          <div className="mt-8 glass-card p-6 border border-amber-500/20 bg-amber-500/5 text-center">
             <p className="text-sm text-muted-foreground mb-2">
               The key insight: <strong className="text-white">each plan is self-funding.</strong> You never need to add new money if you do not want to.
               The system is designed so your returns from each plan naturally cover the minimum of the next tier.
@@ -502,7 +502,7 @@ export default function WhatIsStakingPage() {
       <section className="py-20 border-t border-white/5">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">Head to Head</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Head to Head</p>
             <h2 className="text-3xl font-black mb-4">Staking vs Every Other Option</h2>
           </div>
 
@@ -523,9 +523,9 @@ export default function WhatIsStakingPage() {
             ].map((row) => (
               <div
                 key={row.type}
-                className={`grid grid-cols-5 border-b border-white/[0.05] last:border-0 text-sm ${row.highlight ? 'bg-cyan-500/5 border-cyan-500/10' : ''}`}
+                className={`grid grid-cols-5 border-b border-white/[0.05] last:border-0 text-sm ${row.highlight ? 'bg-amber-500/5 border-amber-500/10' : ''}`}
               >
-                <div className={`p-4 col-span-2 font-medium ${row.highlight ? 'text-cyan-400 font-bold' : 'text-white'}`}>{row.type}</div>
+                <div className={`p-4 col-span-2 font-medium ${row.highlight ? 'text-amber-400 font-bold' : 'text-white'}`}>{row.type}</div>
                 <div className={`p-4 text-center font-semibold ${row.bad[0] ? 'text-red-400' : 'text-green-400'}`}>{row.daily}</div>
                 <div className={`p-4 text-center ${row.bad[1] ? 'text-red-400' : 'text-green-400'}`}>{row.knowledge}</div>
                 <div className={`p-4 text-center ${row.bad[2] ? 'text-red-400' : 'text-green-400'}`}>{row.min}</div>
@@ -572,7 +572,7 @@ export default function WhatIsStakingPage() {
             ].map((faq) => (
               <div key={faq.q} className="glass-card p-5 rounded-xl">
                 <h3 className="font-semibold mb-2 flex items-start gap-2">
-                  <span className="text-cyan-400 mt-0.5 shrink-0 font-bold">Q.</span>
+                  <span className="text-amber-400 mt-0.5 shrink-0 font-bold">Q.</span>
                   {faq.q}
                 </h3>
                 <p className="text-sm text-muted-foreground pl-5 leading-relaxed">{faq.a}</p>
@@ -584,10 +584,10 @@ export default function WhatIsStakingPage() {
 
       {/* ── CTA ──────────────────────────────────────────────────────────────── */}
       <section className="py-24 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-background to-purple-950/20" />
-        <div className="glow-blob w-[600px] h-[400px] bg-cyan-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-950/30 via-background to-amber-950/15" />
+        <div className="glow-blob w-[600px] h-[400px] bg-amber-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <div className="container relative mx-auto px-4 text-center max-w-2xl">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-cyan-400 mx-auto mb-6">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 text-amber-400 mx-auto mb-6">
             <Rocket className="h-8 w-8" />
           </div>
           <h2 className="text-3xl md:text-4xl font-black mb-4">

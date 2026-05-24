@@ -90,7 +90,7 @@ export function Navbar() {
         )}
       >
         {/* Top gradient line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
 
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           {/* Logo */}
@@ -111,7 +111,7 @@ export function Navbar() {
               >
                 {link.label}
                 {pathname === link.href && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full" />
+                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-full" />
                 )}
               </Link>
             ))}
@@ -127,7 +127,7 @@ export function Navbar() {
                 >
                   <Avatar className="h-7 w-7 ring-1 ring-white/10">
                     <AvatarImage src={session.user.avatar || ''} />
-                    <AvatarFallback className="text-xs bg-gradient-to-br from-cyan-500 to-blue-600">{initials}</AvatarFallback>
+                    <AvatarFallback className="text-xs bg-gradient-to-br from-amber-500 to-amber-600">{initials}</AvatarFallback>
                   </Avatar>
                   <span className="text-sm font-medium">{session.user.name?.split(' ')[0]}</span>
                   <ChevronDown className={cn('h-3.5 w-3.5 text-muted-foreground transition-transform duration-200', userDropdown && 'rotate-180')} />
@@ -140,7 +140,7 @@ export function Navbar() {
                       <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
                     </div>
                     <Link href="/dashboard" className="flex items-center gap-2.5 px-4 py-3 text-sm hover:bg-white/5 transition-colors" onClick={() => setUserDropdown(false)}>
-                      <LayoutDashboard className="h-4 w-4 text-cyan-400" />
+                      <LayoutDashboard className="h-4 w-4 text-amber-400" />
                       Dashboard
                     </Link>
                     <Link href="/notify" className="flex items-center gap-2.5 px-4 py-3 text-sm hover:bg-white/5 transition-colors" onClick={() => setUserDropdown(false)}>
@@ -173,7 +173,7 @@ export function Navbar() {
                 <Link href="/signup">
                   <Button
                     size="sm"
-                    className="gap-1.5 px-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white border-0 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105 font-semibold"
+                    className="gap-1.5 px-5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white border-0 rounded-xl shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-300 hover:scale-105 font-semibold"
                   >
                     <Rocket className="h-3.5 w-3.5" />
                     Start Earning
@@ -250,7 +250,7 @@ export function Navbar() {
                 >
                   <span>{link.label}</span>
                   {pathname === link.href
-                    ? <span className="w-1.5 h-5 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500" />
+                    ? <span className="w-1.5 h-5 rounded-full bg-gradient-to-b from-amber-400 to-amber-500" />
                     : <ChevronRight className="h-4 w-4 text-muted-foreground/40" />
                   }
                 </Link>
@@ -265,7 +265,7 @@ export function Navbar() {
                   <div className="flex items-center gap-3 px-4 py-3 mb-3 rounded-xl bg-white/[0.04] border border-white/5">
                     <Avatar className="h-9 w-9 ring-1 ring-white/10 flex-shrink-0">
                       <AvatarImage src={session.user.avatar || ''} />
-                      <AvatarFallback className="text-sm bg-gradient-to-br from-cyan-500 to-blue-600">{initials}</AvatarFallback>
+                      <AvatarFallback className="text-sm bg-gradient-to-br from-amber-500 to-amber-600">{initials}</AvatarFallback>
                     </Avatar>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold truncate">{session.user.name}</p>
@@ -274,7 +274,7 @@ export function Navbar() {
                   </div>
                   <div className="flex gap-2">
                     <Link href="/dashboard" className="flex-1" onClick={() => setMobileOpen(false)}>
-                      <Button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl h-11 font-semibold" size="sm">
+                      <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white border-0 rounded-xl h-11 font-semibold" size="sm">
                         <LayoutDashboard className="h-4 w-4 mr-1.5" />
                         Dashboard
                       </Button>
@@ -292,7 +292,7 @@ export function Navbar() {
               ) : (
                 <div className="flex flex-col gap-2.5 pt-3">
                   <Link href="/signup" className="w-full" onClick={() => setMobileOpen(false)}>
-                    <Button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 rounded-xl h-12 text-base font-semibold shadow-lg shadow-cyan-500/20">
+                    <Button className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-white border-0 rounded-xl h-12 text-base font-semibold shadow-lg shadow-amber-500/20">
                       <Rocket className="h-4 w-4 mr-2" />
                       Start Earning
                     </Button>

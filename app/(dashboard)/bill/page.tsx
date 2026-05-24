@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic'
 const typeConfig: Record<string, { label: string; icon: React.ElementType; color: string; sign: string }> = {
   DEPOSIT: { label: 'Deposit', icon: ArrowDownLeft, color: 'text-green-400', sign: '+' },
   WITHDRAWAL: { label: 'Withdrawal', icon: ArrowUpRight, color: 'text-red-400', sign: '-' },
-  STAKING: { label: 'Staking', icon: DollarSign, color: 'text-blue-400', sign: '-' },
+  STAKING: { label: 'Staking', icon: DollarSign, color: 'text-amber-400', sign: '-' },
   STAKING_RETURN: { label: 'Staking Return', icon: DollarSign, color: 'text-primary', sign: '+' },
   REFERRAL_BONUS: { label: 'Referral Bonus', icon: DollarSign, color: 'text-purple-400', sign: '+' },
   FEE: { label: 'Fee', icon: Activity, color: 'text-yellow-400', sign: '-' },

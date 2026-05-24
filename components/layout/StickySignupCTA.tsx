@@ -85,12 +85,12 @@ export function StickySignupCTA() {
       {/* Signup CTA - shown after scroll; on mobile only shows once WhatsApp widget is dismissed */}
       {visible && (!isMobile || waDismissed) && (
         <div className="fixed bottom-0 left-0 right-0 z-50 md:bottom-6 md:left-auto md:right-6 md:w-[360px] animate-in slide-in-from-bottom duration-300">
-          <div className="bg-[#0a0f1e] border border-cyan-500/30 shadow-2xl shadow-cyan-500/10 md:rounded-2xl overflow-hidden">
-            <div className="h-0.5 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+          <div className="bg-[#0a0f1e] border border-amber-500/30 shadow-2xl shadow-amber-500/10 md:rounded-2xl overflow-hidden">
+            <div className="h-0.5 w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600" />
 
             <div className="p-4 flex items-center gap-4">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/20">
-                <TrendingUp className="h-6 w-6 text-cyan-400" />
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 border border-amber-500/20">
+                <TrendingUp className="h-6 w-6 text-amber-400" />
               </div>
 
               <div className="flex-1 min-w-0">
@@ -111,7 +111,7 @@ export function StickySignupCTA() {
 
             <div className="px-4 pb-4">
               <Link href="/signup" className="block">
-                <button className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/25">
+                <button className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white transition-all duration-200 hover:shadow-lg hover:shadow-amber-500/25">
                   <Rocket className="h-4 w-4" />
                   Create Free Account
                 </button>

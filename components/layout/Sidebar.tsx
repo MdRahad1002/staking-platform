@@ -183,8 +183,16 @@ export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
         ))}
       </nav>
 
-      {/* User Profile (pinned to bottom) */}
-      <div className="p-3 border-t border-border flex flex-col gap-2 flex-shrink-0">
+      {/* User Profile (fixed to bottom on mobile) */}
+      <div
+        className={cn(
+          'p-3 border-t border-border flex flex-col gap-2 flex-shrink-0',
+          'md:static md:relative md:p-3',
+          'fixed bottom-0 left-0 right-0 z-50 bg-background md:relative',
+          collapsed ? 'md:w-16 w-16' : 'md:w-64 w-full'
+        )}
+        style={{ boxShadow: '0 -2px 16px 0 rgba(0,0,0,0.08)' }}
+      >
         <div
           className={cn(
             'flex items-center gap-3 rounded-lg p-2 hover:bg-secondary cursor-pointer transition-colors',

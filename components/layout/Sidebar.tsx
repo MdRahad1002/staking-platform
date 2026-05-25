@@ -184,7 +184,7 @@ export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
       </nav>
 
       {/* User Profile */}
-      <div className="p-3 border-t border-border">
+      <div className="p-3 border-t border-border flex flex-col gap-2">
         <div
           className={cn(
             'flex items-center gap-3 rounded-lg p-2 hover:bg-secondary cursor-pointer transition-colors',
@@ -196,21 +196,24 @@ export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
             <AvatarFallback className="text-xs">{initials}</AvatarFallback>
           </Avatar>
           {!collapsed && (
-            <>
-              <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-medium truncate">{session?.user?.name || 'User'}</p>
-                <p className="text-xs text-muted-foreground truncate">{session?.user?.email}</p>
-              </div>
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className="p-1 rounded text-muted-foreground hover:text-red-400 transition-colors"
-                title="Sign out"
-              >
-                <LogOut className="h-4 w-4" />
-              </button>
-            </>
+            <div className="flex-1 overflow-hidden">
+              <p className="text-sm font-medium truncate">{session?.user?.name || 'User'}</p>
+              <p className="text-xs text-muted-foreground truncate">{session?.user?.email}</p>
+            </div>
           )}
         </div>
+        {/* Always show logout button as a full-width row on mobile and desktop */}
+        <button
+          onClick={() => signOut({ callbackUrl: '/' })}
+          className={cn(
+            'flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium justify-center',
+            'text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-white/10 transition-colors',
+            collapsed && 'justify-center px-2'
+          )}
+        >
+          <LogOut className="h-4 w-4" />
+          {!collapsed && <span>Sign Out</span>}
+        </button>
       </div>
     </aside>
   )

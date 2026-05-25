@@ -283,9 +283,10 @@ export function Navbar() {
                       variant="ghost"
                       size="sm"
                       onClick={() => signOut({ callbackUrl: '/' })}
-                      className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-11 px-4 rounded-xl border border-white/10"
+                      className="flex items-center gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 h-11 px-4 rounded-xl border border-white/10 w-full justify-center"
                     >
                       <LogOut className="h-4 w-4" />
+                      <span className="text-sm font-medium">Sign Out</span>
                     </Button>
                   </div>
                 </>

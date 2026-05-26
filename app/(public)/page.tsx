@@ -362,6 +362,7 @@ import {
   BarChart2,
   Clock,
   ShieldCheck,
+  CandlestickChart,
 } from 'lucide-react'
 
 const features = [
@@ -498,48 +499,55 @@ export default async function HomePage() {
       <CryptoTicker />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 hero-grid opacity-10" />
+      <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden" style={{ background: '#080D1B' }}>
+        {/* Hero background image — Crypto.com style deep navy */}
+        <div className="absolute inset-0">
+          <img src="/hero-background.png" alt="" className="w-full h-full object-cover object-center opacity-20" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080D1B] via-[#080D1B]/90 to-[#080D1B]/60" />
+        </div>
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 hero-grid opacity-[0.06]" />
+        {/* Blue ambient glow */}
+        <div className="pointer-events-none absolute top-0 right-0 h-[700px] w-[700px] rounded-full bg-blue-600/[0.08] blur-[180px] translate-x-1/4 -translate-y-1/4" />
 
         <div className="container relative mx-auto px-4 py-14 sm:py-20 lg:py-0">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
 
             {/* Left: Text content */}
             <div className="text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-300 mb-6 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300 mb-6 backdrop-blur-sm">
                 <Shield className="h-3.5 w-3.5 flex-shrink-0" />
-                FCA Authorised &middot; FINTRAC Registered &middot; KYC / AML Compliant
+                Stake &middot; Trade &middot; Earn &middot; FCA Authorised
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
-                Before You Stake Crypto,{' '}
-                <span className="gradient-text">Compare Your Options.</span>
+                Stake & Trade Crypto.{' '}
+                <span className="gradient-text">Earn Every Day.</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                StakeOnix helps Canadians review staking plans, risk considerations, supported assets,
-                and account requirements before choosing a staking option.
+                Stake 170+ crypto assets for daily rewards — or trade live markets with real-time charts.
+                One regulated platform. FCA-authorised (UK) &amp; FINTRAC-registered (Canada).
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <Link href={session ? '/dashboard' : '/signup'} className="w-full sm:w-auto">
                   <Button
                     size="xl"
-                    className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-cyan-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
+                    className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white shadow-2xl shadow-blue-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50"
                   >
                     <ArrowRight className="h-5 w-5" />
-                    {session ? 'Go to Dashboard' : 'Check My Staking Options'}
+                    {session ? 'Go to Dashboard' : 'Get Started Free'}
                   </Button>
                 </Link>
-                <Link href="/what-is-staking" className="w-full sm:w-auto">
+                <Link href={session ? '/trade' : '/signup'} className="w-full sm:w-auto">
                   <Button
                     variant="outline"
                     size="xl"
-                    className="w-full sm:w-auto gap-2 font-semibold text-base px-8 py-4 border-white/10 hover:border-cyan-500/40 hover:bg-cyan-500/5 rounded-2xl transition-all duration-300"
+                    className="w-full sm:w-auto gap-2 font-semibold text-base px-8 py-4 border-blue-500/30 hover:border-blue-400 hover:bg-blue-500/10 rounded-2xl transition-all duration-300"
                   >
-                    <Eye className="h-5 w-5" />
-                    How Staking Works
+                    <CandlestickChart className="h-5 w-5" />
+                    Start Trading
                   </Button>
                 </Link>
               </div>
@@ -555,7 +563,8 @@ export default async function HomePage() {
                   { icon: <ShieldCheck className="h-4 w-4 text-green-400" />, label: 'SSL Secured' },
                   { icon: <BadgeCheck className="h-4 w-4 text-blue-400" />, label: 'KYC Compliant' },
                   { icon: <Lock className="h-4 w-4 text-yellow-400" />, label: '2FA Protected' },
-                  { icon: <BadgeCheck className="h-4 w-4 text-cyan-400" />, label: 'FCA Authorised' },
+                  { icon: <BadgeCheck className="h-4 w-4 text-blue-400" />, label: 'FCA Authorised' },
+                  { icon: <CandlestickChart className="h-4 w-4 text-blue-400" />, label: 'Live Trading' },
                 ].map((b) => (
                   <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground bg-white/5 border border-white/[0.08] rounded-full px-3 py-1.5">
                     {b.icon}
@@ -575,16 +584,16 @@ export default async function HomePage() {
                   {/* Card header */}
                   <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-white/[0.06]">
                     <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-widest text-cyan-400/80 mb-1">Estimated Yields</p>
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-blue-400/80 mb-1">Estimated Yields</p>
                       <h3 className="text-lg font-bold text-white leading-tight">Typical rates by asset</h3>
                       <p className="text-xs text-muted-foreground mt-0.5">Est. network yields. Actual returns vary.</p>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-3 py-1.5 flex-shrink-0 ml-4">
+                    <div className="flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1.5 flex-shrink-0 ml-4">
                       <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-400" />
                       </span>
-                      <span className="text-xs font-semibold text-cyan-300">Live</span>
+                      <span className="text-xs font-semibold text-blue-300">Live</span>
                     </div>
                   </div>
 
@@ -617,7 +626,7 @@ export default async function HomePage() {
                           </div>
                           <div className="text-right flex-shrink-0">
                             <p className="text-[10px] text-muted-foreground leading-none mb-0.5">Up to</p>
-                            <p className="text-base font-black text-cyan-400">{coin.apr}%</p>
+                            <p className="text-base font-black text-blue-400">{coin.apr}%</p>
                           </div>
                         </div>
                       ))}
@@ -626,7 +635,7 @@ export default async function HomePage() {
                     {/* Right: Top rate card */}
                     <div className="hidden sm:flex w-[158px] flex-shrink-0 p-4 flex-col gap-3 bg-white/[0.02]">
                       <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Top rate</p>
-                      <div className="flex flex-col items-center gap-2 py-3 px-2 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/20">
+                      <div className="flex flex-col items-center gap-2 py-3 px-2 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/10 border border-blue-500/20">
                         <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-2">
                           <img
                             src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/atom.svg"
@@ -639,7 +648,7 @@ export default async function HomePage() {
                           <p className="text-[10px] text-muted-foreground">ATOM</p>
                         </div>
                         <div className="text-center">
-                          <p className="text-3xl font-black text-cyan-400 leading-none">21.5<span className="text-lg">%</span></p>
+                          <p className="text-3xl font-black text-blue-400 leading-none">21.5<span className="text-lg">%</span></p>
                           <p className="text-[10px] text-muted-foreground mt-1">Up to APY</p>
                         </div>
                       </div>
@@ -650,17 +659,17 @@ export default async function HomePage() {
                         </div>
                         <div className="flex justify-between text-[10px] mb-1">
                           <span className="text-muted-foreground/60">Low</span>
-                          <span className="text-cyan-400">High</span>
+                          <span className="text-blue-400">High</span>
                         </div>
                         <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
-                          <div className="h-full w-[85%] rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-cyan-400" />
+                          <div className="h-full w-[85%] rounded-full bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400" />
                         </div>
                       </div>
                       <p className="text-[9px] text-muted-foreground/60 leading-relaxed">
                         Estimated network yields. Actual returns vary by conditions.
                       </p>
                       <Link href={session ? '/dashboard' : '/signup'}>
-                        <button className="w-full text-[11px] font-bold py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all">
+                        <button className="w-full text-[11px] font-bold py-2 px-3 rounded-xl bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:from-blue-400 hover:to-blue-600 transition-all">
                           Start Staking →
                         </button>
                       </Link>
@@ -680,14 +689,14 @@ export default async function HomePage() {
                     </div>
                   </div>
                 </div>
-                <div className="hidden sm:flex absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-cyan-500/20 z-10 items-center gap-2" style={{ animationDelay: '-2s' }}>
+                <div className="hidden sm:flex absolute -top-4 right-6 glass-card px-4 py-2.5 animate-float shadow-xl border border-blue-500/20 z-10 items-center gap-2" style={{ animationDelay: '-2s' }}>
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <Shield className="h-3.5 w-3.5 text-cyan-400" />
+                    <div className="w-7 h-7 rounded-lg bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <Shield className="h-3.5 w-3.5 text-blue-400" />
                     </div>
                     <div>
                       <p className="text-[9px] text-muted-foreground">Canada Regulator</p>
-                      <p className="text-sm font-bold text-cyan-300">FINTRAC Registered</p>
+                      <p className="text-sm font-bold text-blue-300">FINTRAC Registered</p>
                     </div>
                   </div>
                 </div>
@@ -716,6 +725,136 @@ export default async function HomePage() {
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRADE CRYPTO SECTION */}
+      <section className="py-20 relative border-t border-white/5 overflow-hidden" style={{ background: 'linear-gradient(135deg, #080D1B 0%, #0a1120 100%)' }}>
+        <div className="pointer-events-none absolute top-0 left-0 h-[600px] w-[600px] rounded-full bg-blue-600/[0.07] blur-[160px] -translate-x-1/3 -translate-y-1/3" />
+        <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-blue-500/[0.06] blur-[140px] translate-x-1/4 translate-y-1/4" />
+        <div className="container relative mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+
+            {/* Left: Trading terminal visual */}
+            <div className="relative order-2 lg:order-1">
+              <div className="absolute -inset-4 bg-blue-500/8 blur-3xl rounded-3xl pointer-events-none" />
+              <div className="relative rounded-2xl border border-blue-500/20 bg-[#0a0f1e] overflow-hidden shadow-2xl shadow-blue-500/10">
+                {/* Terminal header */}
+                <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                      <CandlestickChart className="h-4 w-4 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">BTC / USDT</p>
+                      <p className="text-[10px] text-muted-foreground">Bitcoin · Live Market</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-lg font-black text-white">$67,842</p>
+                    <p className="text-xs font-semibold text-green-400">+2.34% ↑</p>
+                  </div>
+                </div>
+
+                {/* SVG candlestick chart */}
+                <div className="px-5 pt-4 pb-2">
+                  <svg viewBox="0 0 420 140" className="w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Area fill */}
+                    <defs>
+                      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,110 C40,105 60,90 90,80 C120,70 140,75 170,55 C200,35 220,45 250,30 C280,15 300,25 330,18 C360,11 390,20 420,15 L420,140 L0,140 Z" fill="url(#chartGrad)" />
+                    <path d="M0,110 C40,105 60,90 90,80 C120,70 140,75 170,55 C200,35 220,45 250,30 C280,15 300,25 330,18 C360,11 390,20 420,15" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Candlestick bars */}
+                    {[
+                      { x: 30, open: 108, close: 96, high: 92, low: 114 },
+                      { x: 65, open: 94, close: 85, high: 80, low: 98 },
+                      { x: 100, open: 86, close: 78, high: 73, low: 90 },
+                      { x: 135, open: 78, close: 68, high: 62, low: 82 },
+                      { x: 170, open: 72, close: 58, high: 52, low: 76 },
+                      { x: 205, open: 60, close: 48, high: 42, low: 64 },
+                      { x: 240, open: 50, close: 34, high: 28, low: 54 },
+                      { x: 275, open: 36, close: 24, high: 18, low: 40 },
+                      { x: 310, open: 26, close: 20, high: 14, low: 30 },
+                      { x: 345, open: 22, close: 16, high: 10, low: 26 },
+                      { x: 390, open: 18, close: 12, high: 6, low: 22 },
+                    ].map((c, i) => {
+                      const bullish = c.close < c.open
+                      const color = bullish ? '#22c55e' : '#ef4444'
+                      return (
+                        <g key={i}>
+                          <line x1={c.x} y1={c.high} x2={c.x} y2={c.low} stroke={color} strokeWidth="1" />
+                          <rect x={c.x - 5} y={Math.min(c.open, c.close)} width="10" height={Math.abs(c.open - c.close) || 2} fill={color} rx="1" />
+                        </g>
+                      )
+                    })}
+                  </svg>
+                </div>
+
+                {/* Order panel */}
+                <div className="grid grid-cols-3 gap-px bg-white/[0.04] border-t border-white/[0.06]">
+                  {[
+                    { label: '24h High', value: '$68,421', color: 'text-green-400' },
+                    { label: '24h Low', value: '$65,210', color: 'text-red-400' },
+                    { label: '24h Volume', value: '$2.4B', color: 'text-blue-400' },
+                  ].map((s) => (
+                    <div key={s.label} className="px-4 py-3 bg-[#0a0f1e]">
+                      <p className="text-[10px] text-muted-foreground mb-0.5">{s.label}</p>
+                      <p className={`text-sm font-bold ${s.color}`}>{s.value}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Buy/Sell buttons */}
+                <div className="flex gap-2 p-4 border-t border-white/[0.06]">
+                  <button className="flex-1 py-2.5 rounded-xl bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-bold hover:bg-green-500/30 transition-colors">Buy</button>
+                  <button className="flex-1 py-2.5 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 text-sm font-bold hover:bg-red-500/30 transition-colors">Sell</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Copy */}
+            <div className="order-1 lg:order-2 space-y-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Crypto Trading</p>
+                <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
+                  Trade Live Markets.<br />
+                  <span className="gradient-text">Real-Time Charts.</span>
+                </h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Beyond staking, StakeOnix gives you access to a full-featured crypto trading terminal.
+                  Buy and sell Bitcoin, Ethereum, and 170+ assets with live candlestick charts,
+                  real-time order books, and instant execution — all within the same regulated account.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: <CandlestickChart className="h-5 w-5" />, title: 'Live Charts', desc: 'Real-time candlestick charts powered by live market data', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+                  { icon: <Zap className="h-5 w-5" />, title: 'Instant Execution', desc: 'Market and limit orders executed at speed', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
+                  { icon: <Globe className="h-5 w-5" />, title: '170+ Pairs', desc: 'Trade across the full range of supported crypto assets', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+                  { icon: <ShieldCheck className="h-5 w-5" />, title: 'Regulated', desc: 'FCA-authorised platform — trade with confidence', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+                ].map((f) => (
+                  <div key={f.title} className={`rounded-xl border ${f.bg} p-4`}>
+                    <div className={`${f.color} mb-2`}>{f.icon}</div>
+                    <p className="text-sm font-bold text-white mb-1">{f.title}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link href={session ? '/trade' : '/signup'}>
+                <Button className="gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white border-0 rounded-xl font-semibold px-8 shadow-lg shadow-blue-500/20">
+                  <CandlestickChart className="h-4 w-4" />
+                  {session ? 'Open Trading Terminal' : 'Start Trading Free'}
+                </Button>
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, Suspense } from 'react'
 import Link from 'next/link'
@@ -10,7 +10,10 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { TrendingUp, Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users, BarChart3, ChevronLeft, Phone } from 'lucide-react'
+import {
+  Eye, EyeOff, Lock, Mail, User, Gift, Shield, Users,
+  BarChart3, ChevronLeft, Phone, CheckCircle2, ArrowRight,
+} from 'lucide-react'
 import { toast } from 'sonner'
 
 const COUNTRY_CODES = [
@@ -55,7 +58,7 @@ const COUNTRY_CODES = [
 
 const highlights = [
   {
-    icon: <BarChart3 className="h-5 w-5 text-primary" />,
+    icon: <BarChart3 className="h-5 w-5 text-blue-400" />,
     title: '100% Transparent Returns',
     desc: 'Fixed daily ROI with no hidden fees or surprise deductions.',
   },
@@ -65,10 +68,17 @@ const highlights = [
     desc: 'Earn commissions when friends you invite start staking.',
   },
   {
-    icon: <Shield className="h-5 w-5 text-blue-400" />,
+    icon: <Shield className="h-5 w-5 text-green-400" />,
     title: 'FINTRAC Registered',
     desc: 'Compliant with Canadian anti-money laundering regulations.',
   },
+]
+
+const socialProof = [
+  { value: '480K+', label: 'Active stakers' },
+  { value: 'FINTRAC', label: 'Registered' },
+  { value: '4.8/5', label: 'User rating' },
+  { value: '170+', label: 'Assets' },
 ]
 
 const schema = z
@@ -88,6 +98,33 @@ const schema = z
 
 type FormData = z.infer<typeof schema>
 
+// ── Reusable logo ────────────────────────────────────────────────────────────
+function LogoLink({ id = 'logo' }: { id?: string }) {
+  return (
+    <Link href="/" className="inline-flex items-center gap-2.5">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ height: 36, width: 36 }}>
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#2563EB" />
+            <stop offset="100%" stopColor="#7C3AED" />
+          </linearGradient>
+        </defs>
+        <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" fill={`url(#${id})`} />
+        <rect x="12" y="10" width="13" height="5" rx="1.5" fill="white" />
+        <rect x="12" y="10" width="5" height="10" rx="1.5" fill="white" />
+        <rect x="12" y="17.5" width="16" height="5" rx="1.5" fill="white" />
+        <rect x="23" y="20" width="5" height="10" rx="1.5" fill="white" />
+        <rect x="15" y="25" width="13" height="5" rx="1.5" fill="white" />
+      </svg>
+      <span className="font-extrabold tracking-tight text-xl leading-none">
+        <span className="text-white/60">Stake</span>
+        <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">onix</span>
+      </span>
+    </Link>
+  )
+}
+
+// ── Signup form ──────────────────────────────────────────────────────────────
 function SignupForm() {
   const searchParams = useSearchParams()
   const refCode = searchParams.get('ref') || ''
@@ -125,14 +162,12 @@ function SignupForm() {
         return
       }
 
-      // Auto sign in
       await signIn('credentials', {
         email: data.email,
         password: data.password,
         redirect: false,
       })
 
-      // Show success screen with email check prompt
       setSuccessEmail(data.email)
     } catch {
       toast.error('Something went wrong. Please try again.')
@@ -161,56 +196,48 @@ function SignupForm() {
     setResending(false)
   }
 
-  // ── Success screen ──────────────────────────────────────────────────
+  // ── Success screen ──────────────────────────────────────────────────────
   if (successEmail) {
     return (
       <div className="w-full space-y-6 text-center">
-        {/* Icon */}
         <div className="flex justify-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 border border-primary/20">
-            <Mail className="h-9 w-9 text-primary" />
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-500/15 border-2 border-green-500/30 ring-4 ring-green-500/10">
+            <CheckCircle2 className="h-10 w-10 text-green-400" />
           </div>
         </div>
 
-        {/* Heading */}
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold">Check your inbox</h1>
-          <p className="text-sm text-muted-foreground">
-            We&apos;ve sent a welcome email to
-          </p>
-          <p className="text-sm font-semibold text-foreground break-all">{successEmail}</p>
+          <h1 className="text-2xl font-black text-white">Account Created!</h1>
+          <p className="text-sm text-white/50">We&apos;ve sent a welcome email to</p>
+          <p className="text-sm font-semibold text-white break-all">{successEmail}</p>
         </div>
 
-        {/* Info box */}
-        <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-left space-y-2">
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Your account is <span className="text-green-400 font-semibold">active</span> - you can start using StakeOnix right away.
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/8 p-4 text-left">
+          <p className="text-xs text-white/50 leading-relaxed">
+            Your account is <span className="text-green-400 font-semibold">active</span> — you can start using Stakeonix right away.
             The email contains your verification link and a summary of your account.
           </p>
         </div>
 
-        {/* Go to dashboard */}
-        <Button
-          variant="gradient"
-          className="w-full h-11"
+        <button
+          className="w-full h-12 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white transition-all hover:scale-[1.01] shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
           onClick={() => { window.location.href = '/dashboard' }}
         >
-          Go to Dashboard
-        </Button>
+          <ArrowRight className="h-4 w-4" /> Go to Dashboard
+        </button>
 
-        {/* Resend */}
-        <div className="border-t border-border pt-4">
-          <p className="text-xs text-muted-foreground mb-3">Didn&apos;t receive the email? Check your spam folder or</p>
+        <div className="border-t border-white/[0.06] pt-4">
+          <p className="text-xs text-white/30 mb-2">Didn&apos;t receive the email? Check your spam folder or</p>
           {resent ? (
-            <p className="text-xs font-semibold text-green-400">✓ Email resent successfully!</p>
+            <p className="text-xs font-semibold text-green-400">Email resent successfully!</p>
           ) : (
             <button
               type="button"
               onClick={handleResend}
               disabled={resending}
-              className="text-xs font-semibold text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+              className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors disabled:opacity-50"
             >
-              {resending ? 'Sending…' : 'Resend verification email'}
+              {resending ? 'Sending...' : 'Resend verification email'}
             </button>
           )}
         </div>
@@ -218,283 +245,259 @@ function SignupForm() {
     )
   }
 
+  const inputClass = "h-12 rounded-xl bg-white/[0.06] border-white/10 text-white placeholder:text-white/25 focus:border-blue-500/50 focus:ring-blue-500/20"
+  const labelClass = "text-xs font-semibold text-white/60 uppercase tracking-widest"
+
   return (
     <div className="w-full space-y-5">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold">Create Account</h1>
-        <p className="text-sm text-muted-foreground">Join thousands of investors today</p>
+        <h1 className="text-2xl font-black text-white">Create Account</h1>
+        <p className="text-sm text-white/50">Join thousands of investors today</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
+        {/* Name row */}
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label>First Name</Label>
+            <Label className={labelClass}>First Name</Label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-              <Input placeholder="John" className="pl-9 h-11 bg-secondary/40" {...register('firstName')} />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+              <Input placeholder="John" className={`pl-10 ${inputClass}`} {...register('firstName')} />
             </div>
-            {errors.firstName && (
-              <p className="text-xs text-destructive">{errors.firstName.message}</p>
-            )}
+            {errors.firstName && <p className="text-xs text-red-400">{errors.firstName.message}</p>}
           </div>
           <div className="space-y-1.5">
-            <Label>Last Name</Label>
-            <Input placeholder="Doe" className="h-11 bg-secondary/40" {...register('lastName')} />
-            {errors.lastName && (
-              <p className="text-xs text-destructive">{errors.lastName.message}</p>
-            )}
+            <Label className={labelClass}>Last Name</Label>
+            <Input placeholder="Doe" className={inputClass} {...register('lastName')} />
+            {errors.lastName && <p className="text-xs text-red-400">{errors.lastName.message}</p>}
           </div>
         </div>
 
+        {/* Email */}
         <div className="space-y-1.5">
-          <Label>Email Address</Label>
+          <Label className={labelClass}>Email Address</Label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-            <Input
-              type="email"
-              placeholder="your@email.com"
-              className="pl-9 h-11 bg-secondary/40"
-              {...register('email')}
-            />
+            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+            <Input type="email" placeholder="your@email.com" className={`pl-10 ${inputClass}`} {...register('email')} />
           </div>
-          {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
+          {errors.email && <p className="text-xs text-red-400">{errors.email.message}</p>}
         </div>
 
-        {/* Phone Number */}
+        {/* Phone */}
         <div className="space-y-1.5">
-          <Label>Phone Number</Label>
+          <Label className={labelClass}>Phone Number</Label>
           <div className="flex gap-2">
             <div className="relative">
               <select
                 value={countryCode}
                 onChange={(e) => setCountryCode(e.target.value)}
-                className="h-11 rounded-md border border-input bg-secondary/40 pl-3 pr-7 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
+                className="h-12 rounded-xl border border-white/10 bg-white/[0.06] pl-3 pr-7 text-sm text-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer"
                 style={{ minWidth: '7.5rem' }}
               >
-                {COUNTRY_CODES.map((c) => (
-                  <option key={c.code} value={c.code}>
+                {COUNTRY_CODES.map((c, i) => (
+                  <option key={`${c.code}-${i}`} value={c.code} className="bg-[#0d1422] text-white">
                     {c.flag} {c.name} ({c.code})
                   </option>
                 ))}
               </select>
-              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">▼</span>
+              <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-white/30 text-xs">▼</span>
             </div>
             <div className="relative flex-1">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-              <Input
-                type="tel"
-                placeholder="Phone number"
-                className="pl-9 h-11 bg-secondary/40"
-                {...register('phoneNumber')}
-              />
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+              <Input type="tel" placeholder="Phone number" className={`pl-10 ${inputClass}`} {...register('phoneNumber')} />
             </div>
           </div>
-          {errors.phoneNumber && <p className="text-xs text-destructive">{errors.phoneNumber.message}</p>}
+          {errors.phoneNumber && <p className="text-xs text-red-400">{errors.phoneNumber.message}</p>}
         </div>
 
+        {/* Password */}
         <div className="space-y-1.5">
-          <Label>Password</Label>
+          <Label className={labelClass}>Password</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
             <Input
               type={showPassword ? 'text' : 'password'}
               placeholder="Min. 8 characters"
-              className="pl-9 pr-10 h-11 bg-secondary/40"
+              className={`pl-10 pr-11 ${inputClass}`}
               {...register('password')}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
-          {errors.password && (
-            <p className="text-xs text-destructive">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-xs text-red-400">{errors.password.message}</p>}
         </div>
 
+        {/* Confirm password */}
         <div className="space-y-1.5">
-          <Label>Confirm Password</Label>
+          <Label className={labelClass}>Confirm Password</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-            <Input
-              type="password"
-              placeholder="Repeat password"
-              className="pl-9 h-11 bg-secondary/40"
-              {...register('confirmPassword')}
-            />
+            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
+            <Input type="password" placeholder="Repeat password" className={`pl-10 ${inputClass}`} {...register('confirmPassword')} />
           </div>
-          {errors.confirmPassword && (
-            <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>
-          )}
+          {errors.confirmPassword && <p className="text-xs text-red-400">{errors.confirmPassword.message}</p>}
         </div>
 
+        {/* Referral code */}
         <div className="space-y-1.5">
-          <Label className="flex items-center justify-between">
-            <span>Referral Code <span className="text-muted-foreground">(optional)</span></span>
+          <Label className={labelClass}>
+            Referral Code{' '}
+            <span className="text-white/30 normal-case tracking-normal font-normal">(optional)</span>
             {refCode && (
-              <span className="text-xs text-green-400 font-medium flex items-center gap-1">
-                ✓ Code applied
-              </span>
+              <span className="ml-2 text-green-400 font-medium text-[10px] normal-case tracking-normal"> Code applied</span>
             )}
           </Label>
           <div className="relative">
-            <Gift className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Gift className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 pointer-events-none" />
             <Input
               placeholder="Enter referral code"
-              className={`pl-9 h-11 ${refCode ? 'border-green-500/50 bg-green-500/5' : 'bg-secondary/40'}`}
+              className={`pl-10 ${inputClass} ${refCode ? 'border-green-500/30 bg-green-500/[0.06]' : ''}`}
               {...register('referralCode')}
             />
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground">
+        {/* Terms */}
+        <p className="text-xs text-white/30 leading-relaxed">
           By creating an account, you agree to our{' '}
-          <Link href="/terms" className="text-primary hover:underline">
-            Terms of Service
-          </Link>{' '}
-          and{' '}
-          <Link href="/policy" className="text-primary hover:underline">
-            Privacy Policy
-          </Link>
-          .
+          <Link href="/terms" className="text-blue-400 hover:text-blue-300 transition-colors">Terms of Service</Link>
+          {' '}and{' '}
+          <Link href="/policy" className="text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</Link>.
         </p>
 
-        <Button type="submit" variant="gradient" className="w-full h-11 font-semibold text-base" disabled={loading}>
-          {loading ? 'Creating Account…' : 'Create Account'}
-        </Button>
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full h-12 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white transition-all hover:scale-[1.01] shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100 flex items-center justify-center gap-2"
+        >
+          {loading
+            ? <><span className="inline-block h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />Creating Account...</>
+            : <><ArrowRight className="h-4 w-4" />Create Account</>
+          }
+        </button>
       </form>
 
-      <p className="text-center text-sm text-muted-foreground mt-4">
+      <p className="text-center text-sm text-white/40">
         Already have an account?{' '}
-        <Link href="/login" className="text-primary hover:underline font-semibold">
-          Sign in
+        <Link href="/login" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+          Sign In
         </Link>
       </p>
     </div>
   )
 }
 
+// ── Page ─────────────────────────────────────────────────────────────────────
 export default function SignupPage() {
   return (
-    <div className="min-h-screen flex">
-      {/* Left panel - branding */}
-      <div className="hidden lg:flex lg:w-[55%] relative overflow-hidden bg-secondary/30 flex-col justify-between p-12">
-        <div className="absolute inset-0 animated-bg opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-transparent" />
-        <div className="absolute top-1/4 right-1/4 h-72 w-72 rounded-full bg-primary/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 left-1/3 h-48 w-48 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+    <div className="min-h-screen flex" style={{ background: '#080d1b' }}>
 
+      {/* ── Left branding panel ── */}
+      <div
+        className="hidden lg:flex lg:w-[45%] relative overflow-hidden flex-col justify-between p-12"
+        style={{ background: 'linear-gradient(135deg, #050a14 0%, #080d1b 60%, #0a0f20 100%)' }}
+      >
+        <div className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-blue-600/[0.12] blur-[120px] translate-x-1/3 -translate-y-1/4" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-violet-600/[0.10] blur-[100px] -translate-x-1/4 translate-y-1/4" />
+        <div className="pointer-events-none absolute inset-0 dot-grid opacity-40" />
+
+        {/* Logo */}
         <div className="relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2.5 font-bold text-xl">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 drop-shadow-[0_2px_8px_rgba(79,70,229,0.5)]">
-              <defs><linearGradient id="slg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#2563EB"/><stop offset="100%" stopColor="#7C3AED"/></linearGradient></defs>
-              <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" fill="url(#slg3)"/>
-              <rect x="12" y="10" width="13" height="5" rx="1.5" fill="white"/>
-              <rect x="12" y="10" width="5" height="10" rx="1.5" fill="white"/>
-              <rect x="12" y="17.5" width="16" height="5" rx="1.5" fill="white"/>
-              <rect x="23" y="20" width="5" height="10" rx="1.5" fill="white"/>
-              <rect x="15" y="25" width="13" height="5" rx="1.5" fill="white"/>
-            </svg>
-            <span className="text-muted-foreground font-bold">Stake</span><span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent font-extrabold">onix</span>
-          </Link>
+          <LogoLink id="slp1" />
         </div>
 
-        <div className="relative z-10 space-y-10">
+        {/* Copy */}
+        <div className="relative z-10 space-y-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs font-semibold text-yellow-300 mb-5">
+              <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
               Start earning in minutes
-            </p>
-            <h2 className="text-4xl font-bold leading-tight mb-4">
-              Your First Daily <br />
-              <span className="gradient-text">Reward Awaits</span>
+            </div>
+            <h2 className="text-4xl font-black leading-tight mb-4 text-white">
+              Your First Daily<br />
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                Reward Awaits
+              </span>
             </h2>
-            <p className="text-muted-foreground max-w-sm">
-              Create a free account, deposit crypto, choose a plan - and earn passive income on autopilot.
+            <p className="text-white/50 max-w-sm text-sm leading-relaxed">
+              Create a free account, deposit crypto, choose a plan — and earn passive income on autopilot.
             </p>
           </div>
 
-          {/* Social proof stats */}
+          {/* Social proof */}
           <div className="grid grid-cols-2 gap-3">
-            {[
-              { value: '480K+', label: 'Active stakers' },
-              { value: 'FINTRAC', label: 'Registered' },
-              { value: '4.8/5', label: 'User rating' },
-              { value: '170+', label: 'Assets' },
-            ].map((s) => (
-              <div key={s.label} className="rounded-xl bg-white/[0.04] border border-white/[0.08] px-4 py-3">
-                <p className="text-xl font-black gradient-text">{s.value}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{s.label}</p>
+            {socialProof.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-2xl border border-white/[0.07] bg-white/[0.04] backdrop-blur-sm px-4 py-3"
+              >
+                <p className="text-xl font-black bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">{s.value}</p>
+                <p className="text-xs text-white/40 mt-0.5">{s.label}</p>
               </div>
             ))}
           </div>
 
+          {/* Features */}
           <div className="space-y-4">
             {highlights.map((h) => (
               <div key={h.title} className="flex items-start gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-secondary/60 border border-border">
+                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-white/[0.06] border border-white/[0.08]">
                   {h.icon}
                 </div>
                 <div>
-                  <p className="font-semibold text-sm">{h.title}</p>
-                  <p className="text-xs text-muted-foreground">{h.desc}</p>
+                  <p className="font-semibold text-sm text-white/90">{h.title}</p>
+                  <p className="text-xs text-white/40 mt-0.5">{h.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Footer badge */}
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs text-yellow-300">
-            <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
-            Start earning daily &nbsp;&middot;&nbsp; No credit card required
+          <div className="inline-flex items-center gap-2 rounded-full border border-green-500/25 bg-green-500/8 px-3 py-1.5 text-xs text-green-300">
+            <div className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+            No credit card required &nbsp;&middot;&nbsp; Free to start
           </div>
         </div>
       </div>
 
-      {/* Right panel - form */}
-      <div className="flex flex-1 flex-col lg:w-[45%] bg-background">
-        {/* Mobile logo */}
-        <div className="flex items-center justify-between p-6 lg:hidden border-b border-border">
-          <Link href="/" className="inline-flex items-center gap-2 font-bold">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 drop-shadow-[0_2px_8px_rgba(79,70,229,0.5)]">
-              <defs><linearGradient id="slg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#2563EB"/><stop offset="100%" stopColor="#7C3AED"/></linearGradient></defs>
-              <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" fill="url(#slg4)"/>
-              <rect x="12" y="10" width="13" height="5" rx="1.5" fill="white"/>
-              <rect x="12" y="10" width="5" height="10" rx="1.5" fill="white"/>
-              <rect x="12" y="17.5" width="16" height="5" rx="1.5" fill="white"/>
-              <rect x="23" y="20" width="5" height="10" rx="1.5" fill="white"/>
-              <rect x="15" y="25" width="13" height="5" rx="1.5" fill="white"/>
-            </svg>
-            <span className="text-muted-foreground font-bold">Stake</span><span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent font-extrabold">onix</span>
-          </Link>
+      {/* ── Right: form ── */}
+      <div className="flex flex-1 flex-col lg:w-[55%]">
+        {/* Mobile top bar */}
+        <div className="flex items-center justify-between p-5 lg:hidden border-b border-white/[0.06]">
+          <LogoLink id="smob" />
           <Link
             href="/login"
-            className="flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+            className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 font-medium transition-colors"
           >
             <ChevronLeft className="h-3.5 w-3.5" /> Sign in
           </Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-6 py-8 lg:px-12">
-          <div className="w-full max-w-sm">
-            <Suspense
-              fallback={<div className="h-96 w-full animate-pulse rounded-xl bg-secondary/40" />}
-            >
-              <SignupForm />
-            </Suspense>
-          </div>
-        </div>
+        {/* Scrollable form area */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center px-6 py-10 lg:px-12">
+            <div className="w-full max-w-sm">
+              {/* Glass card */}
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm p-8 shadow-2xl shadow-black/40">
+                <Suspense fallback={<div className="h-96 w-full animate-pulse rounded-xl bg-white/5" />}>
+                  <SignupForm />
+                </Suspense>
+              </div>
 
-        <div className="p-6 text-center border-t border-border">
-          <p className="text-xs text-muted-foreground">
-            Protected by 256-bit SSL encryption &nbsp;&middot;&nbsp;{' '}
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms of Service
-            </Link>
-          </p>
+              <p className="text-center text-xs text-white/25 mt-6">
+                Protected by 256-bit SSL &nbsp;&middot;&nbsp;{' '}
+                <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

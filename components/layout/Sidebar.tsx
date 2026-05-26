@@ -128,60 +128,62 @@ export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
       </div>
 
       {/* Navigation (scrollable) */}
-      <nav className="flex-1 min-h-0 overflow-y-auto p-3 space-y-1">
-        {!collapsed && (
-          <p className="px-3 py-2 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">
-            Main
-          </p>
-        )}
-        {userLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={onClose}
-            className={cn(
-              'nav-link',
-              isActive(link.href) && 'active',
-              collapsed && 'justify-center px-0'
-            )}
-            title={collapsed ? link.label : undefined}
-          >
-            {link.icon}
-            {!collapsed && (
-              <>
-                <span className="flex-1">{link.label}</span>
-                {link.badge && (
-                  <Badge variant="success" className="text-xs px-1.5 py-0">
-                    {link.badge}
-                  </Badge>
-                )}
-              </>
-            )}
-          </Link>
-        ))}
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <nav className="p-3 space-y-1">
+          {!collapsed && (
+            <p className="px-3 py-2 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">
+              Main
+            </p>
+          )}
+          {userLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onClose}
+              className={cn(
+                'nav-link',
+                isActive(link.href) && 'active',
+                collapsed && 'justify-center px-0'
+              )}
+              title={collapsed ? link.label : undefined}
+            >
+              {link.icon}
+              {!collapsed && (
+                <>
+                  <span className="flex-1">{link.label}</span>
+                  {link.badge && (
+                    <Badge variant="success" className="text-xs px-1.5 py-0">
+                      {link.badge}
+                    </Badge>
+                  )}
+                </>
+              )}
+            </Link>
+          ))}
 
-        {!collapsed && (
-          <p className="px-3 py-2 mt-4 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">
-            Settings
-          </p>
-        )}
-        {settingsLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={onClose}
-            className={cn(
-              'nav-link',
-              isActive(link.href) && 'active',
-              collapsed && 'justify-center px-0'
-            )}
-            title={collapsed ? link.label : undefined}
-          >
-            {link.icon}
-            {!collapsed && <span className="flex-1">{link.label}</span>}
-          </Link>
-        ))}
-      </nav>
+          {!collapsed && (
+            <p className="px-3 py-2 mt-4 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">
+              Settings
+            </p>
+          )}
+          {settingsLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onClose}
+              className={cn(
+                'nav-link',
+                isActive(link.href) && 'active',
+                collapsed && 'justify-center px-0'
+              )}
+              title={collapsed ? link.label : undefined}
+            >
+              {link.icon}
+              {!collapsed && <span className="flex-1">{link.label}</span>}
+            </Link>
+          ))}
+        </nav>
+      </div>
 
       {/* User Profile (fixed to bottom on mobile) */}
       <div

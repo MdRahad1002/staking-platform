@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { signOut } from 'next-auth/react'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import {
@@ -18,7 +17,6 @@ import {
   Receipt,
   Settings,
   LogOut,
-  ChevronRight,
   TrendingDown,
   KeyRound,
   Wallet,
@@ -62,16 +60,6 @@ interface SidebarProps {
 
 export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
   const pathname = usePathname()
-  const { data: session } = useSession()
-
-  const initials = session?.user?.name
-    ? session.user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-    : 'U'
 
   const isActive = (href: string) => {
     if (href === '/settings') return pathname === '/settings'
@@ -182,42 +170,21 @@ export function Sidebar({ collapsed = false, onClose }: SidebarProps) {
               {!collapsed && <span className="flex-1">{link.label}</span>}
             </Link>
           ))}
-        </nav>
-      </div>
 
-      {/* User Profile (pinned to bottom via flex-col) */}
-      <div
-        className="p-3 border-t border-border flex flex-col gap-2 flex-shrink-0 bg-background"
-        style={{ boxShadow: '0 -2px 16px 0 rgba(0,0,0,0.08)' }}
-      >
-        <div
-          className={cn(
-            'flex items-center gap-3 rounded-lg p-2 hover:bg-secondary cursor-pointer transition-colors',
-            collapsed && 'justify-center'
-          )}
-        >
-          <Avatar className="h-8 w-8 flex-shrink-0">
-            <AvatarImage src={session?.user?.avatar || ''} />
-            <AvatarFallback className="text-xs">{initials}</AvatarFallback>
-          </Avatar>
-          {!collapsed && (
-            <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-medium truncate">{session?.user?.name || 'User'}</p>
-              <p className="text-xs text-muted-foreground truncate">{session?.user?.email}</p>
-            </div>
-          )}
-        </div>
-        <button
-          onClick={() => signOut({ callbackUrl: '/' })}
-          className={cn(
-            'flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium justify-center',
-            'text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-white/10 transition-colors',
-            collapsed && 'justify-center px-2'
-          )}
-        >
-          <LogOut className="h-4 w-4" />
-          {!collapsed && <span>Sign Out</span>}
-        </button>
+          {/* Sign Out */}
+          <div className={cn('pt-2', !collapsed && 'border-t border-border mt-2')} />
+          <button
+            onClick={() => { signOut({ callbackUrl: '/' }); onClose?.() }}
+            className={cn(
+              'nav-link w-full text-red-400 hover:text-red-300 hover:bg-red-500/10',
+              collapsed && 'justify-center px-0'
+            )}
+            title={collapsed ? 'Sign Out' : undefined}
+          >
+            <LogOut className="h-4 w-4" />
+            {!collapsed && <span className="flex-1">Sign Out</span>}
+          </button>
+        </nav>
       </div>
     </aside>
   )

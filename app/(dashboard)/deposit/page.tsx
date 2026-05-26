@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import QRCode from 'qrcode'
 
 interface DepositCurrency {
   id: string; symbol: string; name: string; network: string
@@ -540,6 +541,16 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
   const { display: countdown, expired } = useCountdown(payment.expiresAt)
   const isDone = ['CONFIRMED', 'confirmed', 'finished', 'sending'].includes(pollStatus)
   const isFailed = ['FAILED', 'failed', 'expired'].includes(pollStatus) || expired
+  const [qrDataUrl, setQrDataUrl] = useState<string>('')
+
+  useEffect(() => {
+    if (!payment.address) return
+    QRCode.toDataURL(payment.address, {
+      width: 220,
+      margin: 2,
+      color: { dark: '#0a0a0a', light: '#ffffff' },
+    }).then(setQrDataUrl).catch(() => {})
+  }, [payment.address])
 
   if (isDone) {
     return (
@@ -617,11 +628,26 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
               </div>
             </div>
 
-            {/* Address */}
-            <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/20 to-background p-5 space-y-3">
+            {/* Address + QR Code */}
+            <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/20 to-background p-5 space-y-4">
               <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                 Send to this {payment.payCurrency.toUpperCase()} Address
               </p>
+
+              {/* QR Code */}
+              {qrDataUrl && (
+                <div className="flex flex-col items-center gap-2">
+                  <div className="rounded-2xl bg-white p-3 shadow-lg shadow-black/30 ring-1 ring-white/10">
+                    <img
+                      src={qrDataUrl}
+                      alt={`QR code for ${payment.payCurrency.toUpperCase()} address`}
+                      className="h-44 w-44 block"
+                    />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground">Scan with your wallet app</p>
+                </div>
+              )}
+
               <div className="rounded-xl bg-black/30 border border-white/5 px-4 py-3">
                 <p className="font-mono text-sm break-all leading-relaxed text-foreground/90 select-all">
                   {payment.address}

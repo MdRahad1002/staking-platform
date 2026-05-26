@@ -376,7 +376,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
         const p = parseFloat(data.price)
         if (!isNaN(p) && p > 0) clientPrice = p
       } catch {
-        // continue — server will try its own fetch
+        // continue server will try its own fetch
       }
     }
 
@@ -529,7 +529,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
               </Button>
             </div>
 
-            {/* Row 2: H / L / Vol / Δ — horizontally scrollable */}
+            {/* Row 2: H / L / Vol / Δ horizontally scrollable */}
             {ticker && (
               <div className="flex gap-3 text-[11px] text-zinc-500 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <span className="whitespace-nowrap flex-shrink-0">
@@ -948,7 +948,7 @@ export default function TradingTerminal({ userBalance: initialBalance }: Trading
                             </div>
                           </div>
 
-                          {/* PnL — prominent */}
+                          {/* PnL prominent */}
                           <div className={cn(
                             'self-start inline-flex items-baseline gap-1.5 rounded-xl px-3 py-2 font-bold font-mono',
                             pnl >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'

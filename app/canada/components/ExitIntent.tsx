@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { X } from 'lucide-react'
 import { CTA_HREF } from '../data'
 
-// Based on $10,000 — the median Canadian household liquid savings estimate.
+// Based on $10,000 the median Canadian household liquid savings estimate.
 // GIC best rate vs StakeOnix SOL staking
 const DEFAULT_AMOUNT = 10_000
 const GIC_APY = 3.9      // best 1-yr GIC on market (Apr 2025 avg)
@@ -69,7 +69,7 @@ export function ExitIntent() {
         {/* Red urgency strip */}
         <div className="bg-red-600 px-6 py-2.5 flex items-center justify-between">
           <p className="text-white text-xs font-bold uppercase tracking-widest">
-            ⚠ Wait — before you go
+            ⚠ Wait before you go
           </p>
           <button
             onClick={close}
@@ -91,10 +91,10 @@ export function ExitIntent() {
             <span className="text-red-400 tabular-nums">
               ${DAILY_LOSS.toFixed(2)}
             </span>{' '}
-            on the table — <span className="text-red-400">today.</span>
+            on the table <span className="text-red-400">today.</span>
           </h2>
 
-          {/* Math breakdown — make it real */}
+          {/* Math breakdown make it real */}
           <div className="rounded-xl bg-white/5 border border-white/10 px-5 py-4 mb-6">
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
@@ -125,7 +125,7 @@ export function ExitIntent() {
               onClick={close}
               className="flex items-center justify-center w-full rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-base py-4 transition-all shadow-lg shadow-emerald-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
             >
-              ⚡ Start Earning Now — Free
+              ⚡ Start Earning Now Free
             </Link>
 
             {/* Guilt-inducing dismiss */}
@@ -133,7 +133,7 @@ export function ExitIntent() {
               onClick={close}
               className="w-full text-white/25 hover:text-white/40 text-xs py-2 transition-colors"
             >
-              No thanks — I&apos;m happy losing ${ANNUAL_LOSS.toFixed(0)}/year
+              No thanks I&apos;m happy losing ${ANNUAL_LOSS.toFixed(0)}/year
             </button>
           </div>
         </div>

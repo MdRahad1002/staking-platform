@@ -29,7 +29,7 @@ export function Security() {
         <div className="rounded-2xl overflow-hidden mb-14 max-w-4xl mx-auto">
           <img
             src="/section-6.png"
-            alt="Stakeonix Canadian support agent at laptop — Bank-level security, KYC/AML compliant, Canadian support"
+            alt="Stakeonix Canadian support agent at laptop Bank-level security, KYC/AML compliant, Canadian support"
             className="w-full h-auto"
             loading="lazy"
           />

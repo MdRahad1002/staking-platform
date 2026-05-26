@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (refundAmount <= 0) {
-      return NextResponse.json({ message: 'No refund needed — balance is already correct.', report })
+      return NextResponse.json({ message: 'No refund needed balance is already correct.', report })
     }
 
     // Apply refund atomically

@@ -19,7 +19,7 @@ const steps = [
     number: '03',
     icon: BarChart3,
     headline: 'Compare staking options',
-    body: 'Review available assets, lock periods, estimated reward rates, and risk levels side by side — before committing to anything.',
+    body: 'Review available assets, lock periods, estimated reward rates, and risk levels side by side before committing to anything.',
   },
   {
     number: '04',
@@ -42,11 +42,11 @@ export function HowItWorks() {
             How StakeOnix Works
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            A clear four-step process — from creating your account to reviewing your options.
+            A clear four-step process from creating your account to reviewing your options.
           </p>
         </div>
 
-        {/* Visual — 4-step process diagram */}
+        {/* Visual 4-step process diagram */}
         <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-lg mb-12">
           <img
             src="/section-4.png"

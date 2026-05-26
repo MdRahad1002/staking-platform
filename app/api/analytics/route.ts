@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 
-// Lightweight ingestion endpoint — no auth required (public tracker)
+// Lightweight ingestion endpoint no auth required (public tracker)
 // Rate limiting is handled by the client (max 1 pageview + batched clicks)
 
 function getIp(req: NextRequest): string {

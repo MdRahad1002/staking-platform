@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 
-// Maintenance margin rate (0.5%) — positions are liquidated before margin is 100% gone
+// Maintenance margin rate (0.5%) positions are liquidated before margin is 100% gone
 const MM_RATE = 0.005
 
 function calcLiqPrice(side: string, entryPrice: number, leverage: number): number | null {
@@ -77,7 +77,7 @@ export async function GET() {
                 realizedPnl: -pos.margin,
               },
             }),
-            // User gets nothing — platform keeps the margin
+            // User gets nothing platform keeps the margin
             prisma.transaction.create({
               data: {
                 userId: pos.userId,
@@ -118,7 +118,7 @@ export async function GET() {
                 userId: pos.userId,
                 type: 'TRADE_CLOSE',
                 amount: returnAmount,
-                description: `Stop Loss hit — ${pos.side}${pos.leverage > 1 ? ` ${pos.leverage}x` : ''} ${pos.symbol} at $${closePrice.toFixed(2)} | PnL: ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`,
+                description: `Stop Loss hit ${pos.side}${pos.leverage > 1 ? ` ${pos.leverage}x` : ''} ${pos.symbol} at $${closePrice.toFixed(2)} | PnL: ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`,
                 referenceId: pos.id,
               },
             }),
@@ -153,7 +153,7 @@ export async function GET() {
                 userId: pos.userId,
                 type: 'TRADE_CLOSE',
                 amount: returnAmount,
-                description: `Take Profit hit — ${pos.side}${pos.leverage > 1 ? ` ${pos.leverage}x` : ''} ${pos.symbol} at $${closePrice.toFixed(2)} | PnL: +$${pnl.toFixed(2)}`,
+                description: `Take Profit hit ${pos.side}${pos.leverage > 1 ? ` ${pos.leverage}x` : ''} ${pos.symbol} at $${closePrice.toFixed(2)} | PnL: +$${pnl.toFixed(2)}`,
                 referenceId: pos.id,
               },
             }),

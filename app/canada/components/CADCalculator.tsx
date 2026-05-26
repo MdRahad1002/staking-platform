@@ -64,7 +64,7 @@ export function CADCalculator() {
             How Much Is Your GIC Costing You?{' '}<span className="text-red-500">Every Single Day.</span>
           </h2>
           <p className="text-gray-500 text-lg">
-            Enter your amount and see the gap between a GIC and staking — live, in dollars, per day.
+            Enter your amount and see the gap between a GIC and staking live, in dollars, per day.
           </p>
         </div>
 
@@ -186,7 +186,7 @@ export function CADCalculator() {
               href={CTA_HREF}
               className="flex items-center justify-center w-full rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-3.5 transition-all hover:shadow-lg hover:shadow-emerald-500/25"
             >
-              Stop Losing — Start Staking Free →
+              Stop Losing Start Staking Free →
             </Link>
           </div>
         </div>

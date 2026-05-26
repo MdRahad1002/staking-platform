@@ -239,7 +239,7 @@ export const securityItems: SecurityItem[] = [
 // ── Trust bar items ───────────────────────────────────────────────────────────
 export const trustBarItems = [
   { label: 'FINTRAC Registered · BN 820033090', href: 'https://www.fintrac-canafe.gc.ca/re-en', external: true },
-  { label: '⚡ BTC at $106,000 CAD — all-time high', href: '#yields' },
+  { label: '⚡ BTC at $106,000 CAD all-time high', href: '#yields' },
   { label: 'BoC Rate Decision · June 10', href: '#problem' },
   { label: '95% Funds in Cold Storage', href: '#security' },
   { label: 'Interac & Wire Deposits', href: '#how-it-works' },

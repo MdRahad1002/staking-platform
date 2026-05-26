@@ -68,11 +68,11 @@ export function PathSelector() {
           Choose the path that best matches your current crypto experience.
         </p>
 
-        {/* Visual — three persona cards with real photos */}
+        {/* Visual three persona cards with real photos */}
         <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg mb-12">
           <img
             src="/section-3.png"
-            alt="Three types of crypto users — Beginner, Crypto Holder, and Active User — each with a tailored staking path"
+            alt="Three types of crypto users Beginner, Crypto Holder, and Active User each with a tailored staking path"
             className="w-full h-auto"
             loading="lazy"
           />

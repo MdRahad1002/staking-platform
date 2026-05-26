@@ -41,7 +41,7 @@ export function StickyMobileCTA() {
         visible ? 'translate-y-0' : 'translate-y-full'
       )}
       role="complementary"
-      aria-label="Start staking — limited time"
+      aria-label="Start staking limited time"
     >
       {/* Urgency bar */}
       <div className="bg-red-600 px-4 py-1.5 flex items-center justify-center gap-2">
@@ -50,7 +50,7 @@ export function StickyMobileCTA() {
           <span className="relative inline-flex rounded-full h-2 w-2 bg-red-200" />
         </span>
         <p className="text-white text-xs font-bold tracking-wide text-center">
-          BoC rate cut in <span className="text-yellow-300">{daysLeft} days</span> — GIC yields dropping
+          BoC rate cut in <span className="text-yellow-300">{daysLeft} days</span> GIC yields dropping
         </p>
       </div>
 
@@ -62,7 +62,7 @@ export function StickyMobileCTA() {
           tabIndex={visible ? 0 : -1}
         >
           <Zap className="h-4 w-4 fill-current" aria-hidden="true" />
-          <span className="text-base leading-tight">Start Earning Now — 3 Min Setup</span>
+          <span className="text-base leading-tight">Start Earning Now 3 Min Setup</span>
         </Link>
         <button
           onClick={() => setDismissed(true)}

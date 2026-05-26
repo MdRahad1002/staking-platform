@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { CTA_HREF } from '../data'
 
-// Opportunity cost per second — on $10,000, gap between GIC (3.9%) and staking (12%)
+// Opportunity cost per second on $10,000, gap between GIC (3.9%) and staking (12%)
 const ANNUAL_GAP  = 10_000 * (12 - 3.9) / 100   // $810
 const PER_SECOND  = ANNUAL_GAP / (365 * 24 * 3600) // ~$0.0000257/sec
 
@@ -74,7 +74,7 @@ export function LossTicker() {
   )
 }
 
-/* ── Compact inline badge — embed this inside the Hero ───────────────────── */
+/* ── Compact inline badge embed this inside the Hero ───────────────────── */
 export function LossTickerBadge() {
   const startRef = useRef(Date.now())
   const [lost, setLost] = useState(0)

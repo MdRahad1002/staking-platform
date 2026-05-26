@@ -97,13 +97,13 @@ export function MarketMini() {
               <p className="text-sm font-bold text-foreground font-mono leading-none">
                 {t
                   ? `$${t.price.toLocaleString('en-US', { maximumFractionDigits: t.price < 10 ? 4 : 2 })}`
-                  : '—'}
+                  : ''}
               </p>
             )}
 
             {/* change */}
             <p className={`text-[11px] font-semibold mt-1 ${isUp ? 'text-green-400' : 'text-red-400'}`}>
-              {t ? `${isUp ? '+' : ''}${t.changePercent.toFixed(2)}%` : '—'}
+              {t ? `${isUp ? '+' : ''}${t.changePercent.toFixed(2)}%` : ''}
             </p>
 
             {/* subtle glow on hover */}

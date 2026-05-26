@@ -94,7 +94,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Main content */}
       <div className="flex flex-1 flex-col overflow-hidden min-w-0 relative z-10">
-        {/* Header — glass effect */}
+        {/* Header glass effect */}
         <header className="flex h-14 md:h-16 items-center justify-between border-b border-border/40 bg-background/70 backdrop-blur-xl px-4 md:px-6 flex-shrink-0 sticky top-0 z-20">
           <div className="flex items-center gap-3">
             {/* Mobile: logo mark */}
@@ -154,7 +154,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </header>
 
-        {/* Page content — extra bottom padding on mobile for BottomNav */}
+        {/* Page content extra bottom padding on mobile for BottomNav */}
         <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-24 md:pb-6">
           {children}
         </main>

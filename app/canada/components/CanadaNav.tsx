@@ -123,7 +123,7 @@ export function CanadaNav() {
         </div>
       </div>
 
-      {/* Mobile menu — full-height overlay */}
+      {/* Mobile menu full-height overlay */}
       {mobileOpen && (
         <div className="md:hidden bg-white border-b border-gray-100 shadow-lg">
           <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile navigation">

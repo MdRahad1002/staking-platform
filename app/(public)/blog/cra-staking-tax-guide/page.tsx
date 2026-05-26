@@ -79,7 +79,7 @@ const toc = [
 const faqItems = [
   {
     q: 'Do I pay tax when I deposit crypto onto a staking platform?',
-    a: "Under the CRA's January 2025 guidance, depositing crypto onto a CSA-registered platform generally does not trigger a taxable disposition. You are not considered to have sold your crypto simply by moving it to a registered platform for staking. However, this applies specifically to registered platforms — the rules may differ for unregistered offshore services.",
+    a: "Under the CRA's January 2025 guidance, depositing crypto onto a CSA-registered platform generally does not trigger a taxable disposition. You are not considered to have sold your crypto simply by moving it to a registered platform for staking. However, this applies specifically to registered platforms the rules may differ for unregistered offshore services.",
   },
   {
     q: 'Is staking itself a taxable event?',
@@ -91,7 +91,7 @@ const faqItems = [
   },
   {
     q: 'Do I owe tax if I just hold my staking rewards and do not sell them?',
-    a: 'Yes. Staking rewards are taxed as income when received, regardless of whether you sell them. The tax is triggered at the moment the rewards land in your account, not when you eventually sell. Many Canadians miss this and only report when they convert to CAD — that is an error that can result in arrears interest and penalties.',
+    a: 'Yes. Staking rewards are taxed as income when received, regardless of whether you sell them. The tax is triggered at the moment the rewards land in your account, not when you eventually sell. Many Canadians miss this and only report when they convert to CAD that is an error that can result in arrears interest and penalties.',
   },
   {
     q: 'What if the value of my staking rewards drops after I receive them?',
@@ -103,11 +103,11 @@ const faqItems = [
   },
   {
     q: 'What is the adjusted cost base (ACB) and why does it matter?',
-    a: 'The ACB is your cost basis in a crypto asset — what you are treated as having paid for it. When you eventually sell, your capital gain or loss is calculated as (proceeds minus ACB). For staking rewards, the ACB equals the fair market value you already reported as income when you received them. Keeping accurate ACB records is critical to avoid double-taxation.',
+    a: 'The ACB is your cost basis in a crypto asset what you are treated as having paid for it. When you eventually sell, your capital gain or loss is calculated as (proceeds minus ACB). For staking rewards, the ACB equals the fair market value you already reported as income when you received them. Keeping accurate ACB records is critical to avoid double-taxation.',
   },
   {
     q: 'Do I need to report crypto on my T1 even if I made no CAD profit?',
-    a: 'Yes. The CRA requires Canadians to report all world income, including staking rewards in crypto. If you received any staking rewards during the tax year — even if you did not sell them or convert them to CAD — you must report the fair market value as income on your T1. There is also a foreign asset reporting requirement (T1135) if your total foreign crypto holdings exceed $100,000 CAD at any point in the year.',
+    a: 'Yes. The CRA requires Canadians to report all world income, including staking rewards in crypto. If you received any staking rewards during the tax year even if you did not sell them or convert them to CAD you must report the fair market value as income on your T1. There is also a foreign asset reporting requirement (T1135) if your total foreign crypto holdings exceed $100,000 CAD at any point in the year.',
   },
 ]
 
@@ -376,7 +376,7 @@ export default function CRATaxGuidePage() {
                     <div>
                       <p className="text-sm font-semibold text-red-800 mb-1">Do not hold crypto directly in a TFSA or RRSP</p>
                       <p className="text-sm text-red-700">
-                        Some self-directed brokerage platforms allow it technically but it is a violation of the Income Tax Act. The penalty is 1% per month on the full value — that can quickly exceed your staking yields. The CRA has audited and penalized Canadians for this.
+                        Some self-directed brokerage platforms allow it technically but it is a violation of the Income Tax Act. The penalty is 1% per month on the full value that can quickly exceed your staking yields. The CRA has audited and penalized Canadians for this.
                       </p>
                     </div>
                   </div>
@@ -547,7 +547,7 @@ export default function CRATaxGuidePage() {
               </div>
             </article>
 
-            {/* Sidebar — sticky ToC on desktop */}
+            {/* Sidebar sticky ToC on desktop */}
             <aside className="hidden lg:block sticky top-24 self-start">
               <div className="rounded-2xl border border-gray-200 p-5 mb-6">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">On this page</p>

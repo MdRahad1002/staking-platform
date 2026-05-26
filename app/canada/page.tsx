@@ -25,7 +25,7 @@ const FAQ            = dynamic(() => import('./components/FAQ').then(m => ({ def
 const FinalCTA       = dynamic(() => import('./components/FinalCTA').then(m => ({ default: m.FinalCTA })), { ssr: true })
 const CanadaFooter   = dynamic(() => import('./components/Footer').then(m => ({ default: m.CanadaFooter })), { ssr: true })
 
-// CanadaComments uses ssr:false — must live in a Client Component wrapper
+// CanadaComments uses ssr:false must live in a Client Component wrapper
 import { CanadaCommentsClient } from './components/CanadaCommentsClient'
 import {
   COMPANY_NAME,

@@ -122,7 +122,7 @@ async function main() {
   console.log(`  Refund to apply:   $${refundAmount.toFixed(2)}`)
 
   if (refundAmount <= 0) {
-    console.log('\nNo refund needed — balance is already correct.')
+    console.log('\nNo refund needed balance is already correct.')
     await prisma.$disconnect()
     return
   }

@@ -378,7 +378,7 @@ export function AnalyticsDashboard({
                     <td className="py-2.5 px-4 text-right font-semibold">
                       {fmt(Math.max(0, stats.totalPageViews - topReferrers.reduce((a, r) => a + r.visits, 0)))}
                     </td>
-                    <td className="py-2.5 px-4 text-right text-muted-foreground">—</td>
+                    <td className="py-2.5 px-4 text-right text-muted-foreground"></td>
                   </tr>
                   {topReferrers.map((r, i) => {
                     const ad = isAdReferrer(r.referrer)

@@ -245,7 +245,7 @@ const faqHomepageSchema = {
       name: 'How do I start staking cryptocurrency on StakeOnix?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Getting started takes 4 simple steps: (1) Create a free account at stakeonix.ca — under 2 minutes. (2) Deposit cryptocurrency to your StakeOnix wallet using any supported asset. (3) Choose a staking plan from the Plans page that matches your investment goals. (4) Start earning daily staking rewards, automatically credited to your account.',
+        text: 'Getting started takes 4 simple steps: (1) Create a free account at stakeonix.ca under 2 minutes. (2) Deposit cryptocurrency to your StakeOnix wallet using any supported asset. (3) Choose a staking plan from the Plans page that matches your investment goals. (4) Start earning daily staking rewards, automatically credited to your account.',
       },
     },
     {
@@ -261,7 +261,7 @@ const faqHomepageSchema = {
       name: 'What is FCA authorisation and why does it matter for crypto staking?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "FCA (Financial Conduct Authority) authorisation means StakeOnix has been approved and is supervised by the UK's primary financial regulator. This requires meeting strict standards around financial conduct, anti-money-laundering (AML) and client asset protection. For users, this means dealing with a regulated platform subject to ongoing oversight — significantly different from unregulated crypto platforms.",
+        text: "FCA (Financial Conduct Authority) authorisation means StakeOnix has been approved and is supervised by the UK's primary financial regulator. This requires meeting strict standards around financial conduct, anti-money-laundering (AML) and client asset protection. For users, this means dealing with a regulated platform subject to ongoing oversight significantly different from unregulated crypto platforms.",
       },
     },
   ],
@@ -303,7 +303,7 @@ const howToSchema = {
       '@type': 'HowToStep',
       position: 2,
       name: 'Deposit Cryptocurrency',
-      text: 'Fund your StakeOnix wallet by depositing any supported cryptocurrency — Bitcoin, Ethereum, USDT and 170+ more. Minimum $200 USD.',
+      text: 'Fund your StakeOnix wallet by depositing any supported cryptocurrency Bitcoin, Ethereum, USDT and 170+ more. Minimum $200 USD.',
       url: `${APP_URL}/deposit`,
     },
     {
@@ -500,7 +500,7 @@ export default async function HomePage() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[100svh] sm:min-h-[92vh] flex items-center overflow-hidden" style={{ background: '#080D1B' }}>
-        {/* Hero background image — Crypto.com style deep navy */}
+        {/* Hero background image Crypto.com style deep navy */}
         <div className="absolute inset-0">
           <img src="/hero-background.png" alt="" className="w-full h-full object-cover object-center opacity-20" aria-hidden="true" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#080D1B] via-[#080D1B]/90 to-[#080D1B]/60" />
@@ -526,7 +526,7 @@ export default async function HomePage() {
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
-                Stake 170+ crypto assets for daily rewards — or trade live markets with real-time charts.
+                Stake 170+ crypto assets for daily rewards or trade live markets with real-time charts.
                 One regulated platform. FCA-authorised (UK) &amp; FINTRAC-registered (Canada).
               </p>
 
@@ -828,7 +828,7 @@ export default async function HomePage() {
                 <p className="text-muted-foreground leading-relaxed">
                   Beyond staking, StakeOnix gives you access to a full-featured crypto trading terminal.
                   Buy and sell Bitcoin, Ethereum, and 170+ assets with live candlestick charts,
-                  real-time order books, and instant execution — all within the same regulated account.
+                  real-time order books, and instant execution all within the same regulated account.
                 </p>
               </div>
 
@@ -837,7 +837,7 @@ export default async function HomePage() {
                   { icon: <CandlestickChart className="h-5 w-5" />, title: 'Live Charts', desc: 'Real-time candlestick charts powered by live market data', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
                   { icon: <Zap className="h-5 w-5" />, title: 'Instant Execution', desc: 'Market and limit orders executed at speed', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
                   { icon: <Globe className="h-5 w-5" />, title: '170+ Pairs', desc: 'Trade across the full range of supported crypto assets', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
-                  { icon: <ShieldCheck className="h-5 w-5" />, title: 'Regulated', desc: 'FCA-authorised platform — trade with confidence', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
+                  { icon: <ShieldCheck className="h-5 w-5" />, title: 'Regulated', desc: 'FCA-authorised platform trade with confidence', color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20' },
                 ].map((f) => (
                   <div key={f.title} className={`rounded-xl border ${f.bg} p-4`}>
                     <div className={`${f.color} mb-2`}>{f.icon}</div>
@@ -1069,7 +1069,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {/* live rates grid — data-reveal stagger injected per-item */}
+            {/* live rates grid data-reveal stagger injected per-item */}
             {[
               { symbol: 'eth',   name: 'Ethereum',    apr: 9.0,  badge: null },
               { symbol: 'btc',   name: 'Bitcoin',     apr: 7.0,  badge: null },
@@ -1661,7 +1661,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* HUMAN TRUST — Real people, real support */}
+      {/* HUMAN TRUST Real people, real support */}
       <section className="py-20 relative border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -1679,7 +1679,7 @@ export default async function HomePage() {
                 role: 'Staking Advisor',
                 gradient: 'from-cyan-500 to-blue-600',
                 reason: 'We explain things simply.',
-                body: 'Staking feels complicated from the outside. Our advisors break it down clearly — no jargon, no pressure. You ask questions, we answer honestly.',
+                body: 'Staking feels complicated from the outside. Our advisors break it down clearly no jargon, no pressure. You ask questions, we answer honestly.',
                 detail: 'Average response under 4 hours',
               },
               {
@@ -1695,7 +1695,7 @@ export default async function HomePage() {
                 role: 'Account Support',
                 gradient: 'from-purple-500 to-violet-600',
                 reason: 'You are never alone in this.',
-                body: 'Whether you are choosing a plan, making a deposit, or have questions about withdrawals — support is available by phone, email and live chat.',
+                body: 'Whether you are choosing a plan, making a deposit, or have questions about withdrawals support is available by phone, email and live chat.',
                 detail: 'Available Mon–Sat',
               },
             ].map((card) => (
@@ -1786,7 +1786,7 @@ export default async function HomePage() {
                 step: '3',
                 icon: <CheckCircle2 className="h-6 w-6" />,
                 label: 'Choose and activate',
-                desc: 'Select a plan that fits your goals. Review the terms, lock period, and risk level. Activate when ready — or ask support first. No pressure.',
+                desc: 'Select a plan that fits your goals. Review the terms, lock period, and risk level. Activate when ready or ask support first. No pressure.',
                 color: 'from-purple-500/20 to-violet-600/20',
                 iconColor: 'text-purple-400',
                 borderHover: 'hover:border-purple-500/30',
@@ -1838,7 +1838,7 @@ export default async function HomePage() {
                 <span className="gradient-text">options look like?</span>
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto mb-10 text-lg leading-relaxed">
-                Create a free account and see current plan options, yield estimates, and risk levels for your portfolio — before you commit to anything.
+                Create a free account and see current plan options, yield estimates, and risk levels for your portfolio before you commit to anything.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href={session ? '/dashboard' : '/signup'}>

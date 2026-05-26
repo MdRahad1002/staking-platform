@@ -118,7 +118,7 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Floating button — above bottom nav on mobile */}
+      {/* Floating button above bottom nav on mobile */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -133,7 +133,7 @@ export function ChatWidget() {
         </button>
       )}
 
-      {/* Chat window — responsive: nearly full-width above bottom nav on mobile */}
+      {/* Chat window responsive: nearly full-width above bottom nav on mobile */}
       {isOpen && (
         <div
           className={cn(

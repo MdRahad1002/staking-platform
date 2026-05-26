@@ -294,7 +294,7 @@ export default async function DashboardPage() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-sm">
-              You have {formatCurrency(data.user?.balance ?? 0)} ready to work — start earning today
+              You have {formatCurrency(data.user?.balance ?? 0)} ready to work start earning today
             </p>
             <p className="text-xs text-muted-foreground mt-1">
               Stake with <strong className="text-foreground">{data.idlePlan.name}</strong> and earn{' '}
@@ -319,7 +319,7 @@ export default async function DashboardPage() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-sm">
-              Upgrade to <span className="text-amber-400">{data.nextTierPlan.name}</span> — earn{' '}
+              Upgrade to <span className="text-amber-400">{data.nextTierPlan.name}</span> earn{' '}
               <span className="text-amber-400">{data.nextTierPlan.dailyRoi}%/day</span> vs your current{' '}
               {data.bestActiveRoi}%/day
             </p>

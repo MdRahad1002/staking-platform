@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     const quantity = effectivePrice ? (amt * effectiveLev) / effectivePrice : 0
     const positionSide = tradeType === 'SPOT' ? 'SPOT_BUY' : side // LONG | SHORT | SPOT_BUY
 
-    // All DB writes in a single atomic transaction — if any step fails, balance decrement is rolled back
+    // All DB writes in a single atomic transaction if any step fails, balance decrement is rolled back
     const { order, position } = await prisma.$transaction(async (tx) => {
       // 1. Deduct margin from user balance
       await tx.user.update({

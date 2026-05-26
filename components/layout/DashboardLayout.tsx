@@ -85,7 +85,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Sidebar - desktop: inline flow, mobile: fixed drawer */}
       <div
         className={cn(
-          'fixed inset-y-0 left-0 z-40 md:relative md:z-10 md:translate-x-0 transition-transform duration-300 ease-in-out',
+          'fixed top-0 bottom-16 left-0 z-40 md:relative md:top-auto md:bottom-auto md:left-auto md:z-10 md:translate-x-0 transition-transform duration-300 ease-in-out',
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >

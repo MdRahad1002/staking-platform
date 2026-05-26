@@ -1,78 +1,55 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { formatDateTime } from '@/lib/utils'
-import { Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw, AlertCircle, TrendingUp, Zap, ChevronRight } from 'lucide-react'
+import { formatDateTime, formatCurrency } from '@/lib/utils'
+import {
+  Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw,
+  AlertCircle, TrendingUp, Zap, ChevronRight, ShieldCheck, Lock,
+  Wallet, BadgeCheck, ArrowRight, ReceiptText,
+} from 'lucide-react'
 import { toast } from 'sonner'
-import { formatCurrency } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 
 interface DepositCurrency {
-  id: string
-  symbol: string
-  name: string
-  network: string
-  minDeposit: number
-  iconUrl?: string | null
+  id: string; symbol: string; name: string; network: string
+  minDeposit: number; iconUrl?: string | null
 }
-
 interface DepositHistory {
-  id: string
-  amount: number
-  amountUsd?: number
-  currency: { symbol: string }
-  payCurrency?: string
-  payAmount?: number
-  address: string
-  txHash?: string | null
-  status: string
-  createdAt: string
-  confirmations: number
-  requiredConfirmations: number
+  id: string; amount: number; amountUsd?: number
+  currency: { symbol: string }; payCurrency?: string; payAmount?: number
+  address: string; txHash?: string | null; status: string
+  createdAt: string; confirmations: number; requiredConfirmations: number
 }
-
 interface ActivePayment {
-  depositId: string
-  paymentId: string
-  address: string
-  payAmount: number
-  payCurrency: string
-  amountUsd: number
-  expiresAt: string
-  status: string
+  depositId: string; paymentId: string; address: string
+  payAmount: number; payCurrency: string; amountUsd: number
+  expiresAt: string; status: string
 }
-
 interface StakingPlan {
-  id: string
-  name: string
-  minAmount: number
-  maxAmount: number | null
-  durationDays: number
-  dailyRoi: number
-  totalRoi: number
-  isFeatured: boolean
-  sortOrder: number
+  id: string; name: string; minAmount: number; maxAmount: number | null
+  durationDays: number; dailyRoi: number; totalRoi: number
+  isFeatured: boolean; sortOrder: number
 }
 
 const QUICK_PICKS = [200, 500, 1000, 5000, 10000, 25000]
 
 const STATUS_LABEL: Record<string, string> = {
-  waiting: 'Waiting for payment…',
-  confirming: 'Confirming transaction…',
-  confirmed: 'Confirmed!',
-  sending: 'Sending to wallet…',
+  waiting: 'Waiting for payment',
+  confirming: 'Confirming on blockchain',
+  confirmed: 'Payment confirmed!',
+  sending: 'Sending to wallet',
   finished: 'Completed!',
-  partially_paid: 'Partially paid - waiting for more',
+  partially_paid: 'Partially paid - awaiting remainder',
   failed: 'Payment failed',
   expired: 'Payment expired',
   refunded: 'Refunded',
-  PENDING: 'Waiting for payment…',
-  CONFIRMED: 'Confirmed!',
+  PENDING: 'Waiting for payment',
+  CONFIRMED: 'Payment confirmed!',
   FAILED: 'Failed',
   PARTIALLY_PAID: 'Partially paid',
 }
@@ -106,7 +83,6 @@ export default function DepositPage() {
   const [plans, setPlans] = useState<StakingPlan[]>([])
 
   const selectedCurrency = currencies.find((c) => c.id === selected)
-
   const depositNum = parseFloat(amountUsd) || 0
 
   const matchedPlan = plans.length > 0 && depositNum > 0
@@ -115,26 +91,17 @@ export default function DepositPage() {
         .reduce((best: StakingPlan | null, p) => (!best || p.dailyRoi > best.dailyRoi ? p : best), null)
     : null
 
-  const nextPlan = plans.length > 0
-    ? plans.find((p) => p.minAmount > depositNum) ?? null
-    : null
-
+  const nextPlan = plans.length > 0 ? plans.find((p) => p.minAmount > depositNum) ?? null : null
   const missingForNext = nextPlan ? nextPlan.minAmount - depositNum : 0
 
   useEffect(() => {
-    fetch('/api/deposit/currencies')
-      .then((r) => r.json())
-      .then((d) => {
-        const list = d.data || []
-        setCurrencies(list)
-        if (list.length > 0) setSelected(list[0].id)
-      })
-    fetch('/api/deposit/history')
-      .then((r) => r.json())
-      .then((d) => setHistory(d.data || []))
-    fetch('/api/staking/plans')
-      .then((r) => r.json())
-      .then((d) => setPlans(d.data || []))
+    fetch('/api/deposit/currencies').then((r) => r.json()).then((d) => {
+      const list = d.data || []
+      setCurrencies(list)
+      if (list.length > 0) setSelected(list[0].id)
+    })
+    fetch('/api/deposit/history').then((r) => r.json()).then((d) => setHistory(d.data || []))
+    fetch('/api/staking/plans').then((r) => r.json()).then((d) => setPlans(d.data || []))
   }, [])
 
   const stopPoll = useCallback(() => {
@@ -187,7 +154,7 @@ export default function DepositPage() {
       setPayment(data.data)
       setPollStatus('waiting')
       startPoll(data.data.depositId)
-      toast.success('Payment created - send the exact amount to the address below')
+      toast.success('Payment address generated - send the exact amount shown')
     } catch {
       toast.error('Something went wrong.')
     } finally {
@@ -195,27 +162,89 @@ export default function DepositPage() {
     }
   }
 
+  // Derive current step
+  const currentStep = payment
+    ? (['CONFIRMED', 'confirmed', 'finished', 'sending'].includes(pollStatus) ? 3 : 2)
+    : 1
+
   return (
-    <div className="space-y-6 max-w-4xl">
-      <div>
-        <h1 className="text-2xl font-bold">Deposit</h1>
-        <p className="text-muted-foreground text-sm mt-1">Add funds to your account using cryptocurrency.</p>
+    <div className="space-y-8 max-w-5xl">
+
+      {/* ── Page Header ── */}
+      <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/40 via-background to-background p-6 md:p-8">
+        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl translate-x-1/3 -translate-y-1/3" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20">
+            <ArrowDownToLine className="h-6 w-6 text-blue-400" />
+          </div>
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-black text-white">Fund Your Account</h1>
+            <p className="text-muted-foreground mt-1">
+              Deposit cryptocurrency and receive USD credit instantly after network confirmation.
+            </p>
+          </div>
+          <div className="hidden md:flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-green-400" />
+            <span className="text-xs font-semibold text-green-400">Secured & Encrypted</span>
+          </div>
+        </div>
+
+        {/* Step indicator */}
+        <div className="relative mt-6 flex items-center gap-0">
+          {[
+            { n: 1, label: 'Enter Amount' },
+            { n: 2, label: 'Send Payment' },
+            { n: 3, label: 'Credited' },
+          ].map((step, i) => (
+            <div key={step.n} className="flex items-center flex-1">
+              <div className="flex flex-col items-center">
+                <div className={cn(
+                  'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold transition-all',
+                  currentStep > step.n
+                    ? 'bg-green-500 border-green-500 text-white'
+                    : currentStep === step.n
+                      ? 'bg-blue-500 border-blue-500 text-white'
+                      : 'bg-secondary border-border text-muted-foreground'
+                )}>
+                  {currentStep > step.n ? <CheckCircle2 className="h-4 w-4" /> : step.n}
+                </div>
+                <span className={cn(
+                  'text-[10px] font-semibold mt-1.5 text-center whitespace-nowrap',
+                  currentStep === step.n ? 'text-blue-400' : currentStep > step.n ? 'text-green-400' : 'text-muted-foreground'
+                )}>{step.label}</span>
+              </div>
+              {i < 2 && (
+                <div className={cn('flex-1 h-0.5 mx-2 mb-5 rounded-full', currentStep > step.n ? 'bg-green-500/60' : 'bg-border')} />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">{payment ? 'Send Payment' : 'Create Deposit'}</CardTitle>
-            <CardDescription>{payment ? 'Send the exact amount to the address below.' : 'Enter amount and select cryptocurrency.'}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {!payment ? (
-              <>
+      {/* ── Main Grid ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* ── LEFT: Deposit Form / Active Payment ── */}
+        <div className="lg:col-span-2 space-y-5">
+
+          {!payment ? (
+            <div className="rounded-2xl border border-border bg-card overflow-hidden">
+              {/* Card header */}
+              <div className="px-6 pt-6 pb-4 border-b border-border/60">
+                <div className="flex items-center gap-2">
+                  <Wallet className="h-4 w-4 text-blue-400" />
+                  <h2 className="font-bold text-base">Deposit Details</h2>
+                </div>
+                <p className="text-xs text-muted-foreground mt-0.5">Select an amount and the crypto you want to pay with</p>
+              </div>
+
+              <div className="p-6 space-y-6">
+
                 {/* Quick-pick amounts */}
                 {plans.length > 0 && (
-                  <div className="space-y-1.5">
-                    <Label className="text-xs text-muted-foreground">Quick Select</Label>
-                    <div className="grid grid-cols-3 gap-1.5">
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Quick Select</Label>
+                    <div className="grid grid-cols-3 gap-2">
                       {QUICK_PICKS.map((amt) => {
                         const plan = plans.find(
                           (p) => p.minAmount <= amt && (p.maxAmount === null || p.maxAmount >= amt)
@@ -226,15 +255,20 @@ export default function DepositPage() {
                             key={amt}
                             type="button"
                             onClick={() => setAmountUsd(String(amt))}
-                            className={`rounded-xl border px-2 py-2.5 text-center transition-all ${
+                            className={cn(
+                              'rounded-xl border px-3 py-3 text-center transition-all duration-150 hover:scale-[1.02]',
                               isActive
-                                ? 'border-primary bg-primary/15 text-primary'
-                                : 'border-border bg-secondary/40 text-muted-foreground hover:border-primary/40 hover:text-foreground'
-                            }`}
+                                ? 'border-blue-500 bg-blue-500/15 ring-1 ring-blue-500/30'
+                                : 'border-border bg-secondary/30 hover:border-blue-500/40 hover:bg-secondary/60'
+                            )}
                           >
-                            <p className="font-bold text-sm">${amt >= 1000 ? `${amt / 1000}k` : amt}</p>
+                            <p className={cn('font-black text-sm', isActive ? 'text-blue-400' : 'text-foreground')}>
+                              ${amt >= 1000 ? `${amt / 1000}k` : amt}
+                            </p>
                             {plan && (
-                              <p className="text-[9px] leading-tight mt-0.5 truncate opacity-70">{plan.name}</p>
+                              <p className={cn('text-[9px] leading-tight mt-0.5 truncate', isActive ? 'text-blue-300/70' : 'text-muted-foreground')}>
+                                {plan.name}
+                              </p>
                             )}
                           </button>
                         )
@@ -243,156 +277,258 @@ export default function DepositPage() {
                   </div>
                 )}
 
-                <div className="space-y-1.5">
-                  <Label>Amount (USD)</Label>
+                {/* Amount input */}
+                <div className="space-y-2">
+                  <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Amount (USD)</Label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-                    <Input type="number" min="0" step="0.01" placeholder="200.00" className="pl-7" value={amountUsd} onChange={(e) => setAmountUsd(e.target.value)} />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-lg font-bold">$</span>
+                    <Input
+                      type="number" min="0" step="0.01" placeholder="0.00"
+                      className="pl-9 h-14 text-xl font-bold rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60 focus:ring-blue-500/20"
+                      value={amountUsd}
+                      onChange={(e) => setAmountUsd(e.target.value)}
+                    />
                   </div>
-                  {selectedCurrency && <p className="text-xs text-muted-foreground">Minimum: ${selectedCurrency.minDeposit} USD</p>}
+                  {selectedCurrency && (
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <AlertCircle className="h-3 w-3 text-yellow-500" />
+                      Minimum deposit: <strong className="text-foreground">${selectedCurrency.minDeposit} USD</strong>
+                    </p>
+                  )}
                 </div>
 
-                {/* Live earnings preview */}
+                {/* Earnings preview */}
                 {depositNum >= 200 && matchedPlan && (
-                  <div className="rounded-xl border border-green-500/25 bg-green-500/8 p-3 space-y-2">
-                    <div className="flex items-center gap-1.5">
-                      <TrendingUp className="h-3.5 w-3.5 text-green-400" />
-                      <p className="text-[11px] font-bold uppercase tracking-widest text-green-400">
-                        Your Earnings Preview
-                      </p>
+                  <div className="rounded-xl border border-green-500/25 bg-gradient-to-br from-green-950/30 to-emerald-950/20 p-4 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-green-500/20">
+                          <TrendingUp className="h-3.5 w-3.5 text-green-400" />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-green-400">Earnings Preview</span>
+                      </div>
+                      <Badge className="text-[10px] bg-green-500/20 text-green-400 border-green-500/30 border">{matchedPlan.name}</Badge>
                     </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex-1">
-                        <p className="text-xs text-muted-foreground">Matched Plan</p>
-                        <p className="font-bold text-sm text-white">{matchedPlan.name}</p>
-                        <p className="text-[10px] text-muted-foreground">{matchedPlan.durationDays}d · {matchedPlan.dailyRoi}%/day</p>
+
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="rounded-xl bg-black/20 border border-green-500/10 px-3 py-2.5 text-center">
+                        <p className="text-[9px] text-muted-foreground mb-1">Daily Earnings</p>
+                        <p className="font-black text-base text-green-400">+{formatCurrency((depositNum * matchedPlan.dailyRoi) / 100)}</p>
+                        <p className="text-[9px] text-muted-foreground mt-0.5">{matchedPlan.dailyRoi}%/day</p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-[10px] text-muted-foreground">Daily Earnings</p>
-                        <p className="font-bold text-lg text-green-400">+{formatCurrency((depositNum * matchedPlan.dailyRoi) / 100)}</p>
-                        <p className="text-[10px] text-muted-foreground">per day</p>
+                      <div className="rounded-xl bg-black/20 border border-green-500/10 px-3 py-2.5 text-center">
+                        <p className="text-[9px] text-muted-foreground mb-1">Total Profit</p>
+                        <p className="font-black text-base text-white">+{formatCurrency((depositNum * matchedPlan.totalRoi) / 100)}</p>
+                        <p className="text-[9px] text-muted-foreground mt-0.5">{matchedPlan.totalRoi}%</p>
                       </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 border-t border-green-500/15 pt-2">
-                      <div className="rounded-lg bg-black/20 px-2.5 py-1.5 text-center">
-                        <p className="text-[9px] text-muted-foreground">Total Profit</p>
-                        <p className="font-bold text-sm gradient-text">+{formatCurrency((depositNum * matchedPlan.totalRoi) / 100)}</p>
-                      </div>
-                      <div className="rounded-lg bg-black/20 px-2.5 py-1.5 text-center">
-                        <p className="text-[9px] text-muted-foreground">Total Payout</p>
-                        <p className="font-bold text-sm text-white">{formatCurrency(depositNum + (depositNum * matchedPlan.totalRoi) / 100)}</p>
+                      <div className="rounded-xl bg-black/20 border border-green-500/10 px-3 py-2.5 text-center">
+                        <p className="text-[9px] text-muted-foreground mb-1">Total Payout</p>
+                        <p className="font-black text-base text-blue-400">{formatCurrency(depositNum + (depositNum * matchedPlan.totalRoi) / 100)}</p>
+                        <p className="text-[9px] text-muted-foreground mt-0.5">{matchedPlan.durationDays}d term</p>
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* "Just $X more" unlock nudge */}
+                {/* Upgrade nudge */}
                 {nextPlan && missingForNext > 0 && missingForNext <= nextPlan.minAmount * 0.35 && (
-                  <div
-                    className="rounded-xl border border-yellow-500/30 bg-yellow-500/8 px-3 py-2 flex items-center gap-2 cursor-pointer hover:border-yellow-500/50 transition-colors"
+                  <button
+                    type="button"
                     onClick={() => setAmountUsd(String(nextPlan.minAmount))}
+                    className="w-full rounded-xl border border-yellow-500/30 bg-yellow-500/8 px-4 py-3 flex items-center gap-3 hover:border-yellow-500/50 hover:bg-yellow-500/12 transition-all text-left"
                   >
-                    <Zap className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-500/20 flex-shrink-0">
+                      <Zap className="h-4 w-4 text-yellow-400" />
+                    </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold text-yellow-400">
-                        Just {formatCurrency(missingForNext)} more to unlock <strong>{nextPlan.name}</strong>
+                      <p className="text-xs font-bold text-yellow-400">
+                        Add {formatCurrency(missingForNext)} more to unlock {nextPlan.name}
                       </p>
-                      <p className="text-[10px] text-muted-foreground">
-                        {nextPlan.dailyRoi}%/day · earn{' '}
-                        +{formatCurrency((nextPlan.minAmount * nextPlan.dailyRoi) / 100)}/day at minimum
+                      <p className="text-[10px] text-muted-foreground mt-0.5">
+                        {nextPlan.dailyRoi}%/day · earn +{formatCurrency((nextPlan.minAmount * nextPlan.dailyRoi) / 100)}/day at minimum
                       </p>
                     </div>
                     <ChevronRight className="h-4 w-4 text-yellow-400 flex-shrink-0" />
-                  </div>
+                  </button>
                 )}
 
-                <div className="space-y-1.5">
-                  <Label>Pay with</Label>
+                {/* Currency selector */}
+                <div className="space-y-2">
+                  <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Pay With</Label>
                   <Select value={selected} onValueChange={setSelected}>
-                    <SelectTrigger><SelectValue placeholder="Select currency..." /></SelectTrigger>
+                    <SelectTrigger className="h-12 rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60">
+                      <SelectValue placeholder="Select cryptocurrency..." />
+                    </SelectTrigger>
                     <SelectContent>
                       {currencies.map((c) => (
-                        <SelectItem key={c.id} value={c.id}>{c.symbol} - {c.name} ({c.network})</SelectItem>
+                        <SelectItem key={c.id} value={c.id}>
+                          <span className="font-semibold">{c.symbol}</span>
+                          <span className="text-muted-foreground ml-1.5">{c.name} · {c.network}</span>
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
-                <Button onClick={createPayment} variant="gradient" className="w-full gap-2" disabled={!selected || !amountUsd || creating}>
-                  {creating ? <RefreshCw className="h-4 w-4 animate-spin" /> : <ArrowDownToLine className="h-4 w-4" />}
-                  {creating ? 'Creating…' : 'Create Payment'}
-                </Button>
-              </>
-            ) : (
-              <ActivePaymentCard
-                payment={payment}
-                pollStatus={pollStatus}
-                onCopyAddress={() => { navigator.clipboard.writeText(payment.address); toast.success('Address copied!') }}
-                onCopyAmount={() => { navigator.clipboard.writeText(String(payment.payAmount)); toast.success('Amount copied!') }}
-                onCancel={() => { setPayment(null); stopPoll() }}
-              />
-            )}
-          </CardContent>
-        </Card>
 
-        <Card>
-          <CardHeader><CardTitle className="text-base">How It Works</CardTitle></CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            {['Enter the USD amount you want to deposit and choose a cryptocurrency.','A unique payment address is generated. Send the exact crypto amount shown.','After network confirmation, your USD balance is credited automatically.'].map((text, i) => (
-              <div key={i} className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">{i+1}</span>
-                <p>{text}</p>
+                {/* Submit */}
+                <Button
+                  onClick={createPayment}
+                  disabled={!selected || !amountUsd || creating}
+                  className="w-full h-13 rounded-xl font-bold text-base gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white border-0 shadow-lg shadow-blue-500/20 transition-all hover:shadow-blue-500/30 hover:scale-[1.01]"
+                >
+                  {creating
+                    ? <><RefreshCw className="h-4 w-4 animate-spin" /> Generating address...</>
+                    : <><ArrowDownToLine className="h-4 w-4" /> Generate Payment Address</>
+                  }
+                </Button>
+
               </div>
-            ))}
-            <div className="mt-4 rounded-lg bg-secondary/30 p-3 space-y-1.5">
-              <p className="font-medium text-foreground text-xs">Important</p>
-              <ul className="list-disc list-inside space-y-1 text-xs">
-                <li>Send the <strong>exact</strong> amount shown</li>
-                <li>Each payment address is valid for ~60 minutes</li>
-                <li>Always send on the correct network</li>
-                <li>Processing time: 15 min – 2 hours</li>
+            </div>
+          ) : (
+            /* ── ACTIVE PAYMENT VIEW ── */
+            <ActivePaymentCard
+              payment={payment}
+              pollStatus={pollStatus}
+              onCopyAddress={() => { navigator.clipboard.writeText(payment.address); toast.success('Address copied!') }}
+              onCopyAmount={() => { navigator.clipboard.writeText(String(payment.payAmount)); toast.success('Amount copied!') }}
+              onCancel={() => { setPayment(null); stopPoll() }}
+            />
+          )}
+        </div>
+
+        {/* ── RIGHT: Trust + How It Works ── */}
+        <div className="space-y-5">
+
+          {/* Security badges */}
+          <div className="rounded-2xl border border-border bg-card p-5 space-y-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Platform Security</p>
+            <div className="space-y-3">
+              {[
+                { icon: <ShieldCheck className="h-4 w-4 text-green-400" />, label: 'SSL / TLS Encrypted', sub: 'All data in transit is encrypted' },
+                { icon: <Lock className="h-4 w-4 text-blue-400" />, label: 'AES-256 at Rest', sub: 'Wallet data encrypted at rest' },
+                { icon: <BadgeCheck className="h-4 w-4 text-yellow-400" />, label: 'FCA Authorised', sub: 'UK financial regulator oversight' },
+                { icon: <Wallet className="h-4 w-4 text-purple-400" />, label: 'Cold Wallet Storage', sub: 'Majority of funds in cold storage' },
+              ].map((item) => (
+                <div key={item.label} className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-secondary/60 mt-0.5">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-foreground">{item.label}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{item.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* How It Works */}
+          <div className="rounded-2xl border border-border bg-card p-5 space-y-4">
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">How It Works</p>
+            <div className="space-y-4">
+              {[
+                { n: 1, color: 'bg-blue-500/20 text-blue-400', title: 'Enter USD amount', desc: 'Choose the amount you want to deposit and select your preferred cryptocurrency.' },
+                { n: 2, color: 'bg-purple-500/20 text-purple-400', title: 'Send exact crypto', desc: 'A unique address is generated. Send the exact crypto amount shown — no more, no less.' },
+                { n: 3, color: 'bg-green-500/20 text-green-400', title: 'Balance credited', desc: 'After network confirmation (15 min – 2 hrs), your USD balance is credited automatically.' },
+              ].map((step) => (
+                <div key={step.n} className="flex gap-3">
+                  <div className={cn('flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-black mt-0.5', step.color)}>
+                    {step.n}
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-foreground">{step.title}</p>
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-xl border border-orange-500/20 bg-orange-500/8 p-3 space-y-1">
+              <p className="text-[11px] font-bold text-orange-400 flex items-center gap-1.5">
+                <AlertCircle className="h-3.5 w-3.5" /> Important
+              </p>
+              <ul className="text-[10px] text-muted-foreground space-y-1 pl-4 list-disc leading-relaxed">
+                <li>Always send on the <strong className="text-foreground">correct network</strong></li>
+                <li>Address valid for <strong className="text-foreground">~60 minutes</strong></li>
+                <li>Wrong amount or network = <strong className="text-red-400">permanent loss</strong></li>
               </ul>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+        </div>
       </div>
 
-      <Card>
-        <CardHeader><CardTitle className="text-base">Deposit History</CardTitle></CardHeader>
-        <CardContent>
-          {history.length === 0 ? (
-            <p className="text-center text-sm text-muted-foreground py-8">No deposits yet.</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border text-muted-foreground">
-                    <th className="text-left pb-3 font-medium">Date</th>
-                    <th className="text-left pb-3 font-medium">Amount (USD)</th>
-                    <th className="text-left pb-3 font-medium">Crypto</th>
-                    <th className="text-left pb-3 font-medium">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {history.map((dep) => (
-                    <tr key={dep.id} className="hover:bg-secondary/30 transition-colors">
-                      <td className="py-3 text-xs">{formatDateTime(dep.createdAt)}</td>
-                      <td className="py-3 font-medium">${dep.amountUsd ?? dep.amount}</td>
-                      <td className="py-3 text-xs text-muted-foreground">
-                        {dep.payAmount ? `${dep.payAmount} ${(dep.payCurrency ?? dep.currency.symbol).toUpperCase()}` : dep.currency.symbol}
+      {/* ── Deposit History ── */}
+      <div className="rounded-2xl border border-border bg-card overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border/60">
+          <div className="flex items-center gap-2">
+            <ReceiptText className="h-4 w-4 text-blue-400" />
+            <h2 className="font-bold text-base">Deposit History</h2>
+          </div>
+          {history.length > 0 && (
+            <span className="text-xs text-muted-foreground">{history.length} record{history.length !== 1 ? 's' : ''}</span>
+          )}
+        </div>
+
+        {history.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 gap-3 text-center">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/60">
+              <ArrowDownToLine className="h-6 w-6 text-muted-foreground" />
+            </div>
+            <p className="font-semibold text-foreground">No deposits yet</p>
+            <p className="text-sm text-muted-foreground max-w-xs">
+              Your deposit history will appear here once you make your first deposit.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border/60 bg-secondary/20">
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Date</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Amount USD</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Crypto Sent</th>
+                  <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/40">
+                {history.map((dep) => {
+                  const isConfirmed = dep.status === 'CONFIRMED' || dep.status === 'confirmed' || dep.status === 'finished'
+                  const isFailed = dep.status === 'FAILED' || dep.status === 'failed' || dep.status === 'expired'
+                  return (
+                    <tr key={dep.id} className="hover:bg-secondary/20 transition-colors">
+                      <td className="px-6 py-4 text-xs text-muted-foreground whitespace-nowrap">{formatDateTime(dep.createdAt)}</td>
+                      <td className="px-4 py-4 font-bold text-foreground whitespace-nowrap">
+                        ${dep.amountUsd ?? dep.amount}
                       </td>
-                      <td className="py-3">
-                        <Badge variant={dep.status === 'CONFIRMED' ? 'success' : dep.status === 'FAILED' ? 'destructive' : 'secondary'} className="text-xs">
-                          {dep.status}
-                        </Badge>
+                      <td className="px-4 py-4 text-xs text-muted-foreground whitespace-nowrap">
+                        {dep.payAmount
+                          ? <span className="font-mono">{dep.payAmount} {(dep.payCurrency ?? dep.currency.symbol).toUpperCase()}</span>
+                          : dep.currency.symbol}
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-1.5">
+                          {isConfirmed
+                            ? <CheckCircle2 className="h-3.5 w-3.5 text-green-400 flex-shrink-0" />
+                            : isFailed
+                              ? <XCircle className="h-3.5 w-3.5 text-red-400 flex-shrink-0" />
+                              : <Clock className="h-3.5 w-3.5 text-yellow-400 flex-shrink-0" />}
+                          <Badge
+                            variant={isConfirmed ? 'success' : isFailed ? 'destructive' : 'secondary'}
+                            className="text-[10px] capitalize"
+                          >
+                            {dep.status.toLowerCase()}
+                          </Badge>
+                        </div>
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -402,64 +538,135 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
   onCopyAddress: () => void; onCopyAmount: () => void; onCancel: () => void
 }) {
   const { display: countdown, expired } = useCountdown(payment.expiresAt)
-  const isDone = ['CONFIRMED','confirmed','finished','sending'].includes(pollStatus)
-  const isFailed = ['FAILED','failed','expired'].includes(pollStatus) || expired
+  const isDone = ['CONFIRMED', 'confirmed', 'finished', 'sending'].includes(pollStatus)
+  const isFailed = ['FAILED', 'failed', 'expired'].includes(pollStatus) || expired
+
+  if (isDone) {
+    return (
+      <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-950/40 via-background to-background p-8 flex flex-col items-center text-center gap-4">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-500/20 border-2 border-green-500/40">
+          <CheckCircle2 className="h-10 w-10 text-green-400" />
+        </div>
+        <div>
+          <h3 className="text-xl font-black text-white">Balance Credited!</h3>
+          <p className="text-muted-foreground mt-1">
+            <span className="text-green-400 font-bold">${payment.amountUsd} USD</span> has been added to your account.
+          </p>
+        </div>
+        <Button onClick={onCancel} className="gap-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white border-0 rounded-xl">
+          <ArrowRight className="h-4 w-4" /> Make Another Deposit
+        </Button>
+      </div>
+    )
+  }
 
   return (
-    <div className="space-y-4">
-      <div className={`flex items-center gap-2 rounded-lg p-3 text-sm font-medium ${
-        isDone ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
-        isFailed ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-        'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-      }`}>
-        {isDone ? <CheckCircle2 className="h-4 w-4 flex-shrink-0" /> :
-         isFailed ? <XCircle className="h-4 w-4 flex-shrink-0" /> :
-         <RefreshCw className="h-4 w-4 flex-shrink-0 animate-spin" />}
-        {STATUS_LABEL[pollStatus] || 'Waiting for payment…'}
+    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      {/* Status bar */}
+      <div className={cn(
+        'flex items-center gap-3 px-6 py-4 border-b',
+        isFailed
+          ? 'bg-red-950/20 border-red-500/20'
+          : 'bg-amber-950/20 border-amber-500/20'
+      )}>
+        {isFailed
+          ? <XCircle className="h-5 w-5 text-red-400 flex-shrink-0" />
+          : <RefreshCw className="h-5 w-5 text-amber-400 flex-shrink-0 animate-spin" />}
+        <div>
+          <p className={cn('font-bold text-sm', isFailed ? 'text-red-400' : 'text-amber-400')}>
+            {STATUS_LABEL[pollStatus] || 'Waiting for payment'}
+          </p>
+          <p className="text-[10px] text-muted-foreground mt-0.5">
+            We check for confirmations every 30 seconds automatically
+          </p>
+        </div>
+        {!isFailed && (
+          <div className={cn(
+            'ml-auto flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-mono font-bold flex-shrink-0',
+            expired ? 'bg-red-500/10 text-red-400' : 'bg-secondary text-foreground'
+          )}>
+            <Clock className="h-3.5 w-3.5" />
+            {expired ? 'Expired' : countdown}
+          </div>
+        )}
       </div>
 
-      {!isDone && !isFailed && (
-        <>
-          <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/5 p-4 space-y-1">
-            <p className="text-xs text-muted-foreground">Send exactly</p>
-            <div className="flex items-center justify-between">
-              <p className="font-mono text-lg font-bold text-yellow-400">{payment.payAmount} <span className="text-sm">{payment.payCurrency.toUpperCase()}</span></p>
-              <Button variant="ghost" size="sm" className="h-7 text-xs gap-1" onClick={onCopyAmount}><Copy className="h-3.5 w-3.5" /> Copy</Button>
+      <div className="p-6 space-y-5">
+
+        {!isFailed && (
+          <>
+            {/* Amount to send */}
+            <div className="rounded-2xl border border-yellow-500/25 bg-gradient-to-br from-yellow-950/30 to-background p-5">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground mb-3">Send Exactly</p>
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <p className="font-mono text-3xl font-black text-yellow-400 leading-none">
+                    {payment.payAmount}
+                  </p>
+                  <p className="text-lg font-bold text-yellow-300 mt-1">{payment.payCurrency.toUpperCase()}</p>
+                  <p className="text-xs text-muted-foreground mt-2">≈ ${payment.amountUsd} USD</p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-1.5 border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 flex-shrink-0"
+                  onClick={onCopyAmount}
+                >
+                  <Copy className="h-3.5 w-3.5" /> Copy Amount
+                </Button>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">≈ ${payment.amountUsd} USD</p>
+
+            {/* Address */}
+            <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/20 to-background p-5 space-y-3">
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Send to this {payment.payCurrency.toUpperCase()} Address
+              </p>
+              <div className="rounded-xl bg-black/30 border border-white/5 px-4 py-3">
+                <p className="font-mono text-sm break-all leading-relaxed text-foreground/90 select-all">
+                  {payment.address}
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full gap-2 border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
+                onClick={onCopyAddress}
+              >
+                <Copy className="h-4 w-4" /> Copy Address
+              </Button>
+            </div>
+
+            {/* Warning */}
+            <div className="rounded-xl border border-red-500/20 bg-red-500/8 p-4 flex gap-3">
+              <AlertCircle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <p className="text-xs font-bold text-red-400">Critical: Send exact amount only</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  Sending a different amount or using the wrong network will result in permanent loss of funds.
+                  Always double-check the address before sending.
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+
+        {isFailed && (
+          <div className="flex flex-col items-center text-center py-4 gap-3">
+            <XCircle className="h-14 w-14 text-red-400" />
+            <p className="font-bold text-foreground">Payment Failed or Expired</p>
+            <p className="text-sm text-muted-foreground">The payment window has closed. Please create a new deposit.</p>
           </div>
+        )}
 
-          <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 space-y-1">
-            <p className="text-xs text-muted-foreground">To this {payment.payCurrency.toUpperCase()} address</p>
-            <p className="font-mono text-xs break-all leading-relaxed">{payment.address}</p>
-            <Button variant="ghost" size="sm" className="mt-1 h-7 text-xs gap-1" onClick={onCopyAddress}><Copy className="h-3.5 w-3.5" /> Copy Address</Button>
-          </div>
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={onCancel}
+        >
+          {isFailed ? 'Create New Deposit' : 'Cancel Payment'}
+        </Button>
 
-          <div className={`flex items-center gap-2 text-sm rounded-lg p-2.5 ${
-            expired ? 'bg-red-500/10 text-red-400' : 'bg-secondary/40 text-muted-foreground'
-          }`}>
-            <Clock className="h-4 w-4 flex-shrink-0" />
-            {expired ? 'Payment expired' : `Expires in ${countdown}`}
-          </div>
-
-          <div className="rounded-lg bg-orange-500/10 border border-orange-500/20 p-3 text-xs text-orange-400 flex gap-2">
-            <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
-            <p>Send the <strong>exact</strong> amount shown. Wrong amount or wrong network = permanent loss.</p>
-          </div>
-        </>
-      )}
-
-      {isDone && (
-        <div className="text-center py-4 space-y-2">
-          <CheckCircle2 className="h-12 w-12 text-green-400 mx-auto" />
-          <p className="font-semibold">Balance credited!</p>
-          <p className="text-sm text-muted-foreground">${payment.amountUsd} USD added to your account.</p>
-        </div>
-      )}
-
-      <Button variant="outline" size="sm" className="w-full" onClick={onCancel}>
-        {isDone || isFailed ? 'Make another deposit' : 'Cancel'}
-      </Button>
+      </div>
     </div>
   )
 }

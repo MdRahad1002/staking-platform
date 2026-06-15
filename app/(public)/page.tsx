@@ -364,6 +364,9 @@ import {
   Clock,
   ShieldCheck,
   CandlestickChart,
+  Repeat,
+  Receipt,
+  Sparkles,
 } from 'lucide-react'
 
 const features = [
@@ -472,6 +475,19 @@ const testimonials = [
   },
 ]
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SIMULATED "rewards paid" counter for the homepage feature section.
+// TODO: replace simulatedRewardsPaid() with the real /proof-of-rewards aggregate
+//       (sum of STAKING_RETURN + STAKING_BONUS transactions) when going live.
+// ─────────────────────────────────────────────────────────────────────────────
+const SIM_REWARDS_BASE = 4_820_000        // starting headline figure (USD)
+const SIM_REWARDS_EPOCH = Date.UTC(2026, 0, 1) // anchor so the number grows steadily
+const SIM_REWARDS_PER_SECOND = 0.92       // ~$79k/day of simulated growth
+function simulatedRewardsPaid(): number {
+  const elapsedSec = Math.max(0, (Date.now() - SIM_REWARDS_EPOCH) / 1000)
+  return SIM_REWARDS_BASE + elapsedSec * SIM_REWARDS_PER_SECOND
+}
+
 const cryptoCoins = [
   { symbol: 'btc', name: 'Bitcoin' },
   { symbol: 'eth', name: 'Ethereum' },
@@ -491,6 +507,9 @@ const cryptoCoins = [
 
 export default async function HomePage() {
   const session = await getAuthSession()
+
+  // Simulated headline figure (swap for real Proof-of-Rewards data later)
+  const rewardsPaidLabel = `$${Math.floor(simulatedRewardsPaid()).toLocaleString('en-US')}`
 
   return (
     <div className="relative overflow-hidden">
@@ -516,9 +535,19 @@ export default async function HomePage() {
 
             {/* Left: Text content */}
             <div className="text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300 mb-6 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300 mb-4 backdrop-blur-sm">
                 <Shield className="h-3.5 w-3.5 flex-shrink-0" />
                 Stake &middot; Trade &middot; Earn &middot; FCA Authorised
+              </div>
+
+              {/* New features teaser */}
+              <div className="mb-6">
+                <Link href="#why-different" className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/[0.07] px-3 py-1 text-xs text-cyan-200 hover:bg-cyan-400/[0.12] transition-colors">
+                  <Sparkles className="h-3 w-3 flex-shrink-0" />
+                  <span className="font-semibold">New:</span>
+                  <span className="text-cyan-100/80">Autopilot &middot; Protected Staking &middot; Proof of Rewards</span>
+                  <ChevronRight className="h-3 w-3 flex-shrink-0" />
+                </Link>
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
@@ -778,6 +807,73 @@ export default async function HomePage() {
               </Link>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* WHY STAKEONIX IS DIFFERENT */}
+      <section id="why-different" className="py-20 relative border-t border-white/5 overflow-hidden" style={{ background: 'linear-gradient(135deg, #080D1B 0%, #0a1322 100%)' }}>
+        <div className="pointer-events-none absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-blue-600/[0.07] blur-[150px] -translate-y-1/3" />
+        <div className="container relative mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Only on StakeOnix</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Features you won&apos;t find elsewhere</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We combined staking, trading and radical transparency into tools no other regulated
+              platform offers. Three reasons stakers are switching to StakeOnix.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Staking Autopilot */}
+            <div className="group relative rounded-2xl border border-white/10 bg-white/[0.02] p-7 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-all duration-300" data-reveal>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/25 to-blue-700/20 border border-blue-400/30 text-blue-300 mb-5 group-hover:scale-110 transition-transform">
+                <Repeat className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Staking Autopilot</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                Put every daily reward on autopilot. Auto-compound to grow your earnings, or split
+                each payout between reinvesting and cash with one setting.
+              </p>
+              <Link href={session ? '/autopilot' : '/signup'} className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                {session ? 'Open Autopilot' : 'Try Autopilot'} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* Protected Staking */}
+            <div className="group relative rounded-2xl border border-white/10 bg-white/[0.02] p-7 hover:border-cyan-500/40 hover:bg-cyan-500/[0.04] transition-all duration-300" data-reveal data-delay={120}>
+              <div className="absolute top-5 right-5 text-[10px] font-bold uppercase tracking-widest text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-md">Zero downside</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/25 to-blue-600/20 border border-cyan-400/30 text-cyan-300 mb-5 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Protected Staking</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                Keep all your daily rewards and your principal, plus earn a bonus if your chosen market
+                rises by maturity. If it falls, you lose nothing.
+              </p>
+              <Link href={session ? '/plan/stake' : '/signup'} className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+                {session ? 'Create a protected stake' : 'Start protected'} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* Proof of Rewards */}
+            <div className="group relative rounded-2xl border border-white/10 bg-white/[0.02] p-7 hover:border-green-500/40 hover:bg-green-500/[0.04] transition-all duration-300" data-reveal data-delay={240}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500/25 to-emerald-600/20 border border-green-400/30 text-green-300 mb-5 group-hover:scale-110 transition-transform">
+                <Receipt className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Proof of Rewards</h3>
+              <div className="mb-3">
+                <p className="text-2xl font-black gradient-text leading-none">{rewardsPaidLabel}</p>
+                <p className="text-[11px] text-muted-foreground mt-1">paid to stakers &middot; updated live</p>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                No trust required. Every payout is published to a public, anonymized ledger with its own
+                receipt ID see exactly what we pay.
+              </p>
+              <Link href="/proof-of-rewards" className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-400 hover:text-green-300 transition-colors">
+                View the ledger <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

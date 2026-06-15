@@ -15,6 +15,9 @@ export const metadata: Metadata = {
 }
 
 const REWARD_TYPES = ['STAKING_RETURN', 'STAKING_BONUS']
+// STAKING_RETURN is used for both daily ROI *and* principal returns; principal is
+// not a reward, so exclude it from the "rewards paid" figures.
+const EXCLUDE_PRINCIPAL = { NOT: { description: { startsWith: 'Principal returned' } } }
 
 /** Mask an identity for public display: "james@x.com" -> "j***s", "neoTrader" -> "n***r". */
 function anonymize(username: string | null, email: string): string {
@@ -38,11 +41,11 @@ async function getProofData() {
       prisma.transaction.aggregate({
         _sum: { amount: true },
         _count: true,
-        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED' },
+        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED', ...EXCLUDE_PRINCIPAL },
       }),
       prisma.transaction.aggregate({
         _sum: { amount: true },
-        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED', createdAt: { gte: since24h } },
+        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED', createdAt: { gte: since24h }, ...EXCLUDE_PRINCIPAL },
       }),
       prisma.transaction.aggregate({
         _sum: { amount: true },
@@ -55,7 +58,7 @@ async function getProofData() {
         where: { status: 'ACTIVE' },
       }),
       prisma.transaction.findMany({
-        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED' },
+        where: { type: { in: REWARD_TYPES }, status: 'COMPLETED', ...EXCLUDE_PRINCIPAL },
         orderBy: { createdAt: 'desc' },
         take: 18,
         select: {

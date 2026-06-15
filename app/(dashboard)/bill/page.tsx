@@ -12,6 +12,7 @@ const typeConfig: Record<string, { label: string; icon: React.ElementType; color
   WITHDRAWAL: { label: 'Withdrawal', icon: ArrowUpRight, color: 'text-red-400', sign: '-' },
   STAKING: { label: 'Staking', icon: DollarSign, color: 'text-amber-400', sign: '-' },
   STAKING_RETURN: { label: 'Staking Return', icon: DollarSign, color: 'text-primary', sign: '+' },
+  STAKING_BONUS: { label: 'Market Bonus', icon: DollarSign, color: 'text-cyan-400', sign: '+' },
   REFERRAL_BONUS: { label: 'Referral Bonus', icon: DollarSign, color: 'text-purple-400', sign: '+' },
   FEE: { label: 'Fee', icon: Activity, color: 'text-yellow-400', sign: '-' },
 }

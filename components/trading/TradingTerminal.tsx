@@ -199,6 +199,7 @@ export default function TradingTerminal({ userBalance: initialBalance, symbol: c
 
   useEffect(() => {
     if (wsRef.current) wsRef.current.close()
+    setLivePrice(null) // clear stale price when the symbol changes (e.g. via watchlist)
     const ws = new WebSocket(
       `wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@miniTicker`
     )

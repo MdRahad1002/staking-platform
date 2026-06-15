@@ -118,11 +118,19 @@ function calcLiqPrice(pos: Position): number | null {
 
 interface TradingTerminalProps {
   userBalance: number
+  /** Optional controlled symbol (e.g. from an external watchlist). */
+  symbol?: string
+  onSymbolChange?: (symbol: string) => void
 }
 
-export default function TradingTerminal({ userBalance: initialBalance }: TradingTerminalProps) {
-  // Market state
-  const [symbol, setSymbol] = useState('BTCUSDT')
+export default function TradingTerminal({ userBalance: initialBalance, symbol: controlledSymbol, onSymbolChange }: TradingTerminalProps) {
+  // Market state — supports both internal and controlled (watchlist) symbol selection
+  const [internalSymbol, setInternalSymbol] = useState('BTCUSDT')
+  const symbol = controlledSymbol ?? internalSymbol
+  const setSymbol = useCallback((s: string) => {
+    if (onSymbolChange) onSymbolChange(s)
+    else setInternalSymbol(s)
+  }, [onSymbolChange])
   const [chartInterval, setChartInterval] = useState('1h')
   const [ticker, setTicker] = useState<Ticker | null>(null)
   const [livePrice, setLivePrice] = useState<number | null>(null)

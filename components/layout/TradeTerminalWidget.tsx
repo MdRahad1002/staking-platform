@@ -37,7 +37,7 @@ export default function TradeTerminalWidget() {
 
   useEffect(() => {
     fetchMarket()
-    const id = setInterval(fetchMarket, 60_000) // refresh every 60 s
+    const id = setInterval(fetchMarket, 30_000) // refresh every 30 s
     return () => clearInterval(id)
   }, [fetchMarket])
 

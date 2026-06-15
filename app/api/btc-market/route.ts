@@ -35,7 +35,7 @@ export async function GET() {
 
     const res = await fetch(url, {
       headers: { Accept: 'application/json' },
-      next: { revalidate: 60 },
+      next: { revalidate: 30 },
     })
 
     if (!res.ok) throw new Error(`CoinGecko responded with ${res.status}`)
@@ -55,7 +55,7 @@ export async function GET() {
         low: formatPrice(row.low_24h),
         volume: formatVolume(row.total_volume),
       },
-      { headers: { 'Cache-Control': 's-maxage=60, stale-while-revalidate=30' } }
+      { headers: { 'Cache-Control': 's-maxage=30, stale-while-revalidate=15' } }
     )
   } catch (err) {
     console.error('[btc-market] fetch error:', err)

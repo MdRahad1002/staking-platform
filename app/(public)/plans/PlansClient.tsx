@@ -201,8 +201,9 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
       })()}
 
       {/* ── Earnings Calculator ── */}
-      <section className="mb-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-card to-card overflow-hidden">
-        <div className="px-5 pt-5 pb-4">
+      <section className="relative mb-10 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 via-card to-card overflow-hidden">
+        <div className="pointer-events-none absolute top-0 right-0 h-44 w-44 rounded-full bg-blue-500/10 blur-3xl translate-x-1/3 -translate-y-1/3" />
+        <div className="relative px-5 pt-5 pb-4">
           <div className="flex items-center gap-2 mb-1">
             <Calculator className="h-4 w-4 text-primary" />
             <p className="text-sm font-bold text-primary uppercase tracking-widest">Earnings Calculator</p>
@@ -292,25 +293,28 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
                 return (
                   <div
                     key={plan.id}
-                    className="w-48 rounded-xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-4 flex-shrink-0 cursor-pointer hover:border-primary/60 transition-all"
+                    className="group w-48 rounded-2xl border border-primary/30 bg-gradient-to-b from-primary/10 to-card p-4 flex-shrink-0 cursor-pointer hover:border-primary/60 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 ring-1 ring-primary/30">
-                        {plan.iconUrl ? (
-                          <SafeImg src={plan.iconUrl} alt={plan.name} className="h-5 w-5 rounded-full" />
-                        ) : (
-                          <TrendingUp className="h-4 w-4 text-primary" />
-                        )}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/20 ring-1 ring-primary/30 group-hover:scale-110 transition-transform">
+                          {plan.iconUrl ? (
+                            <SafeImg src={plan.iconUrl} alt={plan.name} className="h-5 w-5 rounded-full" />
+                          ) : (
+                            <TrendingUp className="h-4 w-4 text-primary" />
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-bold leading-tight truncate w-24">{plan.name}</p>
+                          <p className="text-[10px] text-muted-foreground">
+                            {plan.durationDays <= 30 ? 'Flexible' : 'Fixed'}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-bold leading-tight truncate w-28">{plan.name}</p>
-                        <p className="text-[10px] text-muted-foreground">
-                          {plan.durationDays <= 30 ? 'Flexible' : 'Fixed'}
-                        </p>
-                      </div>
+                      <span className="flex-shrink-0 text-[9px] font-bold text-primary bg-primary/10 border border-primary/20 px-1.5 py-0.5 rounded-md">Hot</span>
                     </div>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Est. APR</p>
-                    <p className="text-xl font-bold gradient-text">{apr}%</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Up to APR</p>
+                    <p className="text-2xl font-black gradient-text">{apr}%</p>
                   </div>
                 )
               })}

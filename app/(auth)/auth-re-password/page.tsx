@@ -161,7 +161,6 @@ function ForgotPasswordForm() {
           </Button>
         </form>
 
-      /* Step 1a: No token, not sent - show email form */
       ) : !sent ? (
         <form onSubmit={emailForm.handleSubmit(onForgot)} className="space-y-4">
           <div className="space-y-1.5">
@@ -187,7 +186,6 @@ function ForgotPasswordForm() {
           </Button>
         </form>
 
-      /* Step 1b: Email sent - confirmation message */
       ) : (
         <div className="text-center">
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">

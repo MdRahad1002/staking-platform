@@ -10,7 +10,7 @@ import { formatDateTime, formatCurrency } from '@/lib/utils'
 import {
   Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw,
   AlertCircle, TrendingUp, Zap, ChevronRight, ShieldCheck, Lock,
-  Wallet, BadgeCheck, ArrowRight, ReceiptText,
+  Wallet, BadgeCheck, ArrowRight, ReceiptText, Sparkles, ScanLine,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -38,6 +38,28 @@ interface StakingPlan {
 }
 
 const QUICK_PICKS = [200, 500, 1000, 5000, 10000, 25000]
+
+/** Crypto coin icon with graceful fallback to a lettered chip. */
+function CoinIcon({ symbol, iconUrl, className }: { symbol: string; iconUrl?: string | null; className?: string }) {
+  const [errored, setErrored] = useState(false)
+  const src = iconUrl || `https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/svg/color/${symbol.toLowerCase()}.svg`
+  if (errored) {
+    return (
+      <div className={cn('flex items-center justify-center rounded-full bg-blue-500/15 text-[10px] font-black text-blue-300', className)}>
+        {symbol.slice(0, 3).toUpperCase()}
+      </div>
+    )
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={symbol}
+      onError={() => setErrored(true)}
+      className={cn('object-contain', className)}
+    />
+  )
+}
 
 const STATUS_LABEL: Record<string, string> = {
   waiting: 'Waiting for payment',
@@ -172,19 +194,31 @@ export default function DepositPage() {
     <div className="space-y-8 max-w-5xl">
 
       {/* ── Page Header ── */}
-      <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/40 via-background to-background p-6 md:p-8">
-        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl translate-x-1/3 -translate-y-1/3" />
+      <div className="relative overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-950/50 via-[#0a1020] to-background p-6 md:p-8 shadow-2xl shadow-blue-950/30">
+        {/* Layered ambient glows */}
+        <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl translate-x-1/3 -translate-y-1/3" />
+        <div className="pointer-events-none absolute bottom-0 left-1/4 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl translate-y-1/2" />
+        {/* Subtle grid texture */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+        />
         <div className="relative flex flex-col sm:flex-row sm:items-center gap-4">
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/20">
-            <ArrowDownToLine className="h-6 w-6 text-blue-400" />
+          <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/30 to-blue-700/20 border border-blue-400/30 shadow-lg shadow-blue-500/20">
+            <ArrowDownToLine className="h-6 w-6 text-blue-300" />
+            <span className="absolute -inset-px rounded-2xl ring-1 ring-inset ring-white/10" />
           </div>
           <div className="flex-1">
-            <h1 className="text-2xl md:text-3xl font-black text-white">Fund Your Account</h1>
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 mb-2">
+              <Sparkles className="h-3 w-3 text-blue-300" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300">Instant Crypto Funding</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">Fund Your Account</h1>
             <p className="text-muted-foreground mt-1">
               Deposit cryptocurrency and receive USD credit instantly after network confirmation.
             </p>
           </div>
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 rounded-full border border-green-500/25 bg-green-500/10 px-3 py-1.5">
             <ShieldCheck className="h-4 w-4 text-green-400" />
             <span className="text-xs font-semibold text-green-400">Secured & Encrypted</span>
           </div>
@@ -357,18 +391,41 @@ export default function DepositPage() {
                 <div className="space-y-2">
                   <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Pay With</Label>
                   <Select value={selected} onValueChange={setSelected}>
-                    <SelectTrigger className="h-12 rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60">
+                    <SelectTrigger className="h-14 rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60 [&>span]:flex [&>span]:items-center [&>span]:gap-3">
                       <SelectValue placeholder="Select cryptocurrency..." />
                     </SelectTrigger>
                     <SelectContent>
                       {currencies.map((c) => (
                         <SelectItem key={c.id} value={c.id}>
-                          <span className="font-semibold">{c.symbol}</span>
-                          <span className="text-muted-foreground ml-1.5">{c.name} · {c.network}</span>
+                          <span className="flex items-center gap-2.5">
+                            <CoinIcon symbol={c.symbol} iconUrl={c.iconUrl} className="h-6 w-6 rounded-full" />
+                            <span className="font-semibold">{c.symbol}</span>
+                            <span className="text-muted-foreground">{c.name} · {c.network}</span>
+                          </span>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
+
+                  {/* Selected currency at-a-glance */}
+                  {selectedCurrency && (
+                    <div className="flex items-center gap-3 rounded-xl border border-blue-500/20 bg-blue-500/[0.06] px-4 py-3">
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 p-1.5">
+                        <CoinIcon symbol={selectedCurrency.symbol} iconUrl={selectedCurrency.iconUrl} className="h-full w-full rounded-full" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold text-foreground leading-tight">
+                          {selectedCurrency.name} <span className="text-muted-foreground font-normal">({selectedCurrency.symbol})</span>
+                        </p>
+                        <p className="text-[11px] text-muted-foreground mt-0.5">
+                          Min ${selectedCurrency.minDeposit} USD
+                        </p>
+                      </div>
+                      <Badge className="flex-shrink-0 text-[10px] bg-blue-500/15 text-blue-300 border border-blue-500/30">
+                        {selectedCurrency.network}
+                      </Badge>
+                    </div>
+                  )}
                 </div>
 
                 {/* Submit */}
@@ -503,9 +560,12 @@ export default function DepositPage() {
                         ${dep.amountUsd ?? dep.amount}
                       </td>
                       <td className="px-4 py-4 text-xs text-muted-foreground whitespace-nowrap">
-                        {dep.payAmount
-                          ? <span className="font-mono">{dep.payAmount} {(dep.payCurrency ?? dep.currency.symbol).toUpperCase()}</span>
-                          : dep.currency.symbol}
+                        <span className="inline-flex items-center gap-2">
+                          <CoinIcon symbol={dep.payCurrency ?? dep.currency.symbol} className="h-4 w-4 rounded-full" />
+                          {dep.payAmount
+                            ? <span className="font-mono">{dep.payAmount} {(dep.payCurrency ?? dep.currency.symbol).toUpperCase()}</span>
+                            : <span>{dep.currency.symbol}</span>}
+                        </span>
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-1.5">
@@ -607,11 +667,15 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
         {!isFailed && (
           <>
             {/* Amount to send */}
-            <div className="rounded-2xl border border-yellow-500/25 bg-gradient-to-br from-yellow-950/30 to-background p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground mb-3">Send Exactly</p>
-              <div className="flex items-end justify-between gap-4">
+            <div className="relative overflow-hidden rounded-2xl border border-yellow-500/25 bg-gradient-to-br from-yellow-950/30 to-background p-5">
+              <div className="pointer-events-none absolute top-0 right-0 h-32 w-32 rounded-full bg-yellow-500/10 blur-2xl translate-x-1/3 -translate-y-1/3" />
+              <div className="relative flex items-center gap-2 mb-3">
+                <CoinIcon symbol={payment.payCurrency} className="h-5 w-5 rounded-full" />
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Send Exactly</p>
+              </div>
+              <div className="relative flex items-end justify-between gap-4">
                 <div>
-                  <p className="font-mono text-3xl font-black text-yellow-400 leading-none">
+                  <p className="font-mono text-3xl font-black text-yellow-400 leading-none break-all">
                     {payment.payAmount}
                   </p>
                   <p className="text-lg font-bold text-yellow-300 mt-1">{payment.payCurrency.toUpperCase()}</p>
@@ -630,14 +694,20 @@ function ActivePaymentCard({ payment, pollStatus, onCopyAddress, onCopyAmount, o
 
             {/* Address + QR Code */}
             <div className="rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-950/20 to-background p-5 space-y-4">
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+              <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                <ScanLine className="h-3.5 w-3.5 text-blue-400" />
                 Send to this {payment.payCurrency.toUpperCase()} Address
               </p>
 
               {/* QR Code */}
               {qrDataUrl && (
                 <div className="flex flex-col items-center gap-2">
-                  <div className="rounded-2xl bg-white p-3 shadow-lg shadow-black/30 ring-1 ring-white/10">
+                  <div className="relative rounded-2xl bg-white p-3 shadow-lg shadow-blue-950/40 ring-1 ring-white/10">
+                    {/* Corner accents */}
+                    <span className="absolute -top-1 -left-1 h-4 w-4 rounded-tl-lg border-t-2 border-l-2 border-blue-400" />
+                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-tr-lg border-t-2 border-r-2 border-blue-400" />
+                    <span className="absolute -bottom-1 -left-1 h-4 w-4 rounded-bl-lg border-b-2 border-l-2 border-blue-400" />
+                    <span className="absolute -bottom-1 -right-1 h-4 w-4 rounded-br-lg border-b-2 border-r-2 border-blue-400" />
                     <img
                       src={qrDataUrl}
                       alt={`QR code for ${payment.payCurrency.toUpperCase()} address`}

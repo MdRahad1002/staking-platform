@@ -527,8 +527,12 @@ export default async function HomePage() {
         </div>
         {/* Subtle grid overlay */}
         <div className="absolute inset-0 hero-grid opacity-[0.06]" />
-        {/* Blue ambient glow */}
-        <div className="pointer-events-none absolute top-0 right-0 h-[700px] w-[700px] rounded-full bg-blue-600/[0.08] blur-[180px] translate-x-1/4 -translate-y-1/4" />
+        {/* Vibrant aurora mesh — drifting colour blobs for a lively, happy feel */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="aurora-blob absolute top-[-10%] right-[-5%] h-[620px] w-[620px] rounded-full bg-blue-500/[0.16] blur-[150px]" />
+          <div className="aurora-blob delay-1 absolute top-[20%] left-[-10%] h-[520px] w-[520px] rounded-full bg-cyan-400/[0.12] blur-[150px]" />
+          <div className="aurora-blob delay-2 absolute bottom-[-15%] right-[15%] h-[560px] w-[560px] rounded-full bg-violet-500/[0.12] blur-[160px]" />
+        </div>
 
         <div className="container relative mx-auto px-4 py-14 sm:py-20 lg:py-0">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
@@ -551,8 +555,9 @@ export default async function HomePage() {
               </div>
 
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
-                Stake & Trade Crypto.{' '}
-                <span className="gradient-text">Earn Every Day.</span>
+                Stake &amp; Trade Crypto.{' '}
+                <span className="gradient-text-animated">Earn Every Day.</span>
+                <span className="inline-block animate-bob ml-1">🚀</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
@@ -564,7 +569,7 @@ export default async function HomePage() {
                 <Link href={session ? '/dashboard' : '/signup'} className="w-full sm:w-auto">
                   <Button
                     size="xl"
-                    className="w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white shadow-2xl shadow-blue-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-blue-500/50"
+                    className="shine-sweep w-full sm:w-auto gap-2 font-bold text-base px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 hover:from-blue-400 hover:via-cyan-400 hover:to-blue-500 text-white shadow-2xl shadow-blue-500/30 border-0 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50"
                   >
                     <ArrowRight className="h-5 w-5" />
                     {session ? 'Go to Dashboard' : 'Get Started Free'}
@@ -582,6 +587,15 @@ export default async function HomePage() {
                 </Link>
               </div>
 
+              {/* Live social proof */}
+              <Link href="/proof-of-rewards" className="group inline-flex items-center gap-2.5 mb-6 rounded-full border border-green-500/20 bg-green-500/[0.07] pl-1.5 pr-4 py-1.5 hover:border-green-500/40 hover:bg-green-500/[0.12] transition-all">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-green-500/20 text-sm animate-bob">🎉</span>
+                <span className="text-sm text-muted-foreground">
+                  <span className="font-black gradient-text">{rewardsPaidLabel}</span> already paid to stakers
+                </span>
+                <ChevronRight className="h-3.5 w-3.5 text-green-400 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
               {!session && (
                 <p className="text-xs text-muted-foreground mb-8">
                   Staking rewards are variable and not guaranteed. Crypto assets can go down as well as up.
@@ -596,7 +610,7 @@ export default async function HomePage() {
                   { icon: <BadgeCheck className="h-4 w-4 text-blue-400" />, label: 'FCA Authorised' },
                   { icon: <CandlestickChart className="h-4 w-4 text-blue-400" />, label: 'Live Trading' },
                 ].map((b) => (
-                  <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground bg-white/5 border border-white/[0.08] rounded-full px-3 py-1.5">
+                  <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground bg-white/5 border border-white/[0.08] rounded-full px-3 py-1.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.08] hover:text-foreground">
                     {b.icon}
                     <span>{b.label}</span>
                   </div>
@@ -748,10 +762,12 @@ export default async function HomePage() {
                 {i < stats.length - 1 && (
                   <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-10 bg-white/5" />
                 )}
-                <div className="flex justify-center mb-2 text-cyan-400/50 group-hover:text-cyan-400 transition-colors">
-                  {stat.icon}
+                <div className="flex justify-center mb-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/15 to-blue-600/15 border border-white/10 text-cyan-400 group-hover:scale-110 group-hover:border-cyan-400/40 transition-all duration-300">
+                    {stat.icon}
+                  </div>
                 </div>
-                <div className="text-3xl md:text-4xl font-black gradient-text mb-1">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-black gradient-text mb-1 transition-transform duration-300 group-hover:scale-105">{stat.value}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -817,7 +833,7 @@ export default async function HomePage() {
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-2">Only on StakeOnix</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Features you won&apos;t find elsewhere</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Features you <span className="gradient-text-animated">won&apos;t find elsewhere</span></h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We combined staking, trading and radical transparency into tools no other regulated
               platform offers. Three reasons stakers are switching to StakeOnix.

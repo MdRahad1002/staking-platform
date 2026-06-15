@@ -222,13 +222,13 @@ function StakeForm() {
                       aria-checked={isProtected}
                       onClick={() => setIsProtected((v) => !v)}
                       className={cn(
-                        'relative h-6 w-11 flex-shrink-0 rounded-full transition-colors',
-                        isProtected ? 'bg-blue-500' : 'bg-secondary border border-border'
+                        'relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full px-0.5 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50',
+                        isProtected ? 'bg-blue-500' : 'bg-white/15'
                       )}
                     >
                       <span className={cn(
-                        'absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform',
-                        isProtected ? 'translate-x-[22px]' : 'translate-x-0.5'
+                        'h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200',
+                        isProtected ? 'translate-x-5' : 'translate-x-0'
                       )} />
                     </button>
                   </div>

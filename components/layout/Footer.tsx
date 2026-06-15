@@ -14,6 +14,12 @@ const footerLinks = {
     { href: '/app-info', label: 'Mobile App' },
     { href: '/faq', label: 'FAQ' },
   ],
+  Guides: [
+    { href: '/how-to-invest-in-crypto', label: 'How to Invest in Crypto' },
+    { href: '/best-crypto-staking-platform', label: 'Best Staking Platform' },
+    { href: '/canada', label: 'Crypto Staking Canada' },
+    { href: '/uk-crypto-staking', label: 'Crypto Staking UK' },
+  ],
   Legal: [
     { href: '/terms', label: 'Terms of Service' },
     { href: '/policy', label: 'Privacy Policy' },
@@ -62,7 +68,7 @@ export function Footer() {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <Logo linkClassName="mb-4" />
@@ -159,8 +165,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links - 3-col on mobile, dissolves into parent 5-col grid on md */}
-          <div className="grid grid-cols-3 gap-4 md:contents">
+          {/* Links - 2-col on mobile, dissolves into parent 6-col grid on md */}
+          <div className="grid grid-cols-2 gap-4 md:contents">
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="font-semibold text-sm mb-4 text-white/80">{category}</h3>

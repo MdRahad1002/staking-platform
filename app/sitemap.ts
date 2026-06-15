@@ -1,100 +1,39 @@
-﻿import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next'
 
 const APP_URL = 'https://www.stakeonix.ca'
 
+// [path, changeFrequency, priority]
+const ROUTES: [string, MetadataRoute.Sitemap[number]['changeFrequency'], number][] = [
+  ['', 'daily', 1.0],
+  ['/plans', 'daily', 0.95],
+  // High-intent search landing pages
+  ['/how-to-invest-in-crypto', 'weekly', 0.95],
+  ['/best-crypto-staking-platform', 'weekly', 0.92],
+  ['/canada', 'weekly', 0.92],
+  ['/uk-crypto-staking', 'weekly', 0.92],
+  // Education & trust
+  ['/what-is-staking', 'weekly', 0.85],
+  ['/why-choose-us', 'monthly', 0.85],
+  ['/proof-of-rewards', 'daily', 0.85],
+  ['/referral-program', 'monthly', 0.80],
+  ['/about', 'monthly', 0.80],
+  ['/faq', 'weekly', 0.80],
+  ['/what-is-mining', 'monthly', 0.78],
+  ['/blog/cra-staking-tax-guide', 'monthly', 0.78],
+  ['/app-info', 'monthly', 0.70],
+  ['/contact', 'monthly', 0.65],
+  // Legal
+  ['/policy', 'yearly', 0.30],
+  ['/cookies', 'yearly', 0.20],
+  ['/terms', 'yearly', 0.20],
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
-
-  return [
-    {
-      url: APP_URL,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${APP_URL}/plans`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.95,
-    },
-    {
-      url: `${APP_URL}/what-is-staking`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.85,
-    },
-    {
-      url: `${APP_URL}/about`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.80,
-    },
-    {
-      url: `${APP_URL}/faq`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.80,
-    },
-    {
-      url: `${APP_URL}/contact`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.70,
-    },
-    {
-      url: `${APP_URL}/why-choose-us`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.85,
-    },
-    {
-      url: `${APP_URL}/referral-program`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.85,
-    },
-    {
-      url: `${APP_URL}/what-is-mining`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.80,
-    },
-    {
-      url: `${APP_URL}/policy`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.30,
-    },
-    {
-      url: `${APP_URL}/cookies`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.20,
-    },
-    {
-      url: `${APP_URL}/terms`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.20,
-    },
-    {
-      url: `${APP_URL}/canada`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.90,
-    },
-    {
-      url: `${APP_URL}/app-info`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.75,
-    },
-    {
-      url: `${APP_URL}/blog/cra-staking-tax-guide`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.80,
-    },
-  ]
+  return ROUTES.map(([path, changeFrequency, priority]) => ({
+    url: `${APP_URL}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
+  }))
 }

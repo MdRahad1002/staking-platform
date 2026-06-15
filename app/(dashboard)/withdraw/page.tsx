@@ -10,12 +10,13 @@ import { formatCurrency, formatDateTime, truncateAddress } from '@/lib/utils'
 import {
   ArrowUpFromLine, AlertTriangle, ShieldAlert, ShieldCheck, Lock,
   BadgeCheck, Wallet, KeyRound, CheckCircle2, Clock, XCircle,
-  ChevronRight, ReceiptText, AlertCircle, RefreshCw, Info,
+  ChevronRight, ReceiptText, AlertCircle, RefreshCw, Info, Zap,
 } from 'lucide-react'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { CoinIcon } from '@/components/shared/CoinIcon'
 
 interface WithdrawalCurrency {
   id: string
@@ -128,14 +129,26 @@ export default function WithdrawPage() {
     <div className="space-y-8 max-w-5xl">
 
       {/* ── Page Header ── */}
-      <div className="relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-950/40 via-background to-background p-6 md:p-8">
-        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl translate-x-1/3 -translate-y-1/3" />
+      <div className="relative overflow-hidden rounded-3xl border border-orange-500/20 bg-gradient-to-br from-orange-950/50 via-[#170f0a] to-background p-6 md:p-8 shadow-2xl shadow-orange-950/30">
+        {/* Layered ambient glows */}
+        <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-orange-500/15 blur-3xl translate-x-1/3 -translate-y-1/3" />
+        <div className="pointer-events-none absolute bottom-0 left-1/4 h-56 w-56 rounded-full bg-amber-500/10 blur-3xl translate-y-1/2" />
+        {/* Subtle grid texture */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+        />
         <div className="relative flex flex-col sm:flex-row sm:items-center gap-4">
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/20">
-            <ArrowUpFromLine className="h-6 w-6 text-orange-400" />
+          <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500/30 to-orange-700/20 border border-orange-400/30 shadow-lg shadow-orange-500/20">
+            <ArrowUpFromLine className="h-6 w-6 text-orange-300" />
+            <span className="absolute -inset-px rounded-2xl ring-1 ring-inset ring-white/10" />
           </div>
           <div className="flex-1">
-            <h1 className="text-2xl md:text-3xl font-black text-white">Withdraw Funds</h1>
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-0.5 mb-2">
+              <Zap className="h-3 w-3 text-orange-300" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-orange-300">Fast Crypto Payouts</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">Withdraw Funds</h1>
             <p className="text-muted-foreground mt-1">
               Send your earnings directly to your cryptocurrency wallet.
             </p>
@@ -246,18 +259,41 @@ export default function WithdrawPage() {
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Withdraw As</Label>
                 <Select value={selected} onValueChange={setSelected}>
-                  <SelectTrigger className="h-12 rounded-xl border-border/60 bg-secondary/30 focus:border-orange-500/60">
+                  <SelectTrigger className="h-14 rounded-xl border-border/60 bg-secondary/30 focus:border-orange-500/60 [&>span]:flex [&>span]:items-center [&>span]:gap-3">
                     <SelectValue placeholder="Select currency..." />
                   </SelectTrigger>
                   <SelectContent>
                     {currencies.map((c) => (
                       <SelectItem key={c.id} value={c.id}>
-                        <span className="font-semibold">{c.symbol}</span>
-                        <span className="text-muted-foreground ml-1.5">{c.name} · {c.network}</span>
+                        <span className="flex items-center gap-2.5">
+                          <CoinIcon symbol={c.symbol} className="h-6 w-6 rounded-full" />
+                          <span className="font-semibold">{c.symbol}</span>
+                          <span className="text-muted-foreground">{c.name} · {c.network}</span>
+                        </span>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+
+                {/* Selected currency at-a-glance */}
+                {selectedCurrency && (
+                  <div className="flex items-center gap-3 rounded-xl border border-orange-500/20 bg-orange-500/[0.06] px-4 py-3">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 p-1.5">
+                      <CoinIcon symbol={selectedCurrency.symbol} className="h-full w-full rounded-full" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-bold text-foreground leading-tight">
+                        {selectedCurrency.name} <span className="text-muted-foreground font-normal">({selectedCurrency.symbol})</span>
+                      </p>
+                      <p className="text-[11px] text-muted-foreground mt-0.5">
+                        Min {formatCurrency(selectedCurrency.minWithdrawal)} · Fee {formatCurrency(selectedCurrency.fee)}
+                      </p>
+                    </div>
+                    <Badge className="flex-shrink-0 text-[10px] bg-orange-500/15 text-orange-300 border border-orange-500/30">
+                      {selectedCurrency.network}
+                    </Badge>
+                  </div>
+                )}
               </div>
 
               {/* Amount */}
@@ -527,7 +563,12 @@ export default function WithdrawPage() {
                   return (
                     <tr key={w.id} className="hover:bg-secondary/20 transition-colors">
                       <td className="px-6 py-4 text-xs text-muted-foreground whitespace-nowrap">{formatDateTime(w.createdAt)}</td>
-                      <td className="px-4 py-4 font-bold text-foreground whitespace-nowrap">{formatCurrency(w.amount)}</td>
+                      <td className="px-4 py-4 font-bold text-foreground whitespace-nowrap">
+                        <span className="inline-flex items-center gap-2">
+                          <CoinIcon symbol={w.currency.symbol} className="h-4 w-4 rounded-full" />
+                          {formatCurrency(w.amount)}
+                        </span>
+                      </td>
                       <td className="px-4 py-4 text-xs text-yellow-400 whitespace-nowrap">{formatCurrency(w.fee)}</td>
                       <td className="px-4 py-4 font-bold text-orange-400 whitespace-nowrap">{formatCurrency(w.netAmount)}</td>
                       <td className="px-4 py-4 font-mono text-xs text-muted-foreground whitespace-nowrap">{truncateAddress(w.walletAddress)}</td>

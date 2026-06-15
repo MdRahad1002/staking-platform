@@ -18,7 +18,10 @@ import {
   FileText,
   User,
   Camera,
+  Sparkles,
+  Lock,
 } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import { COUNTRIES } from './countries'
 
 interface KycStatus {
@@ -105,19 +108,35 @@ function ImageUploadBox({
 
   return (
     <div className="space-y-2">
-      <Label>
+      <Label className="flex items-center gap-1.5">
         {label} {required && <span className="text-destructive">*</span>}
+        {value && <CheckCircle2 className="h-3.5 w-3.5 text-green-400" />}
       </Label>
       <p className="text-xs text-muted-foreground">{description}</p>
-      <label className="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary/50 transition-colors bg-muted/20">
+      <label className={cn(
+        'group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition-all overflow-hidden',
+        value
+          ? 'border-green-500/40 bg-green-500/[0.04]'
+          : 'border-border bg-secondary/20 hover:border-blue-500/50 hover:bg-blue-500/[0.04]'
+      )}>
         {value ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={value} alt={label} className="h-full w-full object-contain rounded-lg p-1" />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={value} alt={label} className="h-full w-full object-contain rounded-xl p-1" />
+            <span className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-white shadow-lg">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+            </span>
+            <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-semibold text-white/80 bg-black/50 px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              Click to replace
+            </span>
+          </>
         ) : (
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <Upload className="h-8 w-8" />
-            <span className="text-sm">Click to upload</span>
-            <span className="text-xs">JPG, PNG, WEBP - auto-compressed</span>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-110 transition-transform">
+              <Upload className="h-5 w-5" />
+            </div>
+            <span className="text-sm font-medium text-foreground">Click to upload</span>
+            <span className="text-xs">JPG, PNG, WEBP · auto-compressed</span>
           </div>
         )}
         <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
@@ -207,6 +226,12 @@ export default function KycPage() {
   const requiresBack = docType === 'NATIONAL_ID' || docType === 'DRIVERS_LICENSE'
   const canSubmit = kyc?.status !== 'APPROVED' && kyc?.status !== 'PENDING'
 
+  // Progress across the three verification stages
+  const step1Done = !!(firstName && lastName && dob && country)
+  const step2Done = !!(docType && docNumber && frontImage && (!requiresBack || backImage))
+  const step3Done = !!selfieImage
+  const completedCount = [step1Done, step2Done, step3Done].filter(Boolean).length
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!firstName || !lastName || !dob || !country || !docType || !docNumber) {
@@ -247,29 +272,83 @@ export default function KycPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <ShieldCheck className="h-6 w-6 text-primary" />
-          Identity Verification (KYC)
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          KYC verification is required to enable withdrawals. Your data is encrypted and handled securely.
-        </p>
+      {/* ── Header ── */}
+      <div className="relative overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-950/50 via-[#0a1020] to-background p-6 md:p-8 shadow-2xl shadow-blue-950/30">
+        <div className="pointer-events-none absolute top-0 right-0 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl translate-x-1/3 -translate-y-1/3" />
+        <div className="pointer-events-none absolute bottom-0 left-1/4 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl translate-y-1/2" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+        />
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/30 to-blue-700/20 border border-blue-400/30 shadow-lg shadow-blue-500/20">
+            <ShieldCheck className="h-6 w-6 text-blue-300" />
+            <span className="absolute -inset-px rounded-2xl ring-1 ring-inset ring-white/10" />
+          </div>
+          <div className="flex-1">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 mb-2">
+              <Sparkles className="h-3 w-3 text-blue-300" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300">Identity Verification</span>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">Verify Your Identity</h1>
+            <p className="text-muted-foreground mt-1">
+              KYC verification unlocks withdrawals. Your documents are encrypted and handled securely.
+            </p>
+          </div>
+          <div className="hidden md:flex items-center gap-2 rounded-full border border-green-500/25 bg-green-500/10 px-3 py-1.5 self-start">
+            <Lock className="h-4 w-4 text-green-400" />
+            <span className="text-xs font-semibold text-green-400">Encrypted</span>
+          </div>
+        </div>
+
+        {/* Step tracker (only while the form is active) */}
+        {canSubmit && (
+          <>
+          <div className="relative mt-6 flex items-center justify-end">
+            <span className="text-[11px] font-semibold text-muted-foreground">{completedCount}/3 sections complete</span>
+          </div>
+          <div className="relative mt-2 flex items-center gap-0">
+            {[
+              { n: 1, label: 'Personal', done: step1Done },
+              { n: 2, label: 'Document', done: step2Done },
+              { n: 3, label: 'Selfie', done: step3Done },
+            ].map((step, i) => (
+              <div key={step.n} className="flex items-center flex-1">
+                <div className="flex flex-col items-center">
+                  <div className={cn(
+                    'flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold transition-all',
+                    step.done ? 'bg-green-500 border-green-500 text-white' : 'bg-secondary border-border text-muted-foreground'
+                  )}>
+                    {step.done ? <CheckCircle2 className="h-4 w-4" /> : step.n}
+                  </div>
+                  <span className={cn('text-[10px] font-semibold mt-1.5 text-center whitespace-nowrap', step.done ? 'text-green-400' : 'text-muted-foreground')}>
+                    {step.label}
+                  </span>
+                </div>
+                {i < 2 && (
+                  <div className={cn('flex-1 h-0.5 mx-2 mb-5 rounded-full', step.done ? 'bg-green-500/60' : 'bg-border')} />
+                )}
+              </div>
+            ))}
+          </div>
+          </>
+        )}
       </div>
 
       {/* Why KYC */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {[
-          { icon: <ShieldCheck className="h-4 w-4 text-primary" />, title: 'Secure', desc: 'Bank-grade document encryption' },
-          { icon: <Clock className="h-4 w-4 text-primary" />, title: 'Fast Review', desc: '24–48 hour processing time' },
-          { icon: <CheckCircle2 className="h-4 w-4 text-primary" />, title: 'One-Time', desc: 'Submit once, verified forever' },
+          { icon: <ShieldCheck className="h-4 w-4" />, color: 'text-green-400 bg-green-500/10', title: 'Secure', desc: 'Bank-grade document encryption' },
+          { icon: <Clock className="h-4 w-4" />, color: 'text-blue-400 bg-blue-500/10', title: 'Fast Review', desc: '24-48 hour processing time' },
+          { icon: <CheckCircle2 className="h-4 w-4" />, color: 'text-cyan-400 bg-cyan-500/10', title: 'One-Time', desc: 'Submit once, verified forever' },
         ].map((item, i) => (
-          <div key={i} className="flex items-start gap-2 p-3 rounded-lg bg-muted/30 border border-border">
-            {item.icon}
+          <div key={i} className="flex items-start gap-3 p-4 rounded-2xl bg-card border border-border hover:border-blue-500/30 transition-colors">
+            <div className={cn('flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg', item.color)}>
+              {item.icon}
+            </div>
             <div>
-              <p className="text-sm font-medium">{item.title}</p>
-              <p className="text-xs text-muted-foreground">{item.desc}</p>
+              <p className="text-sm font-semibold">{item.title}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
             </div>
           </div>
         ))}
@@ -399,7 +478,8 @@ export default function KycPage() {
             document. Your data is processed solely for identity verification purposes in compliance with applicable regulations.
           </div>
 
-          <Button type="submit" className="w-full" size="lg" disabled={submitting}>
+          <Button type="submit" variant="gradient" className="w-full gap-2 h-12 rounded-xl font-bold text-base" size="lg" disabled={submitting} loading={submitting}>
+            {!submitting && <ShieldCheck className="h-4 w-4" />}
             {submitting ? 'Submitting...' : kyc?.status === 'REJECTED' ? 'Resubmit KYC' : 'Submit KYC Verification'}
           </Button>
         </form>

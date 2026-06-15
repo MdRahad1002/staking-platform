@@ -6,12 +6,32 @@ import { z } from 'zod'
 import { rateLimit, rateLimitResponse } from '@/lib/rate-limit'
 import { getClientIp, isIpBlocked } from '@/lib/ip-check'
 
+// Reference assets eligible for the Protected Staking market-linked bonus
+const REF_SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT', 'XRPUSDT', 'ADAUSDT', 'AVAXUSDT', 'DOTUSDT', 'MATICUSDT', 'LINKUSDT'] as const
+const PROTECTION_PARTICIPATION = 50 // % of reference-asset upside paid as a bonus at maturity
+
 const schema = z.object({
   // planId must be a UUID to prevent injection via crafted strings
   planId: z.string().uuid('Invalid plan.'),
   // Amount must be a finite positive number; cap at 10M to prevent overflow
   amount: z.number().positive().finite().max(10_000_000, 'Amount exceeds allowed limit.'),
+  // Protected Staking (optional opt-in)
+  isProtected: z.boolean().optional().default(false),
+  refSymbol: z.enum(REF_SYMBOLS).optional(),
 })
+
+/** Best-effort server-side spot price for a Binance symbol. */
+async function fetchBinancePrice(symbol: string): Promise<number | null> {
+  try {
+    const res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`, { cache: 'no-store' })
+    if (!res.ok) return null
+    const data = await res.json()
+    const price = parseFloat(data?.price)
+    return Number.isFinite(price) ? price : null
+  } catch {
+    return null
+  }
+}
 
 export async function POST(req: NextRequest) {
   // ── Rate limit: 10 stake activations per user per hour ─────────────────────────
@@ -29,7 +49,7 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 })
     }
-    const { planId, amount } = parsed.data
+    const { planId, amount, isProtected, refSymbol } = parsed.data
 
     // Per-user rate limit: max 5 new stakes per hour per account
     const userRl = rateLimit(`staking:user:${session.user.id}`, 5, 60 * 60_000)
@@ -73,6 +93,20 @@ export async function POST(req: NextRequest) {
     const nextProcessAt = new Date(startedAt.getTime() + 24 * 60 * 60 * 1000) // first payout in 24h
     const { totalReturn: expectedReturn } = calculateStakingReturns(amount, plan.dailyRoi, plan.durationDays)
 
+    // ── Protected Staking: capture the reference asset's price at creation ──
+    let protectedEnabled = false
+    let refStartPrice: number | null = null
+    if (isProtected) {
+      if (!refSymbol) {
+        return NextResponse.json({ error: 'Select a reference asset for Protected Staking.' }, { status: 400 })
+      }
+      refStartPrice = await fetchBinancePrice(refSymbol)
+      if (!refStartPrice) {
+        return NextResponse.json({ error: 'Could not price the reference asset right now. Please try again.' }, { status: 502 })
+      }
+      protectedEnabled = true
+    }
+
     const stake = await prisma.$transaction(async (tx) => {
       // Re-read balance inside the transaction to prevent race-condition double-spend
       const freshUser = await tx.user.findUnique({
@@ -100,6 +134,10 @@ export async function POST(req: NextRequest) {
           startDate: startedAt,
           endDate: endsAt,
           nextProcessAt,
+          isProtected: protectedEnabled,
+          refSymbol: protectedEnabled ? refSymbol : null,
+          refStartPrice: protectedEnabled ? refStartPrice : null,
+          protectionParticipation: PROTECTION_PARTICIPATION,
         },
       })
 

@@ -64,6 +64,7 @@ model User {
   domain            Domain?           @relation(fields: [domainId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   tradeOrders       TradeOrder[]
   tradePositions    TradePosition[]
+  autopilot         AutopilotSetting?
 
   @@index([role])
   @@index([domainId])
@@ -156,6 +157,16 @@ model Stake {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
+  // ── Staking Autopilot: how much daily reward was reinvested into principal ──
+  compoundedAmount Float   @default(0)
+
+  // ── Protected Staking: principal-protected, market-linked bonus ──
+  isProtected             Boolean @default(false)
+  refSymbol               String?              // Binance reference symbol captured at creation, e.g. BTCUSDT
+  refStartPrice           Float?               // reference asset price at stake creation
+  protectionParticipation Float   @default(50) // % of the reference asset's upside paid as a bonus
+  bonusPaid               Float   @default(0)   // market-linked bonus credited at maturity
+
   user           User         @relation(fields: [userId], references: [id])
   plan           StakingPlan  @relation(fields: [planId], references: [id])
   payments       StakePayment[]
@@ -163,6 +174,20 @@ model Stake {
   @@index([userId])
   @@index([planId])
   @@index([status])
+}
+
+// ── Staking Autopilot: per-user reward-routing rule ──
+model AutopilotSetting {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  mode            String   @default("OFF")  // OFF | COMPOUND | SPLIT
+  compoundPercent Float    @default(50)      // 0-100, share of each reward reinvested (used by SPLIT)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model StakePayment {

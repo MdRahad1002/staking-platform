@@ -5,6 +5,7 @@ import { Logo } from '@/components/shared/Logo'
 const footerLinks = {
   Platform: [
     { href: '/plans', label: 'Staking Plans' },
+    { href: '/proof-of-rewards', label: 'Proof of Rewards' },
     { href: '/what-is-staking', label: 'What is Staking?' },
     { href: '/what-is-mining', label: 'What is Mining?' },
     { href: '/why-choose-us', label: 'Why Choose Us' },

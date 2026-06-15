@@ -9,8 +9,23 @@ import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { formatCurrency, calculateStakingReturns } from '@/lib/utils'
-import { TrendingUp, Clock, DollarSign, Calculator } from 'lucide-react'
+import { TrendingUp, Clock, DollarSign, Calculator, ShieldCheck, Info } from 'lucide-react'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils'
+
+const REF_ASSETS = [
+  { value: 'BTCUSDT', label: 'Bitcoin (BTC)' },
+  { value: 'ETHUSDT', label: 'Ethereum (ETH)' },
+  { value: 'SOLUSDT', label: 'Solana (SOL)' },
+  { value: 'BNBUSDT', label: 'BNB (BNB)' },
+  { value: 'XRPUSDT', label: 'XRP (XRP)' },
+  { value: 'ADAUSDT', label: 'Cardano (ADA)' },
+  { value: 'AVAXUSDT', label: 'Avalanche (AVAX)' },
+  { value: 'DOTUSDT', label: 'Polkadot (DOT)' },
+  { value: 'MATICUSDT', label: 'Polygon (MATIC)' },
+  { value: 'LINKUSDT', label: 'Chainlink (LINK)' },
+]
+const PROTECTION_PARTICIPATION = 50
 
 interface Plan {
   id: string
@@ -40,6 +55,8 @@ function StakeForm() {
   const [amount, setAmount] = useState('')
   const [balance, setBalance] = useState(0)
   const [submitting, setSubmitting] = useState(false)
+  const [isProtected, setIsProtected] = useState(false)
+  const [refSymbol, setRefSymbol] = useState('BTCUSDT')
 
   useEffect(() => {
     fetch('/api/staking/plans')
@@ -89,7 +106,12 @@ function StakeForm() {
       const res = await fetch('/api/staking/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId: selectedPlanId, amount: numAmount }),
+        body: JSON.stringify({
+          planId: selectedPlanId,
+          amount: numAmount,
+          isProtected,
+          ...(isProtected ? { refSymbol } : {}),
+        }),
       })
       const data = await res.json()
       if (res.ok) {
@@ -179,6 +201,63 @@ function StakeForm() {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               />
+            </div>
+
+            {/* ── Protected Staking opt-in ── */}
+            <div className={cn(
+              'rounded-xl border p-4 transition-colors',
+              isProtected ? 'border-blue-500/40 bg-blue-500/[0.06]' : 'border-border bg-secondary/20'
+            )}>
+              <div className="flex items-start gap-3">
+                <div className={cn('flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl', isProtected ? 'bg-blue-500/20 text-blue-400' : 'bg-secondary text-muted-foreground')}>
+                  <ShieldCheck className="h-5 w-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-bold text-foreground">Protected Staking</p>
+                    {/* Toggle */}
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={isProtected}
+                      onClick={() => setIsProtected((v) => !v)}
+                      className={cn(
+                        'relative h-6 w-11 flex-shrink-0 rounded-full transition-colors',
+                        isProtected ? 'bg-blue-500' : 'bg-secondary border border-border'
+                      )}
+                    >
+                      <span className={cn(
+                        'absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform',
+                        isProtected ? 'translate-x-[22px]' : 'translate-x-0.5'
+                      )} />
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
+                    Keep all your daily rewards and principal, plus earn a bonus if your chosen market rises by maturity.
+                    If it falls, you lose nothing. You receive {PROTECTION_PARTICIPATION}% of the asset&apos;s upside.
+                  </p>
+
+                  {isProtected && (
+                    <div className="mt-3 space-y-1.5">
+                      <Label className="text-xs">Reference market</Label>
+                      <Select value={refSymbol} onValueChange={setRefSymbol}>
+                        <SelectTrigger className="h-10">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {REF_ASSETS.map((a) => (
+                            <SelectItem key={a.value} value={a.value}>{a.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-[10px] text-muted-foreground flex items-start gap-1.5 pt-1">
+                        <Info className="h-3 w-3 mt-0.5 flex-shrink-0" />
+                        The asset&apos;s price is locked in now. At maturity we compare it to the live price and pay your bonus. Your fixed staking rewards are unchanged.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
 
             <Button

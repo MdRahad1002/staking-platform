@@ -23,6 +23,7 @@ import {
   X,
   ShieldCheck,
   CandlestickChart,
+  Repeat,
 } from 'lucide-react'
 
 interface SidebarLink {
@@ -39,6 +40,7 @@ const userLinks: SidebarLink[] = [
   { href: '/trade', label: 'Trade', icon: <CandlestickChart className="h-4 w-4" /> },
   { href: '/plans', label: 'Staking Plans', icon: <TrendingUp className="h-4 w-4" /> },
   { href: '/orders', label: 'My Stakes', icon: <List className="h-4 w-4" /> },
+  { href: '/autopilot', label: 'Autopilot', icon: <Repeat className="h-4 w-4" />, badge: 'New' },
   { href: '/referrals', label: 'Referrals', icon: <Users className="h-4 w-4" /> },
   { href: '/notify', label: 'Notifications', icon: <Bell className="h-4 w-4" /> },
   { href: '/ticket', label: 'Support', icon: <MessageSquare className="h-4 w-4" /> },

@@ -5,6 +5,7 @@ import { Providers } from '@/components/providers'
 import { Toaster } from 'sonner'
 import { Analytics } from '@vercel/analytics/next'
 import { AnalyticsTracker } from '@/components/AnalyticsTracker'
+import { GoogleAds } from '@/components/analytics/GoogleAds'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -282,6 +283,7 @@ export default function RootLayout({
         </Providers>
         <AnalyticsTracker />
         <Analytics />
+        <GoogleAds />
       </body>
     </html>
   )

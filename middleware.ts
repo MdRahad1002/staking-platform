@@ -10,6 +10,7 @@ const PUBLIC_EXACT = new Set<string>([
   '/login',
   '/signup',
   '/auth-re-password',
+  '/get-started', // paid ad landing page (noindex, not in sitemap, but must be public)
   '/sitemap.xml',
   '/robots.txt',
   '/llms.txt',

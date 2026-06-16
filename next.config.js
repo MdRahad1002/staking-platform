@@ -11,13 +11,14 @@ const CSP = [
   // Inline styles required by Tailwind / CSS-in-JS; hashes can replace unsafe-inline in future
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
-  // next/image, avatar URLs, coin icons from external CDNs
+  // next/image, avatar URLs, coin icons from external CDNs (https: covers ad/analytics pixels)
   "img-src 'self' blob: data: https:",
-  // Next.js runtime + any analytics you add
-  "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-  // WebSockets for Next.js HMR in dev, API calls, and Resend CDN
-  `connect-src 'self' https://api.resend.com https://api.nowpayments.io https://api.westwallet.io https://api.binance.com wss://stream.binance.com wss:`,
-  "frame-src 'none'",
+  // Next.js runtime + Google Ads / Tag Manager (gtag.js)
+  "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://www.google-analytics.com",
+  // WebSockets for Next.js HMR, API calls, Resend CDN, and Google Ads/Analytics beacons
+  `connect-src 'self' https://api.resend.com https://api.nowpayments.io https://api.westwallet.io https://api.binance.com wss://stream.binance.com wss: https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com`,
+  // Google Ads conversion/remarketing frames
+  "frame-src 'self' https://td.doubleclick.net https://www.googletagmanager.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

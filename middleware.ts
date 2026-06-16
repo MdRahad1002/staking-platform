@@ -17,6 +17,11 @@ const PUBLIC_EXACT = new Set([
   '/plans',
   '/referral-program',
   '/canada',
+  // SEO / intent landing pages (must be crawlable + viewable logged-out)
+  '/how-to-invest-in-crypto',
+  '/best-crypto-staking-platform',
+  '/uk-crypto-staking',
+  '/proof-of-rewards',
   '/login',
   '/signup',
   '/auth-re-password',

@@ -16,7 +16,12 @@ const footerLinks = {
   ],
   Guides: [
     { href: '/how-to-invest-in-crypto', label: 'How to Invest in Crypto' },
+    { href: '/crypto-staking-calculator', label: 'Staking Calculator' },
     { href: '/best-crypto-staking-platform', label: 'Best Staking Platform' },
+    { href: '/ethereum-staking', label: 'Ethereum Staking' },
+    { href: '/bitcoin-staking', label: 'Bitcoin Staking' },
+    { href: '/solana-staking', label: 'Solana Staking' },
+    { href: '/usdt-staking', label: 'USDT Staking' },
     { href: '/canada', label: 'Crypto Staking Canada' },
     { href: '/uk-crypto-staking', label: 'Crypto Staking UK' },
   ],

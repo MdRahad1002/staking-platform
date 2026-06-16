@@ -1,32 +1,18 @@
 ﻿import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
+import { PUBLIC_CONTENT_PATHS } from '@/lib/seo-routes'
 
 // ── Static patterns that are always public ────────────────────────────────────
-const PUBLIC_EXACT = new Set([
-  '/',
-  '/about',
-  '/what-is-staking',
-  '/what-is-mining',
-  '/why-choose-us',
-  '/policy',
-  '/terms',
-  '/cookies',
-  '/app-info',
-  '/faq',
-  '/contact',
-  '/plans',
-  '/referral-program',
-  '/canada',
-  // SEO / intent landing pages (must be crawlable + viewable logged-out)
-  '/how-to-invest-in-crypto',
-  '/best-crypto-staking-platform',
-  '/uk-crypto-staking',
-  '/proof-of-rewards',
+// Public content routes come from the shared SEO source of truth so the sitemap
+// and this allowlist can never desync. Auth/utility routes are added on top.
+const PUBLIC_EXACT = new Set<string>([
+  ...PUBLIC_CONTENT_PATHS,
   '/login',
   '/signup',
   '/auth-re-password',
   '/sitemap.xml',
   '/robots.txt',
+  '/llms.txt',
 ])
 
 const PUBLIC_PREFIXES = [

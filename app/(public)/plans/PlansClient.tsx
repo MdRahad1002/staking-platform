@@ -60,8 +60,8 @@ const DURATION_FILTERS = [
 
 const YIELD_FILTERS = [
   { label: 'All Yields', value: 'all' },
-  { label: 'Standard (≤5%/day)', value: 'standard' },
-  { label: 'High Yield (>5%/day)', value: 'high' },
+  { label: 'Standard', value: 'standard' },
+  { label: 'Higher Yield', value: 'high' },
 ]
 
 export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: PlansClientProps) {
@@ -209,7 +209,7 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
             <p className="text-sm font-bold text-primary uppercase tracking-widest">Earnings Calculator</p>
           </div>
           <p className="text-xs text-muted-foreground mb-4">
-            Enter any amount to instantly see your projected daily earnings, total profit, and which plan you qualify for.
+            Enter an amount to see which plan you qualify for. Projections are illustrative; rewards are variable and not guaranteed.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -247,31 +247,40 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
               {calcResult.tooLow ? (
                 <div className="rounded-xl border border-yellow-500/25 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-400 flex items-center gap-2">
                   <Zap className="h-4 w-4 flex-shrink-0" />
-                  Minimum deposit is {formatCurrency(calcResult.plan.minAmount)}. Add more to unlock the <strong>{calcResult.plan.name}</strong> and start earning daily returns.
+                  Minimum deposit is {formatCurrency(calcResult.plan.minAmount)} to access the <strong>{calcResult.plan.name}</strong> plan.
+                </div>
+              ) : !isLoggedIn ? (
+                <div className="rounded-xl border border-primary/25 bg-primary/5 px-4 py-3 text-sm text-muted-foreground flex flex-wrap items-center gap-1.5">
+                  <Lock className="h-4 w-4 text-primary flex-shrink-0" />
+                  You qualify for the <strong className="text-white">{calcResult.plan.name}</strong> plan.
+                  <Link href="/signup" className="text-primary font-medium hover:underline">Create a free account</Link> to view current rates and projections.
                 </div>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Matched Plan</p>
-                    <p className="font-bold text-sm text-primary truncate">{calcResult.plan.name}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{calcResult.plan.durationDays}d · {calcResult.plan.dailyRoi}%/day</p>
+                <>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Matched Plan</p>
+                      <p className="font-bold text-sm text-primary truncate">{calcResult.plan.name}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">{calcResult.plan.durationDays}d term</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Est. Daily</p>
+                      <p className="font-bold text-lg text-green-400">+{formatCurrency(calcResult.dailyEarning)}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">illustrative</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Est. Total</p>
+                      <p className="font-bold text-lg gradient-text">+{formatCurrency(calcResult.totalEarning)}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">over {calcResult.plan.durationDays} days</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Est. Payout</p>
+                      <p className="font-bold text-lg text-white">{formatCurrency(calcResult.totalPayout)}</p>
+                      <p className="text-[10px] text-muted-foreground mt-0.5">principal + rewards</p>
+                    </div>
                   </div>
-                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Daily Earnings</p>
-                    <p className="font-bold text-lg text-green-400">+{formatCurrency(calcResult.dailyEarning)}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">per day, credited</p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Total Profit</p>
-                    <p className="font-bold text-lg gradient-text">+{formatCurrency(calcResult.totalEarning)}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">over {calcResult.plan.durationDays} days</p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-secondary/40 px-4 py-3">
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mb-1">Total Payout</p>
-                    <p className="font-bold text-lg text-white">{formatCurrency(calcResult.totalPayout)}</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">principal + profit</p>
-                  </div>
-                </div>
+                  <p className="text-[10px] text-muted-foreground/70 mt-3">Illustrative only, not an offer or guarantee. Rewards are variable; capital is at risk.</p>
+                </>
               )}
             </div>
           )}
@@ -289,7 +298,6 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
           <div className="overflow-x-auto -mx-1 pb-2">
             <div className="flex gap-3 px-1" style={{ minWidth: 'max-content' }}>
               {featuredPlans.map((plan) => {
-                const apr = (plan.dailyRoi * 365).toFixed(2)
                 return (
                   <div
                     key={plan.id}
@@ -313,8 +321,12 @@ export function PlansClient({ plans, isLoggedIn, hasUsedStarterPlan = false }: P
                       </div>
                       <span className="flex-shrink-0 text-[9px] font-bold text-primary bg-primary/10 border border-primary/20 px-1.5 py-0.5 rounded-md">Hot</span>
                     </div>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Up to APR</p>
-                    <p className="text-2xl font-black gradient-text">{apr}%</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">
+                      {plan.durationDays}-day plan
+                    </p>
+                    <p className="text-sm font-bold text-white mt-0.5">
+                      {isLoggedIn ? 'View rate' : 'Members only'}
+                    </p>
                   </div>
                 )
               })}

@@ -52,13 +52,6 @@ export default async function PlansPage() {
     ? await checkUsedStarterPlan(session.user.id, plans)
     : false
 
-  const maxApr = plans.length > 0
-    ? Math.max(...plans.map((p) => parseFloat((p.dailyRoi * 365).toFixed(2))))
-    : 0
-  const minApr = plans.length > 0
-    ? Math.min(...plans.map((p) => parseFloat((p.dailyRoi * 365 * 0.6).toFixed(2))))
-    : 0
-
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -73,7 +66,7 @@ export default async function PlansPage() {
     '@type': 'FinancialService',
     name: 'StakeOnix Crypto Staking Plans',
     url: `${APP_URL}/plans`,
-    description: `Choose from ${plans.length} cryptocurrency staking plans. Earn between ${minApr}% and ${maxApr}% APR. Daily rewards credited automatically.`,
+    description: `Choose from ${plans.length} cryptocurrency staking plans. Daily rewards credited automatically. Rewards are variable and not guaranteed; capital is at risk.`,
     serviceType: 'Cryptocurrency Staking',
     areaServed: 'Worldwide',
     priceRange: '$200+',
@@ -81,10 +74,10 @@ export default async function PlansPage() {
   }
 
   const heroStats = [
-    { icon: <TrendingUp className="h-5 w-5 text-primary" />, label: 'Est. APR Up To', value: `${maxApr}%` },
-    { icon: <Zap className="h-5 w-5 text-yellow-400" />, label: 'Active Plans', value: `${plans.length}` },
+    { icon: <TrendingUp className="h-5 w-5 text-primary" />, label: 'Rewards Credited', value: 'Daily' },
+    { icon: <Zap className="h-5 w-5 text-yellow-400" />, label: 'Staking Plans', value: `${plans.length}` },
     { icon: <Users className="h-5 w-5 text-amber-400" />, label: 'Active Stakers', value: '15,000+' },
-    { icon: <Shield className="h-5 w-5 text-green-400" />, label: 'Total Staked', value: '$50M+' },
+    { icon: <Shield className="h-5 w-5 text-green-400" />, label: 'Supported Assets', value: '170+' },
   ]
 
   return (
@@ -101,21 +94,20 @@ export default async function PlansPage() {
 
         <div className="container relative mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary mb-5 uppercase tracking-widest">
-            <Zap className="h-3 w-3" /> Earn up to {maxApr}% APR annually
+            <Zap className="h-3 w-3" /> Daily staking rewards &middot; 170+ assets
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Staking <span className="gradient-text">Plans</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-base mb-8">
-            Nine plans designed as a progressive path start with $200 on our 7-day <strong className="text-white">Starter Trial</strong> to see real daily payouts in your account, then scale up as your confidence grows. Every plan delivers daily settlements.
+            Choose from a range of staking plans to suit different goals and time horizons, starting from $200.
+            Sign in to view current rates. Staking rewards are variable and not guaranteed.
           </p>
 
-          {/* APR range pill */}
-          <div className="inline-flex items-center gap-3 rounded-2xl border border-border bg-secondary/60 px-6 py-3 text-sm">
-            <span className="text-muted-foreground">APR Range</span>
-            <span className="font-bold text-primary">{minApr}%</span>
-            <span className="text-muted-foreground">~</span>
-            <span className="font-bold gradient-text">{maxApr}%</span>
+          {/* Risk disclosure */}
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 px-5 py-2.5 text-xs text-muted-foreground max-w-lg">
+            <Shield className="h-3.5 w-3.5 text-yellow-400 flex-shrink-0" />
+            Capital at risk. Crypto values can go down as well as up; rewards are variable and not guaranteed.
           </div>
         </div>
       </section>

@@ -369,130 +369,85 @@ export default function WhatIsStakingPage() {
         </div>
       </section>
 
-      {/* ── THE STAKEONIX PATHWAY: Funnel walk-through ───────────────────────── */}
+      {/* ── HOW PLANS ARE STRUCTURED ─────────────────────────────────────────── */}
       <section className="py-20 border-t border-white/5">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-14">
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400 mb-3">The StakeOnix Path</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">
-              How investors grow from $200 to six figures
+              Start small, then scale at your own pace
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Every investor starts somewhere. Here is exactly how the journey looks on StakeOnix 
-              from a $200 trial to institutional-grade returns.
+              StakeOnix offers a range of plans for different goals and time horizons. You can begin with a
+              short entry plan from $200 and move to longer plans as your confidence grows. Sign in to view
+              current rates and terms.
             </p>
           </div>
 
           <div className="relative space-y-4">
             {[
-              { plan: 'Starter Trial', min: 200, max: 499, days: 7, daily: 1.5, total: 10.5, arrow: '$200 → $221 in 7 days. Your first real payout proves the system works.', tier: 'Entry', tierColor: 'text-slate-400' },
-              { plan: 'Booster Plan', min: 500, max: 999, days: 14, daily: 1.8, total: 25.2, arrow: 'Reinvest your $221 + add $279. $500 → $626 in 14 days.', tier: 'Level 2', tierColor: 'text-blue-400' },
-              { plan: 'Growth Yield', min: 1000, max: 2499, days: 21, daily: 2.2, total: 46.2, arrow: '$626 reinvested + top up to $1,000. First $1,000+ payday at maturity.', tier: 'Level 3', tierColor: 'text-blue-400' },
-              { plan: 'Momentum', min: 2500, max: 4999, days: 30, daily: 2.6, total: 78, arrow: '$1,462 compounds into $2,500+. Monthly income becomes life-changing.', tier: 'Level 4', tierColor: 'text-purple-400' },
-              { plan: 'Professional', min: 5000, max: 9999, days: 30, daily: 3.0, total: 90, arrow: '$5,000 → $9,500 in one month. The plan chosen by 60%+ of repeat investors.', tier: 'Level 5 ⭐', tierColor: 'text-amber-400' },
-              { plan: 'Advanced Vault', min: 10000, max: 24999, days: 45, daily: 3.3, total: 148.5, arrow: '$10,000 → $24,850 in 45 days. Loyalty ROI boost on renewal.', tier: 'Level 6', tierColor: 'text-yellow-400' },
-              { plan: 'Sovereign', min: 100000, max: null, days: 90, daily: 4.5, total: 405, arrow: 'Institutional-grade. Personal fund manager. $100K+ dedicated suite.', tier: 'Institutional', tierColor: 'text-amber-400' },
+              { plan: 'Starter Trial', range: 'From $200', days: '7 days', tier: 'Entry' },
+              { plan: 'Booster Plan', range: '$500+', days: '14 days', tier: 'Level 2' },
+              { plan: 'Growth Yield', range: '$1,000+', days: '21 days', tier: 'Level 3' },
+              { plan: 'Momentum', range: '$2,500+', days: '30 days', tier: 'Level 4' },
+              { plan: 'Professional', range: '$5,000+', days: '30 days', tier: 'Level 5' },
+              { plan: 'Advanced Vault', range: '$10,000+', days: '45 days', tier: 'Level 6' },
+              { plan: 'Sovereign', range: '$100,000+', days: '90 days', tier: 'Institutional' },
             ].map((row, i) => (
               <div key={row.plan} className="flex gap-4 items-start">
                 <div className="flex flex-col items-center">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-500/20 to-amber-600/20 border border-amber-500/30 text-amber-400 text-xs font-bold flex-shrink-0">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 text-blue-400 text-xs font-bold flex-shrink-0">
                     {i + 1}
                   </div>
-                  {i < 6 && <div className="w-px h-4 bg-amber-500/20 mt-1" />}
+                  {i < 6 && <div className="w-px h-4 bg-blue-500/20 mt-1" />}
                 </div>
-                <div className="glass-card p-5 flex-1 mb-0 hover:border-amber-500/20 transition-colors">
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                <div className="glass-card p-5 flex-1 mb-0">
+                  <div className="flex flex-wrap items-center gap-3">
                     <span className="font-bold text-white">{row.plan}</span>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-white/5 border border-white/10 ${row.tierColor}`}>{row.tier}</span>
-                    <span className="text-xs text-muted-foreground ml-auto">
-                      ${row.min.toLocaleString()}{row.max ? `–$${row.max.toLocaleString()}` : '+'} · {row.days}d · {row.daily}%/day
-                    </span>
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-muted-foreground">{row.tier}</span>
+                    <span className="text-xs text-muted-foreground ml-auto">{row.range} &middot; {row.days}</span>
                   </div>
-                  <p className="text-sm text-muted-foreground">{row.arrow}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-8 glass-card p-6 border border-amber-500/20 bg-amber-500/5 text-center">
+          <div className="mt-8 glass-card p-6 border border-yellow-500/20 bg-yellow-500/5 text-center">
             <p className="text-sm text-muted-foreground mb-2">
-              The key insight: <strong className="text-white">each plan is self-funding.</strong> You never need to add new money if you do not want to.
-              The system is designed so your returns from each plan naturally cover the minimum of the next tier.
+              Choose the plan that fits your goals and only commit what you can afford. Sign in to see current
+              rates and terms before you stake.
             </p>
             <p className="text-xs text-muted-foreground/60">
-              Past performance does not guarantee future results. Returns are subject to platform terms. Always invest within your means.
+              Staking rewards are variable and not guaranteed. Past performance does not indicate future results. Capital is at risk.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── REAL EXAMPLE ─────────────────────────────────────────────────────── */}
+      {/* ── HOW A STAKE WORKS ────────────────────────────────────────────────── */}
       <section className="py-16 border-t border-white/5 bg-white/[0.01]">
         <div className="container mx-auto px-4 max-w-2xl">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-10">
-            A Real Example: Starter Trial to Booster
+            How a stake works, step by step
           </h2>
 
-          <div className="space-y-5">
-            {/* Starter Trial */}
-            <div className="glass-card p-6 rounded-2xl">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
-                  <Coins className="h-5 w-5" />
-                </div>
+          <div className="space-y-4">
+            {[
+              { icon: <Coins className="h-5 w-5" />, color: 'text-cyan-400 bg-cyan-500/10', title: 'You choose a plan and deposit', body: 'Pick a plan that matches your goal and time horizon, and stake from $200. Your deposit stays in your account.' },
+              { icon: <TrendingUp className="h-5 w-5" />, color: 'text-blue-400 bg-blue-500/10', title: 'Rewards are credited on a schedule', body: 'While the plan is active, staking rewards are credited to your account per the plan terms. Rates are shown after sign-in and are variable, not guaranteed.' },
+              { icon: <RefreshCw className="h-5 w-5" />, color: 'text-purple-400 bg-purple-500/10', title: 'Reinvest or withdraw', body: 'You can let rewards compound with Staking Autopilot, or withdraw your principal and rewards at maturity under the plan terms.' },
+            ].map((s) => (
+              <div key={s.title} className="glass-card p-6 rounded-2xl flex gap-4">
+                <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl ${s.color}`}>{s.icon}</div>
                 <div>
-                  <p className="font-semibold text-white">Starter Trial Day 1</p>
-                  <p className="text-sm text-muted-foreground">7 days · 1.5%/day · Min $200</p>
+                  <p className="font-semibold text-white mb-1">{s.title}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.body}</p>
                 </div>
               </div>
-              <div className="space-y-2.5">
-                {[
-                  { label: 'You deposit', value: '$200.00', highlight: false },
-                  { label: 'Daily reward (1.5%)', value: '+$3.00 / day', highlight: false },
-                  { label: 'Total earned over 7 days', value: '$21.00', highlight: false },
-                  { label: 'Full payout at day 7', value: '$221.00', highlight: true },
-                ].map((row) => (
-                  <div key={row.label} className={`flex justify-between items-center rounded-xl px-4 py-3 ${row.highlight ? 'bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20' : 'bg-white/[0.03]'}`}>
-                    <span className="text-sm text-muted-foreground">{row.label}</span>
-                    <span className={`font-semibold ${row.highlight ? 'gradient-text' : ''}`}>{row.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 text-muted-foreground text-sm px-2">
-              <ChevronRight className="h-5 w-5 text-cyan-400 flex-shrink-0" />
-              <p>Now reinvest your $221 + add just $279 = $500. Activate the Booster Plan.</p>
-            </div>
-
-            {/* Booster */}
-            <div className="glass-card p-6 rounded-2xl border border-green-500/20 bg-green-500/5">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/10 text-green-400">
-                  <Rocket className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="font-semibold text-white">Booster Plan Day 8</p>
-                  <p className="text-sm text-muted-foreground">14 days · 1.8%/day · $500 in</p>
-                </div>
-              </div>
-              <div className="space-y-2.5">
-                {[
-                  { label: 'Your stake', value: '$500.00', highlight: false },
-                  { label: 'Daily reward (1.8%)', value: '+$9.00 / day', highlight: false },
-                  { label: 'Total earned over 14 days', value: '$126.00', highlight: false },
-                  { label: 'Full payout at day 22', value: '$626.00', highlight: true },
-                ].map((row) => (
-                  <div key={row.label} className={`flex justify-between items-center rounded-xl px-4 py-3 ${row.highlight ? 'bg-gradient-to-r from-green-500/10 to-emerald-600/10 border border-green-500/20' : 'bg-white/[0.03]'}`}>
-                    <span className="text-sm text-muted-foreground">{row.label}</span>
-                    <span className={`font-semibold ${row.highlight ? 'text-green-400' : ''}`}>{row.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
 
             <p className="text-center text-xs text-muted-foreground/50 italic px-4">
-              Examples for illustration only. Returns are not guaranteed. Crypto carries inherent risk.
+              For illustration only. Staking rewards are variable and not guaranteed. Crypto values can go down as well as up; capital is at risk.
             </p>
           </div>
         </div>

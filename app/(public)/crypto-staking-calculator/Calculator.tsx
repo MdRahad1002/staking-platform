@@ -10,19 +10,19 @@ function fmt(n: number): string {
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
 }
 
-// Illustrative example tiers (actual plan rates are shown after sign-up)
+// Illustrative example durations only. Actual plan rates are shown after sign-up;
+// these sample rates are not an offer or a representation of returns.
 const PRESETS = [
-  { label: 'Starter · 7d', days: 7, daily: 1.5 },
-  { label: 'Booster · 14d', days: 14, daily: 1.8 },
-  { label: 'Growth · 30d', days: 30, daily: 2.2 },
-  { label: 'Pro · 30d', days: 30, daily: 3.0 },
-  { label: 'Vault · 90d', days: 90, daily: 3.5 },
+  { label: '7 days', days: 7, daily: 0.8 },
+  { label: '14 days', days: 14, daily: 1.0 },
+  { label: '30 days', days: 30, daily: 1.2 },
+  { label: '90 days', days: 90, daily: 1.5 },
 ]
 
 export function StakingCalculator() {
   const [amount, setAmount] = useState(1000)
   const [days, setDays] = useState(30)
-  const [daily, setDaily] = useState(2.2)
+  const [daily, setDaily] = useState(1.0)
   const [compound, setCompound] = useState(true)
 
   const result = useMemo(() => {
@@ -95,7 +95,7 @@ export function StakingCalculator() {
             <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Daily rate</label>
             <span className="text-sm font-bold text-blue-400 nums-tabular">{daily.toFixed(2)}% / day</span>
           </div>
-          <input type="range" min={0.5} max={5} step={0.1} value={daily} onChange={(e) => setDaily(parseFloat(e.target.value))} className="w-full accent-blue-500" />
+          <input type="range" min={0.2} max={2} step={0.1} value={daily} onChange={(e) => setDaily(parseFloat(e.target.value))} className="w-full accent-blue-500" />
         </div>
 
         {/* Duration */}

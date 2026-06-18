@@ -98,8 +98,9 @@ export async function POST(req: NextRequest) {
           username: finalUsername,
           referralCode: myReferralCode,
           referredById,
-          // Auto-verify so users can login immediately; still send welcome email
-          emailVerified: new Date(),
+          // Email is unverified until the user clicks the verification link.
+          // Login is blocked until then (see lib/auth.ts authorize).
+          emailVerified: null,
           emailVerificationToken: verificationToken,
           emailVerificationExpires: verificationExpires,
         },

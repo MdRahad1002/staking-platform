@@ -89,7 +89,16 @@ function layout(content: string, previewText = ''): string {
   </style>
   <div class="wrapper">
     <div class="container">
-      <div class="header"><div class="logo"><span class="logo-dot"></span>StakeOnix</div></div>
+      <div class="header">
+        <table cellpadding="0" cellspacing="0" align="center" role="presentation"><tr>
+          <td style="vertical-align:middle;">
+            <div style="width:40px;height:40px;border-radius:11px;background-color:#2563eb;background:linear-gradient(135deg,#2563eb,#7c3aed);text-align:center;line-height:40px;font-size:20px;font-weight:800;color:#ffffff;font-family:Arial,Helvetica,sans-serif;">S</div>
+          </td>
+          <td style="vertical-align:middle;padding-left:11px;">
+            <span style="font-size:22px;font-weight:800;letter-spacing:-0.5px;color:#ffffff;font-family:Arial,Helvetica,sans-serif;">Stake<span style="color:#8ab4ff;">onix</span></span>
+          </td>
+        </tr></table>
+      </div>
       <div class="card">${content}</div>
       <div class="footer">
         <div>
@@ -323,46 +332,44 @@ export function getVerificationEmailTemplate(name: string, verifyUrl: string): s
   const firstName = name.split('@')[0].split(' ')[0]
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.stakeonix.ca'
   return layout(`
-    <div class="card-header" style="background:linear-gradient(135deg,#0f1f3d 0%,#162035 50%,#0f1f3d 100%);padding:40px 40px 32px;text-align:center;">
-      <div class="icon-circle icon-gold" style="width:64px;height:64px;border-radius:50%;display:inline-block;text-align:center;line-height:62px;margin:0 auto 20px;font-size:28px;background:linear-gradient(135deg,#f59e0b22,#f59e0b44);border:1px solid #f59e0b55;">🚀</div>
-      <div class="card-title" style="font-size:24px;font-weight:700;color:#fff;margin-bottom:8px;">Welcome to StakeOnix</div>
-      <div class="card-subtitle" style="font-size:15px;color:#94a3b8;line-height:1.5;">Verify your email to unlock your account</div>
+    <div class="card-header" style="background:linear-gradient(135deg,#0f1f3d 0%,#162035 50%,#0f1f3d 100%);padding:44px 40px 36px;text-align:center;">
+      <div style="width:62px;height:62px;border-radius:16px;background-color:#2563eb;background:linear-gradient(135deg,#2563eb,#7c3aed);display:inline-block;text-align:center;line-height:62px;font-size:30px;font-weight:800;color:#ffffff;font-family:Arial,Helvetica,sans-serif;margin:0 auto 22px;">S</div>
+      <div style="font-size:24px;font-weight:700;color:#fff;margin-bottom:8px;font-family:Arial,Helvetica,sans-serif;">Confirm your email address</div>
+      <div style="font-size:15px;color:#94a3b8;line-height:1.5;">One quick step to activate your StakeOnix account</div>
     </div>
     <div class="card-body" style="padding:36px 40px;">
-      <p class="greeting" style="font-size:16px;color:#cbd5e1;margin-bottom:20px;">Hi <strong>${firstName}</strong> 👋</p>
-      <p class="body-text" style="font-size:15px;color:#94a3b8;line-height:1.7;margin-bottom:16px;">You're almost in! Verify your email address to activate your account and start earning daily staking rewards.</p>
-      <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 0 0;">
-        <a href="${verifyUrl}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:15px;font-weight:700;border-radius:8px;text-align:center;letter-spacing:0.3px;text-decoration:none;">Verify My Email &rarr;</a>
+      <p style="font-size:16px;color:#cbd5e1;margin-bottom:16px;">Hi <strong>${firstName}</strong>,</p>
+      <p style="font-size:15px;color:#94a3b8;line-height:1.7;margin-bottom:4px;">Thanks for creating your StakeOnix account. Please confirm your email address to activate it and help keep your account secure.</p>
+      <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 0 4px;">
+        <a href="${verifyUrl}" style="display:inline-block;padding:15px 42px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#ffffff;font-size:15px;font-weight:700;border-radius:10px;text-align:center;letter-spacing:0.2px;text-decoration:none;">Verify Email Address</a>
       </td></tr></table>
-      <div style="background:#052e1c;border:1px solid #064e2e;border-radius:12px;padding:20px 24px;margin-top:28px;text-align:center;">
-        <p style="font-size:13px;color:#059669;font-weight:600;margin:0 0 4px;">Start Earning</p>
-        <p style="font-size:36px;font-weight:700;color:#10b981;margin:4px 0;">Daily</p>
-        <p style="font-size:13px;color:#065f46;margin:0;">Instant credit on your first deposit</p>
-      </div>
-      <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:28px;">
+
+      <p style="font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.8px;margin:30px 0 14px;">What happens next</p>
+      <table width="100%" cellpadding="0" cellspacing="0">
         <tr><td style="padding-bottom:16px;"><table cellpadding="0" cellspacing="0"><tr>
-          <td style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">1</td>
-          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Verify your email</strong> - click the button above</td>
+          <td style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">1</td>
+          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Confirm your email</strong> - click the button above</td>
         </tr></table></td></tr>
         <tr><td style="padding-bottom:16px;"><table cellpadding="0" cellspacing="0"><tr>
-          <td style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">2</td>
-          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Make your first deposit</strong> - starting from $100</td>
+          <td style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">2</td>
+          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Secure your account</strong> - enable two-factor authentication</td>
         </tr></table></td></tr>
         <tr><td style="padding-bottom:16px;"><table cellpadding="0" cellspacing="0"><tr>
-          <td style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">3</td>
-          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Choose a plan</strong> - up to 3.5% daily returns</td>
+          <td style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">3</td>
+          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Explore staking plans</strong> - find one that fits your goals</td>
         </tr></table></td></tr>
         <tr><td><table cellpadding="0" cellspacing="0"><tr>
-          <td style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">4</td>
-          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Earn every day</strong> - rewards credited every 24 hours</td>
+          <td style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:13px;font-weight:700;text-align:center;vertical-align:middle;line-height:28px;">4</td>
+          <td style="padding-left:16px;font-size:14px;color:#94a3b8;line-height:1.6;vertical-align:middle;"><strong style="color:#e2e8f0;">Fund your account</strong> - get started from $200 whenever you're ready</td>
         </tr></table></td></tr>
       </table>
+
       <div style="height:1px;background:linear-gradient(90deg,transparent,#1f2d45,transparent);margin:28px 0;"></div>
-      <p style="color:#475569;font-size:12px;margin:0 0 6px;"><strong style="color:#64748b;">Button not working?</strong> Paste this into your browser:</p>
-      <p style="margin:0 0 8px;"><a href="${verifyUrl}" style="color:#f59e0b;word-break:break-all;font-size:12px;">${verifyUrl}</a></p>
-      <p style="color:#ef4444;font-size:12px;margin:0;">&#9888; This link expires in <strong>24 hours</strong>.</p>
+      <p style="color:#475569;font-size:12px;margin:0 0 6px;"><strong style="color:#64748b;">Button not working?</strong> Copy and paste this link into your browser:</p>
+      <p style="margin:0 0 12px;"><a href="${verifyUrl}" style="color:#60a5fa;word-break:break-all;font-size:12px;">${verifyUrl}</a></p>
+      <p style="color:#64748b;font-size:12px;margin:0;line-height:1.6;">For your security, this link expires in <strong style="color:#94a3b8;">24 hours</strong>. If you did not create a StakeOnix account, you can safely ignore this email.</p>
     </div>
-  `, 'One click to verify and start earning daily returns.')
+  `, 'Confirm your email to activate your StakeOnix account.')
   void appUrl
 }
 
@@ -371,7 +378,7 @@ export async function sendVerificationEmail(email: string, name: string, token: 
   const verifyUrl = `${appUrl}/api/auth/verify-email?token=${token}`
   await sendEmail({
     to: email,
-    subject: 'Welcome to StakeOnix - Please Verify Your Email',
+    subject: 'Confirm your email address to activate your StakeOnix account',
     html: getVerificationEmailTemplate(name, verifyUrl),
   })
 }

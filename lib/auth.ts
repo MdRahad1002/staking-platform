@@ -47,8 +47,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Your account has been suspended')
         }
 
-        // Email verification is sent but not required to login
-
         const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
 
         if (!isPasswordValid) {
@@ -57,6 +55,13 @@ export const authOptions: NextAuthOptions = {
             data: { userId: user.id, ipAddress: ip, userAgent, isSuccess: false },
           }).catch(() => {})
           throw new Error('Invalid email or password')
+        }
+
+        // ── Email verification gate ──────────────────────────────────────
+        // Block sign-in until the user has confirmed their email address.
+        // (Checked after the password so we don't reveal which emails exist.)
+        if (!user.emailVerified) {
+          throw new Error('Please verify your email address before signing in. Check your inbox for the verification link.')
         }
 
         // ── 2FA gate ──────────────────────────────────────────────────

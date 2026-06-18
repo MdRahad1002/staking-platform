@@ -3,7 +3,6 @@
 import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -162,12 +161,7 @@ function SignupForm() {
         return
       }
 
-      await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      })
-
+      // Do NOT sign in yet - the user must verify their email first.
       setSuccessEmail(data.email)
     } catch {
       toast.error('Something went wrong. Please try again.')
@@ -207,24 +201,26 @@ function SignupForm() {
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-2xl font-black text-white">Account Created!</h1>
-          <p className="text-sm text-white/50">We&apos;ve sent a welcome email to</p>
+          <h1 className="text-2xl font-black text-white">Verify Your Email</h1>
+          <p className="text-sm text-white/50">We&apos;ve sent a verification link to</p>
           <p className="text-sm font-semibold text-white break-all">{successEmail}</p>
         </div>
 
-        <div className="rounded-xl border border-blue-500/20 bg-blue-500/8 p-4 text-left">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/8 p-4 text-left flex gap-3">
+          <Mail className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
           <p className="text-xs text-white/50 leading-relaxed">
-            Your account is <span className="text-green-400 font-semibold">active</span> — you can start using Stakeonix right away.
-            The email contains your verification link and a summary of your account.
+            Click the verification link in that email to activate your account. For your security, you&apos;ll
+            be able to sign in once your email address is confirmed.
           </p>
         </div>
 
-        <button
-          className="w-full h-12 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white transition-all hover:scale-[1.01] shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
-          onClick={() => { window.location.href = '/dashboard' }}
-        >
-          <ArrowRight className="h-4 w-4" /> Go to Dashboard
-        </button>
+        <Link href="/login" className="block">
+          <button
+            className="w-full h-12 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white transition-all hover:scale-[1.01] shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2"
+          >
+            <ArrowRight className="h-4 w-4" /> Go to Sign In
+          </button>
+        </Link>
 
         <div className="border-t border-white/[0.06] pt-4">
           <p className="text-xs text-white/30 mb-2">Didn&apos;t receive the email? Check your spam folder or</p>
@@ -396,11 +392,11 @@ function SignupForm() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 export default function SignupPage() {
   return (
-    <div className="min-h-screen flex" style={{ background: '#080d1b' }}>
+    <div className="min-h-screen lg:flex" style={{ background: '#080d1b' }}>
 
-      {/* ── Left branding panel ── */}
+      {/* ── Left branding panel (sticky so the page scrolls naturally) ── */}
       <div
-        className="hidden lg:flex lg:w-[45%] relative overflow-hidden flex-col justify-between p-12"
+        className="hidden lg:flex lg:w-[45%] lg:sticky lg:top-0 lg:h-screen relative overflow-hidden flex-col justify-between p-12"
         style={{ background: 'linear-gradient(135deg, #050a14 0%, #080d1b 60%, #0a0f20 100%)' }}
       >
         <div className="pointer-events-none absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-blue-600/[0.12] blur-[120px] translate-x-1/3 -translate-y-1/4" />
@@ -469,7 +465,7 @@ export default function SignupPage() {
       </div>
 
       {/* ── Right: form ── */}
-      <div className="flex flex-1 flex-col lg:w-[55%]">
+      <div className="flex-1 lg:w-[55%]">
         {/* Mobile top bar */}
         <div className="flex items-center justify-between p-5 lg:hidden border-b border-white/[0.06]">
           <LogoLink id="smob" />
@@ -481,22 +477,20 @@ export default function SignupPage() {
           </Link>
         </div>
 
-        {/* Scrollable form area */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center px-6 py-10 lg:px-12">
-            <div className="w-full max-w-sm">
-              {/* Glass card */}
-              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm p-8 shadow-2xl shadow-black/40">
-                <Suspense fallback={<div className="h-96 w-full animate-pulse rounded-xl bg-white/5" />}>
-                  <SignupForm />
-                </Suspense>
-              </div>
-
-              <p className="text-center text-xs text-white/25 mt-6">
-                Protected by 256-bit SSL &nbsp;&middot;&nbsp;{' '}
-                <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
-              </p>
+        {/* Form area - flows with the document so the mouse wheel scrolls the page */}
+        <div className="flex min-h-screen items-center justify-center px-6 py-10 lg:px-12">
+          <div className="w-full max-w-sm">
+            {/* Glass card */}
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm p-8 shadow-2xl shadow-black/40">
+              <Suspense fallback={<div className="h-96 w-full animate-pulse rounded-xl bg-white/5" />}>
+                <SignupForm />
+              </Suspense>
             </div>
+
+            <p className="text-center text-xs text-white/25 mt-6">
+              Protected by 256-bit SSL &nbsp;&middot;&nbsp;{' '}
+              <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+            </p>
           </div>
         </div>
       </div>

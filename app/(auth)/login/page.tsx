@@ -35,13 +35,13 @@ function getRoleRedirect(role: string, callbackUrl: string): string {
 const perks = [
   {
     icon: <BarChart3 className="h-5 w-5 text-blue-400" />,
-    title: 'Up to 365% APR',
-    desc: 'Industry-leading staking returns, paid daily.',
+    title: 'Regulated Platform',
+    desc: 'FCA-authorised (UK) & FINTRAC-registered (Canada).',
   },
   {
     icon: <Zap className="h-5 w-5 text-yellow-400" />,
-    title: 'Instant Daily Payouts',
-    desc: 'Earnings credited automatically every 24 hours.',
+    title: 'Effortless Staking',
+    desc: 'No trading or charts - just stake and track.',
   },
   {
     icon: <Shield className="h-5 w-5 text-green-400" />,
@@ -113,17 +113,17 @@ function LeftPanel() {
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1.5 text-xs font-semibold text-blue-300 mb-5">
             <div className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
-            Passive income, simplified
+            Staking, simplified
           </div>
           <h2 className="text-4xl font-black leading-tight mb-4 text-white">
-            Grow Your Crypto<br />
+            Stake & Grow<br />
             <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
-              Every Single Day
+              Your Crypto
             </span>
           </h2>
           <p className="text-white/50 max-w-sm text-sm leading-relaxed">
-            Join 15,000+ investors earning automatic daily staking rewards.
-            Transparent plans, zero complexity.
+            Join thousands staking on a regulated platform. Clear terms, no complexity.
+            Rewards are variable and not guaranteed.
           </p>
         </div>
 

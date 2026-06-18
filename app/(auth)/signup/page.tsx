@@ -58,8 +58,8 @@ const COUNTRY_CODES = [
 const highlights = [
   {
     icon: <BarChart3 className="h-5 w-5 text-blue-400" />,
-    title: '100% Transparent Returns',
-    desc: 'Fixed daily ROI with no hidden fees or surprise deductions.',
+    title: 'Transparent & Secure',
+    desc: 'Clear plan terms with no hidden fees or surprise deductions.',
   },
   {
     icon: <Users className="h-5 w-5 text-yellow-400" />,
@@ -413,16 +413,17 @@ export default function SignupPage() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 text-xs font-semibold text-yellow-300 mb-5">
               <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
-              Start earning in minutes
+              Get started in minutes
             </div>
             <h2 className="text-4xl font-black leading-tight mb-4 text-white">
-              Your First Daily<br />
+              Start Staking<br />
               <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                Reward Awaits
+                in Minutes
               </span>
             </h2>
             <p className="text-white/50 max-w-sm text-sm leading-relaxed">
-              Create a free account, deposit crypto, choose a plan — and earn passive income on autopilot.
+              Create a free account, deposit crypto, and choose a plan on a regulated platform.
+              Rewards are variable and not guaranteed.
             </p>
           </div>
 

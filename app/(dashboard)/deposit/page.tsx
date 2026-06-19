@@ -517,11 +517,18 @@ export default function DepositPage() {
           <div className="rounded-2xl border border-border bg-card p-5 space-y-4">
             <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">How It Works</p>
             <div className="space-y-4">
-              {[
-                { n: 1, color: 'bg-blue-500/20 text-blue-400', title: 'Enter USD amount', desc: 'Choose the amount you want to deposit and select your preferred cryptocurrency.' },
-                { n: 2, color: 'bg-purple-500/20 text-purple-400', title: 'Send exact crypto', desc: 'A unique address is generated. Send the exact crypto amount shown — no more, no less.' },
-                { n: 3, color: 'bg-green-500/20 text-green-400', title: 'Balance credited', desc: 'After network confirmation (15 min – 2 hrs), your USD balance is credited automatically.' },
-              ].map((step) => (
+              {(method === 'card'
+                ? [
+                    { n: 1, color: 'bg-blue-500/20 text-blue-400', title: 'Enter amount & coin', desc: 'Choose how much to fund and which coin you want to receive.' },
+                    { n: 2, color: 'bg-purple-500/20 text-purple-400', title: 'Buy with your card', desc: 'Pick a provider (Guardarian needs no account), buy the coin, and send the exact amount to the address we show.' },
+                    { n: 3, color: 'bg-green-500/20 text-green-400', title: 'Balance credited', desc: 'Once the crypto arrives and confirms, your USD balance is credited automatically.' },
+                  ]
+                : [
+                    { n: 1, color: 'bg-blue-500/20 text-blue-400', title: 'Enter USD amount', desc: 'Choose the amount you want to deposit and select your preferred cryptocurrency.' },
+                    { n: 2, color: 'bg-purple-500/20 text-purple-400', title: 'Send exact crypto', desc: 'A unique address is generated. Send the exact crypto amount shown, no more and no less.' },
+                    { n: 3, color: 'bg-green-500/20 text-green-400', title: 'Balance credited', desc: 'After network confirmation (15 min to 2 hrs), your USD balance is credited automatically.' },
+                  ]
+              ).map((step) => (
                 <div key={step.n} className="flex gap-3">
                   <div className={cn('flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-black mt-0.5', step.color)}>
                     {step.n}
@@ -539,9 +546,19 @@ export default function DepositPage() {
                 <AlertCircle className="h-3.5 w-3.5" /> Important
               </p>
               <ul className="text-[10px] text-muted-foreground space-y-1 pl-4 list-disc leading-relaxed">
-                <li>Always send on the <strong className="text-foreground">correct network</strong></li>
-                <li>Address valid for <strong className="text-foreground">~60 minutes</strong></li>
-                <li>Wrong amount or network = <strong className="text-red-400">permanent loss</strong></li>
+                {method === 'card' ? (
+                  <>
+                    <li>On the provider, set <strong className="text-foreground">&quot;you receive&quot;</strong> to the exact amount shown</li>
+                    <li>Select the <strong className="text-foreground">correct coin and network</strong></li>
+                    <li>ID verification is handled by the <strong className="text-foreground">card provider</strong>, not us</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Always send on the <strong className="text-foreground">correct network</strong></li>
+                    <li>Address valid for <strong className="text-foreground">~60 minutes</strong></li>
+                    <li>Wrong amount or network = <strong className="text-red-400">permanent loss</strong></li>
+                  </>
+                )}
               </ul>
             </div>
           </div>

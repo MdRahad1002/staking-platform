@@ -97,7 +97,7 @@ export default function WhatIsMiningPage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/what-is-staking">
-              <Button size="lg" className="gap-2 rounded-xl text-base px-8 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 border-0">
+              <Button size="lg" className="gap-2 rounded-xl text-base px-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 border-0">
                 <TrendingUp className="h-4 w-4" />
                 Learn About Staking Instead
               </Button>
@@ -209,15 +209,15 @@ export default function WhatIsMiningPage() {
                 title: 'Miners compete to solve a giant puzzle',
                 desc: 'Miners collect batches of waiting transactions and race to solve an incredibly difficult mathematical puzzle. The puzzle is designed so that the only way to solve it is to try billions of random guesses per second. This is why mining needs so much computing power.',
                 color: 'border-yellow-500/20 bg-yellow-500/5',
-                numColor: 'from-yellow-500 to-amber-500',
+                numColor: 'from-yellow-500 to-blue-500',
               },
               {
                 step: '03',
                 icon: '🏆',
                 title: 'The first one to solve it wins',
                 desc: 'The miner who finds the correct answer first broadcasts their solution to the network. Other miners verify it (this takes milliseconds). The winning miner gets to add the next "block" of transactions to the blockchain.',
-                color: 'border-amber-500/20 bg-amber-500/5',
-                numColor: 'from-amber-500 to-orange-500',
+                color: 'border-blue-500/20 bg-blue-500/5',
+                numColor: 'from-blue-500 to-orange-500',
               },
               {
                 step: '04',
@@ -232,8 +232,8 @@ export default function WhatIsMiningPage() {
                 icon: '🔁',
                 title: 'The race starts again immediately',
                 desc: 'A new block is targeted every 10 minutes. The network automatically adjusts the difficulty of the puzzle every 2,016 blocks to keep that 10-minute window consistent even if more miners join or leave.',
-                color: 'border-amber-500/20 bg-amber-500/5',
-                numColor: 'from-amber-500 to-amber-400',
+                color: 'border-blue-500/20 bg-blue-500/5',
+                numColor: 'from-blue-500 to-blue-400',
               },
             ].map((item) => (
               <div key={item.step} className={`glass-card p-6 rounded-2xl border ${item.color} flex gap-5`}>

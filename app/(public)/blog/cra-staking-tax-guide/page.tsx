@@ -163,11 +163,11 @@ export default function CRATaxGuidePage() {
         </div>
 
         {/* Disclaimer banner */}
-        <div className="bg-amber-50 border-b border-amber-200">
+        <div className="bg-blue-50 border-b border-blue-200">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="text-sm text-amber-800">
+              <AlertTriangle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <p className="text-sm text-blue-800">
                 <strong>Not tax advice.</strong> This guide is for general informational purposes only and does not constitute legal or tax advice. Tax rules change and individual circumstances vary. Always consult a qualified Canadian tax professional before filing.
               </p>
             </div>
@@ -283,10 +283,10 @@ export default function CRATaxGuidePage() {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 not-prose">
+                <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 not-prose">
                   <div className="flex items-start gap-3">
-                    <Info className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <p className="text-sm text-amber-800">
+                    <Info className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <p className="text-sm text-blue-800">
                       <strong>Liquid staking tokens (e.g., stETH):</strong> Receiving a liquid staking token in exchange for your ETH may constitute a disposition because you are exchanging one property for another. The January 2025 guidance focused on direct staking, not liquid staking derivatives. Treat liquid staking token swaps as dispositions until the CRA clarifies further.
                     </p>
                   </div>
@@ -446,9 +446,9 @@ export default function CRATaxGuidePage() {
                     <p className="text-sm text-gray-500 mb-3">Reported on <strong>Schedule 3 (Capital Gains or Losses)</strong>, then carried to Line 12700 of the T1 General.</p>
                     <p className="text-xs text-gray-400">List each disposition: date, proceeds, ACB, and resulting gain/loss. The taxable portion flows to T1 Line 12700.</p>
                   </div>
-                  <div className="rounded-xl border border-amber-100 bg-amber-50 p-5">
-                    <p className="text-sm font-bold text-amber-800 mb-1">T1135: Foreign Asset Reporting</p>
-                    <p className="text-sm text-amber-700">If the total cost of your foreign crypto holdings (crypto held on non-Canadian platforms or in foreign wallets) exceeded CAD $100,000 at any point during the tax year, you must file T1135. Failure to file results in significant penalties.</p>
+                  <div className="rounded-xl border border-blue-100 bg-blue-50 p-5">
+                    <p className="text-sm font-bold text-blue-800 mb-1">T1135: Foreign Asset Reporting</p>
+                    <p className="text-sm text-blue-700">If the total cost of your foreign crypto holdings (crypto held on non-Canadian platforms or in foreign wallets) exceeded CAD $100,000 at any point during the tax year, you must file T1135. Failure to file results in significant penalties.</p>
                   </div>
                 </div>
 

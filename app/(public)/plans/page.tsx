@@ -76,7 +76,7 @@ export default async function PlansPage() {
   const heroStats = [
     { icon: <TrendingUp className="h-5 w-5 text-primary" />, label: 'Rewards Credited', value: 'Daily' },
     { icon: <Zap className="h-5 w-5 text-yellow-400" />, label: 'Staking Plans', value: `${plans.length}` },
-    { icon: <Users className="h-5 w-5 text-amber-400" />, label: 'Active Stakers', value: '15,000+' },
+    { icon: <Users className="h-5 w-5 text-blue-400" />, label: 'Active Stakers', value: '15,000+' },
     { icon: <Shield className="h-5 w-5 text-green-400" />, label: 'Supported Assets', value: '170+' },
   ]
 

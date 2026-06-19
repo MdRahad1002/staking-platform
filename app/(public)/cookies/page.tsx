@@ -116,13 +116,13 @@ export default function CookiesPage() {
         <div className="mb-10">
           <h1 className="text-4xl font-bold mb-2">Cookie Policy</h1>
           <p className="text-muted-foreground">Last updated: March 13, 2026</p>
-          <div className="mt-4 p-4 rounded-xl bg-amber-500/5 border border-amber-500/20">
+          <div className="mt-4 p-4 rounded-xl bg-blue-500/5 border border-blue-500/20">
             <p className="text-sm text-muted-foreground">
               This Cookie Policy explains how ONIX HOLDINGS LIMITED (Canada) and ONIX HOLDINGS LIMITED (Company No. 03449482, registered in England &amp; Wales) (together, &quot;StakeOnix&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) use cookies and similar technologies
-              when you visit <Link href="/" className="text-amber-400 hover:underline">www.stakeonix.ca</Link>.
+              when you visit <Link href="/" className="text-blue-400 hover:underline">www.stakeonix.ca</Link>.
               It should be read alongside our{' '}
-              <Link href="/policy" className="text-amber-400 hover:underline">Privacy Policy</Link> and{' '}
-              <Link href="/terms" className="text-amber-400 hover:underline">Terms of Service</Link>.
+              <Link href="/policy" className="text-blue-400 hover:underline">Privacy Policy</Link> and{' '}
+              <Link href="/terms" className="text-blue-400 hover:underline">Terms of Service</Link>.
             </p>
           </div>
         </div>

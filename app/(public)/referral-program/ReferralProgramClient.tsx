@@ -28,9 +28,9 @@ const TIERS = [
     target: 5,
     commission: '5%',
     l2: '2%',
-    color: 'text-amber-600',
-    bg: 'bg-amber-600/10 border-amber-600/30',
-    glow: 'hover:border-amber-500/50',
+    color: 'text-blue-600',
+    bg: 'bg-blue-600/10 border-blue-600/30',
+    glow: 'hover:border-blue-500/50',
     perk: '5% L1 commission + 2% L2 commission on your referrals\' referrals',
   },
   {
@@ -75,7 +75,7 @@ const steps = [
   {
     num: '01',
     icon: <Rocket className="h-6 w-6" />,
-    color: 'bg-amber-500/15 text-amber-400',
+    color: 'bg-blue-500/15 text-blue-400',
     title: 'Create your free account',
     desc: 'Sign up in under 2 minutes. No fees, no credit card required.',
   },
@@ -120,19 +120,19 @@ function EarningsCalc() {
   return (
     <div className="glass-card p-8">
       <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-        <TrendingUp className="h-5 w-5 text-amber-400" />
+        <TrendingUp className="h-5 w-5 text-blue-400" />
         Earnings Calculator
       </h3>
       <div className="space-y-6 mb-8">
         <div>
           <div className="flex justify-between text-sm mb-2">
             <span className="text-muted-foreground">Direct referrals (L1)</span>
-            <span className="font-bold text-white">{friends} friends · <span className="text-amber-400">{tierLabel}</span></span>
+            <span className="font-bold text-white">{friends} friends · <span className="text-blue-400">{tierLabel}</span></span>
           </div>
           <input
             type="range" min={1} max={50} value={friends}
             onChange={(e) => setFriends(Number(e.target.value))}
-            className="w-full accent-amber-400"
+            className="w-full accent-blue-400"
           />
           <div className="flex justify-between text-xs text-muted-foreground/50 mt-1">
             <span>1</span><span>50+</span>
@@ -146,7 +146,7 @@ function EarningsCalc() {
           <input
             type="range" min={200} max={10000} step={100} value={avgStake}
             onChange={(e) => setAvgStake(Number(e.target.value))}
-            className="w-full accent-amber-400"
+            className="w-full accent-blue-400"
           />
           <div className="flex justify-between text-xs text-muted-foreground/50 mt-1">
             <span>$200</span><span>$10,000</span>
@@ -156,7 +156,7 @@ function EarningsCalc() {
           {[{f:3,s:500},{f:5,s:1000},{f:10,s:2500},{f:25,s:5000}].map(p => (
             <button key={`${p.f}-${p.s}`}
               onClick={() => { setFriends(p.f); setAvgStake(p.s) }}
-              className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-amber-500/40 hover:bg-amber-500/5 text-muted-foreground hover:text-amber-400 transition-all">
+              className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-blue-500/40 hover:bg-blue-500/5 text-muted-foreground hover:text-blue-400 transition-all">
               {p.f} refs @ ${p.s.toLocaleString()}
             </button>
           ))}
@@ -172,8 +172,8 @@ function EarningsCalc() {
           <p className="text-xl font-black text-white">${monthlyL2.toFixed(2)}</p>
         </div>
       </div>
-      <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/10 border border-amber-500/20 rounded-xl p-4 text-center">
-        <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">Total Yearly (L1 + L2)</p>
+      <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border border-blue-500/20 rounded-xl p-4 text-center">
+        <p className="text-xs text-blue-400 uppercase tracking-wider mb-1">Total Yearly (L1 + L2)</p>
         <p className="text-3xl font-black text-white">${yearlyTotal.toFixed(2)}</p>
       </div>
       <p className="text-xs text-muted-foreground/50 mt-4 text-center">Based on average StakeOnix plan yields. Actual earnings may vary. L2 estimate assumes ~60% of your referrals also refer others.</p>
@@ -367,7 +367,7 @@ export default function ReferralProgramClient() {
               },
               {
                 icon: <CheckCircle2 className="h-5 w-5" />,
-                color: 'bg-amber-500/15 text-amber-400',
+                color: 'bg-blue-500/15 text-blue-400',
                 title: 'Your referrals get a $10 welcome bonus',
                 desc: 'Everyone you refer receives a $10 credit after activating their first plan. That makes your invite more compelling and your link more likely to convert.',
               },

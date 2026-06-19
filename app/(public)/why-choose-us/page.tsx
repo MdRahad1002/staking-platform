@@ -41,8 +41,8 @@ export const metadata: Metadata = {
 const pillars = [
   {
     icon: <Lock className="h-6 w-6" />,
-    color: 'bg-amber-500/15 text-amber-400',
-    glow: 'from-amber-500/10 to-amber-600/10 border-amber-500/20 hover:border-amber-500/40',
+    color: 'bg-blue-500/15 text-blue-400',
+    glow: 'from-blue-500/10 to-blue-600/10 border-blue-500/20 hover:border-blue-500/40',
     title: 'Bank-Grade Security',
     headline: 'Your crypto is protected like a vault.',
     body: 'Every account is protected with 256-bit SSL encryption. Funds are held in multi-signature cold wallets, meaning no single party can authorise asset movement unilaterally. We run 24/7 automated threat detection and manual security audits on a regular basis. Our security architecture is designed to the standard required by our FCA authorisation.',
@@ -77,8 +77,8 @@ const pillars = [
   },
   {
     icon: <BadgeCheck className="h-6 w-6" />,
-    color: 'bg-amber-500/15 text-amber-400',
-    glow: 'from-amber-500/10 to-amber-600/10 border-amber-500/20 hover:border-amber-500/40',
+    color: 'bg-blue-500/15 text-blue-400',
+    glow: 'from-blue-500/10 to-blue-600/10 border-blue-500/20 hover:border-blue-500/40',
     title: 'Regulated & Fully Compliant',
     headline: 'Licensed. Audited. Accountable.',
     body: 'StakeOnix operates under financial services regulations in Canada, with full KYC (Know Your Customer) and AML (Anti-Money Laundering) compliance. Our legal team monitors regulatory changes across all 170+ countries we serve. Unlike many platforms, we actively welcome regulation because we have nothing to hide and everything to prove.',
@@ -160,12 +160,12 @@ export default function WhyChooseUsPage() {
       <main className="min-h-screen">
       {/* HERO */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-950/30 via-background to-amber-950/15" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-background to-blue-950/15" />
         <div className="absolute inset-0 hero-grid opacity-[0.04]" />
-        <div className="glow-blob w-[700px] h-[700px] bg-amber-500/10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/3" />
+        <div className="glow-blob w-[700px] h-[700px] bg-blue-500/10 top-0 left-1/2 -translate-x-1/2 -translate-y-1/3" />
 
         <div className="container relative mx-auto px-4 text-center">
-          <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
             <Award className="h-3.5 w-3.5" />
             Our Advantage
           </span>
@@ -198,9 +198,9 @@ export default function WhyChooseUsPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { icon: <Shield className="h-5 w-5" />, color: 'text-amber-400 bg-amber-500/15', value: 'FCA', label: 'Authorised \u00b7 UK' },
+              { icon: <Shield className="h-5 w-5" />, color: 'text-blue-400 bg-blue-500/15', value: 'FCA', label: 'Authorised \u00b7 UK' },
               { icon: <Globe className="h-5 w-5" />, color: 'text-red-400 bg-red-500/15', value: 'FINTRAC', label: 'Registered \u00b7 Canada' },
-              { icon: <Globe className="h-5 w-5" />, color: 'text-amber-400 bg-amber-500/15', value: '170+', label: 'Supported Assets' },
+              { icon: <Globe className="h-5 w-5" />, color: 'text-blue-400 bg-blue-500/15', value: '170+', label: 'Supported Assets' },
               { icon: <Activity className="h-5 w-5" />, color: 'text-yellow-400 bg-yellow-500/15', value: '99.9%', label: 'Uptime Target' },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-3">
@@ -217,10 +217,10 @@ export default function WhyChooseUsPage() {
 
       {/* 6 PILLARS */}
       <section className="py-24 relative overflow-hidden">
-        <div className="glow-blob w-[600px] h-[600px] bg-amber-600/8 top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" />
+        <div className="glow-blob w-[600px] h-[600px] bg-blue-600/8 top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-16">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">6 Reasons</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">6 Reasons</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">What Makes Us Different</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Not marketing slogans - real, specific reasons backed by facts and numbers.</p>
           </div>
@@ -237,10 +237,10 @@ export default function WhyChooseUsPage() {
                     <span className="text-xs font-bold text-muted-foreground/50 uppercase tracking-widest">0{i + 1}</span>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-1">{p.title}</h3>
-                  <p className="text-sm font-medium text-amber-400 mb-3">{p.headline}</p>
+                  <p className="text-sm font-medium text-blue-400 mb-3">{p.headline}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.body}</p>
                   <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-muted-foreground">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 flex-shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-blue-400 flex-shrink-0" />
                     {p.proof}
                   </div>
                 </div>
@@ -252,10 +252,10 @@ export default function WhyChooseUsPage() {
 
       {/* COMPARISON TABLE */}
       <section className="py-20 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-950/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 to-transparent" />
         <div className="container relative mx-auto px-4">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Head to Head</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Head to Head</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">StakeOnix vs Other Options</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">How we stack up against traditional banks and decentralised exchanges.</p>
           </div>
@@ -265,7 +265,7 @@ export default function WhyChooseUsPage() {
               <div className="grid grid-cols-4 gap-0 border-b border-white/10 bg-white/[0.03]">
                 <div className="p-4 text-sm font-semibold text-muted-foreground">Feature</div>
                 <div className="p-4 text-center">
-                  <span className="inline-block bg-amber-500/15 text-amber-400 text-xs font-bold px-3 py-1 rounded-full">StakeOnix</span>
+                  <span className="inline-block bg-blue-500/15 text-blue-400 text-xs font-bold px-3 py-1 rounded-full">StakeOnix</span>
                 </div>
                 <div className="p-4 text-center text-xs font-semibold text-muted-foreground/60">Bank</div>
                 <div className="p-4 text-center text-xs font-semibold text-muted-foreground/60">DEX</div>
@@ -275,7 +275,7 @@ export default function WhyChooseUsPage() {
                   <div className="p-4 text-sm text-muted-foreground">{row.feature}</div>
                   <div className="p-4 flex justify-center items-center">
                     {row.stakeonix
-                      ? <CheckCircle2 className="h-5 w-5 text-amber-400" />
+                      ? <CheckCircle2 className="h-5 w-5 text-blue-400" />
                       : <span className="h-5 w-5 flex items-center justify-center text-muted-foreground/30 text-lg">-</span>}
                   </div>
                   <div className="p-4 flex justify-center items-center">
@@ -299,7 +299,7 @@ export default function WhyChooseUsPage() {
       <section className="py-20 border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">Real Investors</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Real Investors</p>
             <h2 className="text-3xl md:text-4xl font-black mb-4">Hear From Our Community</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">Thousands of real people from around the world earning daily on StakeOnix.</p>
           </div>
@@ -326,11 +326,11 @@ export default function WhyChooseUsPage() {
 
       {/* CTA */}
       <section className="py-20 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-950/30 via-background to-amber-950/15" />
-        <div className="glow-blob w-[600px] h-[400px] bg-amber-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/30 via-background to-blue-950/15" />
+        <div className="glow-blob w-[600px] h-[400px] bg-blue-500/10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <div className="container relative mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/20 text-amber-400 mx-auto mb-6">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-400 mx-auto mb-6">
               <ShieldCheck className="h-8 w-8" />
             </div>
             <h2 className="text-3xl md:text-4xl font-black mb-4">

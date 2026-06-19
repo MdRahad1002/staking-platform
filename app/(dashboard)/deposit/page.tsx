@@ -11,6 +11,7 @@ import {
   Copy, ArrowDownToLine, CheckCircle2, Clock, XCircle, RefreshCw,
   AlertCircle, TrendingUp, Zap, ChevronRight, ShieldCheck, Lock,
   Wallet, BadgeCheck, ArrowRight, ReceiptText, Sparkles, ScanLine,
+  CreditCard, ExternalLink, Landmark,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -104,6 +105,7 @@ export default function DepositPage() {
   const [pollStatus, setPollStatus] = useState<string>('')
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [plans, setPlans] = useState<StakingPlan[]>([])
+  const [method, setMethod] = useState<'crypto' | 'card'>('crypto')
 
   const selectedCurrency = currencies.find((c) => c.id === selected)
   const depositNum = parseFloat(amountUsd) || 0
@@ -262,7 +264,38 @@ export default function DepositPage() {
         {/* ── LEFT: Deposit Form / Active Payment ── */}
         <div className="lg:col-span-2 space-y-5">
 
-          {!payment ? (
+          {/* Payment method toggle */}
+          {!payment && (
+            <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-card p-1.5">
+              {([
+                { key: 'crypto', label: 'Pay with Crypto', icon: <Wallet className="h-4 w-4" /> },
+                { key: 'card', label: 'Card / Bank', icon: <CreditCard className="h-4 w-4" /> },
+              ] as const).map((m) => (
+                <button
+                  key={m.key}
+                  type="button"
+                  onClick={() => setMethod(m.key)}
+                  className={cn(
+                    'flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold transition-all',
+                    method === m.key
+                      ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-500/20'
+                      : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground'
+                  )}
+                >
+                  {m.icon} {m.label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {!payment && method === 'card' ? (
+            <CardPurchasePanel
+              currencies={currencies}
+              onConfirmed={() =>
+                fetch('/api/deposit/history').then((r) => r.json()).then((d) => setHistory(d.data || []))
+              }
+            />
+          ) : !payment ? (
             <div className="rounded-2xl border border-border bg-card overflow-hidden">
               {/* Card header */}
               <div className="px-6 pt-6 pb-4 border-b border-border/60">
@@ -589,6 +622,333 @@ export default function DepositPage() {
             </table>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Reputable consumer on-ramps that need NO operator account or KYB — we link to
+ * the provider's OWN public buy page. The user completes their own KYC there,
+ * selects the coin, and pastes the deposit address we display; our existing
+ * NOWPayments webhook then credits the right user automatically.
+ *
+ * These providers don't publicly document deep-link params for prefilling the
+ * coin/amount/address (that lives behind their partner API), so we link to the
+ * verified public buy pages and rely on the on-page address + exact-amount
+ * instructions, which is the robust part.
+ */
+function onrampLinks() {
+  return [
+    {
+      name: 'Guardarian',
+      desc: 'No account needed · Card, Apple/Google Pay, SEPA',
+      url: 'https://guardarian.com/buy-crypto-with-card',
+      recommended: true,
+    },
+    {
+      name: 'MoonPay',
+      desc: 'Card · Apple / Google Pay (quick sign-up)',
+      url: 'https://www.moonpay.com/buy',
+      recommended: false,
+    },
+    {
+      name: 'Ramp',
+      desc: 'Card & bank transfer',
+      url: 'https://app.ramp.network',
+      recommended: false,
+    },
+  ]
+}
+
+/**
+ * Buy crypto with a card via a no-KYB consumer on-ramp. Generates a normal
+ * NOWPayments deposit (unique address + exact amount), then points the user at
+ * a third-party buy page to fund it by card. No partner account or business
+ * verification required; crediting reuses the existing deposit webhook + poll.
+ */
+function CardPurchasePanel({ currencies, onConfirmed }: {
+  currencies: DepositCurrency[]; onConfirmed: () => void
+}) {
+  const [amountUsd, setAmountUsd] = useState('')
+  const [selected, setSelected] = useState('')
+  const [creating, setCreating] = useState(false)
+  const [deposit, setDeposit] = useState<ActivePayment | null>(null)
+  const [pollStatus, setPollStatus] = useState('')
+  const [qrDataUrl, setQrDataUrl] = useState('')
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const selectedCurrency = currencies.find((c) => c.id === selected)
+  const num = parseFloat(amountUsd) || 0
+
+  useEffect(() => {
+    if (currencies.length > 0 && !selected) setSelected(currencies[0].id)
+  }, [currencies, selected])
+
+  const stopPoll = useCallback(() => {
+    if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null }
+  }, [])
+  useEffect(() => () => stopPoll(), [stopPoll])
+
+  const poll = useCallback(async (id: string) => {
+    try {
+      const res = await fetch(`/api/deposit/status/${id}`)
+      const data = await res.json()
+      const s: string = data.data?.status ?? ''
+      setPollStatus(s)
+      if (['CONFIRMED', 'confirmed', 'finished', 'sending'].includes(s)) {
+        stopPoll(); onConfirmed()
+        toast.success('Purchase received! Your balance has been credited.')
+      } else if (['FAILED', 'failed', 'expired'].includes(s)) {
+        toast.error('Deposit failed or expired.'); stopPoll()
+      }
+    } catch { /* silent */ }
+  }, [stopPoll, onConfirmed])
+
+  useEffect(() => {
+    if (!deposit?.address) return
+    QRCode.toDataURL(deposit.address, { width: 180, margin: 2, color: { dark: '#0a0a0a', light: '#ffffff' } })
+      .then(setQrDataUrl).catch(() => {})
+  }, [deposit?.address])
+
+  const start = async () => {
+    if (!selected || num <= 0) { toast.error('Enter an amount and select a coin'); return }
+    if (selectedCurrency && num < selectedCurrency.minDeposit) {
+      toast.error(`Minimum is $${selectedCurrency.minDeposit}`); return
+    }
+    setCreating(true)
+    try {
+      const res = await fetch('/api/deposit/address', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currencyId: selected, amountUsd: num }),
+      })
+      const data = await res.json()
+      if (!res.ok) { toast.error(data.error || 'Could not start purchase'); return }
+      setDeposit(data.data)
+      setPollStatus('waiting')
+      stopPoll()
+      poll(data.data.depositId)
+      pollRef.current = setInterval(() => poll(data.data.depositId), 30_000)
+    } catch {
+      toast.error('Something went wrong.')
+    } finally {
+      setCreating(false)
+    }
+  }
+
+  const reset = () => { stopPoll(); setDeposit(null); setPollStatus(''); setQrDataUrl('') }
+  const isDone = ['CONFIRMED', 'confirmed', 'finished', 'sending'].includes(pollStatus)
+
+  // ── Success ──
+  if (isDone) {
+    return (
+      <div className="rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-950/40 via-background to-background p-8 flex flex-col items-center text-center gap-4">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-500/20 border-2 border-green-500/40">
+          <CheckCircle2 className="h-10 w-10 text-green-400" />
+        </div>
+        <div>
+          <h3 className="text-xl font-black text-white">Balance Credited!</h3>
+          <p className="text-muted-foreground mt-1">
+            <span className="text-green-400 font-bold">${deposit?.amountUsd} USD</span> has been added to your account.
+          </p>
+        </div>
+        <Button onClick={reset} className="gap-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white border-0 rounded-xl">
+          <ArrowRight className="h-4 w-4" /> Buy More
+        </Button>
+      </div>
+    )
+  }
+
+  // ── Buy step: deposit created, show on-ramp links + address ──
+  if (deposit) {
+    const sym = (deposit.payCurrency || selectedCurrency?.symbol || '').toUpperCase()
+    const links = onrampLinks()
+    return (
+      <div className="rounded-2xl border border-border bg-card overflow-hidden">
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-amber-500/20 bg-amber-950/20">
+          <RefreshCw className="h-5 w-5 text-amber-400 flex-shrink-0 animate-spin" />
+          <div>
+            <p className="font-bold text-sm text-amber-400">Waiting for your card purchase</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">We check every 30 seconds and credit you automatically once it arrives.</p>
+          </div>
+        </div>
+
+        <div className="p-6 space-y-5">
+          {/* On-ramp choices */}
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">1. Buy with your card here</p>
+            <div className="grid gap-2">
+              {links.map((p) => (
+                <a
+                  key={p.name}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-border bg-secondary/30 px-4 py-3 transition-all hover:border-blue-500/50 hover:bg-secondary/60"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500/15">
+                    <CreditCard className="h-4 w-4 text-blue-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-foreground flex items-center gap-2">
+                      {p.name}
+                      {p.recommended && (
+                        <Badge className="text-[9px] bg-green-500/20 text-green-400 border border-green-500/30">Recommended</Badge>
+                      )}
+                    </p>
+                    <p className="text-[10px] text-muted-foreground">{p.desc}</p>
+                  </div>
+                  <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Exact amount + address to paste */}
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+              2. Receive exactly this amount, to this address
+            </p>
+
+            <div className="rounded-xl border border-yellow-500/25 bg-yellow-950/20 px-4 py-3 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] text-muted-foreground">Set &quot;You receive&quot; to</p>
+                <p className="font-mono text-lg font-black text-yellow-400 break-all">{deposit.payAmount} {sym}</p>
+              </div>
+              <Button
+                variant="outline" size="sm"
+                className="gap-1.5 border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 flex-shrink-0"
+                onClick={() => { navigator.clipboard.writeText(String(deposit.payAmount)); toast.success('Amount copied!') }}
+              >
+                <Copy className="h-3.5 w-3.5" /> Copy
+              </Button>
+            </div>
+
+            <div className="flex items-start gap-3 rounded-xl border border-blue-500/20 bg-blue-950/15 p-3">
+              {qrDataUrl && (
+                <img src={qrDataUrl} alt="Deposit address QR" className="h-20 w-20 rounded-lg bg-white p-1 flex-shrink-0" />
+              )}
+              <div className="min-w-0 flex-1 space-y-2">
+                <p className="text-[10px] text-muted-foreground">Destination wallet address</p>
+                <p className="font-mono text-xs break-all text-foreground/90 select-all">{deposit.address}</p>
+                <Button
+                  variant="outline" size="sm"
+                  className="gap-1.5 border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
+                  onClick={() => { navigator.clipboard.writeText(deposit.address); toast.success('Address copied!') }}
+                >
+                  <Copy className="h-3.5 w-3.5" /> Copy Address
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-orange-500/20 bg-orange-500/8 p-3 flex gap-3">
+            <AlertCircle className="h-4 w-4 text-orange-400 flex-shrink-0 mt-0.5" />
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              On the provider, choose <strong className="text-foreground">{sym}</strong> on the{' '}
+              <strong className="text-foreground">{selectedCurrency?.network}</strong> network, set the amount you
+              <em> receive</em> to the exact figure above, and paste this address as the destination. You pay the
+              provider&apos;s fee on top in fiat.
+            </p>
+          </div>
+
+          <Button variant="outline" className="w-full" onClick={reset}>Cancel</Button>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Form ──
+  return (
+    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      <div className="px-6 pt-6 pb-4 border-b border-border/60">
+        <div className="flex items-center gap-2">
+          <CreditCard className="h-4 w-4 text-blue-400" />
+          <h2 className="font-bold text-base">Buy with Card or Bank</h2>
+        </div>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          Don&apos;t own crypto yet? Buy it by card through a trusted provider; it lands in your account automatically.
+        </p>
+      </div>
+
+      <div className="p-6 space-y-6">
+        <div className="grid grid-cols-3 gap-2">
+          {[100, 250, 500].map((amt) => (
+            <button
+              key={amt}
+              type="button"
+              onClick={() => setAmountUsd(String(amt))}
+              className={cn(
+                'rounded-xl border px-3 py-3 text-center font-black text-sm transition-all hover:scale-[1.02]',
+                num === amt
+                  ? 'border-blue-500 bg-blue-500/15 text-blue-400 ring-1 ring-blue-500/30'
+                  : 'border-border bg-secondary/30 text-foreground hover:border-blue-500/40'
+              )}
+            >
+              ${amt}
+            </button>
+          ))}
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Amount (USD)</Label>
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-lg font-bold">$</span>
+            <Input
+              type="number" min="0" step="0.01" placeholder="0.00"
+              className="pl-9 h-14 text-xl font-bold rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60 focus:ring-blue-500/20"
+              value={amountUsd}
+              onChange={(e) => setAmountUsd(e.target.value)}
+            />
+          </div>
+          {selectedCurrency && (
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 text-yellow-500" />
+              Minimum: <strong className="text-foreground">${selectedCurrency.minDeposit} USD</strong>. Provider card fees apply on top.
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Coin to Receive</Label>
+          <Select value={selected} onValueChange={setSelected}>
+            <SelectTrigger className="h-14 rounded-xl border-border/60 bg-secondary/30 focus:border-blue-500/60 [&>span]:flex [&>span]:items-center [&>span]:gap-3">
+              <SelectValue placeholder="Select coin..." />
+            </SelectTrigger>
+            <SelectContent>
+              {currencies.map((c) => (
+                <SelectItem key={c.id} value={c.id}>
+                  <span className="flex items-center gap-2.5">
+                    <CoinIcon symbol={c.symbol} iconUrl={c.iconUrl} className="h-6 w-6 rounded-full" />
+                    <span className="font-semibold">{c.symbol}</span>
+                    <span className="text-muted-foreground">{c.name} · {c.network}</span>
+                  </span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="flex items-center justify-center gap-4 rounded-xl border border-border bg-secondary/20 px-4 py-3">
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><CreditCard className="h-4 w-4 text-blue-400" /> Card</span>
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Landmark className="h-4 w-4 text-blue-400" /> Bank</span>
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground"><Sparkles className="h-4 w-4 text-blue-400" /> Apple / Google Pay</span>
+        </div>
+
+        <Button
+          onClick={start}
+          disabled={!selected || !amountUsd || creating}
+          className="w-full h-13 rounded-xl font-bold text-base gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white border-0 shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.01]"
+        >
+          {creating
+            ? <><RefreshCw className="h-4 w-4 animate-spin" /> Preparing...</>
+            : <><CreditCard className="h-4 w-4" /> Continue to Card Providers</>}
+        </Button>
+
+        <p className="text-[10px] text-center text-muted-foreground">
+          Identity verification is handled by the card provider. Your balance is credited automatically once the crypto arrives.
+        </p>
       </div>
     </div>
   )

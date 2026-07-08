@@ -55,19 +55,23 @@ export default withAuth(
     const token = req.nextauth.token
     const pathname = req.nextUrl.pathname
 
+    // Behind a reverse proxy req.url resolves to the internal origin
+    // (localhost:3000); build redirects from the public app URL instead.
+    const base = process.env.NEXT_PUBLIC_APP_URL || req.url
+
     // ── Role-based access control ────────────────────────────────────────────
 
     // Admin routes ADMIN only
     if (pathname.startsWith('/admin')) {
       if (token?.role !== 'ADMIN') {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
+        return NextResponse.redirect(new URL('/dashboard', base))
       }
     }
 
     // Worker routes WORKER or ADMIN
     if (pathname.startsWith('/worker')) {
       if (token?.role !== 'WORKER' && token?.role !== 'ADMIN') {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
+        return NextResponse.redirect(new URL('/dashboard', base))
       }
     }
 
@@ -78,7 +82,7 @@ export default withAuth(
         token?.role !== 'WORKER' &&
         token?.role !== 'ADMIN'
       ) {
-        return NextResponse.redirect(new URL('/dashboard', req.url))
+        return NextResponse.redirect(new URL('/dashboard', base))
       }
     }
 

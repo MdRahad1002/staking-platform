@@ -4,10 +4,13 @@ import { sendFirstDepositNudgeEmail } from '@/lib/mail'
 
 // GET /api/auth/verify-email?token=<hex-token>
 export async function GET(req: NextRequest) {
+  // Behind a reverse proxy req.url resolves to the internal origin (localhost:3000),
+  // so build redirects from the public app URL instead.
+  const base = process.env.NEXT_PUBLIC_APP_URL || req.url
   const token = req.nextUrl.searchParams.get('token')
 
   if (!token || typeof token !== 'string') {
-    return NextResponse.redirect(new URL('/verify-email?error=missing', req.url))
+    return NextResponse.redirect(new URL('/verify-email?error=missing', base))
   }
 
   try {
@@ -16,17 +19,17 @@ export async function GET(req: NextRequest) {
     })
 
     if (!user) {
-      return NextResponse.redirect(new URL('/verify-email?error=invalid', req.url))
+      return NextResponse.redirect(new URL('/verify-email?error=invalid', base))
     }
 
     // Check expiry
     if (user.emailVerificationExpires && user.emailVerificationExpires < new Date()) {
-      return NextResponse.redirect(new URL('/verify-email?error=expired', req.url))
+      return NextResponse.redirect(new URL('/verify-email?error=expired', base))
     }
 
     // Already verified
     if (user.emailVerified) {
-      return NextResponse.redirect(new URL('/verify-email?success=already', req.url))
+      return NextResponse.redirect(new URL('/verify-email?success=already', base))
     }
 
     await prisma.user.update({
@@ -42,9 +45,9 @@ export async function GET(req: NextRequest) {
     const displayName = [user.firstName, user.lastName].filter(Boolean).join(' ') || user.email
     void sendFirstDepositNudgeEmail(user.email, displayName)
 
-    return NextResponse.redirect(new URL('/verify-email?success=true', req.url))
+    return NextResponse.redirect(new URL('/verify-email?success=true', base))
   } catch (err) {
     console.error('[verify-email]', err)
-    return NextResponse.redirect(new URL('/verify-email?error=server', req.url))
+    return NextResponse.redirect(new URL('/verify-email?error=server', base))
   }
 }

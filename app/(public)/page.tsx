@@ -557,7 +557,6 @@ export default async function HomePage() {
               <h1 className="text-[2.4rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
                 Stake &amp; Trade Crypto.{' '}
                 <span className="gradient-text-animated">Earn Every Day.</span>
-                <span className="inline-block animate-bob ml-1">🚀</span>
               </h1>
 
               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed">
